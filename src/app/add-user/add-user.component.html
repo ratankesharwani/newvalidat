@@ -1,0 +1,171 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+      <h4 class="card-title">User Details<br><span
+          class="fn12 text-dark">Clients we work with and their transactions</span></h4>
+    </div>
+  </div>
+</div>
+<form [formGroup]="createUser" autocomplete="">
+  <div class="row" formGroupName="request">
+    <div class="col-lg-12" formGroupName="body">
+      <div class="card">
+        <div class="card-body">
+          <div class="row d-flex justify-content-start">
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Email Id<span class="text-danger">*</span></label>
+              <input (keydown.space)="$event.preventDefault()" type="email" class="form-control p-2"
+                placeholder="Type here.." autocomplete="new-password"
+                [ngStyle]="{'border':emailValidation || emailControl.invalid && (emailControl.dirty || emailControl.touched ||submitted)?'1px solid red':''}"
+                formControlName="emailId" (input)="emailValue($event)">
+              <div style="color: red"
+                *ngIf="emailValidation || emailControl.invalid && (emailControl.dirty || emailControl.touched ||submitted)">
+                <small *ngIf="emailValidation || emailControl.errors?.['required']">
+                  {{emailValidation?'Email already registered':'Email is required'}}
+                </small>
+                <small *ngIf="emailControl.errors?.['email']">
+                  Please provide valid email
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">First Name<span class="text-danger">*</span></label>
+              <input type="text" name="firstname" placeholder="Type here.." class="form-control p-2"
+                autocomplete="new-password"
+                [ngStyle]="{'border':firstNameControl.invalid && (firstNameControl.dirty || firstNameControl.touched ||submitted)?'1px solid red':''}"
+                (input)="firstNameValue($event)" formControlName="firstName">
+              <div style="color: red"
+                *ngIf="firstNameControl.invalid && (firstNameControl.dirty || firstNameControl.touched ||submitted)">
+                <small *ngIf="firstNameControl.errors?.['required']">
+                  First Name is required.
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Middle Name<span class="text-danger"></span></label>
+              <input type="text" name="middlename" placeholder="Type here.." class="form-control p-2"
+                (input)="middleNameValue($event)">
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Last Name<span class="text-danger">*</span></label>
+              <input type="text" name="lastname" placeholder="Type here.." class="form-control p-2"
+                autocomplete="new-password"
+                [ngStyle]="{'border':lastNameControl.invalid && (lastNameControl.dirty || lastNameControl.touched ||submitted)?'1px solid red':''}"
+                (input)="lastNameValue($event)" formControlName="lastName">
+              <!--                  <pre *ngIf="isDisableForLastName">{{lastNameError}}</pre>-->
+              <div style="color: red"
+                *ngIf="lastNameControl.invalid && (lastNameControl.dirty || lastNameControl.touched ||submitted)">
+                <small *ngIf="lastNameControl.errors?.['required']">
+                  Last Name is required.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <br>
+  <div class="row" formGroupName="request">
+    <div class="col-lg-12" formGroupName="body">
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="card-title">General details<br></h4>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="row d-flex justify-content-start">
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Company</label><span class="text-danger">*</span>
+              <select class="form-select p-2"
+                [ngClass]="{'opacity-100 pe-auto':!companyHidden,'opacity-50 pe-none bg-beb9b9':companyHidden}"
+                [ngStyle]="{'border':companyIdControl.invalid && (companyIdControl.dirty || companyIdControl.touched ||submitted)?'1px solid red':''}"
+                formControlName="companyId" (change)="companyValue($event)">
+                <option hidden [ngValue]=null>Company</option>
+                <option *ngFor="let data of companyResponse" [ngValue]="data.key">{{data.value}}</option>
+              </select>
+              <div style="color: red"
+                *ngIf="companyIdControl.invalid && (companyIdControl.dirty || companyIdControl.touched ||submitted)">
+                <small *ngIf="companyIdControl.errors?.['required']">
+                  Company is required.
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Deparment</label><span class="text-danger">*</span>
+              <select class="form-select p-2" autocomplete="new-password"
+                [ngStyle]="{'border':departmentIdControl.invalid && (departmentIdControl.dirty || departmentIdControl.touched ||submitted)?'1px solid red':''}"
+                formControlName="departmentId">
+                <option hidden [ngValue]=null>Department</option>
+                <option *ngFor="let data of departmentResponse" [ngValue]="data.id">{{data.departmentName}}</option>
+              </select>
+              <!--                    <pre *ngIf="isDisableForDepartment">{{departmentError}}</pre>-->
+              <div style="color: red"
+                *ngIf="departmentIdControl.invalid && (departmentIdControl.dirty || departmentIdControl.touched ||submitted)">
+                <small *ngIf="departmentIdControl.errors?.['required']">
+                  Department is required.
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Status</label><span class="text-danger">*</span>
+              <select class="form-select p-2" (change)="statusValue($event)" autocomplete="new-password"
+                [ngStyle]="{'border':statusControl.invalid && (statusControl.dirty || statusControl.touched ||submitted)?'1px solid red':''}"
+                formControlName="status">
+                <option hidden [value]=null>Status</option>
+                <option value="true">Active</option>
+                <option value="false">InActive</option>
+              </select>
+              <!--                    <pre *ngIf="isDisableForStatus">{{statusError}}</pre>-->
+              <div style="color: red"
+                *ngIf="statusControl.invalid && (statusControl.dirty || statusControl.touched ||submitted)">
+                <small *ngIf="statusControl.errors?.['required']">
+                  Status is required.
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Job Title<span class="text-danger">*</span></label>
+              <input type="text" name="jobtitle" placeholder="Type here.." autocomplete="new-password"
+                [ngStyle]="{'border':jobTitleControl.invalid && (jobTitleControl.dirty || jobTitleControl.touched ||submitted)?'1px solid red':''}"
+                class="form-control p-2" (input)="jobTitleValue($event)" formControlName="jobTitle">
+              <!--                  <pre *ngIf="isDisableForJobTitle">{{jobTitleError}}</pre>-->
+              <div style="color: red"
+                *ngIf="jobTitleControl.invalid && (jobTitleControl.dirty || jobTitleControl.touched ||submitted)">
+                <small *ngIf="jobTitleControl.errors?.['required']">
+                  Job Title is required.
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Mobile Number<span class="text-danger">*</span></label>
+              <input type="text" name="email" placeholder="Type here.." class="form-control p-2"
+                autocomplete="new-password" (keypress)="numberOnly($event)"
+                [ngStyle]="{'border':mobileValidation || mobileNumberControl.invalid && (mobileNumberControl.dirty || mobileNumberControl.touched ||submitted)?'1px solid red':''}"
+                (input)="mobileNumberValue($event)" formControlName="mobileNo">
+              <!--                  <pre *ngIf="isDisableForMobile">{{mobileError}}</pre>-->
+              <div style="color: red"
+                *ngIf="mobileValidation || mobileNumberControl.invalid && (mobileNumberControl.dirty || mobileNumberControl.touched ||submitted)">
+                <small *ngIf="mobileValidation || mobileNumberControl.errors?.['required']">
+                  {{mobileValidation?'Mobile Number already registered':'Mobile number is required'}}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><br>
+      <div class="clearfix"></div>
+      <button type="button" class="btn btn-success mb-3 float-end" style="cursor: pointer;"
+        (click)="save()">
+        <i data-feather="plus" class="icon15x15"></i> Add new
+      </button>
+      <button type="button" class="btn mb-3 btn-success float-end" routerLink="/Admin/Users"  style="cursor: pointer; margin-right: 11px !important;background-color: rgb(91, 91, 231);">
+        <i data-feather="plus" class="icon15x15"></i> Back
+      </button>
+    </div>
+  </div>
+</form>

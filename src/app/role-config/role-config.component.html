@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+      <h4 class="mb-0">Role Configuration<br><span class="fn12 text-dark">Clients we work with and their
+          transactions</span></h4>
+    </div>
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-lg-12">
+    <div class="card card-h-100">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="col-xl-3 pe-3">
+            <select class="form-select" (change)="rolesValue($event)">
+              <option selected hidden>Role</option>
+              <option *ngFor="let data of roleMasterGridResponse">{{data.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="row">
+        <div class="card-body pt-0 pb-0">
+          <div class="row">
+            <div class="col-md-2 ps-0">
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link mb-2 active" id="admin-tab{{i}}" data-bs-toggle="pill" href="#admintab{{i}}"
+                  role="tab" aria-controls="admintab" aria-selected="true"
+                  *ngFor="let menu of menuPanelResponse; index as i" [class.active]='selectedIndex === i'
+                  (click)="clickModule(i)">{{menu.display}}</a>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="tab-content text-muted mt-4 mt-md-0 pt-3" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="admintab" role="tabpanel" aria-labelledby="admin-tab">
+                  <div class="d-flex flex-wrap">
+                    <div class="col-md-3 pe-2" *ngFor="let data of subMenu;index as i">
+                      <div class="card">
+                        <div class="form-check form-switch form-switch-md p-2">
+                          <label class="form-check-label" for="blacklist"> {{data.display}}</label>
+                          <input class="form-check-input float-end valign-middle"
+                            (click)="addMoreConfigs(data.id ,$event,i)" [(ngModel)]="selectedMenu[selectedIndex][i]"
+                            (ngModelChange)="AddIndex(selectedIndex,i)" type="checkbox" id="blacklist">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="clearfix"></div>
+    <button type="button" class="btn btn-success mb-3 float-end" style="cursor: pointer;" (click)="save()">
+      <i data-feather="plus" class="icon15x15"></i> Save
+    </button>
+  </div>
+</div>

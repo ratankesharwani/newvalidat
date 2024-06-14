@@ -1,0 +1,201 @@
+<div id="layout-wrapper">
+  <header id="page-topbar" class="left0">
+    <app-innerheader></app-innerheader>
+  </header>
+
+  <!-- Start main content-->
+  <div class="main-content mleft0">
+    <div class="page-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+              <h4 class="mb-0">Pay in details<br><span class="fn12 text-dark">Clients we work with and their
+                  transactions</span></h4>
+            </div>
+          </div>
+        </div>
+        <!-- end row --->
+
+        <!-- <app-payindetailsform></app-payindetailsform> -->
+        <div class="row mb-2">
+          <div class="col-xl-12">
+            <div class="card card-h-100">
+              <div class="card-body">
+                <form [formGroup]="applyNUnlock">
+                  <div class="d-flex justify-content-between" formGroupName="request">
+                    <div class="col-xl-4 pe-3 mb-3" formGroupName="body">
+                      <label class="form-label">Set status</label>
+                      <select class="form-select p-3" formControlName="complianceStatusId"
+                        (ngModelChange)="reasonByStatusId($event)">
+                        <option hidden selected [ngValue]=null>Status</option>
+                        <option *ngFor="let status of paymentInStatusDropdown" [ngValue]="status.id"
+                          [selected]="status.display_field===paymentInDetailsAction?.STATUS">{{status.display_field}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-xl-4 pe-3 mb-3" formGroupName="body">
+                      <label class="form-label">Select reason</label>
+                      <select class="form-select p-3" formControlName="complianceReasonId">
+                        <option hidden selected [ngValue]=null>--Select--</option>
+                        <option *ngFor="let reason of paymentInReasonDropdown" [ngValue]="reason.id"
+                                [selected]="reason.id===paymentInDetailsAction?.REASON_ID">{{reason.display_field}}</option>
+                      </select>
+                    </div>
+                    <div class="col-xl-4 mb-3" formGroupName="body">
+                      <label class="form-label">Notes</label>
+                      <textarea rows="1" formControlName="complianceLog" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-outline-secondary me-3" (click)="applyAndLock()">Apply</button>
+                    <button type="button" class="btn btn-primary" (click)="applyAndUnlock()">Apply &amp; Unlock</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button fw-medium" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Senders details <span class="badge badge-soft-primary py-2 ms-2">6 accounts</span>
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="d-flex flex-wrap">
+                          <div class="col-2 mb-3 pe-1" *ngFor="let beneDetails of payinSenderDetails">
+                            <p class="mb-1 text-uppercase">{{beneDetails.display}}</p>
+                            <p class="fw-semibold mb-2">{{beneDetails.value}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Customer details
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="d-flex flex-wrap">
+                          <div class="col-2 mb-3 pe-1" *ngFor="let beneDetails of payinCustomerDetails">
+                            <p class="mb-1 text-uppercase">{{beneDetails.display}}</p>
+                            <p class="fw-semibold mb-2">{{beneDetails.value}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                      <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Other details
+                      </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="d-flex flex-wrap">
+                          <div class="col-2 mb-3 pe-1" *ngFor="let beneDetails of payinOtherDetails">
+                            <p class="mb-1 text-uppercase">{{beneDetails.display}}</p>
+                            <p class="fw-semibold mb-2">{{beneDetails.value}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                      <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Action
+                      </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="d-flex flex-wrap">
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">Bank</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">Sender type</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">Amount</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">Currency code</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">Payment reference</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">Name Account No./IBAN</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">Debtor country</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">bank bic/swift</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">credit / debit</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">bank address</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">transaction number</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">transaction number</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">transaction number</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1">
+                            <p class="mb-1 text-uppercase">transaction number</p>
+                            <p class="fw-semibold mb-2">Clear bank</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div><!-- end card body -->
+            </div><!-- end card -->
+          </div><!-- end col -->
+        </div><!-- end row -->
+      </div>
+    </div>
+  </div>

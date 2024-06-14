@@ -1,0 +1,194 @@
+<form [formGroup]="serviceConfigs">
+  <div class="container" formGroupName="request">
+  <div class="row mb-2" formGroupName="body">
+      <div class="col-xl-10 m-auto">
+        <div class="card card-h-100">
+          <div class="card-body">
+              <h4 class="card-title mb-4">Add custome rule</h4>
+              <hr >
+              <div class="d-flex justify-content-between">
+                <div class="col-xl-4 pe-3 mb-3">
+                  <label class="form-label">Company</label>
+                  <select class="form-select p-2" formControlName="companyId" (ngModelChange)="getCompanyId($event)"
+                  [ngStyle]="controls['companyId'].invalid && (controls['companyId'].dirty || controls['companyId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+            <option  selected [ngValue]=null>--Select--</option>
+            <option *ngFor="let data of companyDropdown"
+                    [ngValue]="data.key">{{data.value}}</option>
+          </select>
+          <div style="color: red" *ngIf="controls['companyId'].invalid && (controls['companyId'].dirty || controls['companyId'].touched || submitted)">
+            <small *ngIf="controls['companyId'].errors?.['required']">
+              Company is required.
+            </small>
+          </div>
+              </div>
+              <div class="col-xl-4  pe-3 mb-3">
+                  <label class="form-label">Module</label>
+                  <select class="form-select p-2" formControlName="moduleId" (ngModelChange)="getModuleId($event)"
+                  [ngStyle]="controls['moduleId'].invalid && (controls['moduleId'].dirty || controls['moduleId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+            <option selected [ngValue]=null>--Select--</option>
+            <option *ngFor="let data of ModuleDropdown"
+                    [ngValue]="data.id">{{data.display_field}}</option>
+          </select>
+          <div style="color: red" *ngIf="controls['moduleId'].invalid && (controls['moduleId'].dirty || controls['moduleId'].touched || submitted)">
+            <small *ngIf="controls['moduleId'].errors?.['required']">
+              Module is required.
+            </small>
+          </div>
+              </div>
+                  <div class="col-xl-4 pe-3 mb-3">
+                      <label class="form-label">Check type</label>
+                      <select class="form-select p-2" formControlName="checkTypeId" (ngModelChange)="getCheckType($event)"
+                      [ngStyle]="controls['checkTypeId'].invalid && (controls['checkTypeId'].dirty || controls['checkTypeId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                <option selected [ngValue]=null>--Select--</option>
+                <option *ngFor="let data of checkTypeValues"
+                        [ngValue]="data.id">{{data.display_field}}</option>
+              </select>
+              <div style="color: red" *ngIf="controls['checkTypeId'].invalid && (controls['checkTypeId'].dirty || controls['checkTypeId'].touched || submitted)">
+                <small *ngIf="controls['checkTypeId'].errors?.['required']">
+                  Check Type is required.
+                </small>
+              </div>
+                  </div>
+              </div>
+          </div> <!-- end card-body-->
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <div class="col-xl-4 pe-3 mb-3">
+                    <label class="form-label">Rule Name</label>
+                    <input type="text" class="form-control p-2" placeholder="Type Rule Name" formControlName="customCheckRuleName"
+                     (ngModelChange)="ruleName($event)"
+                     [ngStyle]="controls['customCheckRuleName'].invalid && (controls['customCheckRuleName'].dirty || controls['customCheckRuleName'].touched || submitted) || UniqueRuleName?{color:'red',border:'1px solid red'}:{}"
+                     [ngClass]="controls['customCheckRuleName'].invalid && (controls['customCheckRuleName'].dirty || controls['customCheckRuleName'].touched || submitted) || UniqueRuleName?'redPlaceholder':''"/>
+              <div style="color: red" *ngIf="controls['customCheckRuleName'].invalid && (controls['customCheckRuleName'].dirty || controls['customCheckRuleName'].touched || submitted) || UniqueRuleName">
+                <small *ngIf="controls['customCheckRuleName'].errors?.['required']">
+                  Rule Name is required.
+                </small>
+                <small *ngIf="UniqueRuleName">
+                  This name already exist
+                </small>
+              </div>
+                </div>
+                <div class="col-xl-4 pe-3 mb-3">
+                  <label class="form-label">Description</label>
+                  <input type="text" class="form-control p-2" placeholder="Type Description" formControlName="description"
+                     (ngModelChange)="getDesc($event)"
+                     [ngStyle]="controls['description'].invalid && (controls['description'].dirty || controls['description'].touched || submitted)?{color:'red',border:'1px solid red'}:{}"
+                     [ngClass]="controls['description'].invalid && (controls['description'].dirty || controls['description'].touched || submitted)?'redPlaceholder':''"/>
+              <div style="color: red" *ngIf="controls['description'].invalid && (controls['description'].dirty || controls['description'].touched || submitted)">
+                <small *ngIf="controls['description'].errors?.['required']">
+                  Description is required.
+                </small>
+              </div>
+              </div>
+              <div class="col-xl-4 mb-3">
+                <label class="form-label">Status</label>
+                <div class="d-flex justify-content-start form-check form-switch pt-1">
+                    <input class="form-check-input float-end valign-middle mt-1"  formControlName="status" type="checkbox" id="blacklist">
+                </div>
+              </div>
+            </div>
+        </div>
+      </div> <!-- end card-->
+
+      </div>
+  </div>
+  <div class="row mb-2" formGroupName="body">
+      <div class="col-xl-10 m-auto">
+        <div class="card card-h-100">
+          <div class="card-body">
+              <h4 class="card-title mb-4">Conditions</h4>
+              <!-- <div>
+                  <div class="d-flex justify-content-between">
+                      <div class="col-xl-4 pe-3 mb-3">
+                          <label class="form-label">Data point</label>
+                          <select class="form-select">
+                              <option selected>Select team member</option>
+                              <option>Option 1</option>
+                              <option>Option 1</option>
+                          </select>
+                      </div>
+                      <div class="col-xl-4 pe-3 mb-3">
+                          <label class="form-label">Operator</label>
+                          <select class="form-select">
+                              <option selected>greater than</option>
+                              <option>Option 1</option>
+                              <option>Option 1</option>
+                          </select>
+                      </div>
+                      <div class="col-xl-3 mb-3 pe-3">
+                          <label class="form-label">Value</label>
+                          <select class="form-select">
+                              <option selected>Select team member</option>
+                              <option>Option 1</option>
+                              <option>Option 1</option>
+                          </select>
+                      </div>
+                      <div class="col-xl-1">
+                          <button type="button" class="btn btn-soft-light float-start mt-4 p-1"><i data-feather="trash-2"></i></button>
+                      </div>
+                  </div>
+              </div> -->
+              <div *ngFor="let totalService of detailsControl.controls;index as i" formArrayName="detail">
+                  <div class="d-flex justify-content-start mt-3 mb-2" [formGroupName]="i-1" *ngIf="i!=0">
+                      <div class="form-check me-2">
+                          <input class="form-check-input" type="radio" name="formRadios" id="formRadios1" checked="" formControlName="andOr"
+                          [ngStyle]="arrayControls(i-1,'andOr','invalid') && (arrayControls(i-1,'andOr','dirty') ||
+                           arrayControls(i-1,'andOr','touched') || submitted)?{color:'red',border:'1px solid red'}:{}" [value]="'AND'">
+                          <label class="form-check-label" for="formRadios1">if</label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="formRadios" id="formRadios2" formControlName="andOr"
+                          [ngStyle]="arrayControls(i-1,'andOr','invalid') && (arrayControls(i-1,'andOr','dirty') ||
+                           arrayControls(i-1,'andOr','touched') || submitted)?{color:'red',border:'1px solid red'}:{}"  [value]="'OR'">
+                          <label class="form-check-label" for="formRadios2">Or</label>
+                      </div>
+                      <div style="color: red" *ngIf="(arrayControls(i-1,'andOr','dirty') || arrayControls(i-1,'andOr','touched') || submitted)" class="pt-1">
+                        <small *ngIf="arrayControls(i-1,'andOr','errors')?.['required']">
+                          If/Or is required.
+                        </small>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-between" [formGroupName]="i">
+                      <div class="col-xl-4 pe-3 mb-3">
+                          <label class="form-label">Data point</label>
+                          <select class="form-select">
+                              <option selected>Select team member</option>
+                              <option>Option 1</option>
+                              <option>Option 1</option>
+                          </select>
+                      </div>
+                      <div class="col-xl-4 pe-3 mb-3">
+                          <label class="form-label">Operator</label>
+                          <select class="form-select">
+                              <option selected>greater than</option>
+                              <option>Option 1</option>
+                              <option>Option 1</option>
+                          </select>
+                      </div>
+                      <div class="col-xl-3 mb-3 pe-3">
+                          <label class="form-label">Value</label>
+                          <select class="form-select">
+                              <option selected>Select team member</option>
+                              <option>Option 1</option>
+                              <option>Option 1</option>
+                          </select>
+                      </div>
+                      <div class="col-xl-1">
+                          <button type="button" (click)="removeService(i)" class="btn btn-soft-light float-start mt-4 p-1"><i data-feather="trash-2">X</i></button>
+                      </div>
+                  </div>
+              </div>
+              <hr >
+              <div class="d-flex justify-content-end">
+                  <button style="margin-right: 43rem" (click)="addMoreService()" type="button" class="btn btn-outline-secondary float-start"><i data-feather="trash-2">Add More</i></button>
+                  <button (click)="goBack()" type="button" class="btn btn-outline-secondary me-3">Cancel</button>
+                  <button type="button" class="btn btn-primary">Add custome rule</button>
+              </div>
+
+
+          </div> <!-- end card-body-->
+      </div> <!-- end card-->
+      </div>
+  </div>
+</div>
+</form>

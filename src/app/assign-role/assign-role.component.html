@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row mb-2">
+    <div class="col-xl-10 m-auto">
+      <div class="card card-h-100">
+        <div class="card-body">
+          <h4 class="card-title mb-3">Role Details</h4>
+          <hr>
+          <div class="d-flex justify-content-start">
+            <div class="col-xl-4 pe-3">
+              <label class="form-label">User</label>
+              <select class="form-select" (change)="userName($event)">
+                <option hidden>User Name</option>
+                <option *ngFor="let data of logInResponse">{{data.firstName}} {{data.lastName}}</option>
+              </select>
+            </div>
+            <div class="col-xl-4">
+              <label class="form-label">Status</label>
+              <div class="d-flex justify-content-start form-check form-switch pt-1">
+                <input [checked]="statusValue" (change)="status($event)"
+                  class="form-check-input float-end valign-middle mt-1" type="checkbox" id="blacklist">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2" [hidden]="hideRoles">
+    <div class="col-xl-10 m-auto">
+      <div class="card card-h-100">
+        <div class="card-body">
+          <h4 class="card-title mb-3">Assign Role</h4>
+          <hr>
+          <div>
+            <div class="form-check form-switch form-switch-md mb-3 p-0 col-xl-5"
+              *ngFor="let data of roleMasterResponse; index as i">
+              <label class="form-check-label" for="blacklist">{{data.name}}</label>
+              <input class="form-check-input float-end valign-middle" type="checkbox" id="blacklist"
+                [(ngModel)]="selected[i]" (change)="selectRoleName($event,i,data.id)">
+            </div>
+          </div>
+        </div> <!-- end card-body-->
+      </div> <!-- end card-->
+      <br>
+      <div class="clearfix"></div>
+      <button type="button" class="btn btn-success mb-3 float-end" style="cursor: pointer;" (click)="save()">
+        <i data-feather="plus" class="icon15x15"></i> Save
+      </button>
+    </div>
+  </div>
+</div>

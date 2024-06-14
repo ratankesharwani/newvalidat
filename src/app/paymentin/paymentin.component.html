@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header justify-content-between d-flex align-items-center border-0">
+                <h4 class="card-title">Payment in <span class="badge badge-soft-primary py-2">{{NumberOfElement}} payments</span></h4>
+            </div><!-- end card header -->
+            <div class="row">
+                <div class="card-body pt-0">
+                    <div class="table mb-0">
+                        <div class="gridjs gridjs-container" style="width: 100%;">
+                            <div class="gridjs-wrapper" style="height: 400px;">
+                                <table class="gridjs-table " style="height: 400px;">
+                                    <thead class="gridjs-thead">
+                                        <tr class="gridjs-tr">
+                                          <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="min-width: 91px; width: 101px; top:0" *ngFor="let header of tabColumns">{{header.name}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="gridjs-tbody">
+                                        <tr class="gridjs-tr" *ngFor="let payin of payIn;index as i">
+                                            <td class="gridjs-td">{{payin.bank}}</td>
+                                            <td class="gridjs-td">{{payin.amount}}</td>
+                                            <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">{{payin.currencyCode}}</td>
+                                            <td class="gridjs-td">{{payin.bankRefNo==='null'?'':payin.bankRefNo}}</td>
+                                            <td class="gridjs-td">{{payin.debtorAccountNumber}}</td>
+                                            <td class="gridjs-td">{{payin.debtorName}}</td>
+                                            <td class="gridjs-td">{{payin.createdDate}}</td>
+                                            <td class="gridjs-td">{{payin.clearedDate}}</td>
+                                            <td class="gridjs-td">{{payin.clearedByName}}</td>
+                                            <td class="gridjs-td">{{payin.senderType}}</td>
+                                            <td class="gridjs-td"><div class="inactive float-start fn11">{{payin.complianceStatus}}</div></td>
+                                            <td class="gridjs-td"><i data-feather="lock" class="icon15x15"></i>{{payin.locked?'Locked':'Unlocked'}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">
+                                              <div *ngIf="payin.blackListCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
+                                              <div *ngIf="payin.blackListCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>
+                                              <div *ngIf="payin.blackListCheck=='NOT_AVAILABLE'" class="crossMarkBox">NA</div>
+                                              <div *ngIf="payin.blackListCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
+                                            </td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">
+                                              <div *ngIf="payin.thirdPartyCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
+                                              <div *ngIf="payin.thirdPartyCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>
+                                              <div *ngIf="payin.thirdPartyCheck=='NOT_AVAILABLE'" class="crossMarkBox">NA</div>
+                                              <div *ngIf="payin.thirdPartyCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
+                                            </td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">
+                                              <div *ngIf="payin.sanctionCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
+                                              <div *ngIf="payin.sanctionCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>
+                                              <div *ngIf="payin.sanctionCheck=='NOT_AVAILABLE'" class="crossMarkBox">NA</div>
+                                              <div *ngIf="payin.sanctionCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
+                                            </td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">
+                                              <div *ngIf="payin.cifasCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
+                                              <div *ngIf="payin.cifasCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>
+                                              <div *ngIf="payin.cifasCheck=='NOT_AVAILABLE'" class="crossMarkBox">NA</div>
+                                              <div *ngIf="payin.cifasCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="gridjs-footer p-0 mt-3">
+                                <div class="gridjs-pagination">
+                                    <div class="gridjs-pages float-none d-flex justify-content-between">
+                                        <a title="Previous" href="javascript:void();" class="btn btn-outline-purple"><i class="fas fa-long-arrow-alt-left"></i> Previous</a>
+                                        <div class="d-flex">
+                                            <a href="javascript:void();" class="btn btn-light" title="Page 1">1</a>
+                                            <a href="javascript:void();" class="btn" title="Page 2">2</a>
+                                            <a href="javascript:void();" class="btn" title="Page 3">3</a>
+                                            <a href="javascript:void();" class="btn" title="Page 4">4</a>
+                                            <a href="javascript:void();" class="btn" title="Page 5">5</a>
+                                            <a href="javascript:void();" class="btn" title="Page 6">6</a>
+                                            <a href="javascript:void();" class="btn" title="Page 7">7</a>
+                                        </div>
+                                        <a title="Next" href="javascript:void();" class="btn btn-outline-purple">Next <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<app-filtersidebar [searchOptions]="tabColumns" (searchEmit)="searchEmited($event)" (reset)="clearFilter()" ></app-filtersidebar>

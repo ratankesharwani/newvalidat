@@ -1,0 +1,114 @@
+<div class="navbar-header">
+    <div class="d-flex w-100 justify-content-between ">
+        <!-- LOGO -->
+        <div class="navbar-brand-box-inner">
+            <a href="index.html" class="logo logo-dark">
+                <img src="assets/images/logo-dark.png" class="img-fluid" alt="">
+            </a>
+
+        </div>
+
+        <div class="d-flex innerNavHolder">
+            <div class="dropdown d-none activeNavBtn d-lg-block ms-2 me-2">
+                <button type="button" class="btn header-item" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                    <span><i class="icon-sm" data-feather="grid"></i> Dashboard</span>
+                    <i class="mdi mdi-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu p-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a class="dropdown-item" href="javascript:void();">Option 1</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 2</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 3</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 4</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 5</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown dropdown-mega d-none d-lg-block" *ngFor="let role of roleBaseMenuPanel;index as i">
+                <button type="button" class="btn header-item" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                    <span><i class="icon-sm" data-feather="grid"></i>{{ role.display }}</span>
+                    <i class="mdi mdi-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu p-2">
+                    <div class="row">
+                        <div class="col-md-12" *ngFor="let subModule of role.subMenu;index as i" >
+                            <a class="dropdown-item" [routerLink]="['/',role.key, subModule.key]">{{  subModule.display }}</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- <div class="dropdown dropdown-mega d-none d-lg-block">
+                <button type="button" class="btn header-item" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                    <span><i class="icon-sm" data-feather="grid"></i> Compliance</span>
+                    <i class="mdi mdi-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu p-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a class="dropdown-item" href="javascript:void();">Option 1</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 2</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 3</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 4</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 5</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div> -->
+
+            <!-- <div class="dropdown dropdown-mega d-none d-lg-block">
+                <button type="button" class="btn header-item " data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                    <span><i class="icon-sm" data-feather="grid"></i> Configuration & Report</span>
+                    <i class="mdi mdi-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu p-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a class="dropdown-item" href="javascript:void();">Option 1</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 2</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 3</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 4</a>
+                            <a class="dropdown-item" href="javascript:void();">Option 5</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div> -->
+        </div>
+
+        <div class="d-flex userProfileHolder">
+            <div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item user text-start d-flex align-items-center" id="page-header-user-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-2.jpg"
+                    alt="Header Avatar">
+                    <span class="ms-2 d-none d-sm-block user-item-desc">
+                        <span class="user-name">Jigar Sha</span>
+                        <span class="user-sub-title">jigar&#64;validat.co.uk</span>
+                    </span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end pt-0">
+                    <div class="p-3 bg-primary border-bottom">
+                        <h6 class="mb-0 text-white">Jigar Sha</h6>
+                        <p class="mb-0 font-size-11 text-white-50 fw-semibold">jigar&#64;validat.co.uk</p>
+                    </div>
+                    <a class="dropdown-item" href="javascript:void();"><i class="mdi mdi-account-circle text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
+                    <a class="dropdown-item" href="javascript:void();"><i class="mdi mdi-message-text-outline text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Messages</span></a>
+                    <a class="dropdown-item" href="javascript:void();"><i class="mdi mdi-calendar-check-outline text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Taskboard</span></a>
+                    <a class="dropdown-item" href="javascript:void();"><i class="mdi mdi-lifebuoy text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Help</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="javascript:void();"><i class="mdi mdi-wallet text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Balance : <b>$6951.02</b></span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="javascript:void();"><i class="mdi mdi-cog-outline text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Settings</span><span class="badge badge-soft-success ms-auto">New</span></a>
+                </div>
+            </div>
+            <button type="button" class="btn header-item colorRed">
+                <i class="icon-sm" data-feather="log-out"></i>
+            </button>
+        </div>
+    </div>
+</div>

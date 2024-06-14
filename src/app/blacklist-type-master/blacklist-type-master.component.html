@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+      <h4 class="card-title">Blacklist Type Details</h4>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row d-flex justify-content-start">
+          <form [formGroup]="blacklistTypeDropdown">
+            <div formGroupName="request">
+              <div class="col-xl-3 mb-3" formGroupName="body">
+                <label class="form-label">Module<span class="text-danger">*</span></label>
+                <select class="form-select p-2" formControlName="moduleId" (ngModelChange)="getModuleId()"
+                  [ngStyle]="control1['moduleId'].invalid && (control1['moduleId'].dirty || control1['moduleId'].touched || submitted)?{color:'red',border:'1px solid red'}:{color:'black'}">
+                  <option selected [ngValue]=null>--Select--</option>
+                  <option *ngFor="let data of moduleDropdown" [ngValue]="data.id">{{data.display_field}}</option>
+                </select>
+                <div style="color: red"
+                  *ngIf="control1['moduleId'].invalid && (control1['moduleId'].dirty || control1['moduleId'].touched || submitted)">
+                  <small *ngIf="control1['moduleId'].errors?.['required']">
+                    Module is required.
+                  </small>
+                </div>
+              </div>
+              <div class="col-xl-3 mb-3" formGroupName="body">
+                <label class="form-label">Company<span class="text-danger">*</span></label>
+                <select class="form-select p-2" formControlName="companyId" (ngModelChange)="companyName()"
+                  [ngStyle]="control1['companyId'].invalid && (control1['companyId'].dirty || control1['companyId'].touched || submitted)?{color:'red',border:'1px solid red'}:{color:'black'}">
+                  <option selected [ngValue]=null>--Select--</option>
+                  <option *ngFor="let data of companyResponse" [ngValue]="data.key">{{data.value}}</option>
+                </select>
+                <div style="color: red"
+                  *ngIf="control1['companyId'].invalid && (control1['companyId'].dirty || control1['companyId'].touched  || submitted)">
+                  <small *ngIf="control1['companyId'].errors?.['required']">
+                    Company is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </form>
+          <form [formGroup]="blacklistTypeMaster">
+            <div formGroupName="request">
+              <div class="col-xl-3 mb-3" formGroupName="body">
+                <label class="form-label">BlackList Type<span class="text-danger">*</span></label>
+                <select class="form-select p-2" formControlName="blackListTypeId"
+                  (ngModelChange)="blackListTypeIdIndex($event)"
+                  [ngStyle]="control2['blackListTypeId'].invalid && (control2['blackListTypeId'].dirty || control2['blackListTypeId'].touched || submitted)?{color:'red',border:'1px solid red'}:{color:'black'}">
+                  <option selected [ngValue]=null>--Select--</option>
+                  <option *ngFor="let data of blacklistTypeResponse" [ngValue]="data.key">{{data.value}}</option>
+                </select>
+                <div style="color: red"
+                  *ngIf="control2['blackListTypeId'].invalid && (control2['blackListTypeId'].dirty || control2['blackListTypeId'].touched  || submitted)">
+                  <small *ngIf="control2['blackListTypeId'].errors?.['required']">
+                    Blacklist Type is required.
+                  </small>
+                </div>
+              </div>
+              <div class="col-xl-3 mb-3" formGroupName="body">
+                <label class="form-label">Blacklist Column Name<span class="text-danger">*</span></label>
+                <input style="height: 29px" type="text" placeholder="Type here.." class="form-control p-2 font-12"
+                  formControlName="blackListValue"
+                  [ngStyle]="control2['blackListValue'].invalid && (control2['blackListValue'].dirty || control2['blackListValue'].touched || submitted)?{color:'red',border:'1px solid red'}:{color:'black'}">
+                <div style="color: red"
+                  *ngIf="control2['blackListValue'].invalid && (control2['blackListValue'].dirty || control2['blackListValue'].touched  || submitted)">
+                  <small *ngIf="control2['blackListValue'].errors?.['required']">
+                    Blacklist Type is required.
+                  </small>
+                </div>
+              </div>
+              <div class="col-xl-3 mb-3" formGroupName="body">
+                <label class="form-label">Status</label>
+                <div class="d-flex justify-content-start form-check form-switch pt-1">
+                  <input formControlName="status" class="form-check-input float-end valign-middle mt-1" type="checkbox"
+                    id="blacklist">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="clearfix"></div>
+    <button type="button" class="btn btn-success mb-3 float-end" style="cursor: pointer;" (click)="save()">
+      <i data-feather="plus" class="icon15x15"></i> Add new
+    </button>
+    <button type="button" class="btn mb-3 btn-success float-end" routerLink="/Configuration/Add_BlackList_Details"
+      style="cursor: pointer; margin-right: 11px !important;background-color: rgb(91, 91, 231);">
+      <i data-feather="plus" class="icon15x15"></i> Back
+    </button>
+  </div>
+</div>
+<br>

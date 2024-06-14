@@ -1,0 +1,17 @@
+<div id="layout-wrapper">
+    <header id="page-topbar" class="left0">
+        <app-innerheader></app-innerheader>
+    </header>
+    <div class="main-content mleft0">
+        <div class="page-content">
+            <div class="container-fluid">
+                <app-filterbutton (click)="click()"></app-filterbutton>
+                <!-- <app-paymentin [toggleButton]="toggleButton"></app-paymentin> -->
+                <app-paymentout [toggleButton]="toggleButton"></app-paymentout>
+            </div>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</div>
+<!-- <app-filtersidebar></app-filtersidebar>
+ <app-addservicerule></app-addservicerule> -->

@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+      <h4 class="card-title">Add Whitelist Details<br><span class="fn12 text-dark">Clients we work with and their
+          transactions</span></h4>
+    </div>
+  </div>
+</div>
+<form [formGroup]="addWhitelistDetails" autocomplete="">
+  <div class="row" formGroupName="request">
+    <div class="col-lg-12" formGroupName="body">
+      <div class="card">
+        <div class="card-body">
+          <div class="row d-flex justify-content-start">
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Currency<span class="text-danger">*</span></label>
+              <select class="form-select p-2 font-12" formControlName="currencyCode"
+                [ngStyle]="controls['currencyCode'].invalid && (controls['currencyCode'].dirty || controls['currencyCode'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                <option hidden selected [ngValue]="null">Select Currency</option>
+                <option *ngFor="let data of currencyDropDownResponse">{{data.value}}</option>
+              </select>
+              <div class="colorRed"
+                *ngIf="controls['currencyCode'].invalid && (controls['currencyCode'].dirty || controls['currencyCode'].touched || submitted)">
+                <small *ngIf="controls['currencyCode'].errors?.['required']">
+                  Currency is required.
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Account Number<span class="text-danger">*</span></label>
+              <input placeholder="Type here.." type="text" class="form-control p-2 font-12"
+                formControlName="accountNumber"
+                [ngStyle]="controls['accountNumber'].invalid && (controls['accountNumber'].dirty || controls['accountNumber'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+              <div class="colorRed"
+                *ngIf="controls['accountNumber'].invalid && (controls['accountNumber'].dirty || controls['accountNumber'].touched  || submitted)">
+                <small *ngIf="controls['accountNumber'].errors?.['required']">
+                  Account Number is required.
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Debtor Name<span class="text-danger">*</span></label>
+              <input placeholder="Type here.." type="text" class="form-control p-2 font-12" formControlName="debtorName"
+                [ngStyle]="controls['debtorName'].invalid && (controls['debtorName'].dirty || controls['debtorName'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+              <div class="colorRed"
+                *ngIf="controls['debtorName'].invalid && (controls['debtorName'].dirty || controls['debtorName'].touched  || submitted)">
+                <small *ngIf="controls['debtorName'].errors?.['required']">
+                  Debtor Name is required.
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Bank Name<span class="text-danger">*</span></label>
+              <input placeholder="Type here.." type="text" class="form-control p-2 font-12" formControlName="bankName"
+                [ngStyle]="controls['bankName'].invalid && (controls['bankName'].dirty || controls['bankName'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+              <div class="colorRed"
+                *ngIf="controls['bankName'].invalid && (controls['bankName'].dirty || controls['bankName'].touched  || submitted)">
+                <small *ngIf="controls['bankName'].errors?.['required']">
+                  Bank Name is required.
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Client Id<span class="text-danger">*</span></label>
+              <input placeholder="Type here.." type="text" class="form-control p-2 font-12" formControlName="clientId"
+                maxlength="9"
+                [ngStyle]="controls['clientId'].invalid && (controls['clientId'].dirty || controls['clientId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+              <div class="colorRed"
+                *ngIf="controls['clientId'].invalid && (controls['clientId'].dirty || controls['clientId'].touched  || submitted)">
+                <small *ngIf="controls['clientId'].errors?.['required']">
+                  Client ID is required.
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Sender Type<span class="text-danger">*</span></label>
+              <select class="form-select p-2 font-12" formControlName="senderType"
+                [ngStyle]="controls['senderType'].invalid && (controls['senderType'].dirty || controls['senderType'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                <option hidden selected [ngValue]="null">Select Sender</option>
+                <option *ngFor="let data of senderType">{{data.display_field}}</option>
+              </select>
+              <div class="colorRed"
+                *ngIf="controls['senderType'].invalid && (controls['senderType'].dirty || controls['senderType'].touched || submitted)">
+                <small *ngIf="controls['senderType'].errors?.['required']">
+                  Sender Type is required.
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Description<span class="text-danger"></span></label>
+              <input placeholder="Type here.." type="text" class="form-control p-2 font-12"
+                formControlName="description">
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Status</label>
+              <div class="d-flex justify-content-start form-check form-switch pt-1">
+                  <input formControlName="status" class="form-check-input float-end valign-middle mt-1" type="checkbox" id="blacklist">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <br>
+      <div class="clearfix"></div>
+      <button type="button" class="btn btn-success mb-3 float-end" style="cursor: pointer;" (click)="save()">
+        <i data-feather="plus" class="icon15x15"></i> Add new
+      </button>
+      <button type="button" class="btn mb-3 btn-success float-end" routerLink="/Configuration/Add_Whitelist_Details"
+        style="cursor: pointer; margin-right: 11px !important;background-color: rgb(91, 91, 231);">
+        <i data-feather="plus" class="icon15x15"></i> Back
+      </button>
+    </div>
+  </div>
+  <br>
+</form>

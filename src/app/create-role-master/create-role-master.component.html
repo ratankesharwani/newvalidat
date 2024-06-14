@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+      <h4 class="card-title">Roles Details<br><span
+          class="fn12 text-dark">Create role detail</span></h4>
+    </div>
+  </div>
+</div>
+<form [formGroup]="addRoleMaster" autocomplete="">
+  <br>
+  <div class="row" formGroupName="request">
+    <div class="col-lg-12" formGroupName="body">
+      <div class="card">
+        <div class="card-body">
+          <div class="row d-flex justify-content-start">
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Role Name</label><span class="text-danger">*</span>
+              <input placeholder="Type here.."  [ngStyle]="{'border':roleNameControl.invalid && (roleNameControl.dirty || roleNameControl.touched || submitted)?'1px solid red':''}" type="text" class="form-control p-2" (input)="roleName($event)" formControlName="roleName">
+              <div style="color: red" *ngIf="roleNameControl.invalid && (roleNameControl.dirty || roleNameControl.touched || submitted)">
+                <small *ngIf="roleNameControl.errors?.['required']" >
+                  Role Name is Required
+                </small>
+              </div>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Remark</label>
+              <input placeholder="Type here.." name="remark" rows="2" resize="no" class="form-control p-2"  formControlName="remark" (input)="remark($event)"/>
+            </div>
+            <div class="col-xl-3 mb-3">
+              <label class="form-label">Status</label>
+              <div class="d-flex justify-content-start form-check form-switch pt-1">
+                  <input (change)="status($event)" class="form-check-input float-end valign-middle mt-1" type="checkbox" id="blacklist">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><br>
+      <div class="clearfix"></div>
+      <button type="button" class="btn btn-success mb-3 float-end" style="cursor: pointer;"
+        (click)="save()">
+        <i data-feather="plus" class="icon15x15"></i> Add new
+      </button>
+      <button type="button" class="btn mb-3 btn-success float-end" routerLink="/User_Permission/Role_Master"  style="cursor: pointer; margin-right: 11px !important;background-color: rgb(91, 91, 231);">
+        <i data-feather="plus" class="icon15x15"></i> Back
+      </button>
+    </div>
+  </div>
+</form>

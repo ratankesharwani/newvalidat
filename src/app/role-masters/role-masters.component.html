@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header justify-content-between d-flex align-items-center border-0">
+        <h4 class="card-title">Role Masters <span
+            class="badge badge-soft-primary py-2">{{roleMasterGridResponse?.length}} Rules</span></h4>
+        <button type="button" class="btn btn-success" routerLink="/User_Permission/Add_Role"><i data-feather="plus"
+            class="icon15x15"></i> Add new</button>
+      </div><!-- end card header -->
+      <div class="row">
+        <div class="card-body pt-0">
+          <div class="table mb-0">
+            <div class="gridjs gridjs-container" style="width: 100%;">
+              <div class="gridjs-wrapper" style="height: 400px;">
+                <table class="gridjs-table " style="height: 400px;">
+                  <thead class="gridjs-thead">
+                    <tr class="gridjs-tr">
+                      <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0"
+                        *ngFor="let col of tabColumns">
+                        {{col.name}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="gridjs-tbody">
+                    <tr class="gridjs-tr" *ngFor="let data of roleMasterGridResponse; index as i">
+                      <td class="gridjs-td">{{data.name}}</td>
+                      <td class="gridjs-td">{{data.remark}}</td>
+                      <td class="gridjs-td">{{data.createdDate}}</td>
+                      <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
+                        <div class="activeStatus float-start fn11">
+                          {{data.status ? 'Active' : 'Inactive'}}
+                        </div>
+                      </td>
+                      <td class="gridjs-td">
+                        <div class="d-flex justify-content-start hover-cursor" (click)="openPopUp(data.id,data.status)">
+                          <div class="mt-2 ms-3" matTooltipPosition="above"
+                            matTooltip="Set to {{data.status?'Inactive':'Active'}}"><i
+                              class="ti-more-alt colorGray"></i>#</div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="gridjs-footer p-0 mt-3">
+                <div class="gridjs-pagination">
+                  <div class="gridjs-pages float-none d-flex justify-content-between">
+                    <a title="Previous" href="javascript:void();" class="btn btn-outline-purple"><i
+                        class="fas fa-long-arrow-alt-left"></i> Previous</a>
+                    <div class="d-flex">
+                      <a href="javascript:void();" class="btn btn-light" title="Page 1">1</a>
+                      <a href="javascript:void();" class="btn" title="Page 2">2</a>
+                      <a href="javascript:void();" class="btn" title="Page 3">3</a>
+                      <a href="javascript:void();" class="btn" title="Page 4">4</a>
+                      <a href="javascript:void();" class="btn" title="Page 5">5</a>
+                      <a href="javascript:void();" class="btn" title="Page 6">6</a>
+                      <a href="javascript:void();" class="btn" title="Page 7">7</a>
+                    </div>
+                    <a title="Next" href="javascript:void();" class="btn btn-outline-purple">Next <i
+                        class="fas fa-long-arrow-alt-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
