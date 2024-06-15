@@ -13,9 +13,31 @@
             </div>
             <div class="col-xl-3 pe-3 mb-3">
               <label class="form-label">Company</label>
-              <input placeholder="Created Date"
+              <!-- <div class="date-range-picker">
+                <dp-date-picker
+                  mode="day"
+                  theme="dp-material"
+                  [config]="datePickerConfig"
+                  placeholder="Start Date">
+                </dp-date-picker>
+
+                <dp-date-picker
+                  mode="day"
+                  theme="dp-material"
+                  [config]="datePickerConfig"
+                  placeholder="End Date">
+                </dp-date-picker>
+              </div> -->
+              <!-- <input placeholder="Created Date"
                 [bsConfig]="{ isAnimated: true,rangeInputFormat : 'DD-MM-YYYY',showWeekNumbers:false}"
-                class="form-control  rounded bg-light border-1 p-1_3 mt-1" bsDaterangepicker>
+                class="form-control  rounded bg-light border-1 p-1_3 mt-1" bsDaterangepicker> -->
+                <input
+                    type="text"
+                    class="form-control"
+                    id="daterange"
+                    placeholder="Select date range"
+                    bsDaterangepicker
+                    [bsConfig]="bsConfig">
             </div>
             <div class="col-xl-3 pe-3 mb-3">
               <label class="form-label">Module</label>

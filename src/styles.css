@@ -4,7 +4,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
-
+/*
 .theme-green .bs-datepicker-head {
   background-color: #306191;
 }
@@ -21,7 +21,7 @@ table td[class*=select-] span:after {
 }
 .bs-datepicker{
   margin-left: 26rem!important;
-}
+} */
 
 
 
@@ -30,3 +30,41 @@ table td[class*=select-] span:after {
 .hideDisplay{display: none;}
 .showDisplay{display: block;}
 .alertBox{ border: none; border-radius: 10px; box-shadow: 0px 0px 20px #000; background-color: #fff; margin: 80px auto;}
+
+
+.bs-datepicker {
+  display: flex;
+  flex-direction: column;
+}
+
+.bs-datepicker .bs-datepicker-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.bs-datepicker .bs-datepicker-body {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.bs-datepicker .bs-datepicker-month {
+  margin: 0;
+}
+
+.bs-datepicker .bs-datepicker-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.bs-datepicker .bs-datepicker-nav button {
+  background: #007bff;
+  border: none;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.bs-datepicker .bs-datepicker-nav button:hover {
+  background: #0056b3;
+}

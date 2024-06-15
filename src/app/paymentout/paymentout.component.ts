@@ -66,7 +66,7 @@ export class PaymentoutComponent {
   tabColumns=[
     {
       name:"Payout Id",
-      key:'bank',
+      key:'paymentOutId',
       search:true,
       dataType:"input",
       value:'',
@@ -74,7 +74,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Beneficiary Name",
-      key:'bank',
+      key:'beneName',
       search:true,
       dataType:"input",
       value:'',
@@ -82,7 +82,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Beneficiary Acc. No.",
-      key:'amount',
+      key:'recipientAccountNumber',
       search:true,
       dataType:"input",
       value:'',
@@ -90,7 +90,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Beneficiary Bic/Swift",
-      key:'currencyCode',
+      key:'recipientBicCode',
       search:true,
       dataType:"input",
       value:'',
@@ -98,7 +98,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Amount",
-      key:'bankRefNo',
+      key:'amount',
       search:true,
       dataType:"input",
       value:'',
@@ -106,7 +106,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Currency Code",
-      key:'debtorAccountNumber',
+      key:'currencyCode',
       search:true,
       dataType:"input",
       value:'',
@@ -114,7 +114,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Country Code",
-      key:'debtorName',
+      key:'countryCode',
       search:true,
       dataType:"input",
       value:'',
@@ -122,7 +122,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Value Date",
-      key:'createdDate',
+      key:'valueDate',
       search:true,
       dataType:"input",
       value:'',
@@ -130,7 +130,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Created Date",
-      key:'transactionDate',
+      key:'createdDate',
       search:true,
       dataType:"input",
       value:'',
@@ -138,7 +138,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Cleared Date",
-      key:'clearedByName',
+      key:'clearedDate',
       search:true,
       dataType:"input",
       value:'',
@@ -146,7 +146,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Cleared By",
-      key:'senderType',
+      key:'clearedByName',
       search:true,
       dataType:"select",
       value:'',
@@ -170,7 +170,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Blacklist",
-      key:'blackListCheck',
+      key:'blacklistCheck',
       search:true,
       dataType:"select",
       value:'',
@@ -178,7 +178,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Beneficiary Sanction",
-      key:'thirdParty',
+      key:'beneSanctionCheck',
       search:true,
       dataType:"select",
       value:'',
@@ -186,7 +186,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Customer Sanction",
-      key:'sanctionCheck',
+      key:'customerSanctionCheck',
       search:true,
       dataType:"select",
       value:'',
@@ -194,7 +194,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Beneficiary Others",
-      key:'cifasCheck',
+      key:'beneCifasCheck',
       search:true,
       dataType:"select",
       value:'',
@@ -202,7 +202,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Customer Others",
-      key:'cifasCheck',
+      key:'customerCifasCheck',
       search:true,
       dataType:"select",
       value:'',
@@ -210,7 +210,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Custom",
-      key:'cifasCheck',
+      key:'customCheck',
       search:true,
       dataType:"select",
       value:'',

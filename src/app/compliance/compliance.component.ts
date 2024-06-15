@@ -5,17 +5,30 @@ import { PaymentinComponent } from "../paymentin/paymentin.component";
 import { FooterComponent } from "../footer/footer.component";
 import { isPlatformBrowser } from '@angular/common';
 import { PaymentoutComponent } from "../paymentout/paymentout.component";
+import { FiltersidebarComponent } from "../filtersidebar/filtersidebar.component";
+import { AddserviceruleComponent } from "../addservicerule/addservicerule.component";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-compliance',
     standalone: true,
     templateUrl: './compliance.component.html',
     styleUrl: './compliance.component.css',
-    imports: [InnerheaderComponent, FilterbuttonComponent, PaymentinComponent, FooterComponent, PaymentoutComponent]
+    imports: [
+      InnerheaderComponent,
+      RouterOutlet,
+      FilterbuttonComponent,
+      PaymentinComponent,
+      FooterComponent,
+      PaymentoutComponent,
+      FiltersidebarComponent,
+      AddserviceruleComponent
+    ]
 })
 export class ComplianceComponent {
   private isBrowser: boolean;
   toggleButton:boolean=false
+  activeComponent:any
 
   title = 'newvalidat';
   constructor(private renderer: Renderer2,
@@ -25,6 +38,9 @@ export class ComplianceComponent {
   click(){
     if (this.isBrowser) {
         this.toggleButton=true
+        if(this.activeComponent instanceof PaymentinComponent){
+          this.activeComponent.toggleButton=this.toggleButton
+        }
         this.renderer.addClass(document.body, 'right-bar-enabled');
     }
   }
@@ -32,5 +48,8 @@ export class ComplianceComponent {
     if (this.isBrowser) {
       this.renderer.removeClass(document.body, 'right-bar-enabled');
     }
+  }
+  onRouterActivate(event:any){
+     this.activeComponent=event
   }
 }

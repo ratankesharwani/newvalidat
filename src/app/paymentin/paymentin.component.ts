@@ -324,12 +324,6 @@ export class PaymentinComponent {
   }
 
   ngOnInit() {
-    // const sidebar = $('.sidebar');
-    // sidebar.on('show.bs.collapse', '.collapse', function() {
-    //   sidebar.find('.collapse.show')['collapse']('hide');
-    // });
-    // const  sidebar = document.getElementById('sidebar')
-    // sidebar?.style.setProperty("width","0");
     this.checkedAll = false
     this.lockForm.value.request.body.cpilRequest.length = 0
     this.paymentInList()
@@ -427,48 +421,6 @@ export class PaymentinComponent {
       }
     }
   }
-
-  // config: ExportAsConfig = {
-  //   type: 'pdf',
-  //   elementIdOrContent: 'data-table',
-  //   options: {
-  //     jsPDF: {
-  //       format: 'a2',
-  //       unit: 'mm',
-  //       width: '300',
-  //       height: '10',
-  //       margins: {
-  //         top: '20'
-  //       }
-  //     },
-  //   }
-  // };
-
-  // exportAs(type: SupportedExtensions, opt?: string) {
-  //   this.config.type = type;
-  //   if (opt) {
-  //     this.config.options.jsPDF.orientation = opt;
-  //   }
-  //   this.exportAsService.save(this.config, "PayinQueue-" + this.currentDate).subscribe(() => {
-  //   });
-  // // }
-
-  // exportAsConfig: ExportAsConfig = {
-  //   type: 'pdf',
-  //   elementIdOrContent: 'data-table',
-  //   options: {
-  //     jsPDF: {
-  //       format: 'a2',
-  //     },
-  //   }
-  // }
-
-  // export() {
-  //   this.exportAsService.save(this.exportAsConfig, "PayinQueue-" + this.currentDate).subscribe(() => {
-  //   });
-  //   this.exportAsService.get(this.config).subscribe(content => {
-  //   });
-  // }
 
   searchEmited(event:any){
     this.searching(event.value,event.key)
@@ -632,7 +584,6 @@ export class PaymentinComponent {
   }
   opened:boolean=false
   onClick(){
-    // document.body.classList.toggle('sidebar-icon-only');
     this.opened=!this.opened;
     const  sidebar = document.getElementById('sidebar')
     sidebar?.style.setProperty("width",this.opened?"237px":"0");

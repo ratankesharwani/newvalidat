@@ -7,7 +7,9 @@ import { CommonModule } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 import moment from 'moment';
 import { PageEvent } from '@angular/material/paginator';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerConfig, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AngularMyDatePickerModule } from 'angular-mydatepicker';
+import { DpDatePickerModule, IDatePickerConfig } from 'ng2-date-picker';
 
 @Component({
   selector: 'app-banned-bene',
@@ -17,6 +19,24 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
   styleUrl: './banned-bene.component.css'
 })
 export class BannedBeneComponent {
+  datePickerConfig: any = {
+    // Customize your date picker configuration here
+    format: 'YYYY-MM-DD',
+    firstDayOfWeek: 'mo',
+    monthFormat: 'MMM, YYYY',
+    closeOnSelect: false,
+    closeOnSelectDelay: 100,
+    onOpenDelay: 0,
+    disableKeypress: false,
+    allowMultiSelect: false,
+    openSelectorTopOfInput: false,
+    showNearMonthDays: true,
+    showWeekNumbers: false,
+    enableMonthSelector: true,
+    showGoToCurrent: true,
+    locale: 'en',
+    returnedValueType: 'string', // 'string', 'Moment' or 'js-date'
+  };
   company: FormGroup;
   companyResponse: any;
   moduleForm: FormGroup;
@@ -33,11 +53,17 @@ export class BannedBeneComponent {
   maxDate = new Date();
   createdDateRange: any;
   selectBanned : boolean = false;
+  dateRange: Date[];
+  bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(private active: ActivatedRoute,
               private service: AdminService,
               private elementRef: ElementRef,
               private localStorage:LocalStorageService) {
+                this.bsConfig = {
+                  containerClass: 'theme-default',
+                  rangeInputFormat: 'YYYY-MM-DD'
+                };
 
     const queueData: any = this.localStorage.getItem("data")
     this.queueParseData = JSON.parse(queueData)

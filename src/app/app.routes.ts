@@ -27,6 +27,7 @@ import { BannedBeneComponent } from './banned-bene/banned-bene.component';
 import { RiskDetailsComponent } from './risk-details/risk-details.component';
 import { RiskManagementComponent } from './risk-management/risk-management.component';
 import { PayindetailsComponent } from './payindetails/payindetails.component';
+import { PaymentoutComponent } from './paymentout/paymentout.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'Admin', pathMatch: 'full' },
@@ -43,7 +44,7 @@ export const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'PayIn_Queue' },
       { path: 'PayIn_Queue', component: PaymentinComponent },
-      { path: 'PayOut_Queue', component: PayoutQueueComponent }
+      { path: 'PayOut_Queue', component: PaymentoutComponent }
     ]
   },
   {

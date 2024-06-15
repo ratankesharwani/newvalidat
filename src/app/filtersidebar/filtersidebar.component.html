@@ -11,9 +11,9 @@
         <form>
           <div *ngFor="let column of searchOptions">
             <div class="mb-2">
-              <input placeholder="Created Date"
+              <!-- <input placeholder="Created Date"
                 [bsConfig]="{ isAnimated: true,rangeInputFormat : 'DD-MM-YYYY',showWeekNumbers:false}"
-                class="form-control  rounded bg-light border-1 p-1_3 mt-1" bsDaterangepicker>
+                class="form-control  rounded bg-light border-1 p-1_3 mt-1" bsDaterangepicker> -->
               <ng-container (change)="searching($event)"  *ngTemplateOutlet="getTemplate(column.dataType); context: { $implicit: column }"></ng-container>
             </div>
           </div>
