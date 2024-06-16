@@ -107,12 +107,12 @@ export class PayinDocsComponent {
     this.spinner=true
     this.formData.append("documentTypeId", this.UploadForm.controls['documentTypeId'].value)
     this.formData.append("file", this.file,)
-    this.formData.append("integrationId", this.queueParseData.id)
-    this.formData.append("clientId", this.queueParseData.clientId)
+    this.formData.append("integrationId", this.queueParseData?.id)
+    this.formData.append("clientId", this.queueParseData?.clientId)
     const userId: any = this.localStorage.getItem("userId")
     this.formData.append("uploadedBy", userId)
     this.formData.append("description", this.UploadForm.controls['description'].value)
-    this.formData.append("moduleId", this.queueParseData.moduleId)
+    this.formData.append("moduleId", this.queueParseData?.moduleId)
     this.Submit()
   }
   insertionSort(array: any[]): void {

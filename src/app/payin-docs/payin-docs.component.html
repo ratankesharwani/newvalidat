@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<form [formGroup]="UploadForm" (ngSubmit)="uploadForm()">
+<form >
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -24,6 +24,7 @@
                                 </div>
                                 <!-- <i class="d-block m-auto" data-feather="upload-cloud"></i> -->
                                 <a href="javascript:void()" class="text-green">Click to upload</a> or drag and drop
+                                <input type="file" name="file" class="d-none" id="fileUpload" multiple>
                                 <span class="fs-6 d-block">jpg, xlsx, png, xls, pdf, jpeg, csv, doc, docx, zip, rar, mht, msg or GIF (max. 800x400px)</span>
                             </h4>
                         </div>

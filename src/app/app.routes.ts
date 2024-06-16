@@ -40,13 +40,16 @@ import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { VarifyOtpComponent } from './varify-otp/varify-otp.component';
+import { ReportComponent } from './report/report.component';
+import { PayinReportComponent } from './payin-report/payin-report.component';
+import { PayoutReportComponent } from './payout-report/payout-report.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'Admin', pathMatch: 'full' },
-  {path: 'login', component: LoginComponent},
-  {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'reset-password', component: ResetPasswordComponent},
-  {path: 'verify-otp', component: VarifyOtpComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'verify-otp', component: VarifyOtpComponent },
   {
     path: 'Admin', component: AdminComponent,
     children: [
@@ -93,26 +96,33 @@ export const routes: Routes = [
     ]
   },
   {
-    path:'Payin_Service',component:PayinServicesComponent,
-    children:[
-      {path:'',pathMatch:'full',redirectTo:'Details'},
-      {path:'Details',component:PayindetailsComponent},
-      {path:'Services',component:PayinServiceComponent},
-      {path:'Attachments',component:PayinDocsComponent},
-      {path:'Logs',component:PayinActivityLogComponent},
+    path: 'Payin_Service', component: PayinServicesComponent,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'Details' },
+      { path: 'Details', component: PayindetailsComponent },
+      { path: 'Services', component: PayinServiceComponent },
+      { path: 'Attachments', component: PayinDocsComponent },
+      { path: 'Logs', component: PayinActivityLogComponent },
     ]
   },
   {
-    path:'Payout_Service',component:PayoutServicesComponent,
-    children:[
-      {path:'',pathMatch:'full',redirectTo:'Details'},
-      {path:'Details',component:PayoutdetailsComponent},
-      {path:'Services',component:PayoutServiceComponent},
-      {path:'Attachments',component:PayoutDocsComponent},
-      {path:'Logs',component:PayoutActivityLogComponent},
+    path: 'Payout_Service', component: PayoutServicesComponent,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'Details' },
+      { path: 'Details', component: PayoutdetailsComponent },
+      { path: 'Services', component: PayoutServiceComponent },
+      { path: 'Attachments', component: PayoutDocsComponent },
+      { path: 'Logs', component: PayoutActivityLogComponent },
     ]
   },
   {
-    path:'payin-details',component:PayindetailsComponent
+    path: 'Report', component: ReportComponent,
+    children: [
+      { path: 'PaymentIn', component: PayinReportComponent },
+      { path: 'PaymentOut', component: PayoutReportComponent },
+    ]
+  },
+  {
+    path: 'payin-details', component: PayindetailsComponent
   }
 ];
