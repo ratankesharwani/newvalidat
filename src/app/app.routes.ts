@@ -77,7 +77,7 @@ export const routes: Routes = [
       { path: 'Whitelist_Details', component: AddWhitelistDetailsComponent },
       { path: 'Add_Service_Rule', component: ServiceRulesComponent },
       { path: 'service-rule-details', component: ServiceRuleDetailsComponent },
-      { path: 'add-service-rule', component: ServiceConfigurationComponent },
+      { path: 'Create_Service_Rule', component: ServiceConfigurationComponent },
       { path: 'Custom_Rule', component: CustomRulesComponent },
       { path: 'Add_Custom_Rule', component: AddCustomRuleComponent },
       { path: 'Banned_Bene', component: BannedBeneComponent },
