@@ -23,10 +23,10 @@
   </div>
 </div>
 <ng-template #inputTemplate let-column>
-  <input type="text" [(ngModel)]="column.value" [ngClass]="column.class" placeholder="{{ column.name }}"  (ngModelChange)="searching(column)" />
+  <input type="text"  *ngIf="column.search" [(ngModel)]="column.value" [ngClass]="column.class" placeholder="{{ column.name }}"  (ngModelChange)="searching(column)" />
 </ng-template>
 <ng-template #selectTemplate let-column>
-  <select  [ngClass]="column.class" (change)="searching({value:$event.target?.['value'],key:column.key})">
+  <select  *ngIf="column.search"  [ngClass]="column.class" (change)="searching({value:$event.target?.['value'],key:column.key})">
     <option [value]=null selected hidden>{{column.name}}</option>
     <option *ngFor="let option of column.value" [ngValue]=" option.display_field">{{ option.display_field }}</option>
   </select>

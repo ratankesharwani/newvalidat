@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { AdminService } from '../Service/admin.service';
@@ -9,15 +9,17 @@ import { LocalStorageService } from '../Service/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
+import { FiltersidebarComponent } from "../filtersidebar/filtersidebar.component";
 @Component({
-  selector: 'app-blacklisttype',
-  standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,CommonModule,MatTooltip,RouterLink],
-  templateUrl: './blacklisttype.component.html',
-  styleUrl: './blacklisttype.component.css'
+    selector: 'app-blacklisttype',
+    standalone: true,
+    templateUrl: './blacklisttype.component.html',
+    styleUrl: './blacklisttype.component.css',
+    imports: [FormsModule, ReactiveFormsModule, CommonModule, MatTooltip, RouterLink, FiltersidebarComponent]
 })
 export class BlacklisttypeComponent {
   @ViewChild('paginator') paginator: MatPaginator
+  @Input() toggleButton:boolean=false
   blackListTypeMaster: FormGroup;
   Response: any = [];
   result: any;
@@ -119,7 +121,7 @@ export class BlacklisttypeComponent {
     {
       name:"Action",
       key:'complianceStatus',
-      search:true,
+      search:false,
       dataType:"select",
       value:'',
       class:'form-select'
@@ -128,9 +130,9 @@ export class BlacklisttypeComponent {
 
   constructor(private service: AdminService,
               private downloadService: DownloadService,
-               private elementRef: ElementRef,
+              private elementRef: ElementRef,
               private localStorage:LocalStorageService) {
-    this.updateBlacklistTypeMaster = new FormGroup({
+    this.blackListTypeMaster = new FormGroup({
       request: new FormGroup({
         module: new FormControl('COMPLIANCE'),
         subModule: new FormControl('BLACKLIST_TYPE_MASTER'),
@@ -187,6 +189,9 @@ export class BlacklisttypeComponent {
   }
 
   ngOnInit() {
+      this.getBlacklist();
+  }
+  getBlacklist(){
     this.blackListTypeMaster.controls['request'].value.body.pageNumber = this.pageNumber;
     this.blackListTypeMaster.controls['request'].value.body.numberOfElements = this.numberOfElements;
 
@@ -225,98 +230,43 @@ export class BlacklisttypeComponent {
       input => (input.value = "")
     );
     this.statusSearch = null
-    this.ngOnInit()
+    this.getBlacklist()
   }
 
 
   handlePageEvent(e: PageEvent) {
     this.pageNumber = e.pageIndex
     this.numberOfElements = e.pageSize
-    this.ngOnInit()
+    this.getBlacklist()
   }
 
   blackListStatus = [{display: 'Active', value: true},
     {display: 'Inactive', value: false}]
 
   changeStatus(event: any, id: any) {
-    this.updateBlacklistTypeMaster.controls['request'].value.body.status = !event;
-    this.updateBlacklistTypeMaster.controls['request'].value.body.blackListTypeId = id;
-    this.service.updateBlackListMaster(this.updateBlacklistTypeMaster.value).subscribe(data => {
-      this.ngOnInit()
+    this.blackListTypeMaster.controls['request'].value.body.status = !event;
+    this.blackListTypeMaster.controls['request'].value.body.blackListTypeId = id;
+    this.service.updateBlackListMaster(this.blackListTypeMaster.value).subscribe(data => {
+      this.getBlacklist()
     }, error => {
       console.log(error)
     })
   }
 
-  onSearchModule(event: any) {
-    this.blackListTypeMaster.controls['request'].value.body.moduleName = event.target.value ? event.target.value : null
-    this.ngOnInit()
-    this.paginator.firstPage()
-  }
-
-  onSearchCompany(event: any) {
-    this.blackListTypeMaster.controls['request'].value.body.companyName = event.target.value ? event.target.value : null
-    this.ngOnInit()
-    this.paginator.firstPage()
-  }
-
-  onSearchColumn(event: any) {
-    this.blackListTypeMaster.controls['request'].value.body.columnName = event.target.value ? event.target.value : null
-    this.ngOnInit()
-    this.paginator.firstPage()
-  }
-
-  onSearchBlacklistType(event: any) {
-    this.blackListTypeMaster.controls['request'].value.body.blacklistType = event.target.value ? event.target.value : null
-    this.ngOnInit()
-    this.paginator.firstPage()
-  }
-
   onSearchBlacklistValue(event: any) {
     this.blackListTypeMaster.controls['request'].value.body.blacklistValue = event.target.value ? event.target.value : null
-    this.ngOnInit()
+    this.getBlacklist()
     this.paginator.firstPage()
   }
 
   onSearchStatus(event: any) {
     this.blackListTypeMaster.controls['request'].value.body.status = event
-    this.ngOnInit()
+    this.getBlacklist()
     this.paginator.firstPage()
   }
 
-  fromCreatedOn(event: any) {
-    this.ngOnInit()
-    this.paginator.firstPage()
-  }
 
-  toCreatedOn(event: any) {
-    this.ngOnInit()
-    this.paginator.firstPage()
-  }
 
-  fromUpdatedOn(event: any) {
-    this.blackListTypeMaster.controls['request'].value.body.fromUpdatedOn = event.target.value
-    this.ngOnInit()
-    this.paginator.firstPage()
-  }
-
-  toUpdatedOn(event: any) {
-    this.blackListTypeMaster.controls['request'].value.body.toUpdatedOn = event.target.value
-    this.ngOnInit()
-    this.paginator.firstPage()
-  }
-
-  UpdatedBy(event: any) {
-    this.blackListTypeMaster.controls['request'].value.body.updatorName = event.target.value ? event.target.value : null
-    this.ngOnInit()
-    this.paginator.firstPage()
-  }
-
-  CreatedBy(event: any) {
-    this.blackListTypeMaster.controls['request'].value.body.creator = event.target.value ? event.target.value : null
-    this.ngOnInit()
-    this.paginator.firstPage()
-  }
 
   closeConfirmModal() {
     const element = document.getElementById('confirmModal')
@@ -325,16 +275,16 @@ export class BlacklisttypeComponent {
 
 
   openConfirmModal(id: any, status: any) {
-    this.updateBlacklistTypeMaster.controls['request'].value.body.status = !status;
-    this.updateBlacklistTypeMaster.controls['request'].value.body.blackListTypeId = id;
+    this.blackListTypeMaster.controls['request'].value.body.status = !status;
+    this.blackListTypeMaster.controls['request'].value.body.blackListTypeId = id;
     const element = document.getElementById('confirmModal')
     element?.style.setProperty("display", "block")
   }
 
   confirmStatus() {
-    this.service.updateBlackListMaster(this.updateBlacklistTypeMaster.value).subscribe(data => {
+    this.service.updateBlackListMaster(this.blackListTypeMaster.value).subscribe(data => {
       this.closeAlert()
-      this.ngOnInit()
+      this.getBlacklist()
     }, error => {
       console.log(error)
     })
@@ -343,8 +293,8 @@ export class BlacklisttypeComponent {
 
   openPopUp(id: any, status: any) {
     this.openPop = true
-    this.updateBlacklistTypeMaster.controls['request'].value.body.status = !status;
-    this.updateBlacklistTypeMaster.controls['request'].value.body.blackListTypeId = id;
+    this.blackListTypeMaster.controls['request'].value.body.status = !status;
+    this.blackListTypeMaster.controls['request'].value.body.blackListTypeId = id;
     if (status) {
       this.AlertMessage = "Are you sure you want to apply 'Inactive' action?"
     } else {
@@ -354,13 +304,13 @@ export class BlacklisttypeComponent {
 
   closePopup(event: any) {
     if (event) {
-      this.service.updateBlackListMaster(this.updateBlacklistTypeMaster.value).subscribe((data: any) => {
-        this.ngOnInit()
+      this.service.updateBlackListMaster(this.blackListTypeMaster.value).subscribe((data: any) => {
+        this.getBlacklist()
       }, error => {
         console.log(error)
       })
     } else {
-      this.ngOnInit()
+      this.getBlacklist()
     }
     this.openPop = false
   }
@@ -385,7 +335,7 @@ export class BlacklisttypeComponent {
         }
       }
     })
-    this.ngOnInit()
+    this.getBlacklist()
     this.paginator.firstPage()
   }
 
@@ -398,7 +348,7 @@ export class BlacklisttypeComponent {
         }
       }
     })
-    this.ngOnInit()
+    this.getBlacklist()
     this.paginator.firstPage()
   }
 
@@ -413,19 +363,72 @@ export class BlacklisttypeComponent {
 
   clickedInside: any
 
-  @HostListener('document:click', ['$event.target'])
-  onPageClick(targetElement) {
-    this.clickedInside = this.elementRef.nativeElement.querySelector('.alertHolder').contains(targetElement);
-    if (this.clickedInside) {
-      if (!this.display) {
-        this.closeAlert()
-      }
-    }
-  }
+  // @HostListener('document:click', ['$event.target'])
+  // onPageClick(targetElement) {
+  //   this.clickedInside = this.elementRef.nativeElement.querySelector('.alertHolder').contains(targetElement);
+  //   if (this.clickedInside) {
+  //     if (!this.display) {
+  //       this.closeAlert()
+  //     }
+  //   }
+  // }
   opened:boolean=false
   onClick(){
     this.opened=!this.opened;
     const  sidebar = document.getElementById('sidebar')
     sidebar?.style.setProperty("width",this.opened?"237px":"0");
+  }
+  searchEmited(event:any){
+    this.searching(event.value,event.key)
+  }
+  searching(event: any, keyWord: any) {
+    switch (keyWord) {
+      case 'moduleName':
+        this.blackListTypeMaster.patchValue({request: {body: {moduleName: event?event:null}}})
+        break;
+      case 'companyName':
+        this.blackListTypeMaster.patchValue({request: {body: {companyName: event?event:null}}})
+        break
+      case 'columnName':
+        this.blackListTypeMaster.patchValue({request: {body: {columnName: event?event:null}}})
+        break
+      case 'blacklistType':
+        this.blackListTypeMaster.patchValue({request: {body: {blackListType: event}}})
+        break
+      case 'blacklistValue':
+        this.blackListTypeMaster.patchValue({request: {body: {blacklistValue: event}}})
+        break
+      case 'createdDates':
+        this.blackListTypeMaster.patchValue({
+          request: {
+            body: {
+              "fromCreatedOn": event ? moment(event[0]).format('YYYY-MM-DD'+'T00:00:00'+'.000Z') : null,
+              "toCreatedOn": event ? moment(event[1]).format('YYYY-MM-DD'+'T23:59:59'+'.000Z') : null
+            }
+          }
+        })
+        break
+      case 'updatedDates':
+        this.blackListTypeMaster.patchValue({
+          request: {
+            body: {
+              "fromUpdatedOn": event ? moment(event[0]).format('YYYY-MM-DD'+'T00:00:00'+'.000Z') : null,
+              "toUpdatedOn": event ? moment(event[1]).format('YYYY-MM-DD'+'T23:59:59'+'.000Z') : null
+            }
+          }
+        })       
+        break
+      case 'creator':
+        this.blackListTypeMaster.patchValue({request: {body: {creator: event ? event : null}}})
+        break
+      case 'updatorName':
+        this.blackListTypeMaster.patchValue({request: {body: {updatorName: event ? event : null}}})
+        break
+      case 'status':
+        this.blackListTypeMaster.patchValue({request: {body: {status: event ? event : null}}})
+        break
+    }
+    this.getBlacklist()
+    // this.paginator.firstPage()
   }
 }

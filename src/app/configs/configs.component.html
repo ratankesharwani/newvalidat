@@ -5,13 +5,10 @@
   <div class="main-content mleft0">
       <div class="page-content">
           <div class="container-fluid">
-              <!-- <app-filterbutton></app-filterbutton> -->
-              <router-outlet></router-outlet>
-              <!-- <app-paymentin [toggleButton]="toggleButton"></app-paymentin> -->
-              <!-- <app-paymentout [toggleButton]="toggleButton"></app-paymentout> -->
+              <app-filterbutton (click)="click()"></app-filterbutton>
+              <router-outlet (activate)="onRouterActivate($event)"></router-outlet>
           </div>
       </div>
       <app-footer></app-footer>
   </div>
 </div>
-<!-- <app-filtersidebar></app-filtersidebar> -->

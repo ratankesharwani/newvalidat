@@ -1,7 +1,7 @@
 :root{
   --bs-body-bg:#f1f5f6 !important;
 }
-.btn-primary{
+.btn-primary{ 
   --bs-btn-color:#fff;
   --bs-btn-bg:#098b8b !important;
   --bs-btn-border-color:#038585 !important;
@@ -115,7 +115,7 @@ a{
   margin-top: 2px;
   height: 20px;
   line-height: 20px;
-
+ 
 }
 .inactive::before,.activeStatus::before{content: "•"; margin-right: 3px; font-size: 12px; /*line-height: 10px;*/ font-weight: 600;}
 .activeStatus{
@@ -312,11 +312,12 @@ textarea{resize: none;}
 .bg-gray{ background-color: #44699d;}
 
 /** Login Page Style **/
-/* .loginBG{
+.loginBG{
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("../../assets/images/signInImg.jpg");
-} */
+}
 .welcomeTxt{z-index: 9999; left: 25%; top: 42%;}
 .greenColor{color: #098b8b;}
 .form-floating-custom>.form-control,.form-floating-custom>.form-select{padding-left: 60px !important;}
+.showEye{z-index: 9999; right: 10px; top: 23px;}
