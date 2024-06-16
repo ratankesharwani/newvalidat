@@ -12,15 +12,281 @@
         <div class="card">
             <div class="card-body">
                 <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button fw-medium" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Blacklist <span class="badge badge-soft-primary py-2 ms-2">sucess</span>
+                    <div class="accordion-item"  *ngFor="let finalResponse of Display;index as i" (click)="onClick(finalResponse.service_name,i)">
+                        <h2 class="accordion-header" id="heading{{i}}">
+                            <button class="accordion-button fw-medium" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="true" [attr.aria-controls]="'collapse' + i">
+                                {{finalResponse.service_name}}
+                                <span class="badge badge-soft-primary py-2 ms-2">sucess</span>
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div [id]="'collapse' + i" class="accordion-collapse collapse" [class.show]="i === 0" [attr.aria-labelledby]="'heading{{i}}'" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                Put Data
+                                <div class="card">
+                                    <div class="col-md-12 grid-margin stretch-card" *ngFor="let detail of Details[i]">
+                                      <div class="table-responsive w-100">
+                                        <table class="table table-hover">
+                                          <thead>
+                                          <tr>
+                                            <th class="w-10rem" *ngIf="detail.externalServiceCheckId || finalResponse.service_name=='RISK_ASSESSMENT'">
+                                              <div class="d-flex justify-content-start">
+                                                <div class="ms-6 line-height25">
+                                                  Details
+                                                </div>
+                                              </div>
+                                            </th>
+                                            <th *ngFor="let checks of detail.checkField" class="w-10rem" [ngStyle]="detail.type==='EXTERNAL'?{display:'none'}:{display:'auto'}">
+                                              <div class="d-flex justify-content-start">
+                                                <div class="ms-6 line-height25">
+                                                  {{checks.field}}
+                                                </div>
+                                              </div>
+                                            </th>
+                                            <th class="w-10rem">
+                                              <div class="d-flex justify-content-start">
+                                                <div class="ms-6 line-height25">
+                                                  Checked Date
+                                                </div>
+                                              </div>
+                                            </th>
+                                            <th class="w-10rem">
+                                              <div class="d-flex justify-content-start">
+                                                <div class="ms-6 line-height25">
+                                                  Checked By
+                                                </div>
+                                              </div>
+                                            </th>
+                                            <th class="w-10rem">
+                                              <div class="d-flex justify-content-start">
+                                                <div class="ms-6 line-height25">
+                                                  Description
+                                                </div>
+                            
+                                              </div>
+                                            </th>
+                                            <th *ngIf="detail.responseReference" class="w-10rem">
+                                              <div class="d-flex justify-content-start">
+                                                <div class="ms-6 line-height25">
+                                                  Response
+                                                </div>
+                            
+                                              </div>
+                                            </th>
+                                            <th class="w-10rem">
+                                              <div class="d-flex justify-content-start">
+                                                <div class="ms-6 line-height25">
+                                                  Status
+                                                </div>
+                                              </div>
+                                            </th>
+                                          </tr>
+                                          </thead>
+                                          <tbody>
+                                          <tr>
+                                            <td [ngStyle]="(detail.externalServiceCheckId===null && finalResponse.service_name!='RISK_ASSESSMENT')?{display:'none'}:{display:'auto'}">
+                                              <a class="btn btn-default btn-xs p-0 accordion-toggle" (click)="sanctionCheckResult(finalResponse.service_name,detail?.id,detail.externalServiceCheckId)" id="serviceNames{{detail.externalServiceCheckId}}" data-bs-toggle="collapse" href="#Demo{{detail.externalServiceCheckId}}">
+                                                <span class="glyphicon glyphicon-eye-open font-17">
+                                                  +
+                                                </span>
+                                              </a>
+                                            </td>
+                                            <td *ngFor="let checks of detail.checkField" class="w-10rem" [ngStyle]="detail.type==='EXTERNAL'?{display:'none'}:{display:'auto'}">
+                                              <label class="text-muted">
+                                                {{checks.result}}
+                                              </label>
+                                            </td>
+                                            <td>
+                                              <label class=" text-muted">
+                                                {{detail.checkedDate}}
+                                              </label>
+                                            </td>
+                                            <td class="w-10rem">
+                                              <label class=" text-muted ">
+                                                {{detail.checkedByName}}
+                                              </label>
+                                            </td>
+                                            <td class="w-10rem">
+                                              <label class=" text-muted ">
+                                                {{detail.description}}
+                                              </label>
+                                            </td>
+                                            <td class="hover-cursor w-10rem" *ngIf="detail.responseReference"
+                                                (click)="downloadRef(detail.responseReference,finalResponse?.id)">{{detail.responseReference}}
+                                              <i class="fa fa-download p-1"></i></td>
+                                            <td class="w-10rem">
+                                              <label class=" text-muted">
+                                                 <span class="font-weight600 me-1 colorGreen"
+                                                       [ngStyle]="(detail.result==='PASS')?{}:{color:'#e85a20'}">
+                                                {{detail.result}}
+                                              </span>
+                                              </label>
+                                            </td>
+                                          </tr>
+                                          <tr [ngStyle]="showAlert?{}:{display:'none'}">
+                                            <td colspan="14" class="accordian-body collapse table-padding" id="Demo{{detail.externalServiceCheckId}}">
+                                              <div class="alert alert-danger">
+                                                <strong>Alert :</strong> No Match found.
+                                                <button type="button" (click)="closeSanctionAlert(detail.externalServiceCheckId)" class="closeSanctionAlert">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                          <tr [ngStyle]="(sanctionCheckResultValue.get(detail.externalServiceCheckId)?.length>0 && finalResponse.service_name!='RISK_ASSESSMENT')?{}:{display:'none'}">
+                                            <td colspan="14" class="accordian-body collapse table-padding" id="Demo{{detail.externalServiceCheckId}}">
+                                              <div class="row">
+                                                <div class="col-md-12 grid-margin mb-02 stretch-card">
+                                                  <div class="card-body pb-2 rounded-circle">
+                                                    <div class="card position-relative ">
+                                                      <div class="col-md-12 stretch-card contentHolder border-top-25">
+                                                        <div class="table-responsive w-100 detailsTableProperty">
+                                                          <table class="table table-hover" id="data-table">
+                                                            <thead class="thead-white tableHeadProp">
+                                                            <th class="headerTable" scope="col">
+                                                              <div class="d-flex justify-content-start">
+                                                                <div class="ms-5 line-height20">
+                                                                  Unique Entity Id
+                                                                </div>
+                                                              </div>
+                                                            </th>
+                                                            <th class="headerTable" scope="col">
+                                                              <div class="d-flex justify-content-start">
+                                                                <div class="ms-5 line-height20">
+                                                                  Sanction Type Value
+                                                                </div>
+                                                              </div>
+                                                            </th>
+                                                            <th class="headerTable" scope="col">
+                                                              <div class="d-flex justify-content-start">
+                                                                <div class="ms-5 line-height20">
+                                                                  Person
+                                                                </div>
+                                                              </div>
+                                                            </th>
+                                                            <th class="headerTable" scope="col">
+                                                              <div class="d-flex justify-content-start">
+                                                                <div class="ms-5 line-height20">
+                                                                  Result Name
+                                                                </div>
+                                                              </div>
+                                                            </th>
+                                                            <th class="headerTable" scope="col">
+                                                              <div class="d-flex justify-content-start">
+                                                                <div class="ms-5 line-height20">
+                                                                  Score
+                                                                </div>
+                                                              </div>
+                                                            </th>
+                                                            <th class="headerTable" scope="col">
+                                                              <div class="d-flex justify-content-start">
+                                                                <div class="ms-5 line-height20">
+                                                                  DOB
+                                                                </div>
+                                                              </div>
+                                                            </th>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr *ngFor="let results of sanctionCheckResultValue.get(detail.externalServiceCheckId)">
+                                                              <td>{{results.uniqueEntityId}}</td>
+                                                              <td>{{results.sanctionTypeValue}}</td>
+                                                              <td>{{results.person}}</td>
+                                                              <td>{{results.resultName}}</td>
+                                                              <td>{{results.score}}</td>
+                                                              <td>{{results.dateOfBirth}}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                          </table>
+                                                        </div>
+                                                      </div>
+                                                      <div>
+                                                        <div class="float-start d-flex justify-content-between align-items-center font-12" style="margin-top: 14px;margin-left: 34px">
+                                                          <div class="p-1">
+                                                            <h3 class="font-12 float-start mb-0">Export</h3>
+                                                          </div>
+                                                          <div class="p-1 entriesOption"><a (click)="download(detail.externalServiceCheckId,'CSV',finalResponse.service_name)">csv</a></div>
+                                                          <div class="p-1 entriesOption"><a (click)="download(detail.externalServiceCheckId,'XLS',finalResponse.service_name)">xls</a></div>
+                                                        </div>
+                                                      <mat-paginator #paginator class="rounded-circle"
+                                                                     (page)="handlePageEvent($event,detail.externalServiceCheckId)"
+                                                                     [length]=TotalElements.get(detail.externalServiceCheckId)
+                                                                     [pageSize]=NumberOfElement.get(detail.externalServiceCheckId)
+                                                                     [showFirstLastButtons]="true"
+                                                                     [pageSizeOptions]="[10,20,30,40,50]"
+                                                                     [pageIndex]=PageNumber.get(detail.externalServiceCheckId)
+                                                                     aria-label="Select page">
+                                                      </mat-paginator>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                          <tr [ngStyle]="finalResponse.service_name=='RISK_ASSESSMENT'?{}:{display:'none'}">
+                                            <td colspan="14" class="accordian-body collapse table-padding" id="Demo{{detail.externalServiceCheckId}}">
+                                              <div class="row">
+                                                <div class="col-md-12 grid-margin mb-02 stretch-card">
+                                                  <div class="card-body pb-2 rounded-circle">
+                                                    <div class="card position-relative ">
+                                                      <div class="col-md-12 stretch-card contentHolder border-top-25">
+                                                        <div class="table-responsive w-100 detailsTableProperty">
+                                                          <table class="table table-hover" id="data-table">
+                                                            <thead class="thead-white tableHeadProp">
+                                                            <th class="headerTable" scope="col">
+                                                              <div class="d-flex justify-content-start">
+                                                                <div class="ms-5 line-height20">
+                                                                  Column Name
+                                                                </div>
+                                                              </div>
+                                                            </th>
+                                                            <th class="headerTable" scope="col">
+                                                              <div class="d-flex justify-content-start">
+                                                                <div class="ms-5 line-height20">
+                                                                  Value
+                                                                </div>
+                                                              </div>
+                                                            </th>
+                                                            <th class="headerTable" scope="col">
+                                                              <div class="d-flex justify-content-start">
+                                                                <div class="ms-5 line-height20">
+                                                                  Total Score
+                                                                </div>
+                                                              </div>
+                                                            </th>
+                                                            <th class="headerTable" scope="col">
+                                                              <div class="d-flex justify-content-start">
+                                                                <div class="ms-5 line-height20">
+                                                                  Score
+                                                                </div>
+                                                              </div>
+                                                            </th>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr *ngFor="let results of riskDetails">
+                                                              <td>{{results.columnName}}</td>
+                                                              <td>{{results.value}}</td>
+                                                              <td>10</td>
+                                                              <td>{{results.score}}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                          </table>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                    <div class="w-auto ps-3 mb-3 ms-6" *ngIf="repeatCheck[i]">
+                                      <button class="btnPop btnLightBlue font-14 ms-6 ps-3"  (click)="openCheck(finalResponse.service_name,i)">
+                                        Repeat Check
+                                      </button>
+                                    </div>
+                                  </div>
                             </div>
                         </div>
                     </div>

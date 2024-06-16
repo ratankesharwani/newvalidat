@@ -36,9 +36,17 @@ import { PayoutServiceComponent } from './payout-service/payout-service.componen
 import { PayoutdetailsComponent } from './payoutdetails/payoutdetails.component';
 import { PayoutServicesComponent } from './payout-services/payout-services.component';
 import { PayinDocsComponent } from './payin-docs/payin-docs.component';
+import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { VarifyOtpComponent } from './varify-otp/varify-otp.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'Admin', pathMatch: 'full' },
+  {path: 'login', component: LoginComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
+  {path: 'verify-otp', component: VarifyOtpComponent},
   {
     path: 'Admin', component: AdminComponent,
     children: [
