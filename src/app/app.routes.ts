@@ -17,7 +17,6 @@ import { BlacklistDetailsComponent } from './blacklist-details/blacklist-details
 import { BlacklistTypeMasterComponent } from './blacklist-type-master/blacklist-type-master.component';
 import { WhitelistDetailsComponent } from './whitelist-details/whitelist-details.component';
 import { AddWhitelistDetailsComponent } from './add-whitelist-details/add-whitelist-details.component';
-import { PayoutQueueComponent } from './payout-queue/payout-queue.component';
 import { ServiceConfigurationComponent } from './service-configuration/service-configuration.component';
 import { ServiceRuleDetailsComponent } from './service-rule-details/service-rule-details.component';
 import { ServiceRulesComponent } from './service-rules/service-rules.component';
@@ -28,6 +27,15 @@ import { RiskDetailsComponent } from './risk-details/risk-details.component';
 import { RiskManagementComponent } from './risk-management/risk-management.component';
 import { PayindetailsComponent } from './payindetails/payindetails.component';
 import { PaymentoutComponent } from './paymentout/paymentout.component';
+import { PayinServicesComponent } from './payin-services/payin-services.component';
+import { PayinServiceComponent } from './payin-service/payin-service.component';
+import { PayinActivityLogComponent } from './payin-activity-log/payin-activity-log.component';
+import { PayoutDocsComponent } from './payout-docs/payout-docs.component';
+import { PayoutActivityLogComponent } from './payout-activity-log/payout-activity-log.component';
+import { PayoutServiceComponent } from './payout-service/payout-service.component';
+import { PayoutdetailsComponent } from './payoutdetails/payoutdetails.component';
+import { PayoutServicesComponent } from './payout-services/payout-services.component';
+import { PayinDocsComponent } from './payin-docs/payin-docs.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'Admin', pathMatch: 'full' },
@@ -74,6 +82,26 @@ export const routes: Routes = [
       { path: 'Add_Role', component: CreateRoleMasterComponent },
       { path: 'Assign_Role', component: AssignRoleComponent, },
       { path: 'Role_Configuration', component: RoleConfigComponent, }
+    ]
+  },
+  {
+    path:'Payin_Service',component:PayinServicesComponent,
+    children:[
+      {path:'',pathMatch:'full',redirectTo:'Details'},
+      {path:'Details',component:PayindetailsComponent},
+      {path:'Services',component:PayinServiceComponent},
+      {path:'Attachments',component:PayinDocsComponent},
+      {path:'Logs',component:PayinActivityLogComponent},
+    ]
+  },
+  {
+    path:'Payout_Service',component:PayoutServicesComponent,
+    children:[
+      {path:'',pathMatch:'full',redirectTo:'Details'},
+      {path:'Details',component:PayoutdetailsComponent},
+      {path:'Services',component:PayoutServiceComponent},
+      {path:'Attachments',component:PayoutDocsComponent},
+      {path:'Logs',component:PayoutActivityLogComponent},
     ]
   },
   {

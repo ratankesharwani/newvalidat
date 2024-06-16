@@ -114,7 +114,7 @@ export class PaymentoutComponent {
     },
     {
       name:"Country Code",
-      key:'countryCode',
+      key:'beneCountry',
       search:true,
       dataType:"input",
       value:'',
@@ -148,9 +148,9 @@ export class PaymentoutComponent {
       name:"Cleared By",
       key:'clearedByName',
       search:true,
-      dataType:"select",
+      dataType:"input",
       value:'',
-      class:'form-select'
+      class:'form-control'
     },
     {
       name:"Status",
@@ -158,6 +158,7 @@ export class PaymentoutComponent {
       search:true,
       dataType:"select",
       value:'',
+      options:'',
       class:'form-select'
     },
     {
@@ -166,6 +167,7 @@ export class PaymentoutComponent {
       search:true,
       dataType:"select",
       value:'',
+      options:'',
       class:'form-select'
     },
     {
@@ -174,6 +176,7 @@ export class PaymentoutComponent {
       search:true,
       dataType:"select",
       value:'',
+      options:'',
       class:'form-select'
     },
     {
@@ -182,6 +185,7 @@ export class PaymentoutComponent {
       search:true,
       dataType:"select",
       value:'',
+      options:'',
       class:'form-select'
     },
     {
@@ -190,6 +194,7 @@ export class PaymentoutComponent {
       search:true,
       dataType:"select",
       value:'',
+      options:'',
       class:'form-select'
     },
     {
@@ -198,6 +203,7 @@ export class PaymentoutComponent {
       search:true,
       dataType:"select",
       value:'',
+      options:'',
       class:'form-select'
     },
     {
@@ -206,6 +212,7 @@ export class PaymentoutComponent {
       search:true,
       dataType:"select",
       value:'',
+      options:'',
       class:'form-select'
     },
     {
@@ -214,6 +221,7 @@ export class PaymentoutComponent {
       search:true,
       dataType:"select",
       value:'',
+      options:'',
       class:'form-select'
     }
   ]
@@ -253,7 +261,9 @@ export class PaymentoutComponent {
     this.ComplianceFilteredData.valueDateRange=this.filteredData?.valueDateRange || null
     this.ComplianceFilteredData.recipientAccountNumber=this.filteredData?.recipientAccountNumber || null
     this.ComplianceFilteredData.recipientBicCode=this.filteredData?.recipientBicCode || null
-
+    this.tabColumns.forEach(column => {
+      if(column.key==='complianceStatus'){
+      }})
     this.payoutDetails = new FormGroup({
       request: new FormGroup({
         module: new FormControl('COMPLIANCE'),
@@ -338,18 +348,32 @@ export class PaymentoutComponent {
     this.payoutList();
     this.service.payInList(this.complianceStatus.value).subscribe((response) => {
       this.complianceStatusResponse = response;
+      this.tabColumns.forEach(column => {
+        if(column.key==='complianceStatus'){
+          column.value = response;
+        }})
     }, error => {
       console.log(error)
     })
 
     this.service.payInList(this.isLocked.value).subscribe((response) => {
       this.isLockedResponse = response;
+      this.tabColumns.forEach(column => {
+        if (column.key === 'locked') {
+          column.value = response;
+        }
+      });
     }, error => {
       console.log(error)
     })
 
     this.service.payInList(this.serviceCheck.value).subscribe((response) => {
       this.serviceCheckResponse = response;
+      this.tabColumns.forEach(column => {
+        if (column.key === 'blacklistCheck' || column.key==='beneCifasCheck' || column.key ==='customerCifasCheck' || column.key==='customCheck' || column.key==='customerSanctionCheck' || column.key==='beneSanctionCheck') {
+          column.value = response;
+        }
+      });
     }, error => {
       console.log(error)
     })
@@ -365,7 +389,7 @@ export class PaymentoutComponent {
       status: this.payoutDetailsResponse[i].complianceStatus
     }
     this.localStorage.setItem("payoutData", JSON.stringify(routeData))
-    this.router.navigate(['/payout-dash'])
+    this.router.navigate(['/Payout_Service'])
   }
 
   handlePageEvent(e: PageEvent) {

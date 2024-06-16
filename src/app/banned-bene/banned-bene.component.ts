@@ -8,17 +8,24 @@ import { MatTooltip } from '@angular/material/tooltip';
 import moment from 'moment';
 import { PageEvent } from '@angular/material/paginator';
 import { BsDatepickerConfig, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { AngularMyDatePickerModule } from 'angular-mydatepicker';
-import { DpDatePickerModule, IDatePickerConfig } from 'ng2-date-picker';
+import { LocaleConfig, NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @Component({
   selector: 'app-banned-bene',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,CommonModule,MatTooltip,RouterLink,BsDatepickerModule],
+  imports: [FormsModule,ReactiveFormsModule,CommonModule,MatTooltip,RouterLink,BsDatepickerModule,NgxDaterangepickerMd],
   templateUrl: './banned-bene.component.html',
   styleUrl: './banned-bene.component.css'
 })
 export class BannedBeneComponent {
+  locale: LocaleConfig = {
+    format: 'DD.MM.YYYY',
+    separator: ' - ',
+    applyLabel: 'Apply',
+    cancelLabel: 'Cancel',
+    customRangeLabel: 'Custom range'
+  };
+  selected: { startDate: moment.Moment, endDate: moment.Moment };
   datePickerConfig: any = {
     // Customize your date picker configuration here
     format: 'YYYY-MM-DD',
@@ -60,10 +67,12 @@ export class BannedBeneComponent {
               private service: AdminService,
               private elementRef: ElementRef,
               private localStorage:LocalStorageService) {
-                this.bsConfig = {
-                  containerClass: 'theme-default',
-                  rangeInputFormat: 'YYYY-MM-DD'
-                };
+    this.bsConfig = {
+      containerClass: 'theme-default',
+      rangeInputFormat: 'YYYY-MM-DD',
+      showWeekNumbers: false,
+      isAnimated: true
+    };
 
     const queueData: any = this.localStorage.getItem("data")
     this.queueParseData = JSON.parse(queueData)

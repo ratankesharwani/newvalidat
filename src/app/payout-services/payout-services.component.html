@@ -1,0 +1,21 @@
+<div id="layout-wrapper">
+    <header id="page-topbar" class="left0">
+        <app-innerheader></app-innerheader>
+    </header>
+    <div class="main-content mleft0">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="mt-2">
+                    <ul class="nav nav-tabs nav-tabs-custom mb-4" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" routerLink='/Payout_Service/Details' routerLinkActive='active'>Payin Details</a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink='/Payout_Service/Services'>Service Checks</a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink='/Payout_Service/Attachments'>Attach Documents</a></li>
+                        <li class="nav-item"><a class="nav-link active" routerLink='/Payout_Service/Logs'>Activity Log</a></li>
+                    </ul>
+                </div>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</div>

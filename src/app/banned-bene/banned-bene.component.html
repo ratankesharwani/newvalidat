@@ -31,13 +31,14 @@
               <!-- <input placeholder="Created Date"
                 [bsConfig]="{ isAnimated: true,rangeInputFormat : 'DD-MM-YYYY',showWeekNumbers:false}"
                 class="form-control  rounded bg-light border-1 p-1_3 mt-1" bsDaterangepicker> -->
-                <input
+                <!-- <input
                     type="text"
                     class="form-control"
                     id="daterange"
                     placeholder="Select date range"
-                    bsDaterangepicker
-                    [bsConfig]="bsConfig">
+                    [bsConfig]="bsConfig" bsDaterangepicker> -->
+                    <input type="text"
+                    class="form-control" ngxDaterangepickerMd [locale]="locale" />
             </div>
             <div class="col-xl-3 pe-3 mb-3">
               <label class="form-label">Module</label>

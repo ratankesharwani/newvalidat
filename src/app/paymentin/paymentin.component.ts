@@ -567,7 +567,7 @@ export class PaymentinComponent {
       status: this.payIn[index].complianceStatus
     }
     this.localStorage.setItem("queueData", JSON.stringify(this.routeData))
-    this.router.navigate(['/tab-dash'])
+    this.router.navigate(['/Payin_Service'])
   }
    openNav() {
      const sidebar = document.getElementById("mySidebar");

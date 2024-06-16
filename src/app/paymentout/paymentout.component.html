@@ -2,8 +2,8 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header justify-content-between d-flex align-items-center border-0">
-                <h4 class="card-title">Payment out <span class="badge badge-soft-primary py-2">100 users</span></h4>
-            </div><!-- end card header -->
+                <h4 class="card-title">Payment out <span class="badge badge-soft-primary py-2">{{payoutDetailsResponse?.length}} payments</span></h4>
+            </div>
             <div class="row">
                 <div class="card-body pt-0">
                     <div class="table mb-0">
@@ -16,20 +16,20 @@
                                         </tr>
                                     </thead>
                                     <tbody class="gridjs-tbody">
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">851783</td>
-                                            <td class="gridjs-td">folayan Olakunle Folaranmi</td>
-                                            <td class="gridjs-td">2296318100</td>
-                                            <td class="gridjs-td">UNAFNGLA</td>
-                                            <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">USD</td>
-                                            <td class="gridjs-td">7200.2</td>
-                                            <td class="gridjs-td">NG</td>
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td"><div class="inactive float-start fn11">Hold</div></td>
-                                            <td class="gridjs-td"><i data-feather="lock" class="icon15x15"></i> Locked</td>
+                                        <tr class="gridjs-tr" *ngFor="let data of payoutDetailsResponse; index as i" (dblclick)="onRoute(i)">
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{data.payoutId}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{data.recipientAccountName}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{data.recipientAccountNumber}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{data.recipientBicCode}}</td>
+                                            <td class="gridjs-td">{{data.payoutAmount}}</td>
+                                            <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">{{data.payoutCurrencyCode}}</td>
+                                            <td class="gridjs-td">{{data.recipientCountryCode}}</td>
+                                            <td class="gridjs-td">{{data.valueDate}}</td>
+                                            <td class="gridjs-td">{{data.createdDate}}</td>
+                                            <td class="gridjs-td">{{data.clearedDate}}</td>
+                                            <td class="gridjs-td">{{data.clearedByName}}</td>
+                                            <td class="gridjs-td"><div class="inactive float-start fn11">{{data.complianceStatus}}</div></td>
+                                            <td class="gridjs-td"><i data-feather="lock" class="icon15x15"></i> {{data.locked?'Locked':'Unlocked'}}</td>
                                             <td class="gridjs-td"><div class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div></td>
                                             <td class="gridjs-td"><div class="crossMarkBox"><span class="icon15x15">X</span></div></td>
                                             <td class="gridjs-td text-center">NR</td>
@@ -61,10 +61,7 @@
                     </div>
                 </div>
             </div>
-            <!-- end card body -->
         </div>
-        <!-- end card -->
     </div>
-    <!-- end col -->
 </div>
 <app-filtersidebar [searchOptions]="tabColumns" (searchEmit)="searchEmited($event)" (reset)="clearSearch()" ></app-filtersidebar>

@@ -6,9 +6,10 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 export const APP_PROVIDERS: Provider[] = [
   DatePipe
 ];
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(),importProvidersFrom(HttpClientModule)]
+  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(),importProvidersFrom(HttpClientModule,NgxDaterangepickerMd.forRoot())]
 };

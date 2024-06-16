@@ -17,18 +17,18 @@
                                     </thead>
                                     <tbody class="gridjs-tbody">
                                         <tr class="gridjs-tr" *ngFor="let payin of payIn;index as i">
-                                            <td class="gridjs-td">{{payin.bank}}</td>
-                                            <td class="gridjs-td">{{payin.amount}}</td>
-                                            <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">{{payin.currencyCode}}</td>
-                                            <td class="gridjs-td">{{payin.bankRefNo==='null'?'':payin.bankRefNo}}</td>
-                                            <td class="gridjs-td">{{payin.debtorAccountNumber}}</td>
-                                            <td class="gridjs-td">{{payin.debtorName}}</td>
-                                            <td class="gridjs-td">{{payin.createdDate}}</td>
-                                            <td class="gridjs-td">{{payin.clearedDate}}</td>
-                                            <td class="gridjs-td">{{payin.clearedByName}}</td>
-                                            <td class="gridjs-td">{{payin.senderType}}</td>
-                                            <td class="gridjs-td"><div class="inactive float-start fn11">{{payin.complianceStatus}}</div></td>
-                                            <td class="gridjs-td"><i data-feather="lock" class="icon15x15"></i>{{payin.locked?'Locked':'Unlocked'}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{payin.bank}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{payin.amount}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)"><img src="assets/images/flags/us.jpg" class="flagHolder">{{payin.currencyCode}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{payin.bankRefNo==='null'?'':payin.bankRefNo}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{payin.debtorAccountNumber}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{payin.debtorName}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{payin.createdDate}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{payin.clearedDate}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{payin.clearedByName}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)">{{payin.senderType}}</td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)"><div class="inactive float-start fn11">{{payin.complianceStatus}}</div></td>
+                                            <td class="gridjs-td" (dblclick)="onRoute(i)"><i data-feather="lock" class="icon15x15"></i>{{payin.locked?'Locked':'Unlocked'}}</td>
                                             <td class="gridjs-td" (dblclick)="onRoute(i)">
                                               <div *ngIf="payin.blackListCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
                                               <div *ngIf="payin.blackListCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>

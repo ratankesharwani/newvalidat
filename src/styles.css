@@ -3,25 +3,41 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+/* .bs-datepicker {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-/*
-.theme-green .bs-datepicker-head {
-  background-color: #306191;
+.bs-datepicker .bs-datepicker-head {
+  background-color: #007bff;
+  color: #fff;
 }
-.theme-green .bs-datepicker-body table td.week span {
-  color: #306191;
+
+.bs-datepicker .bs-datepicker-body {
+  background-color: #f8f9fa;
 }
-.theme-green .bs-datepicker-body table td span.selected, .theme-green
-.bs-datepicker-body table td.selected span,
-.theme-green .bs-datepicker-body
-table td span[class*=select-]:after,
-.theme-green .bs-datepicker-body
-table td[class*=select-] span:after {
-  background-color: #306191;
+
+.bs-datepicker .bs-datepicker-cell {
+  color: #495057;
 }
-.bs-datepicker{
-  margin-left: 26rem!important;
+
+.bs-datepicker .bs-datepicker-cell:hover,
+.bs-datepicker .bs-datepicker-cell:focus,
+.bs-datepicker .bs-datepicker-cell:active {
+  background-color: #e9ecef;
+}
+
+.bs-datepicker .bs-datepicker-cell.is-highlighted {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.bs-datepicker .bs-datepicker-cell.is-disabled {
+  color: #adb5bd;
 } */
+
+
 
 
 
@@ -30,41 +46,3 @@ table td[class*=select-] span:after {
 .hideDisplay{display: none;}
 .showDisplay{display: block;}
 .alertBox{ border: none; border-radius: 10px; box-shadow: 0px 0px 20px #000; background-color: #fff; margin: 80px auto;}
-
-
-.bs-datepicker {
-  display: flex;
-  flex-direction: column;
-}
-
-.bs-datepicker .bs-datepicker-container {
-  display: flex;
-  flex-direction: row;
-}
-
-.bs-datepicker .bs-datepicker-body {
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-.bs-datepicker .bs-datepicker-month {
-  margin: 0;
-}
-
-.bs-datepicker .bs-datepicker-nav {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-}
-
-.bs-datepicker .bs-datepicker-nav button {
-  background: #007bff;
-  border: none;
-  color: #fff;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-}
-
-.bs-datepicker .bs-datepicker-nav button:hover {
-  background: #0056b3;
-}

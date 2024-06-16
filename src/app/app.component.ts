@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component, Inject, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, Renderer2,ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { InnerheaderComponent } from './innerheader/innerheader.component';
 import { FooterComponent } from './footer/footer.component';
@@ -15,6 +15,7 @@ import { AddserviceruleComponent } from "./addservicerule/addservicerule.compone
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
+    encapsulation: ViewEncapsulation.None,
     imports: [HttpClientModule, RouterOutlet, InnerheaderComponent, FooterComponent, FilterbuttonComponent, FiltersidebarComponent, PaymentinComponent, PaymentoutComponent, AddserviceruleComponent]
 })
 export class AppComponent {

@@ -1,18 +1,21 @@
+:root{
+  --bs-body-bg:#f1f5f6 !important;
+}
 .btn-primary{
   --bs-btn-color:#fff;
-  --bs-btn-bg:#7f56da !important;
-  --bs-btn-border-color:#7f56da !important;
+  --bs-btn-bg:#098b8b !important;
+  --bs-btn-border-color:#038585 !important;
   --bs-btn-hover-color:#fff;
-  --bs-btn-hover-bg:#653ac4 !important;
-  --bs-btn-hover-border-color:#653ac4 !important;
+  --bs-btn-hover-bg:#038585 !important;
+  --bs-btn-hover-border-color:#038585 !important;
   --bs-btn-focus-shadow-rgb:41,159,225;
   --bs-btn-active-color:#fff;
-  --bs-btn-active-bg:#653ac4 !important;
-  --bs-btn-active-border-color:#7f56da !important;
+  --bs-btn-active-bg:#038585 !important;
+  --bs-btn-active-border-color:#098b8b !important;
   --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color:#fff;
-  --bs-btn-disabled-bg:#653ac4 !important;
-  --bs-btn-disabled-border-color:#038edc
+  --bs-btn-disabled-bg:#038585 !important;
+  --bs-btn-disabled-border-color:#038585
 }
 .card{
   --bs-card-spacer-y:1.25rem;
@@ -53,6 +56,10 @@ body[data-sidebar-size=sm] .vertical-menu #sidebar-menu>ul>li>a{
 }
 body:not([data-sidebar-size=sm]) .navbar-header .vertical-menu-btn{
   display:block
+}
+a{
+  color:#038585 !important;
+  text-decoration:none
 }
 
 @media (min-width:769px){
@@ -151,6 +158,7 @@ body:not([data-sidebar-size=sm]) .navbar-header .vertical-menu-btn{
   background-color:#fff;
 }
 .form-control{border-radius:.40rem !important; padding: .20rem .75rem !important;}
+.formLogin{padding: 0 !important;}
 .form-select,.form-group{border-radius:.40rem !important; padding: .20rem .75rem !important;}
 .innerNavHolder{height: 35px; margin-top: 18px;}
 .userProfileHolder{height: 35px; margin-top: 18px;}
@@ -302,3 +310,13 @@ textarea{resize: none;}
 .border-bottom-left{border-bottom-left-radius: 0 !important;}
 .border-bottom-right{border-bottom-right-radius: 0 !important;}
 .bg-gray{ background-color: #44699d;}
+
+/** Login Page Style **/
+/* .loginBG{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../../assets/images/signInImg.jpg");
+} */
+.welcomeTxt{z-index: 9999; left: 25%; top: 42%;}
+.greenColor{color: #098b8b;}
+.form-floating-custom>.form-control,.form-floating-custom>.form-select{padding-left: 60px !important;}
