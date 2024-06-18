@@ -12,15 +12,188 @@
         <div class="card">
             <div class="card-body">
                 <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button fw-medium" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Blacklist <span class="badge badge-soft-primary py-2 ms-2">sucess</span>
+                    <div class="accordion-item"  *ngFor="let finalResponse of Display;index as i" (click)="onClick(finalResponse.service_name,i)">
+                        <h2 class="accordion-header" id="heading{{i}}">
+                            <button class="accordion-button fw-medium" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="true" [attr.aria-controls]="'collapse' + i">
+                                {{finalResponse.service_name}}
+                                <span class="badge badge-soft-primary py-2 ms-2">sucess</span>
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div [id]="'collapse' + i" class="accordion-collapse collapse" [class.show]="i === 0" [attr.aria-labelledby]="'heading{{i}}'" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                Put Data
+                                <div class="table mb-0">
+                                    <div class="gridjs gridjs-container" style="width: 100%;">
+                                        <div class="gridjs-wrapper" style="height: 400px;">
+                                            <table class="gridjs-table " style="height: 400px;">
+                                                <thead class="gridjs-thead">
+                                                    <tr class="gridjs-tr">
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Receiver’s bank</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Amount received</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Currency</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Payment reference</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Sender Acc No./IBan</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Sender name</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Created date</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Cleared date</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Cleared by</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Sender type</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Status <i data-feather="arrow-down" class="icon15x15"></i></th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Is Locked</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Blacklist</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Third party</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Sanction</th>
+                                                        <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Others</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="gridjs-tbody">
+                                                    <tr class="gridjs-tr">
+                                                        <td class="gridjs-td">Clearbank</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">USD</td>
+                                                        <td class="gridjs-td">HJHJJH76</td>
+                                                        <td class="gridjs-td">002901515153</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">FIRST_PARTY</td>
+                                                        <td class="gridjs-td"><div class="inactive float-start fn11">Hold</div></td>
+                                                        <td class="gridjs-td"><i data-feather="lock" class="icon15x15"></i> Locked</td>
+                                                        <td class="gridjs-td"><div class="checkMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td text-center">NR</td>
+                                                        <td class="gridjs-td text-center">NR</td>
+                                                        <td class="gridjs-td text-center">NR</td>
+                                                    </tr>
+                                                    <tr class="gridjs-tr">
+                                                        <td class="gridjs-td">Clearbank</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td"><img src="assets/images/flags/germany.jpg" class="flagHolder">USD</td>
+                                                        <td class="gridjs-td">HJHJJH76</td>
+                                                        <td class="gridjs-td">002901515153</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">FIRST_PARTY</td>
+                                                        <td class="gridjs-td"><div class="inactive float-start fn11">Hold</div></td>
+                                                        <td class="gridjs-td"><i data-feather="lock" class="icon15x15"></i> Locked</td>
+                                                        <td class="gridjs-td"><div class="checkMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="crossMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="checkMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="checkMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                    </tr>
+                                                    <tr class="gridjs-tr">
+                                                        <td class="gridjs-td">Clearbank</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td"><img src="assets/images/flags/italy.jpg" class="flagHolder">USD</td>
+                                                        <td class="gridjs-td">HJHJJH76</td>
+                                                        <td class="gridjs-td">002901515153</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">FIRST_PARTY</td>
+                                                        <td class="gridjs-td"><div class="inactive float-start fn11">Hold</div></td>
+                                                        <td class="gridjs-td"><i data-feather="unlock" class="icon15x15"></i> Unlocked</td>
+                                                        <td class="gridjs-td"><div class="crossMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="crossMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td text-center">NR</td>
+                                                        <td class="gridjs-td"><div class="checkMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                    </tr>
+                                                    <tr class="gridjs-tr">
+                                                        <td class="gridjs-td">Clearbank</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td"><img src="assets/images/flags/russia.jpg" class="flagHolder">USD</td>
+                                                        <td class="gridjs-td">HJHJJH76</td>
+                                                        <td class="gridjs-td">002901515153</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">FIRST_PARTY</td>
+                                                        <td class="gridjs-td"><div class="inactive float-start fn11">Hold</div></td>
+                                                        <td class="gridjs-td"><i data-feather="lock" class="icon15x15"></i> Locked</td>
+                                                        <td class="gridjs-td"><div class="crossMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="checkMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td text-center">NR</td>
+                                                        <td class="gridjs-td"><div class="crossMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                    </tr>
+                                                    <tr class="gridjs-tr">
+                                                        <td class="gridjs-td">Clearbank</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td"><img src="assets/images/flags/spain.jpg" class="flagHolder">USD</td>
+                                                        <td class="gridjs-td">HJHJJH76</td>
+                                                        <td class="gridjs-td">002901515153</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">FIRST_PARTY</td>
+                                                        <td class="gridjs-td"><div class="inactive float-start fn11">Hold</div></td>
+                                                        <td class="gridjs-td"><i data-feather="unlock" class="icon15x15"></i> Unlocked</td>
+                                                        <td class="gridjs-td"><div class="checkMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="checkMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td text-center">NR</td>
+                                                        <td class="gridjs-td text-center">NR</td>
+                                                    </tr>
+                                                    <tr class="gridjs-tr">
+                                                        <td class="gridjs-td">Clearbank</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td"><img src="assets/images/flags/italy.jpg" class="flagHolder">USD</td>
+                                                        <td class="gridjs-td">HJHJJH76</td>
+                                                        <td class="gridjs-td">002901515153</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">FIRST_PARTY</td>
+                                                        <td class="gridjs-td"><div class="inactive float-start fn11">Hold</div></td>
+                                                        <td class="gridjs-td"><i data-feather="lock" class="icon15x15"></i> Locked</td>
+                                                        <td class="gridjs-td"><div class="checkMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="crossMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="checkMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="crossMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                    </tr>
+                                                    <tr class="gridjs-tr">
+                                                        <td class="gridjs-td">Clearbank</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td"><img src="assets/images/flags/russia.jpg" class="flagHolder">USD</td>
+                                                        <td class="gridjs-td">HJHJJH76</td>
+                                                        <td class="gridjs-td">002901515153</td>
+                                                        <td class="gridjs-td">Olivia Rhye</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">2024:03:08 14:03:23</td>
+                                                        <td class="gridjs-td">FIRST_PARTY</td>
+                                                        <td class="gridjs-td"><div class="inactive float-start fn11">Hold</div></td>
+                                                        <td class="gridjs-td"><i data-feather="unlock" class="icon15x15"></i> Unlocked</td>
+                                                        <td class="gridjs-td"><div class="crossMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="crossMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="crossMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                        <td class="gridjs-td"><div class="checkMarkBox"><i data-feather="check" class="icon15x15"></i></div></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="gridjs-footer p-0 mt-3">
+                                            <div class="gridjs-pagination">
+                                                <div class="gridjs-pages float-none d-flex justify-content-between">
+                                                    <a title="Previous" href="javascript:void();" class="btn btn-outline-purple"><i class="fas fa-long-arrow-alt-left"></i> Previous</a>
+                                                    <div class="d-flex">
+                                                        <a href="javascript:void();" class="btn btn-light" title="Page 1">1</a>
+                                                        <a href="javascript:void();" class="btn" title="Page 2">2</a>
+                                                        <a href="javascript:void();" class="btn" title="Page 3">3</a>
+                                                        <a href="javascript:void();" class="btn" title="Page 4">4</a>
+                                                        <a href="javascript:void();" class="btn" title="Page 5">5</a>
+                                                        <a href="javascript:void();" class="btn" title="Page 6">6</a>
+                                                        <a href="javascript:void();" class="btn" title="Page 7">7</a>
+                                                    </div>
+                                                    <a title="Next" href="javascript:void();" class="btn btn-outline-purple">Next <i class="fas fa-long-arrow-alt-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

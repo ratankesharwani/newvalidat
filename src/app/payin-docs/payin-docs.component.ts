@@ -3,13 +3,14 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } 
 import { AdminService } from '../Service/admin.service';
 import { CommonModule } from '@angular/common';
 import { LocalStorageService } from '../Service/local-storage.service';
-
+import { DropzoneDirective } from '../dropzone.directive';
 @Component({
   selector: 'app-payin-docs',
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule,FormsModule],
   templateUrl: './payin-docs.component.html',
-  styleUrl: './payin-docs.component.css'
+  styleUrl: './payin-docs.component.css',
+  providers:[DropzoneDirective]
 })
 export class PayinDocsComponent {
   @ViewChild('myFile')

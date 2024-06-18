@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment.prod';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, switchMap, of, catchError, map } from 'rxjs';
 import {MatDialog} from "@angular/material/dialog";
+import { AuthrizationAlertComponent } from '../authrization-alert/authrization-alert.component';
 
 @Injectable({
   providedIn: 'root'
@@ -23,31 +24,31 @@ export class AdminService {
   login(data:any):Observable<any>{
    return this.http.post(this.complianceUrl,data);
   }
-  // apiCheck(data:any):Observable<any>{
-  //   return this.http.post(this.complianceUrl,data).pipe(
-  //     switchMap((res)=>{
-  //       if(res){
-  //         return of(true)
-  //       }else {
-  //         return of(false)
-  //       }
-  //     }),catchError((e)=>{
-  //       if(localStorage.getItem('tabAllow') && window.location.hash.split("/")[1]==='tab-dash'){
-  //           return of(true)
-  //       }else {
-  //         const dialogRef = this.dialog.open(AuthrizationAlertComponent, {
-  //           disableClose: true,
-  //           height: '100%',
-  //           width: '100%',
-  //           data:"Unauthorized action detected"
-  //         });
-  //         return dialogRef.afterClosed().pipe(map(choice => {
-  //         }));
-  //         return of(false);
-  //       }
-  //     })
-  //   )
-  // }
+  apiCheck(data:any):Observable<any>{
+    return this.http.post(this.complianceUrl,data).pipe(
+      switchMap((res)=>{
+        if(res){
+          return of(true)
+        }else {
+          return of(false)
+        }
+      }),catchError((e)=>{
+        if(localStorage.getItem('tabAllow') && window.location.hash.split("/")[1]==='tab-dash'){
+            return of(true)
+        }else {
+          const dialogRef = this.dialog.open(AuthrizationAlertComponent, {
+            disableClose: true,
+            height: '100%',
+            width: '100%',
+            data:"Unauthorized action detected"
+          });
+          return dialogRef.afterClosed().pipe(map(choice => {
+          }));
+          return of(false);
+        }
+      })
+    )
+  }
   payInList(data:any):Observable<any>{
     return this.http.post<any>(this.complianceUrl,data);
   }
