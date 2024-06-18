@@ -1,14 +1,14 @@
 import { Component, HostListener } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminService } from '../Service/admin.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,CommonModule],
+  imports: [FormsModule,ReactiveFormsModule,CommonModule,RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

@@ -1,1 +1,53 @@
-<p>varify-otp works!</p>
+<div class="bs-body-bg"></div>
+<div class="container-fluid m-0 p-0 ">
+    <div class="col-md-12">
+        <div class="row d-flex justify-content-start g-0">
+                <div class="col-lg-6 vh-100 overflow-hidden position-relative">
+                    <img src="assets/images/signInImg.jpg" class="img-fluid" >
+                    <div class="text-white-50 col-lg-6 mb-4 position-absolute welcomeTxt">
+                        <h5 class="text-white countdown-endtxt">Welcome back!</h5>
+                        <p>We are glad to see you again! Instant deposits, withdrawals &amp; payouts trusted by millions worldwide.</p>
+                    </div>                            
+                </div><!-- end col -->
+                <div class="col-lg-3 offset-lg-1">
+                    <div class="h-100 d-flex align-items-center justify-content-center">
+                        <div class="w-100">
+                            <div class="mb-5 col-md-7">
+                                <img src="assets/images/logo-dark.png" class="img-fluid" >
+                            </div>
+
+                            <div class="text-primary mb-3"><h5>We've sent a 4 digit verification code on your Email</h5></div>
+                            <form  [formGroup]="OTPForm">
+                                <div formGroupName="request">
+                                <div class="form-floating form-floating-custom mb-3" formGroupName="body">
+                                    <div class="form-floating-icon"><i class="mdi mdi-account-multiple-outline"></i></div>
+                                    <input type="number" maxlength="04" class="form-control" formControlName="otp"
+                                    id="reset-password" placeholder="Enter your code here, It's valid for 10 minutes." required autocomplete="off"
+                                    [ngStyle]="otpControl.invalid && (otpControl.dirty || otpControl.touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                                    <label for="reset-password" *ngIf="otpControl.invalid"
+                                    [ngStyle]="otpControl.invalid && (otpControl.dirty || otpControl.touched || submitted)?{color:'red'}:{}">
+                                   Enter your code here.<span>*</span></label>
+                                </div>
+                                <cd-timer (onStop)=onTimerStop() class="font-14 fblue font-weight600" [countdown]=true format="ms" [startTime]="60" #basicTimer></cd-timer>
+                                <a href="javascript:void();" class="float-end mb-3" (click)="resentOTP()"  id="resend">Resend OTP</a>
+
+                                <div class="mt-3">
+                                    <button class="btn btn-primary w-100 submit" type="submit" id="submit" (click)="sendOTP()">Validate OTP</button>
+                                </div>
+
+                                <div class="mt-4 text-center">
+                                    <a href="javascript:void();" class="text-white-50 text-decoration-underline">Forgot your password?</a>
+                                </div>
+                            </div>
+                            </form><!-- end form -->
+
+                            <p>Already have an account ? <a href="javascript:void();" class="fw-medium text-decoration-underline colorOrg" (click)="goToLogin()"> Login </a></p>
+                            <div class="text-muted ">2024 &copy; Validat.</div>
+
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+</div>

@@ -66,3 +66,4 @@
   </div>
 </div>
 <app-filtersidebar [searchOptions]="tabColumns" (searchEmit)="searchEmited($event)" (reset)="clearFilter()" ></app-filtersidebar>
+<app-popupbox [display]=openPop [Description]="alertMessage" (action)="closePopup($event)" [AlertMessage]="AlertMessage"></app-popupbox>

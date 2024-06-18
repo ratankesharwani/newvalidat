@@ -10,12 +10,13 @@ import { CommonModule } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
 import { FiltersidebarComponent } from "../filtersidebar/filtersidebar.component";
+import { PopupboxComponent } from "../popupbox/popupbox.component";
 @Component({
     selector: 'app-blacklisttype',
     standalone: true,
     templateUrl: './blacklisttype.component.html',
     styleUrl: './blacklisttype.component.css',
-    imports: [FormsModule, ReactiveFormsModule, CommonModule, MatTooltip, RouterLink, FiltersidebarComponent]
+    imports: [FormsModule, ReactiveFormsModule, CommonModule, MatTooltip, RouterLink, FiltersidebarComponent, PopupboxComponent]
 })
 export class BlacklisttypeComponent {
   @ViewChild('paginator') paginator: MatPaginator
@@ -222,7 +223,8 @@ export class BlacklisttypeComponent {
               fromCreatedOn: null,
               toCreatedOn: null,
               updatedBy: null,
-              status: null
+              status: null,
+              creator: null,
             }
         }
     })
@@ -252,21 +254,6 @@ export class BlacklisttypeComponent {
       console.log(error)
     })
   }
-
-  onSearchBlacklistValue(event: any) {
-    this.blackListTypeMaster.controls['request'].value.body.blacklistValue = event.target.value ? event.target.value : null
-    this.getBlacklist()
-    this.paginator.firstPage()
-  }
-
-  onSearchStatus(event: any) {
-    this.blackListTypeMaster.controls['request'].value.body.status = event
-    this.getBlacklist()
-    this.paginator.firstPage()
-  }
-
-
-
 
   closeConfirmModal() {
     const element = document.getElementById('confirmModal')
@@ -326,32 +313,6 @@ export class BlacklisttypeComponent {
     'Last Month': [dayjs().subtract(1, 'month').startOf('month'), dayjs().subtract(1, 'month').endOf('month')],
   }
 
-  createdDates(event: any) {
-    this.blackListTypeMaster.patchValue({
-      request: {
-        body: {
-          "fromCreatedOn": event ? moment(event[0]).format('YYYY-MM-DD'+'T00:00:00'+'.000Z') : null,
-          "toCreatedOn": event ? moment(event[1]).format('YYYY-MM-DD'+'T23:59:59'+'.000Z') : null
-        }
-      }
-    })
-    this.getBlacklist()
-    this.paginator.firstPage()
-  }
-
-  updatedDates(event: any) {
-    this.blackListTypeMaster.patchValue({
-      request: {
-        body: {
-          "fromUpdatedOn": event ? moment(event[0]).format('YYYY-MM-DD'+'T00:00:00'+'.000Z') : null,
-          "toUpdatedOn": event ? moment(event[1]).format('YYYY-MM-DD'+'T23:59:59'+'.000Z') : null
-        }
-      }
-    })
-    this.getBlacklist()
-    this.paginator.firstPage()
-  }
-
   closeAlert() {
     this.display = true
     let Interval = setInterval(() => {
@@ -383,21 +344,6 @@ export class BlacklisttypeComponent {
   }
   searching(event: any, keyWord: any) {
     switch (keyWord) {
-      case 'moduleName':
-        this.blackListTypeMaster.patchValue({request: {body: {moduleName: event?event:null}}})
-        break;
-      case 'companyName':
-        this.blackListTypeMaster.patchValue({request: {body: {companyName: event?event:null}}})
-        break
-      case 'columnName':
-        this.blackListTypeMaster.patchValue({request: {body: {columnName: event?event:null}}})
-        break
-      case 'blacklistType':
-        this.blackListTypeMaster.patchValue({request: {body: {blackListType: event}}})
-        break
-      case 'blacklistValue':
-        this.blackListTypeMaster.patchValue({request: {body: {blacklistValue: event}}})
-        break
       case 'createdDates':
         this.blackListTypeMaster.patchValue({
           request: {
@@ -418,17 +364,9 @@ export class BlacklisttypeComponent {
           }
         })       
         break
-      case 'creator':
-        this.blackListTypeMaster.patchValue({request: {body: {creator: event ? event : null}}})
-        break
-      case 'updatorName':
-        this.blackListTypeMaster.patchValue({request: {body: {updatorName: event ? event : null}}})
-        break
-      case 'status':
-        this.blackListTypeMaster.patchValue({request: {body: {status: event ? event : null}}})
-        break
+      default:
+        this.blackListTypeMaster.patchValue({request: {body: {[keyWord]: event?event:null}}})
     }
     this.getBlacklist()
-    // this.paginator.firstPage()
   }
 }

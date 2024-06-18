@@ -4,11 +4,12 @@ import { AdminService } from '../Service/admin.service';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { CommonModule } from '@angular/common';
+import { CdTimerModule } from 'angular-cd-timer';
 
 @Component({
   selector: 'app-varify-otp',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,CdTimerModule],
   templateUrl: './varify-otp.component.html',
   styleUrl: './varify-otp.component.css'
 })
@@ -126,6 +127,9 @@ export class VarifyOtpComponent {
   }
   @HostListener('document:keydown.enter', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     this.sendOTP()
+  }
+  goToLogin(){
+    this.router.navigate(['/login'])
   }
 }
 

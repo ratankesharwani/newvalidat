@@ -1,13 +1,14 @@
 import { Component, HostListener } from '@angular/core';
 import { AdminService } from '../Service/admin.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { LocalStorageService } from '../Service/local-storage.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule,FormsModule,CommonModule,RouterLink],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
 })
@@ -56,5 +57,8 @@ export class ForgotPasswordComponent {
   }
   @HostListener('document:keydown.enter', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     this.sendOTP()
+  }
+  goToLogin(){
+    this.router.navigate(['/login'])
   }
 }

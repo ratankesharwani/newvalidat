@@ -17,30 +17,53 @@
                             </div>
 
                             <div class="text-primary mb-3"><h5>Please Log In</h5></div>
-                            <form>
-                                <div class="form-floating form-floating-custom mb-3">
+                            <form [formGroup]="loginForm">
+                            <div formGroupName="request">
+                                <div class="form-floating form-floating-custom mb-3" formGroupName="body">
                                     <div class="form-floating-icon"><i class="mdi mdi-account-multiple-outline"></i></div>
-                                    <input type="text" class="formLogin form-control" id="input-username">
-                                    <label for="input-email">Email Address</label>
+                                    <input type="text" class="formLogin form-control" id="input-email" placeholder="Enter Your Email" formControlName="emailId"
+                                        required autocomplete="off"
+                                        [ngStyle]="{'border-color':loginForm.invalid && (emailControl.dirty || emailControl.touched || submitted) && (emailControl.errors?.['required'] || emailControl.errors?.['email'])?'red':''}">
+                                    <label for="input-email"
+                                        [ngStyle]="{'color':loginForm.invalid && (emailControl.dirty || emailControl.touched || submitted) && (emailControl.errors?.['required'] || emailControl.errors?.['email'])?'red':''}">Email
+                                        Address</label>
+                                    <div class="form-floating form-floating-custom mb-4" style="color: red;font-size: 17px"
+                                        *ngIf="loginForm.invalid && (emailControl.dirty || emailControl.touched || submitted)">
+                                        <small *ngIf="emailControl.errors?.['required']">
+                                            Email is required.
+                                        </small>
+                                        <small *ngIf="emailControl.errors?.['email']">
+                                            Please enter valid email.
+                                        </small>
+                                    </div>
                                 </div>
-                                <div class="form-floating form-floating-custom mb-3">
-                                    <input type="password" name="password" id="password" class="form-control">
-                                    <i class="position-absolute showEye far fa-eye-slash" id="togglePassword"></i>
-                                    <label for="input-password">Password</label>
+                                <div class="form-floating form-floating-custom mb-3" formGroupName="body">
+                                    <input [type]="passwordType" class="form-control" id="input-password" placeholder="Enter Password"
+                                        formControlName="password" autocomplete="input-password"
+                                        [ngStyle]="{'border-color':loginForm.invalid && (passControl.dirty || passControl.touched || submitted) && passControl.errors?.['required']?'red':''}">
+                                    <label for="input-password" [ngStyle]="{'color':loginForm.invalid && (passControl.dirty || passControl.touched || submitted) &&
+                                                          passControl.errors?.['required']?'red':''}">Password</label>
+                                    <div class="form-floating form-floating-custom mb-4" style="color: red;font-size: 17px"
+                                        *ngIf="loginForm.invalid && (passControl.dirty || passControl.touched || submitted)">
+                                        <small *ngIf="passControl.errors?.['required']">
+                                            Password is required.
+                                        </small>
+                                    </div>
+                                    <i class="position-absolute showEye fa fa-eye" [ngClass]="hiddenPassword" id="togglePassword" (click)="showPassword()"></i>
                                     <div class="form-floating-icon"><i class="mdi mdi-lock-outline"></i></div>
                                 </div>
 
-                                <a href="javascript:void();" class="float-end mb-3">Forgot Password?</a>
+                                <a href="javascript:void();" class="float-end mb-3" routerLink="/forgot-password">Forgot Password?</a>
 
                                 <div class="mt-3">
-                                    <button class="btn btn-primary w-100 submit" type="submit" id="submit">Log In</button>
+                                    <button class="btn btn-primary w-100 submit" type="submit" id="submit" (click)="onLogin()">Log In</button>
                                 </div>
 
                                 <div class="mt-4 text-center">
                                     <a href="javascript:void();" class="text-white-50 text-decoration-underline">Forgot your password?</a>
                                 </div>
+                            </div>
                             </form><!-- end form -->
-
                             <p>Don't have an account ? <a href="javascript:void();" class="fw-medium text-decoration-underline colorOrg"> Signup </a></p>
                             <div class="text-muted "><script>document.write(new Date().getFullYear())</script> &copy; Validat.</div>
 
@@ -62,22 +85,3 @@
     </div>
 </div-->
 </div>
-<script>
-    const togglePassword = document.querySelector("#togglePassword");
-    const password = document.querySelector("#password");
-
-    togglePassword.addEventListener("click", function () {
-        //alert("eye");
-        // toggle the type attribute
-        const type = password.getAttribute("type") === "password" ? "text" : "password";
-        password.setAttribute("type", type);
-        // toggle the icon
-        this.classList.toggle("fa-eye");
-    });
-
-    // prevent form submit
-    const form = document.querySelector("form");
-    form.addEventListener('submit',function(e){
-        e.preventDefault();
-    });
-</script>

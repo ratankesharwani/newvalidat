@@ -108,5 +108,8 @@ export class ResetPasswordComponent {
   @HostListener('document:keydown.enter', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     this.resetPassword()
   }
+  goToLogin(){
+    this.router.navigate(['/login'])
+  }
 }
 
