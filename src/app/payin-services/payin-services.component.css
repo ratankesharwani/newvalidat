@@ -43,7 +43,7 @@
     background-color: #038585;
   }
   .toggle input+.slider {
-    background-color: #f55d22;
+    background-color: #ffffff;
   }
   
   .toggle input:checked+.slider::before {
@@ -81,7 +81,7 @@
     transition: all 0.4s ease-in-out;
   }
   .toggle .labels::after {
-    color: #ffffff;
+    color: #060606;
   }
   
   .toggle input:checked~.labels::after {

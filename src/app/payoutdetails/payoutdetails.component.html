@@ -1,1 +1,116 @@
-<p>payoutdetails works!</p>
+<div class="row">
+    <div class="col-12">
+      <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h4 class="mb-0">Pay out details<br><span class="fn12 text-dark">Clients we work with and their transactions</span></h4>
+        <!-- <div class="form-check form-switch form-switch-md mt-1 p-0 col-xl-5">
+            <input class="form-check-input float-end valign-middle" type="checkbox" id="blacklist">
+        </div> -->
+    </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-xl-12">
+      <div class="card card-h-100">
+        <div class="card-body">
+          <form [formGroup]="applyAndUnlock" id="action-box">
+            <div class="d-flex justify-content-between" formGroupName="request" id="fill-form">
+              <div class="col-xl-4 pe-3 mb-3" formGroupName="body">
+                <label class="form-label">Set status</label>
+                <select class="form-select p-3" formControlName="complianceStatusId"
+                  (ngModelChange)="statusValue($event)">
+                  <option hidden selected [ngValue]=null>Status</option>
+                  <option *ngFor="let status of statusResponse" [ngValue]="status.id"
+                    [selected]="status.display_field===payoutDetailsActionResponse?.STATUS">{{status.display_field}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-xl-4 pe-3 mb-3" formGroupName="body">
+                <label class="form-label">Select reason</label>
+                <select class="form-select p-3" formControlName="complianceReasonId">
+                  <option hidden selected [ngValue]=null>--Select--</option>
+                  <option *ngFor="let reason of reasonResponse" [ngValue]="reason.id"
+                          [selected]="reason.id===payoutDetailsActionResponse?.REASON_ID">{{reason.display_field}}</option>
+                </select>
+              </div>
+              <div class="col-xl-4 pe-3 mb-3" formGroupName="body">
+                <label class="form-label">Notes</label>
+                <textarea rows="1" formControlName="complianceLog" class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-outline-secondary me-3" (click)="applyAndLock()">Apply</button>
+              <button type="button" class="btn btn-primary" (click)="applyNUnlock()">Apply &amp; Unlock</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button fw-medium" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Bank Details
+                  <!-- <span class="badge badge-soft-primary py-2 ms-2">6 accounts</span> -->
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="d-flex flex-wrap">
+                    <div class="col-2 mb-3 pe-1" *ngFor="let beneDetails of payoutBankDetails">
+                      <p class="mb-1 text-uppercase">{{beneDetails.display}}</p>
+                      <p class="fw-semibold mb-2">{{beneDetails.value}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Bene details
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="d-flex flex-wrap">
+                    <div class="col-2 mb-3 pe-1" *ngFor="let beneDetails of payoutBeneDetails">
+                      <p class="mb-1 text-uppercase">{{beneDetails.display}}</p>
+                      <p class="fw-semibold mb-2">{{beneDetails.value}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Other details
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="d-flex flex-wrap">
+                    <div class="col-2 mb-3 pe-1" *ngFor="let beneDetails of payoutOthersDetails">
+                      <p class="mb-1 text-uppercase">{{beneDetails.display}}</p>
+                      <p class="fw-semibold mb-2">{{beneDetails.value}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- end card body -->
+      </div><!-- end card -->
+    </div><!-- end col -->
+  </div>

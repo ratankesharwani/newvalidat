@@ -7,17 +7,37 @@
             <div class="container-fluid">
                 <div class="mt-2 float-start">
                     <ul class="nav nav-tabs nav-tabs-custom mb-4" role="tablist">
-                        <li class="nav-item"><a class="nav-link active" routerLink='/Payout_Service/Details' routerLinkActive='active'>Payin Details</a></li>
+                        <li class="nav-item"><a class="nav-link active" routerLink='/Payout_Service/Details' routerLinkActive='active'>Payout Details</a></li>
                         <li class="nav-item"><a class="nav-link" routerLink='/Payout_Service/Services'>Service Checks</a></li>
                         <li class="nav-item"><a class="nav-link" routerLink='/Payout_Service/Attachments'>Attach Documents</a></li>
                         <li class="nav-item"><a class="nav-link active" routerLink='/Payout_Service/Logs'>Activity Log</a></li>
                     </ul>
                 </div>
                 <div class="float-end mt-2">
-                    <button type="button" class="btn btn-primary"><i class="fas fa-arrow-up"></i> Back</button>
+                    <button type="button" [routerLink]="['/Compliance/PayIn_Queue']" class="btn btn-primary"><i class="fas fa-arrow-up"></i> Back</button>
                 </div>
+                
                 <div class="clearfix"></div>
-                <router-outlet></router-outlet>
+                <div class="mt-2 float-end" id="toggle" [ngClass]="{'opacity-100 pe-auto':formBlock,'opacity-50 pe-none':(!formBlock && !systemAdmin)}">
+                  <p class="float-start font-14 colorOrg font-weight600 me-2 mt-2" *ngIf="lock && !lockedByCurrentUser">Record locked by {{currentUser}}
+                  </p>
+                  <a class="btnOff me-2 mt-2" *ngIf="!lock">
+                    <label class="toggle">
+                      <input type="checkbox"  (change)="toggle($event)" [(ngModel)]="Toggle">
+                      <span class="slider"></span>
+                      <span class="labels" data-on="Locked" data-off="Unlocked"></span>
+                    </label>
+                  </a>
+    
+                  <a class="btnOff me-2 mt-2" *ngIf="lock && (lockedByCurrentUser || systemAdmin)">
+                    <label class="toggle">
+                      <input type="checkbox"  (change)="toggle($event)" [(ngModel)]="Toggle">
+                      <span class="slider"></span>
+                      <span class="labels" data-on="Locked" data-off="Unlocked"></span>
+                    </label>
+                  </a>
+                  </div>
+                <router-outlet (activate)='onActivate($event)'></router-outlet>
             </div>
         </div>
         <app-footer></app-footer>
