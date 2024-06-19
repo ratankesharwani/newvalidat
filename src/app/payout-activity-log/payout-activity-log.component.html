@@ -1,11 +1,48 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-flex align-items-center justify-content-between">
-            <h4 class="mb-0">Activity Log<br><span class="fn12 text-dark">Clients we work with and their transactions</span></h4>
+            <h4 class="mb-0">Activity Log<br><span class="fn12 text-dark">Clients we work with and their
+                    transactions</span></h4>
         </div>
     </div>
 </div>
-
+<div class="row mb-2">
+    <div class="col-xl-12">
+        <div class="card card-h-100">
+            <div class="card-body">
+                <form [formGroup]="ActivityLog" (ngSubmit)="save()">
+                    <div class="d-flex justify-content-between" formGroupName="request">
+                        <div class="col-xl-4 pe-3 mb-3" formGroupName="body">
+                            <label class="form-label">From Date</label>
+                            <input type="text" class="form-control" placeholder="Choose date"
+                                [bsConfig]="{ isAnimated: true ,dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false}"
+                                (bsValueChange)="fromD($event)" bsDatepicker [(bsValue)]="from_Date"
+                                [minDate]="minFromDate" [maxDate]="maxFromDate" />
+                        </div>
+                        <div class="col-xl-4 pe-3 mb-3" formGroupName="body">
+                            <label class="form-label">To Date</label>
+                            <input type="text" class="form-control" placeholder="Choose date"
+                                [bsConfig]="{ isAnimated: true ,dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false}"
+                                (bsValueChange)="toD($event)" bsDatepicker [(bsValue)]="to_Date" [minDate]="minToDate"
+                                [maxDate]="maxToDate" />
+                        </div>
+                        <div class="col-xl-4 mb-3" formGroupName="body">
+                            <label class="form-label">Type</label>
+                            <select class="form-select" formControlName="memoCategoryId"
+                                (ngModelChange)="onChangeMemoType($event)">
+                                <option *ngFor="let type of logType" [ngValue]="type.id">{{type.display_field}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="d-flex justify-content-end">
+                    <!-- <button type="button" class="btn btn-outline-secondary me-3" >Apply</button> -->
+                    <button type="button" class="btn btn-primary" (click)="save()">Apply &amp; Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -17,75 +54,33 @@
                                 <table class="gridjs-table " style="height: 400px;">
                                     <thead class="gridjs-thead">
                                         <tr class="gridjs-tr">
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Created date</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Added by</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Description</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Reason</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0">Created date</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0">Added by</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0" *ngIf="hideColumn">Description</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0" *ngIf="hideColumn">Reason</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0" *ngIf="!hideColumn">Notes</th>
                                         </tr>
                                     </thead>
                                     <tbody class="gridjs-tbody">
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
+                                        <tr class="gridjs-tr" *ngFor="let memo of memodata">
+                                            <td class="gridjs-td">{{memo.createdDate}}</td>
+                                            <td class="gridjs-td">{{memo.userName}}</td>
+                                            <td class="gridjs-td" *ngIf="hideColumn">
+                                                <ul>
+                                                    <li><span>{{memo.description}}</span></li>
+                                                </ul>
+                                            </td>
+                                            <td class="gridjs-td" *ngIf="hideColumn">{{memo.reason}}</td>
                                         </tr>
-
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                        </tr>
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                        </tr>
-
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                        </tr>
-
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                        </tr>
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                        </tr>
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                        </tr>
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                        </tr>
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                        </tr>
-
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="gridjs-footer p-0 mt-3">
+                            <!-- <div class="gridjs-footer p-0 mt-3">
                                 <div class="gridjs-pagination">
                                     <div class="gridjs-pages float-none d-flex justify-content-between">
                                         <a title="Previous" href="javascript:void();" class="btn btn-outline-purple"><i class="fas fa-long-arrow-alt-left"></i> Previous</a>
@@ -101,14 +96,11 @@
                                         <a title="Next" href="javascript:void();" class="btn btn-outline-purple">Next <i class="fas fa-long-arrow-alt-right"></i></a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- end card body -->
         </div>
-        <!-- end card -->
     </div>
-    <!-- end col -->
 </div>

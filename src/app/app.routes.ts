@@ -45,7 +45,7 @@ import { PayinReportComponent } from './payin-report/payin-report.component';
 import { PayoutReportComponent } from './payout-report/payout-report.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'Admin', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
