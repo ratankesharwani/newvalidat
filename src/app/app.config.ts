@@ -9,9 +9,11 @@ import { DatePipe } from '@angular/common';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { DropzoneDirective } from './dropzone.directive'; // Import your Dropzone directive
 import * as Dropzone from 'dropzone';
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
 export const APP_PROVIDERS: Provider[] = [
   DatePipe,
 ];
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), DropzoneDirective,provideAnimationsAsync(),importProvidersFrom(HttpClientModule,NgxDaterangepickerMd.forRoot())]
+  providers: [provideRouter(routes), provideClientHydration(), DropzoneDirective,provideAnimationsAsync(),importProvidersFrom(HttpClientModule,NgxDaterangepickerMd.forRoot(),NgxEchartsModule.forRoot({echarts}),)]
 };

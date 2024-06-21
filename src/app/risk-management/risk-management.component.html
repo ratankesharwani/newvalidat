@@ -65,7 +65,7 @@
                                 [ngStyle]="controls['dataPointId'].invalid && (controls['dataPointId'].dirty || controls['dataPointId'].touched || submitted)|| dataPointValidation?{color:'red',border:'1px solid red'}:{}">
                                 >
                                 <option [selected]="dataPointValidation" [ngValue]=null>--Select--</option>
-                                <option *ngFor="let data of dataPointResponse" [ngValue]="data.id">{{data.value}}
+                                <option *ngFor="let data of dataPointResponse" [ngValue]="data.key">{{data.value}}
                                 </option>
                             </select>
                             <div style="color: red"
@@ -103,11 +103,11 @@
             <button type="button" class="btn btn-success mb-3 float-end" style="cursor: pointer;" (click)="save()">
                 <i data-feather="plus" class="icon15x15"></i> Add new
             </button>
-            <button type="button" class="btn mb-3 btn-success float-end"
+            <!-- <button type="button" class="btn mb-3 btn-success float-end"
                 routerLink="/Configuration/Add_Whitelist_Details"
                 style="cursor: pointer; margin-right: 11px !important;background-color: rgb(91, 91, 231);">
                 <i data-feather="plus" class="icon15x15"></i> Back
-            </button>
+            </button> -->
         </div>
     </div>
     <br>
@@ -117,7 +117,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header justify-content-between d-flex align-items-center border-0">
-                <h4 class="card-title">Blacklist Type<span class="badge badge-soft-primary py-2">{{riskAssessmentListResponse?.length}} Blacklist</span></h4>
+                <h4 class="card-title">Risk Assessment<span class="badge badge-soft-primary py-2">{{riskAssessmentListResponse?.length}} Blacklist</span></h4>
                 <!-- <button routerLink="/Configuration/Blacklist_Details" type="button" class="btn btn-success"><i data-feather="plus" class="icon15x15"></i> Add new</button> -->
             </div>
             <div class="row">
@@ -131,7 +131,7 @@
                                             <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0" *ngFor="let tab of tabColumns">{{tab.name}}</th>
                                     </thead>
                                     <tbody class="gridjs-tbody">
-                                        <tr class="gridjs-tr" *ngFor="let data of riskAssessmentListResponse; index as i">
+                                        <tr class="gridjs-tr" *ngFor="let data of riskAssessmentListResponse; index as i" (dblclick)="riskAssessmentDetails($event , i)">
                                             <td class="gridjs-td">{{data.name}}</td>
                                             <td class="gridjs-td">{{data.datapoint}}</td>
                                             <td class="gridjs-td">{{data.createdDate}}</td>
@@ -158,4 +158,7 @@
         </div>
     </div>
   </div>
-  
+  <app-popupbox-confirmation *ngIf="riskAssessmentCreationResponse" [display]=openPop [Description]="alertMessage"
+        (action)="closePopup1()" [AlertMessage]="AlertMessage" [fontColor]="fontColor"></app-popupbox-confirmation>
+      <app-popupbox [display]=openPopWithAction (action)="closePopup($event)"
+        [AlertMessage]="AlertMessage"></app-popupbox>

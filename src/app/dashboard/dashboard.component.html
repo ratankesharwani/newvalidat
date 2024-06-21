@@ -1,0 +1,83 @@
+<div class="row p-2">
+    <div class="col-md-12 mb-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h4 class="font-weight-bold mb-0">Dashboard</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="row mb-3">
+          <div class="col mt-3" (click)="addItem('pay-in-graph')">
+            <div class="card">
+              <div class="row">
+                <div class="card-body pt-3">
+                  <h4 class="card-title mb-4">Payment in</h4>
+                  <div class="d-flex justify-content-between mb-3">
+                    <h6 class="mb-0 lineHeight">
+                      <img src="assets/images/iconHistory.png" class="icon20x20 me-2">Incoming Funds
+                    </h6>
+                    <span class="float-end valueBox text-center">{{PayinDashDetails?.total_payment_in}}</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-3">
+                    <h6 class="mb-0 lineHeight">
+                      <i class="fas fa-user-check icon20x20 me-2"></i>Compliance Inprogress
+                    </h6>
+                    <span class="float-end valueBoxGreen text-center">{{PayinDashDetails?.on_hold_payment_in}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col mt-3" (click)="addItem('pay-out-graph')">
+            <div class="card">
+              <div class="row">
+                <div class="card-body pt-3">
+                  <h4 class="card-title mb-4">Payment out</h4>
+                  <div class="d-flex justify-content-between mb-3">
+                    <h6 class="mb-0 lineHeight">
+                      <img src="assets/images/iconHistory.png" class="icon20x20 me-2">Outgoing Funds
+                    </h6>
+                    <span class="float-end valueBox text-center">{{PayoutDashDetails?.total_payment_in || 0}}</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-3">
+                    <h6 class="mb-0 lineHeight">
+                      <i class="fas fa-user-check icon20x20 me-2"></i>Compliance Inprogress
+                    </h6>
+                    <span class="float-end valueBoxGreen text-center">{{PayoutDashDetails?.on_hold_payment_in || 0}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col mt-3">
+            <div class="card">
+              <div class="card-body pt-3">
+                <h4 class="card-title mb-4">Details or Additional Content</h4>
+                <p>Put your content here. This area can be used to show additional details, charts, graphs, etc.</p>
+                <div class="row p-2">
+                  <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card position-relative p-3">
+                      <div style="padding: 30px">
+                        <app-graph [Graph]="route"></app-graph>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

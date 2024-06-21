@@ -5,11 +5,13 @@ import { Router, RouterLink } from '@angular/router';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
+import { PopupboxComponent } from '../popupbox/popupbox.component';
+import { PopupboxConfirmationComponent } from '../popupbox-confirmation/popupbox-confirmation.component';
 
 @Component({
   selector: 'app-risk-management',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule,CommonModule,RouterLink,MatTooltip],
+  imports: [ReactiveFormsModule,FormsModule,CommonModule,RouterLink,MatTooltip,PopupboxComponent,PopupboxConfirmationComponent],
   templateUrl: './risk-management.component.html',
   styleUrl: './risk-management.component.css'
 })
@@ -280,7 +282,7 @@ export class RiskManagementComponent {
 
   riskAssessmentDetails(data: any, i) {
     this.router.navigate(
-      ['/Configuration/Risk_Assessment_details'],
+      ['/Configuration/Risk_Assessment_Details'],
       {
         queryParams: {
           id: this.riskAssessmentListResponse[i].id,

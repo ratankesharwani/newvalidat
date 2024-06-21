@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="card position-relative" style="box-shadow: 2px 4px 7px -4px #f6f4f4;border: 0px solid #f6f4f4">
+    <form [formGroup]="Dashboard">
+      <div class="col-md-11 mb-3 m-auto d-flex flex-wrap align-content-start" formGroupName="request">
+        <div class="col-md-3 px-4" formGroupName="body">
+          <div class="form-group position-relative mb-2">
+            <i class="ti-angle-down formArrow top12"></i>
+            <select class="form-select p-2" formControlName="code" (ngModelChange)="lookForm($event)">
+              <option label="">DEFAULT</option>
+              <option label="">CUSTOM</option>
+              <option label="">YEAR</option>
+              <option label="">MONTH</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3 px-4" [ngClass]="{'pe-auto':disabledRange,'opacity-50 pe-none':!disabledRange}">
+          <div class="form-group position-relative mb-2">
+            <input class="form-control p-2" placeholder="FROM" autocomplete="off" name="date"
+                   bsDatepicker [bsConfig]="{dateInputFormat: dateInputFormat,minMode:viewMode,showWeekNumbers:false}"
+                   (bsValueChange)="fromD($event)"
+                   [(bsValue)]="from_Date"
+                   [minDate]="minFromDate"
+                   [maxDate]="maxFromDate">
+          </div>
+        </div>
+        <div class="col-md-3 px-4" [ngClass]="{'opacity-100 pe-auto':disabledRange,'opacity-50 pe-none':!disabledRange}">
+          <div class="form-group position-relative mb-2">
+            <input class="form-control p-2" placeholder="TO" autocomplete="off" name="date"
+                   bsDatepicker [bsConfig]="{dateInputFormat: dateInputFormat,minMode:viewMode,showWeekNumbers:false}"
+                   (bsValueChange)="toD($event)"
+                   [(bsValue)]="to_Date"
+                   [minDate]="minToDate"
+                   [maxDate]="maxToDate">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div id="main" echarts [options]="option" class="demo-chart"></div>

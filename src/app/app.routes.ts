@@ -43,6 +43,9 @@ import { VarifyOtpComponent } from './varify-otp/varify-otp.component';
 import { ReportComponent } from './report/report.component';
 import { PayinReportComponent } from './payin-report/payin-report.component';
 import { PayoutReportComponent } from './payout-report/payout-report.component';
+import { OutDashComponent } from './out-dash/out-dash.component';
+import { GraphComponent } from './graph/graph.component';
+import { PaymentInGraphComponent } from './payment-in-graph/payment-in-graph.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -50,6 +53,21 @@ export const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'verify-otp', component: VarifyOtpComponent },
+  {
+    path: 'out-dash', component: OutDashComponent,
+    children: [
+      {
+        path: 'graph', component: GraphComponent,
+        children: [
+          {path: '', redirectTo: 'pay-in-graph', pathMatch: 'full'},
+          {path: 'pay-in-graph', component: PaymentInGraphComponent},
+          // {path: 'pfx-graph', component: PFXRegistrationGraphComponent},
+          // {path: 'cfx-graph', component: CFXRegistrationGraphComponent},
+          // {path: 'pay-out-graph', component: PaymentOutGraphComponent},
+        ]
+      }
+    ]
+  },
   {
     path: 'Admin', component: AdminComponent,
     children: [
@@ -82,8 +100,8 @@ export const routes: Routes = [
       { path: 'Add_Custom_Rule', component: AddCustomRuleComponent,data :{disableSearch:true} },
       { path: 'Banned_Bene', component: BannedBeneComponent ,data :{disableSearch:true} },
       { path: 'Add_Banned_Bene', component: AddBannedBeneComponent ,data :{disableSearch:true}},
-      { path: 'Risk_Assessment', component: RiskManagementComponent },
-      { path: 'Risk_Assessment_details', component: RiskDetailsComponent },
+      { path: 'Risk_Assessment', component: RiskManagementComponent ,data :{disableSearch:true}},
+      { path: 'Risk_Assessment_Details', component: RiskDetailsComponent ,data :{disableSearch:true}},
     ]
   },
   {
