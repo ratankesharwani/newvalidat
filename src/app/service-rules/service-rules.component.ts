@@ -1,7 +1,7 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AdminService } from '../Service/admin.service';
 import { DownloadService } from '../Service/download.service';
 import { LocalStorageService } from '../Service/local-storage.service';
@@ -104,11 +104,12 @@ export class ServiceRulesComponent {
       class:'form-control'
     }
   ]
+  search:any
 
   constructor(private service: AdminService, private router: Router,
               private downloadService: DownloadService,
               private elementRef :ElementRef,
-              public datepipe: DatePipe,
+              public datepipe: DatePipe,private route:ActivatedRoute,
               private localStorage:LocalStorageService) {
 
     this.getRulesForComp = new FormGroup({

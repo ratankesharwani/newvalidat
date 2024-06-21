@@ -1,9 +1,8 @@
 import { Component, Inject, PLATFORM_ID, Renderer2 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { InnerheaderComponent } from "../innerheader/innerheader.component";
 import { FooterComponent } from "../footer/footer.component";
-import { isPlatformBrowser } from '@angular/common';
-import { PaymentinComponent } from '../paymentin/paymentin.component';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FilterbuttonComponent } from "../filterbutton/filterbutton.component";
 import { BlacklisttypeComponent } from '../blacklisttype/blacklisttype.component';
 
@@ -12,17 +11,21 @@ import { BlacklisttypeComponent } from '../blacklisttype/blacklisttype.component
     standalone: true,
     templateUrl: './configs.component.html',
     styleUrl: './configs.component.css',
-    imports: [RouterModule, InnerheaderComponent, FooterComponent, FilterbuttonComponent]
+    imports: [RouterModule, InnerheaderComponent,CommonModule, FooterComponent, FilterbuttonComponent]
 })
 export class ConfigsComponent {
     private isBrowser: boolean;
     toggleButton:boolean=false
     activeComponent:any
+    disableSearch:boolean=false
   
     title = 'newvalidat';
-    constructor(private renderer: Renderer2,
+    constructor(private renderer: Renderer2,private route :ActivatedRoute,
       @Inject(PLATFORM_ID) private platformId: any
       ) {this.isBrowser = isPlatformBrowser(this.platformId);}
+      ngOnInit(){
+       
+      }
   
     click(){
       if (this.isBrowser) {
@@ -40,6 +43,10 @@ export class ConfigsComponent {
     }
     onRouterActivate(event:any){
        this.activeComponent=event
+       this.route.firstChild?.data.subscribe(data => {
+        this.disableSearch = data['disableSearch'];
+        console.log(this.disableSearch);
+      });
     }
   }
   

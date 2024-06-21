@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import dayjs from 'dayjs';
@@ -9,16 +9,19 @@ import { Router, RouterLink } from '@angular/router';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
+import { FiltersidebarComponent } from "../filtersidebar/filtersidebar.component";
+import { PopupboxComponent } from "../popupbox/popupbox.component";
 
 @Component({
-  selector: 'app-blacklist-details',
-  standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,CommonModule,MatTooltip,RouterLink],
-  templateUrl: './blacklist-details.component.html',
-  styleUrl: './blacklist-details.component.css'
+    selector: 'app-blacklist-details',
+    standalone: true,
+    templateUrl: './blacklist-details.component.html',
+    styleUrl: './blacklist-details.component.css',
+    imports: [FormsModule, ReactiveFormsModule, CommonModule, MatTooltip, RouterLink, FiltersidebarComponent, PopupboxComponent]
 })
 export class BlacklistDetailsComponent {
   @ViewChild('paginator') paginator: MatPaginator
+  @Input() toggleButton:boolean=false
   blackList: FormGroup;
   apiResponse: any = [];
   statusSearch = null
@@ -53,14 +56,6 @@ export class BlacklistDetailsComponent {
     },
     {
       name:"Blacklist Type",
-      key:'columnName',
-      search:true,
-      dataType:"input",
-      value:'',
-      class:'form-control'
-    },
-    {
-      name:"Blacklist Value",
       key:'blacklistType',
       search:true,
       dataType:"input",
@@ -68,7 +63,7 @@ export class BlacklistDetailsComponent {
       class:'form-control'
     },
     {
-      name:"Created Date",
+      name:"Blacklist Value",
       key:'blacklistValue',
       search:true,
       dataType:"input",
@@ -76,23 +71,15 @@ export class BlacklistDetailsComponent {
       class:'form-control'
     },
     {
+      name:"Created Date",
+      key:'createdDates',
+      search:true,
+      dataType:"input",
+      value:'',
+      class:'form-control'
+    },
+    {
       name:"Created By",
-      key:'debtorName',
-      search:true,
-      dataType:"input",
-      value:'',
-      class:'form-control'
-    },
-    {
-      name:"Updated Date",
-      key:'createdDate',
-      search:true,
-      dataType:"input",
-      value:'',
-      class:'form-control'
-    },
-    {
-      name:"Updated By",
       key:'creator',
       search:true,
       dataType:"input",
@@ -100,7 +87,15 @@ export class BlacklistDetailsComponent {
       class:'form-control'
     },
     {
-      name:"Status",
+      name:"Updated Date",
+      key:'updatedDates',
+      search:true,
+      dataType:"input",
+      value:'',
+      class:'form-control'
+    },
+    {
+      name:"Updated By",
       key:'updatorName',
       search:true,
       dataType:"input",
@@ -108,9 +103,20 @@ export class BlacklistDetailsComponent {
       class:'form-control'
     },
     {
-      name:"Action",
-      key:'senderType',
+      name:"Status",
+      key:'status',
       search:true,
+      dataType:"select",
+      value:[
+        { display_field: 'Active', key: true },
+        { display_field: 'Inactive', key: false }
+      ],
+      class:'form-control'
+    },
+    {
+      name:"Action",
+      key:'action',
+      search:false,
       dataType:"select",
       value:'',
       class:'form-select'
@@ -144,6 +150,17 @@ export class BlacklistDetailsComponent {
         body: new FormGroup({
           pageNumber: new FormControl(0),
           numberOfElements: new FormControl(20),
+          fromCreatedOn:new FormControl(),
+          toCreatedOn:new FormControl(),
+          fromUpdatedOn:new FormControl(),
+          toUpdatedOn:new FormControl(),
+          status:new FormControl(true),
+          companyName:new FormControl(),
+          moduleName:new FormControl(),
+          updatorName:new FormControl(),
+          creator:new FormControl(),
+          blacklistType:new FormControl(),
+          blacklistValue:new FormControl()
         })
       })
     });
@@ -164,8 +181,7 @@ export class BlacklistDetailsComponent {
   }
 
   ngOnInit() {
-    this.blackList.controls['request'].value.body.pageNumber = this.pageNumber;
-    this.blackList.controls['request'].value.body.numberOfElements = this.numberOfElements;
+    this.blackList.patchValue({request:{body:{pageNumber:this.pageNumber,numberOfElements:this.numberOfElements}}})
     this.service.payInList(this.blackList.value).subscribe((response) => {
       this.totalElements = response.totalElements;
       this.apiResponse = response.content;
@@ -184,6 +200,17 @@ export class BlacklistDetailsComponent {
         body: new FormGroup({
           pageNumber: new FormControl(0),
           numberOfElements: new FormControl(20),
+          fromCreatedOn:new FormControl(),
+          toCreatedOn:new FormControl(),
+          fromUpdatedOn:new FormControl(),
+          toUpdatedOn:new FormControl(),
+          status:new FormControl(true),
+          companyName:new FormControl(),
+          moduleName:new FormControl(),
+          updatorName:new FormControl(),
+          creator:new FormControl(),
+          blacklistType:new FormControl(),
+          blacklistValue:new FormControl()
         })
       })
     });
@@ -397,6 +424,39 @@ export class BlacklistDetailsComponent {
     this.opened = !this.opened;
     const sidebar = document.getElementById('sidebar')
     sidebar?.style.setProperty("width", this.opened ? "237px" : "0");
+  }
+  searchEmited(event:any){
+    this.searching(event.value,event.key)
+  }
+  searching(event: any, keyWord: any) {
+    switch (keyWord) {
+      case 'createdDates':
+        this.blackList.patchValue({
+          request: {
+            body: {
+              "fromCreatedOn": event ? moment(event[0]).format('YYYY-MM-DD'+'T00:00:00'+'.000Z') : null,
+              "toCreatedOn": event ? moment(event[1]).format('YYYY-MM-DD'+'T23:59:59'+'.000Z') : null
+            }
+          }
+        })
+        break
+      case 'updatedDates':
+        this.blackList.patchValue({
+          request: {
+            body: {
+              "fromUpdatedOn": event ? moment(event[0]).format('YYYY-MM-DD'+'T00:00:00'+'.000Z') : null,
+              "toUpdatedOn": event ? moment(event[1]).format('YYYY-MM-DD'+'T23:59:59'+'.000Z') : null
+            }
+          }
+        })       
+        break
+      case 'status':
+         this.blackList.patchValue({request: {body: {[keyWord]: event==='Active'}}})
+      break  
+      default:
+        this.blackList.patchValue({request: {body: {[keyWord]: event?event:null}}})
+    }
+    this.ngOnInit()
   }
 }
 

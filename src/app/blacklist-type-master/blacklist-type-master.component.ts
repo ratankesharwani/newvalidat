@@ -4,13 +4,15 @@ import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } 
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LocalStorageService } from '../Service/local-storage.service';
+import { PopupboxComponent } from "../popupbox/popupbox.component";
+import { PopupboxConfirmationComponent } from '../popupbox-confirmation/popupbox-confirmation.component';
 
 @Component({
-  selector: 'app-blacklist-type-master',
-  standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,CommonModule,RouterLink],
-  templateUrl: './blacklist-type-master.component.html',
-  styleUrl: './blacklist-type-master.component.css'
+    selector: 'app-blacklist-type-master',
+    standalone: true,
+    templateUrl: './blacklist-type-master.component.html',
+    styleUrl: './blacklist-type-master.component.css',
+    imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterLink, PopupboxComponent,PopupboxConfirmationComponent]
 })
 export class BlacklistTypeMasterComponent {
   companyResponse: any;
@@ -48,6 +50,83 @@ export class BlacklistTypeMasterComponent {
   fontColor = 'green'
   controls: any
   creator :any
+  tabColumns=[
+    {
+      name:"Module",
+      key:'moduleName',
+      search:true,
+      dataType:"input",
+      value:'',
+      class:'form-control'
+    },
+    {
+      name:"Company Name",
+      key:'companyName',
+      search:true,
+      dataType:"input",
+      value:'',
+      class:'form-control'
+    },
+    {
+      name:"Blacklist Type",
+      key:'blacklistType',
+      search:true,
+      dataType:"input",
+      value:'',
+      class:'form-control'
+    },
+    {
+      name:"Blacklist Value",
+      key:'blacklistValue',
+      search:true,
+      dataType:"input",
+      value:'',
+      class:'form-control'
+    },
+    {
+      name:"Created Date",
+      key:'createdDates',
+      search:true,
+      dataType:"input",
+      value:'',
+      class:'form-control'
+    },
+    {
+      name:"Created By",
+      key:'creator',
+      search:true,
+      dataType:"input",
+      value:'',
+      class:'form-control'
+    },
+    {
+      name:"Updated Date",
+      key:'updatedDates',
+      search:true,
+      dataType:"input",
+      value:'',
+      class:'form-control'
+    },
+    {
+      name:"Updated By",
+      key:'updatorName',
+      search:true,
+      dataType:"input",
+      value:'',
+      class:'form-control'
+    },
+    {
+      name:"Status",
+      key:'status',
+      search:true,
+      dataType:"select",
+      value:[
+        { display_field: 'Active', key: true },
+        { display_field: 'Inactive', key: false }
+      ],
+      class:'form-control'
+    }
+  ]
 
   ngOnDestroy() {
     this.localStorage.removeItem("blacklistDetails")

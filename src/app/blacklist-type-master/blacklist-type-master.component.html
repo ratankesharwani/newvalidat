@@ -11,7 +11,7 @@
       <div class="card-body">
         <div class="row d-flex justify-content-start">
           <form [formGroup]="blacklistTypeDropdown">
-            <div formGroupName="request">
+            <div formGroupName="request" >
               <div class="col-xl-3 mb-3" formGroupName="body">
                 <label class="form-label">Module<span class="text-danger">*</span></label>
                 <select class="form-select p-2" formControlName="moduleId" (ngModelChange)="getModuleId()"
@@ -95,3 +95,65 @@
   </div>
 </div>
 <br>
+<div class="row">
+  <div class="col-lg-12">
+      <div class="card">
+          <div class="card-header justify-content-between d-flex align-items-center border-0">
+              <h4 class="card-title">Blacklist Type<span class="badge badge-soft-primary py-2">{{blacklistdetailAll?.length}} Blacklist Details</span></h4>
+              <button routerLink="/Configuration/Blacklist_Type_Master" type="button" class="btn btn-success"><i data-feather="plus" class="icon15x15"></i> Add new</button>
+          </div><!-- end card header -->
+          <div class="row">
+              <div class="card-body pt-0">
+                  <div class="table mb-0">
+                      <div class="gridjs gridjs-container" style="width: 100%;">
+                          <div class="gridjs-wrapper" style="height: 400px;">
+                              <table class="gridjs-table " style="height: 400px;">
+                                  <thead class="gridjs-thead">
+                                      <tr class="gridjs-tr">
+                                          <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0" *ngFor="let tab of tabColumns">{{tab.name}}</th>
+                                  </thead>
+                                  <tbody class="gridjs-tbody">
+                                      <tr class="gridjs-tr" *ngFor="let data of blacklistdetailAll; index as i">
+                                          <td class="gridjs-td">{{data.module}}</td>
+                                          <td class="gridjs-td">{{data.companyName}}</td>
+                                          <td class="gridjs-td">{{data.blacklistType}}</td>
+                                          <td class="gridjs-td">{{data.blacklistValue}}</td>
+                                          <td class="gridjs-td">{{data.createdDate}}</td>
+                                          <td class="gridjs-td">{{data.creatorName}}</td>
+                                          <td class="gridjs-td">{{data.updatedDate}}</td>
+                                          <td class="gridjs-td">{{data.updaterName}}</td>
+                                          <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
+                                            {{data.status ? 'Active' : 'Inactive'}}
+                                          </td>
+                                        </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <div class="gridjs-footer p-0 mt-3">
+                              <div class="gridjs-pagination">
+                                  <div class="gridjs-pages float-none d-flex justify-content-between">
+                                      <a title="Previous" href="javascript:void();" class="btn btn-outline-purple"><i class="fas fa-long-arrow-alt-left"></i> Previous</a>
+                                      <div class="d-flex">
+                                          <a href="javascript:void();" class="btn btn-light" title="Page 1">1</a>
+                                          <a href="javascript:void();" class="btn" title="Page 2">2</a>
+                                          <a href="javascript:void();" class="btn" title="Page 3">3</a>
+                                          <a href="javascript:void();" class="btn" title="Page 4">4</a>
+                                          <a href="javascript:void();" class="btn" title="Page 5">5</a>
+                                          <a href="javascript:void();" class="btn" title="Page 6">6</a>
+                                          <a href="javascript:void();" class="btn" title="Page 7">7</a>
+                                      </div>
+                                      <a title="Next" href="javascript:void();" class="btn btn-outline-purple">Next <i class="fas fa-long-arrow-alt-right"></i></a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- end card body -->
+      </div>
+      <!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+<!-- <app-popupbox-confirmation [display]=openPop [Description]="alertMessage" (action)="closePopup()" [AlertMessage]="AlertMessage" [fontColor]="fontColor"></app-popupbox-confirmation> -->

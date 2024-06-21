@@ -1,1 +1,139 @@
-<p>add-banned-bene works!</p>
+<form [formGroup]="addBannedBene">
+    <div class="container" formGroupName="request">
+        <div class="row mb-2" formGroupName="body">
+            <div class="col-xl-10 m-auto">
+                <div class="card card-h-100">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Add banned bene</h4>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <div class="col-xl-4 pe-3 mb-3">
+                                <label class="form-label">Company</label>
+                                <select class="form-control p-2 font-12" formControlName="companyId"
+                                    [ngStyle]="controls['companyId'].invalid && (controls['companyId'].dirty || controls['companyId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                                    <option hidden selected [ngValue]="null">Select Company</option>
+                                    <option *ngFor="let data of companyResponse" [ngValue]="data.key">{{data.value}}
+                                    </option>
+                                </select>
+                                <div class="colorRed"
+                                    *ngIf="controls['companyId'].invalid && (controls['companyId'].dirty || controls['companyId'].touched || submitted)">
+                                    <small *ngIf="controls['companyId'].errors?.['required']">
+                                        Company is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-xl-4  pe-3 mb-3">
+                                <label class="form-label">Module</label>
+                                <select class="form-control p-2 font-12" formControlName="moduleId"
+                                    [ngStyle]="controls['moduleId'].invalid && (controls['moduleId'].dirty || controls['moduleId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                                    <option hidden selected [ngValue]="null">Select Module</option>
+                                    <option *ngFor="let data of moduleFormResponse" [ngValue]="data.id">
+                                        {{data.display_field}}</option>
+                                </select>
+                                <div class="colorRed"
+                                    *ngIf="controls['moduleId'].invalid && (controls['moduleId'].dirty || controls['moduleId'].touched || submitted)">
+                                    <small *ngIf="controls['moduleId'].errors?.['required']">
+                                        Module is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 pe-3 mb-3">
+                                <label class="form-label">Currency</label>
+                                <select class="form-control p-2 font-12" formControlName="currencyCode"
+                                    [ngStyle]="controls['currencyCode'].invalid && (controls['currencyCode'].dirty || controls['currencyCode'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                                    <option hidden selected [ngValue]="null">Select Currency</option>
+                                    <option *ngFor="let data of currencyResponse">{{data.value}}</option>
+                                </select>
+                                <div class="colorRed"
+                                    *ngIf="controls['currencyCode'].invalid && (controls['currencyCode'].dirty || controls['currencyCode'].touched || submitted)">
+                                    <small *ngIf="controls['currencyCode'].errors?.['required']">
+                                        Currency is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end card-body-->
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="col-xl-4 pe-3 mb-3">
+                                <label class="form-label">Country</label>
+                                <select class="form-control p-2 font-12" formControlName="country"
+                                    [ngStyle]="controls['country'].invalid && (controls['country'].dirty || controls['country'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                                    <option hidden selected [ngValue]="null">Select Country</option>
+                                    <option *ngFor="let data of countryResponse">{{data.Display}}</option>
+                                </select>
+                                <div class="colorRed"
+                                    *ngIf="controls['country'].invalid && (controls['country'].dirty || controls['country'].touched || submitted)">
+                                    <small *ngIf="controls['country'].errors?.['required']">
+                                        Country is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 pe-3 mb-3">
+                                <label class="form-label">Account Type</label>
+                                <select class="form-control p-2 font-12" formControlName="field"
+                                    [ngStyle]="controls['field'].invalid && (controls['field'].dirty || controls['field'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                                    <option hidden selected [ngValue]="null">Select Account Type</option>
+                                    <option *ngFor="let data of accountTypeResponse">{{data.display_field}}</option>
+                                </select>
+                                <div class="colorRed"
+                                    *ngIf="controls['field'].invalid && (controls['field'].dirty || controls['field'].touched || submitted)">
+                                    <small *ngIf="controls['field'].errors?.['required']">
+                                        Account Type is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 mb-3">
+                                <label class="form-label">Account Name</label>
+                                <input placeholder="Type here.." type="text" class="form-control p-2 font-12"
+                                    formControlName="name"
+                                    [ngStyle]="controls['name'].invalid && (controls['name'].dirty || controls['name'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                                <div class="colorRed"
+                                    *ngIf="controls['name'].invalid && (controls['name'].dirty || controls['name'].touched  || submitted)">
+                                    <small *ngIf="controls['name'].errors?.['required']">
+                                        Account Name is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="col-xl-4 mb-3">
+                                <label class="form-label">Account No. / IBAN</label>
+                                <input placeholder="Type here.." (keypress)="keyPressAlphaNumeric($event)" type="text"
+                                    class="form-control p-2 font-12" formControlName="code"
+                                    [ngStyle]="controls['code'].invalid && (controls['code'].dirty || controls['code'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                                <div class="colorRed"
+                                    *ngIf="controls['code'].invalid && (controls['code'].dirty || controls['code'].touched  || submitted)">
+                                    <small *ngIf="controls['code'].errors?.['required']">
+                                        Account No. / IBAN is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 mb-3">
+                                <label class="form-label">Status</label>
+                                <div class="d-flex justify-content-start form-check form-switch pt-1">
+                                    <input class="form-check-input float-end valign-middle mt-1"
+                                        formControlName="status" type="checkbox" id="blacklist">
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                </div> <!-- end card-->
+            </div>
+        </div>
+        <div class="row mb-2" formGroupName="body">
+            <div class="col-xl-10 m-auto">
+                <div class="card card-h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-outline-secondary me-3" (click)="goBack()">Cancel</button>
+                            <button type="button" class="btn btn-primary">Add banned bene</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

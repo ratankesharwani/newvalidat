@@ -11,14 +11,15 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
 import { FiltersidebarComponent } from "../filtersidebar/filtersidebar.component";
 import { PopupboxComponent } from "../popupbox/popupbox.component";
+import { PopupboxConfirmationComponent } from "../popupbox-confirmation/popupbox-confirmation.component";
 @Component({
     selector: 'app-blacklisttype',
     standalone: true,
     templateUrl: './blacklisttype.component.html',
     styleUrl: './blacklisttype.component.css',
-    imports: [FormsModule, ReactiveFormsModule, CommonModule, MatTooltip, RouterLink, FiltersidebarComponent, PopupboxComponent]
+    imports: [FormsModule, ReactiveFormsModule, CommonModule, MatTooltip, RouterLink, FiltersidebarComponent, PopupboxComponent, PopupboxConfirmationComponent]
 })
-export class BlacklisttypeComponent {
+export class  BlacklisttypeComponent {
   @ViewChild('paginator') paginator: MatPaginator
   @Input() toggleButton:boolean=false
   blackListTypeMaster: FormGroup;
@@ -65,7 +66,7 @@ export class BlacklisttypeComponent {
     },
     {
       name:"Blacklist Type",
-      key:'blacklistType',
+      key:'blackListType',
       search:true,
       dataType:"input",
       value:'',
@@ -73,7 +74,7 @@ export class BlacklisttypeComponent {
     },
     {
       name:"Blacklist Desc",
-      key:'blacklistValue',
+      key:'blackListValue',
       search:true,
       dataType:"input",
       value:'',
@@ -113,10 +114,13 @@ export class BlacklisttypeComponent {
     },
     {
       name:"Status",
-      key:'senderType',
+      key:'status',
       search:true,
       dataType:"select",
-      value:'',
+      value:[
+        { display_field: 'Active', key: true },
+        { display_field: 'Inactive', key: false }
+      ],
       class:'form-select'
     },
     {
@@ -133,7 +137,7 @@ export class BlacklisttypeComponent {
               private downloadService: DownloadService,
               private elementRef: ElementRef,
               private localStorage:LocalStorageService) {
-    this.blackListTypeMaster = new FormGroup({
+    this.updateBlacklistTypeMaster = new FormGroup({
       request: new FormGroup({
         module: new FormControl('COMPLIANCE'),
         subModule: new FormControl('BLACKLIST_TYPE_MASTER'),
@@ -168,7 +172,8 @@ export class BlacklisttypeComponent {
           fromUpdatedOn: new FormControl(),
           toUpdatedOn: new FormControl(),
           createdBy: new FormControl(),
-          updatedBy: new FormControl()
+          updatedBy: new FormControl(),
+          updatorName: new FormControl(),
         })
       })
     });
@@ -203,6 +208,7 @@ export class BlacklisttypeComponent {
       console.log(err);
     })
   }
+  
 
   clearFilter() {
     this.createdDateRange = null
@@ -242,14 +248,11 @@ export class BlacklisttypeComponent {
     this.getBlacklist()
   }
 
-  blackListStatus = [{display: 'Active', value: true},
-    {display: 'Inactive', value: false}]
-
   changeStatus(event: any, id: any) {
-    this.blackListTypeMaster.controls['request'].value.body.status = !event;
-    this.blackListTypeMaster.controls['request'].value.body.blackListTypeId = id;
-    this.service.updateBlackListMaster(this.blackListTypeMaster.value).subscribe(data => {
-      this.getBlacklist()
+    this.updateBlacklistTypeMaster.controls['request'].value.body.status = !event;
+    this.updateBlacklistTypeMaster.controls['request'].value.body.blackListTypeId = id;
+    this.service.updateBlackListMaster(this.updateBlacklistTypeMaster.value).subscribe(data => {
+      this.ngOnInit()
     }, error => {
       console.log(error)
     })
@@ -262,14 +265,14 @@ export class BlacklisttypeComponent {
 
 
   openConfirmModal(id: any, status: any) {
-    this.blackListTypeMaster.controls['request'].value.body.status = !status;
-    this.blackListTypeMaster.controls['request'].value.body.blackListTypeId = id;
+    this.updateBlacklistTypeMaster.controls['request'].value.body.status = !status;
+    this.updateBlacklistTypeMaster.controls['request'].value.body.blackListTypeId = id;
     const element = document.getElementById('confirmModal')
     element?.style.setProperty("display", "block")
   }
 
   confirmStatus() {
-    this.service.updateBlackListMaster(this.blackListTypeMaster.value).subscribe(data => {
+    this.service.updateBlackListMaster(this.updateBlacklistTypeMaster.value).subscribe(data => {
       this.closeAlert()
       this.getBlacklist()
     }, error => {
@@ -280,8 +283,8 @@ export class BlacklisttypeComponent {
 
   openPopUp(id: any, status: any) {
     this.openPop = true
-    this.blackListTypeMaster.controls['request'].value.body.status = !status;
-    this.blackListTypeMaster.controls['request'].value.body.blackListTypeId = id;
+    this.updateBlacklistTypeMaster.controls['request'].value.body.status = !status;
+    this.updateBlacklistTypeMaster.controls['request'].value.body.blackListTypeId = id;
     if (status) {
       this.AlertMessage = "Are you sure you want to apply 'Inactive' action?"
     } else {
@@ -291,7 +294,7 @@ export class BlacklisttypeComponent {
 
   closePopup(event: any) {
     if (event) {
-      this.service.updateBlackListMaster(this.blackListTypeMaster.value).subscribe((data: any) => {
+      this.service.updateBlackListMaster(this.updateBlacklistTypeMaster.value).subscribe((data: any) => {
         this.getBlacklist()
       }, error => {
         console.log(error)
@@ -364,6 +367,9 @@ export class BlacklisttypeComponent {
           }
         })       
         break
+      case 'status':
+         this.blackListTypeMaster.patchValue({request: {body: {[keyWord]: event==='Active'}}})
+      break  
       default:
         this.blackListTypeMaster.patchValue({request: {body: {[keyWord]: event?event:null}}})
     }

@@ -61,5 +61,8 @@ export class FiltersidebarComponent {
   }
   resetSearch():void{
     this.reset.emit()
+    Array.from(document.querySelectorAll("select")).forEach(
+      input => (input.value = 'null')
+    );
   }
 }
