@@ -1,5 +1,4 @@
 import {Component, Inject, Input, PLATFORM_ID} from '@angular/core';
-import * as echarts from 'echarts';
 import { EChartsOption } from 'echarts';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import moment from "moment";
@@ -7,13 +6,19 @@ import { AdminService } from '../Service/admin.service';
 import { SharedService } from '../Service/shared.service';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { NgxEchartsModule } from 'ngx-echarts';
-
+import { NGX_ECHARTS_CONFIG, NgxEchartsModule } from 'ngx-echarts';
+import { BrowserOnlyEchartsDirective } from '../browser-only-echarts.directive'; 
 @Component({
   selector: 'app-payment-in-graph',
   standalone:true,
-  imports:[FormsModule,ReactiveFormsModule,CommonModule,BsDatepickerModule, NgxEchartsModule],
+  imports:[FormsModule,ReactiveFormsModule,CommonModule,BsDatepickerModule, NgxEchartsModule,BrowserOnlyEchartsDirective],
   templateUrl: './payment-in-graph.component.html',
+  providers: [
+    {
+      provide: NGX_ECHARTS_CONFIG,
+      useValue: {}
+    }
+  ],
   styleUrls: ['./payment-in-graph.component.css']
 })
 export class PaymentInGraphComponent{
