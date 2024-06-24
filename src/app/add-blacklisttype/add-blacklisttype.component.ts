@@ -5,11 +5,12 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { Router, RouterLink } from '@angular/router';
 import { AdminService } from '../Service/admin.service';
 import { LocalStorageService } from '../Service/local-storage.service';
+import { PopupboxConfirmationComponent } from '../popupbox-confirmation/popupbox-confirmation.component';
 
 @Component({
   selector: 'app-add-blacklisttype',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, CommonModule, RouterLink, MatTooltip],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, RouterLink, MatTooltip,PopupboxConfirmationComponent],
   templateUrl: './add-blacklisttype.component.html',
   styleUrl: './add-blacklisttype.component.css'
 })

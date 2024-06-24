@@ -1,18 +1,19 @@
 <div class="alertHolder" [ngClass]="{hideDisplay:hideDisplay,showDisplay:!hideDisplay}">
-    <div class="alertBox animated w-25 h-16 p-4" id="alert" [ngClass]="{fadeOutDown:!display,fadeInDown:display}">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">{{AlertMessage}}</h5>
-          <button type="button" class="btn-close" style="margin-top: -53px" data-bs-dismiss="modal" aria-label="Close"
-            (click)="closeAlert()"></button>
-        </div>
-        <div class="modal-body">
-          <p>{{Description || "Something went wrong, please try again"}}</p>
-        </div>
-        <br>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" style="margin-right: 11px !important" data-bs-dismiss="modal" (click)="closeAlert()">Close</button>
-        </div>
+  <div class="alertBox animated w-25 h-16 p-4" id="alert" [ngClass]="{fadeOutDown:!display,fadeInDown:display}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{AlertMessage}}</h5>
+        <button type="button" class="btn-close" style="margin-left: 14rem;
+    margin-top: -3px;" data-bs-dismiss="modal" aria-label="Close" (click)="closeAlert()"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{Description || "Something went wrong, please try again"}}</p>
+      </div>
+      <br>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" style="margin-right: 11px !important" data-bs-dismiss="modal"
+          (click)="closeAlert()">Close</button>
       </div>
     </div>
   </div>
+</div>

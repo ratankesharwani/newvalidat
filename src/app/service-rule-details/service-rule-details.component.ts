@@ -5,11 +5,13 @@ import { AdminService } from '../Service/admin.service';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
+import { PopupboxComponent } from '../popupbox/popupbox.component';
+import { PopupboxConfirmationComponent } from '../popupbox-confirmation/popupbox-confirmation.component';
 
 @Component({
   selector: 'app-service-rule-details',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,CommonModule,MatTooltip],
+  imports: [FormsModule,ReactiveFormsModule,CommonModule,MatTooltip,PopupboxConfirmationComponent],
   templateUrl: './service-rule-details.component.html',
   styleUrl: './service-rule-details.component.css'
 })

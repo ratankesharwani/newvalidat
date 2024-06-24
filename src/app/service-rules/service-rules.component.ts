@@ -6,11 +6,13 @@ import { AdminService } from '../Service/admin.service';
 import { DownloadService } from '../Service/download.service';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { MatTooltip } from '@angular/material/tooltip';
+import { PopupboxConfirmationComponent } from '../popupbox-confirmation/popupbox-confirmation.component';
+import { PopupboxComponent } from '../popupbox/popupbox.component';
 
 @Component({
   selector: 'app-service-rules',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule,CommonModule,MatTooltip,RouterLink],
+  imports: [ReactiveFormsModule,FormsModule,CommonModule,MatTooltip,RouterLink,PopupboxConfirmationComponent,PopupboxComponent],
   templateUrl: './service-rules.component.html',
   styleUrl: './service-rules.component.css',
   providers:[DatePipe]
