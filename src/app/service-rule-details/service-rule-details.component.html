@@ -1,1 +1,76 @@
-<p>service-rule-details works!</p>
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-xl-10 m-auto">
+                <div class="card card-h-100">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Add service rule</h4>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <div class="col-xl-4 pe-3 mb-3">
+                                <label class="form-label">Company <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control p-2" [(ngModel)]="Company" disabled>
+                            </div>
+                            <div class="col-xl-4  pe-3 mb-3">
+                                <label class="form-label">Module<span class="text-danger">*</span></label>
+                                <label class="font-weight600">Module<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control p-2" [(ngModel)]="Module" disabled>
+                            </div>
+                            <div class="col-xl-3 pe-3 mb-3">
+                                <label class="form-label">Rule Name</label>
+                                <label class="font-weight600">Rule Name<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control p-2" [(ngModel)]="RuleName" disabled>
+                            </div>
+                            <div class="col-xl-4 mb-3">
+                                <label class="form-label">Status</label>
+                                <div class="d-flex justify-content-start form-check form-switch pt-1">
+                                    <input class="form-check-input float-end valign-middle mt-1" [(ngModel)]="flag" type="checkbox" id="blacklist"  (change)="changeStatus($event)" matTooltipPosition="above"
+                                    matTooltip="Set as {{flag?'Inactive':'Active'}}">
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-xl-10 m-auto">
+                <div class="card card-h-100">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Check rules</h4>
+                        <div id="service-rule">
+                        <div  *ngFor="let ruleDetails of RuleDetails;index as i">
+                            <div class="d-flex justify-content-between">
+                                <div class="col-xl-4 pe-3 mb-3">
+                                    <label class="form-label">Service Type</label>
+                                    <input type="text" class="form-control p-2" [(ngModel)]="ruleDetails.serviceName" disabled>
+                                </div>
+                                <div class="col-xl-4 pe-3 mb-3">
+                                    <label class="form-label">Operator</label>
+                                    <input type="text" class="form-control p-2" [(ngModel)]="Operator" disabled>
+                                </div>
+                                <div class="col-xl-3 mb-3 pe-3">
+                                    <label class="form-label">Value</label>
+                                    <input type="text" class="form-control p-2" [(ngModel)]="Status[i]" disabled>
+                                </div>
+                                <!-- <div class="col-xl-1">
+                                    <button type="button" (click)="removeService(i)"
+                                        class="btn btn-soft-light float-start mt-4 p-1"><i
+                                            data-feather="trash-2">X</i></button>
+                                </div> -->
+                            </div>
+                        </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <!-- <button style="margin-right: 43rem" id="add-more" (click)="addMoreService()" type="button"  
+                                class="btn btn-outline-secondary float-start"><i data-feather="trash-2">Add
+                                    More</i></button> -->
+                            <button (click)="goBack()" type="button"
+                                class="btn btn-outline-secondary me-3">Cancel</button>
+                            <button type="button" class="btn btn-primary" (click)="updateRulesStatus()">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

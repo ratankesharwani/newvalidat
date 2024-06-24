@@ -2,7 +2,7 @@
     <div class="d-flex w-100 justify-content-between ">
         <!-- LOGO -->
         <div class="navbar-brand-box-inner">
-            <a href="index.html" class="logo logo-dark">
+            <a  [routerLink]="'/out-dash/graph'" class="logo logo-dark">
                 <img src="assets/images/logo-dark.png" class="img-fluid" alt="">
             </a>
 
@@ -10,11 +10,11 @@
 
         <div class="d-flex innerNavHolder">
             <div class="dropdown d-none activeNavBtn d-lg-block ms-2 me-2">
-                <button type="button" class="btn header-item" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                <button [routerLink]="'/out-dash/graph'" type="button" class="btn header-item" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                     <span><i class="icon-sm" data-feather="grid"></i> Dashboard</span>
-                    <i class="mdi mdi-chevron-down"></i>
+                    <!-- <i class="mdi mdi-chevron-down"></i> -->
                 </button>
-                <div class="dropdown-menu dropdown-menu p-2">
+                <!-- <div class="dropdown-menu dropdown-menu p-2">
                     <div class="row">
                         <div class="col-md-12">
                             <a class="dropdown-item" href="javascript:void();">Option 1</a>
@@ -24,7 +24,7 @@
                             <a class="dropdown-item" href="javascript:void();">Option 5</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="dropdown dropdown-mega d-none d-lg-block" *ngFor="let role of roleBaseMenuPanel;index as i">

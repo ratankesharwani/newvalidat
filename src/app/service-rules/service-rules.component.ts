@@ -170,7 +170,7 @@ export class ServiceRulesComponent {
   }
 
   ruleDetailsById(id: any, status: any, moduleId: any, companyId: any) {
-    this.router.navigate(['/Configuration/service-rule-details'],
+    this.router.navigate(['/Configuration/Service_Rule_Details'],
       {
         queryParams: {
           id: id, status: status,
