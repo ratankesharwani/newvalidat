@@ -7,11 +7,12 @@ import { DownloadService } from '../Service/download.service';
 import { CommonModule } from '@angular/common';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { MatTooltip } from '@angular/material/tooltip';
+import { PopupboxComponent } from '../popupbox/popupbox.component';
 
 @Component({
   selector: 'app-role-masters',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule,CommonModule,RouterLink,MatTooltip],
+  imports: [ReactiveFormsModule,FormsModule,CommonModule,RouterLink,MatTooltip,PopupboxComponent],
   templateUrl: './role-masters.component.html',
   styleUrl: './role-masters.component.css'
 })

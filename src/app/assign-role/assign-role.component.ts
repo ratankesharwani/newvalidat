@@ -4,11 +4,12 @@ import { AdminService } from '../Service/admin.service';
 import { CommonModule } from '@angular/common';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { RouterLink } from '@angular/router';
+import { PopupboxConfirmationComponent } from '../popupbox-confirmation/popupbox-confirmation.component';
 
 @Component({
   selector: 'app-assign-role',
   standalone: true,
-  imports: [FormsModule,CommonModule,ReactiveFormsModule,RouterLink],
+  imports: [FormsModule,CommonModule,ReactiveFormsModule,RouterLink,PopupboxConfirmationComponent],
   templateUrl: './assign-role.component.html',
   styleUrl: './assign-role.component.css'
 })
@@ -265,7 +266,7 @@ export class AssignRoleComponent {
         this.roleDetailsResponse = response;
         this.alertMessage = response.MSG
         this.openPop=true
-        this.AlertMessage='Successfull !!'
+        this.AlertMessage='Success'
         this.roleDetails.patchValue({
           userId: new FormControl(null),
           status: new FormControl(null),
@@ -285,7 +286,7 @@ export class AssignRoleComponent {
         this.updateRoleResponse = response;
         this.alertMessage = response.MSG
         this.openPop=true
-        this.AlertMessage='Successfull !!'
+        this.AlertMessage='Success'
         this.roleDetails.patchValue({
           userId: new FormControl(null),
           status: new FormControl(null),

@@ -4,11 +4,12 @@ import { AdminService } from '../Service/admin.service';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { CommonModule } from '@angular/common';
+import { PopupboxConfirmationComponent } from '../popupbox-confirmation/popupbox-confirmation.component';
 
 @Component({
   selector: 'app-role-config',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,PopupboxConfirmationComponent],
   templateUrl: './role-config.component.html',
   styleUrl: './role-config.component.css'
 })

@@ -5,11 +5,12 @@ import { Router, RouterLink } from '@angular/router';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
+import { PopupboxConfirmationComponent } from '../popupbox-confirmation/popupbox-confirmation.component';
 
 @Component({
   selector: 'app-create-role-master',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,CommonModule,RouterLink,MatTooltip],
+  imports: [FormsModule,ReactiveFormsModule,CommonModule,RouterLink,MatTooltip,PopupboxConfirmationComponent],
   templateUrl: './create-role-master.component.html',
   styleUrl: './create-role-master.component.css'
 })
@@ -93,13 +94,13 @@ export class CreateRoleMasterComponent {
         this.AlertMessage = 'Successful !!'
         this.addRoleMasterResponse = response;
         this.alertMessage = response.MSG
-        alert(response.MSG)
+        // alert(response.MSG)
       }, error => {
         this.openPop = true
         this.AlertMessage = 'Successful !!'
         this.fontColor = 'red'
         this.alertMessage = error.error.ERROR;
-        alert(error.error.ERROR)
+        // alert(error.error.ERROR)
       })
     }
   }
