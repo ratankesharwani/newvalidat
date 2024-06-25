@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-filterbutton',
@@ -8,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './filterbutton.component.css'
 })
 export class FilterbuttonComponent {
-
+  @Output() clickSearch :EventEmitter<any> = new EventEmitter()
+  search(){
+    this.clickSearch.emit("");
+  }
 }
