@@ -7,13 +7,13 @@ import { SharedService } from '../Service/shared.service';
 import { CommonModule } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 @Component({
-  selector: 'app-payment-in-graph',
-  standalone:true,
-  imports:[CommonModule,ReactiveFormsModule,BsDatepickerModule],
-  templateUrl: './payment-in-graph.component.html',
-  styleUrls: ['./payment-in-graph.component.css']
+  selector: 'app-payment-out-graph',
+  standalone: true,
+  imports: [CommonModule,ReactiveFormsModule,BsDatepickerModule],
+  templateUrl: './payment-out-graph.component.html',
+  styleUrl: './payment-out-graph.component.css'
 })
-export class PaymentInGraphComponent{
+export class PaymentOutGraphComponent {
   Dashboard:FormGroup
   @Input() Route: any;
   DashboardValue:any
@@ -37,7 +37,7 @@ export class PaymentInGraphComponent{
     this.Dashboard=new FormGroup({
       request:new FormGroup({
         module:new FormControl('COMPLIANCE'),
-        subModule:new FormControl('PAYMENT_IN_DASHBOARD_GRAPH'),
+        subModule:new FormControl('PAYMENT_OUT_DASHBOARD_GRAPH'),
         body:new FormGroup({
           code:new FormControl('DEFAULT'),
           fromDate:new FormControl(''),
@@ -284,3 +284,4 @@ export class PaymentInGraphComponent{
     // this.option && myChart.setOption(this.option);
   }
 }
+

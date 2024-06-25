@@ -46,6 +46,7 @@ import { PayoutReportComponent } from './payout-report/payout-report.component';
 import { OutDashComponent } from './out-dash/out-dash.component';
 import { GraphComponent } from './graph/graph.component';
 import { PaymentInGraphComponent } from './payment-in-graph/payment-in-graph.component';
+import { PaymentOutGraphComponent } from './payment-out-graph/payment-out-graph.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -63,7 +64,7 @@ export const routes: Routes = [
           {path: 'pay-in-graph', component: PaymentInGraphComponent},
           // {path: 'pfx-graph', component: PFXRegistrationGraphComponent},
           // {path: 'cfx-graph', component: CFXRegistrationGraphComponent},
-          // {path: 'pay-out-graph', component: PaymentOutGraphComponent},
+          {path: 'pay-out-graph', component: PaymentOutGraphComponent},
         ]
       }
     ]
