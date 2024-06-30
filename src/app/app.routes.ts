@@ -47,6 +47,7 @@ import { OutDashComponent } from './out-dash/out-dash.component';
 import { GraphComponent } from './graph/graph.component';
 import { PaymentInGraphComponent } from './payment-in-graph/payment-in-graph.component';
 import { PaymentOutGraphComponent } from './payment-out-graph/payment-out-graph.component';
+import { GraphReportComponent } from './graph-report/graph-report.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -140,6 +141,9 @@ export const routes: Routes = [
       { path: 'PaymentIn', component: PayinReportComponent },
       { path: 'PaymentOut', component: PayoutReportComponent },
     ]
+  },
+  {
+    path: 'graph-report/:id', component: GraphReportComponent,
   },
   {
     path: 'payin-details', component: PayindetailsComponent
