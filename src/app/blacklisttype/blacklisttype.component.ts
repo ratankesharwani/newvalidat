@@ -82,17 +82,17 @@ export class  BlacklisttypeComponent {
     },
     {
       name:"Created Date",
-      key:'debtorName',
+      key:'createdDates',
       search:true,
-      dataType:"input",
+      dataType:"date",
       value:'',
       class:'form-control'
     },
     {
       name:"Updated Date",
-      key:'createdDate',
+      key:'updatedDates',
       search:true,
-      dataType:"input",
+      dataType:"date",
       value:'',
       class:'form-control'
     },

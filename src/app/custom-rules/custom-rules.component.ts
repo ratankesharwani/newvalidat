@@ -6,13 +6,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AdminService } from '../Service/admin.service';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { CommonModule } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
     selector: 'app-custom-rules',
     standalone: true,
     templateUrl: './custom-rules.component.html',
     styleUrl: './custom-rules.component.css',
-    imports: [CustomruleComponent, LoaddataComponent,FormsModule,ReactiveFormsModule,CommonModule,RouterLink]
+    imports: [CustomruleComponent, LoaddataComponent,MatTooltip, FormsModule,ReactiveFormsModule,CommonModule,RouterLink]
 })
 export class CustomRulesComponent {
   customCheckDetailsForm:FormGroup
@@ -85,7 +86,7 @@ export class CustomRulesComponent {
             moduleId:new FormControl(null,Validators.required),
             companyId:new FormControl(null,Validators.required),
             checkType:new FormControl(null,Validators.required),
-            active:new FormControl(true,Validators.required)
+            active:new FormControl(false,Validators.required)
             // moduleId:new FormControl({value: Number(this.customCheckDetails.moduleId), disabled: this.Disabled}, Validators.required),
             // companyId:new FormControl({value: Number(this.customCheckDetails.companyId), disabled: this.Disabled}, Validators.required)
           })

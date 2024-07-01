@@ -31,3 +31,9 @@
     <option *ngFor="let option of column.value" [ngValue]=" option.display_field">{{ option.display_field }}</option>
   </select>
 </ng-template>
+<ng-template #dateTemplate let-column>
+  <input
+  placeholder="{{ column.name }}" *ngIf="column.search" [ngClass]="column.class"  [maxDate]="maxDate" (bsValueChange)="searching({value:$event,key:column.key})"
+  [bsConfig]="{ isAnimated: true,rangeInputFormat : 'DD-MM-YYYY',showWeekNumbers:false}"
+  bsDaterangepicker>
+</ng-template>

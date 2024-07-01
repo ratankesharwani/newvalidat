@@ -159,6 +159,12 @@ export class ServiceRulesComponent {
   updateRulesStatus(Id: any, ModuleId: any, CompanyId: any, Status: any) {
     this.statusActive=!Status
     this.animation=!this.animation
+    this.openPop = true
+    if (Status) {
+      this.AlertMessage = "Are you sure you want to apply 'Inactive' action?"
+    } else {
+      this.AlertMessage = "Are you sure you want to apply 'Active' action?"
+    }
     this.updateRulesForComp.patchValue({
       request: {
         body: {
@@ -182,7 +188,7 @@ export class ServiceRulesComponent {
       })
   }
 
-  closePopup() {
+  closePopup(event:any) {
     this.openPop=false
     this.alertMessage = ''
     this.displayStyle = "none"
@@ -195,15 +201,18 @@ export class ServiceRulesComponent {
       clearInterval(Interval)
     },300)
   }
-  confirmStatus() {
-    this.service.payInList(this.updateRulesForComp.value).subscribe((data: any) => {
-      this.ngOnInit()
-    }, error => {
-      this.openPop=true
-      this.alertMessage=error.error.ERROR
-      this.AlertMessage='Warning !!'
-      this.fontColor='red'
-    })
+  confirmStatus(event:any) {
+    if (event) {
+      this.service.payInList(this.updateRulesForComp.value).subscribe((data: any) => {
+        this.ngOnInit()
+      }, error => {
+        // this.openPop=true
+        // this.alertMessage=error.error.ERROR
+        // this.AlertMessage='Warning !!'
+        // this.fontColor='red'
+      })
+    } 
+    this.openPop = false
   }
   // @HostListener('document:click', ['$event.target'])
   // onPageClick(targetElement){

@@ -234,7 +234,7 @@ export class BlacklistTypeMasterComponent {
         this.submitted = false
         this.service.payInList(this.blacklistDetailsTypeAll.value).subscribe((response: any) => {
           this.openPop = true
-          this.AlertMessage = 'Successful !!'
+          this.AlertMessage = 'Successful'
           this.alertMessage = "Status Updated Successfully"
           this.blacklistdetailAll = response;
         })
@@ -246,7 +246,7 @@ export class BlacklistTypeMasterComponent {
      this.service.payInList(this.blacklistTypeMaster.value).subscribe(data => {
        this.submitted = false
        this.openPop = true
-       this.AlertMessage = 'Successful !!'
+       this.AlertMessage = 'Successful'
        this.fontColor = 'green'
        this.alertMessage = "Blacklist Type added"
        this.blackListTypeIdIndex(this.blackListTypeId)

@@ -81,7 +81,7 @@
           <div class="row d-flex justify-content-start">
             <div class="col-xl-3 mb-3">
               <label class="form-label">Company</label><span class="text-danger">*</span>
-              <select class="form-select p-2"
+              <select class="form-select"
                 [ngClass]="{'opacity-100 pe-auto':!companyHidden,'opacity-50 pe-none bg-beb9b9':companyHidden}"
                 [ngStyle]="{'border':companyIdControl.invalid && (companyIdControl.dirty || companyIdControl.touched ||submitted)?'1px solid red':''}"
                 formControlName="companyId" (change)="companyValue($event)">
@@ -97,7 +97,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Deparment</label><span class="text-danger">*</span>
-              <select class="form-select p-2" autocomplete="new-password"
+              <select class="form-select" autocomplete="new-password"
                 [ngStyle]="{'border':departmentIdControl.invalid && (departmentIdControl.dirty || departmentIdControl.touched ||submitted)?'1px solid red':''}"
                 formControlName="departmentId">
                 <option hidden [ngValue]=null>Department</option>
@@ -113,7 +113,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Status</label><span class="text-danger">*</span>
-              <select class="form-select p-2" (change)="statusValue($event)" autocomplete="new-password"
+              <select class="form-select" (change)="statusValue($event)" autocomplete="new-password"
                 [ngStyle]="{'border':statusControl.invalid && (statusControl.dirty || statusControl.touched ||submitted)?'1px solid red':''}"
                 formControlName="status">
                 <option hidden [value]=null>Status</option>

@@ -6,14 +6,14 @@
           <div class="d-flex justify-content-between" formGroupName="body">
             <div class="col-xl-3 pe-3 mb-3">
               <label class="form-label">Company</label>
-              <select class="form-select p-2" formControlName="companyId">
+              <select class="form-select" formControlName="companyId">
                 <option selected [ngValue]=null>--Select--</option>
                 <option *ngFor="let data of companyResponse;" [ngValue]="data.key">{{data.value}}</option>
               </select>
             </div>
             <div class="col-xl-3 pe-3 mb-3">
               <label class="form-label">Module</label>
-              <select class="form-select p-2" formControlName="moduleId" (ngModelChange)="moduleDropdown()">
+              <select class="form-select" formControlName="moduleId" (ngModelChange)="moduleDropdown()">
                 <option selected [ngValue]=null>--Select--</option>
                 <option *ngFor="let data of moduleFormResponse;" [ngValue]="data.id">{{data.display_field}}</option>
               </select>

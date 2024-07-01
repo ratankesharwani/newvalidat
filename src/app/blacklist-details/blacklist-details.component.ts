@@ -74,7 +74,7 @@ export class BlacklistDetailsComponent {
       name:"Created Date",
       key:'createdDates',
       search:true,
-      dataType:"input",
+      dataType:"date",
       value:'',
       class:'form-control'
     },
@@ -90,7 +90,7 @@ export class BlacklistDetailsComponent {
       name:"Updated Date",
       key:'updatedDates',
       search:true,
-      dataType:"input",
+      dataType:"date",
       value:'',
       class:'form-control'
     },
@@ -111,7 +111,7 @@ export class BlacklistDetailsComponent {
         { display_field: 'Active', key: true },
         { display_field: 'Inactive', key: false }
       ],
-      class:'form-control'
+      class:'form-select'
     },
     {
       name:"Action",

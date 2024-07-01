@@ -27,11 +27,11 @@
                                             <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
                                                 {{data.status ? 'Active' : 'Inactive'}}
                                             </td>
-                                            <td>
+                                            <td class="gridjs-td">
                                                 <div class="d-flex justify-content-start hover-cursor"  (click)="updateRulesStatus(data.id,data.moduleId,data.companyId,data.status)"
                                                      matTooltipPosition="above"
                                                      matTooltip="Set to {{data.status?'Inactive':'Active'}}">
-                                                  <div class="mt-2 ms-3"><i class="ti-more-alt colorGray"></i></div>
+                                                  <div class="mt-2 ms-3"><i class="ti-more-alt colorGray"></i><button>Click</button></div>
                                                 </div>
                                               </td>
   
@@ -46,4 +46,4 @@
         </div>
     </div>
   </div>
-  <app-popupbox [display]=openPop [Description]="alertMessage" (action)="closePopup()" [AlertMessage]="AlertMessage"></app-popupbox>
+  <app-popupbox [display]=openPop [Description]="alertMessage" (action)="confirmStatus($event)" [AlertMessage]="AlertMessage"></app-popupbox>

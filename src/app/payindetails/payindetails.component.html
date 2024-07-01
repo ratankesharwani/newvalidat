@@ -16,7 +16,7 @@
                   <div class="d-flex justify-content-between" formGroupName="request" id="fill-form">
                     <div class="col-xl-4 pe-3 mb-3" formGroupName="body">
                       <label class="form-label">Set status</label>
-                      <select class="form-select p-3" formControlName="complianceStatusId"
+                      <select class="form-select" formControlName="complianceStatusId"
                         (ngModelChange)="reasonByStatusId($event)">
                         <option hidden selected [ngValue]=null>Status</option>
                         <option *ngFor="let status of paymentInStatusDropdown" [ngValue]="status.id"
@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-xl-4 pe-3 mb-3" formGroupName="body">
                       <label class="form-label">Select reason</label>
-                      <select class="form-select p-3" formControlName="complianceReasonId">
+                      <select class="form-select" formControlName="complianceReasonId">
                         <option hidden selected [ngValue]=null>--Select--</option>
                         <option *ngFor="let reason of paymentInReasonDropdown" [ngValue]="reason.id"
                                 [selected]="reason.id===paymentInDetailsAction?.REASON_ID">{{reason.display_field}}</option>

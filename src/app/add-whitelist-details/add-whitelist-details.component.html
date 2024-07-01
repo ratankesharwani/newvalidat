@@ -14,7 +14,7 @@
           <div class="row d-flex justify-content-start">
             <div class="col-xl-3 mb-3">
               <label class="form-label">Currency<span class="text-danger">*</span></label>
-              <select class="form-select p-2 font-12" formControlName="currencyCode"
+              <select class="form-select font-12" formControlName="currencyCode"
                 [ngStyle]="controls['currencyCode'].invalid && (controls['currencyCode'].dirty || controls['currencyCode'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
                 <option hidden selected [ngValue]="null">Select Currency</option>
                 <option *ngFor="let data of currencyDropDownResponse">{{data.value}}</option>
@@ -28,7 +28,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Account Number<span class="text-danger">*</span></label>
-              <input placeholder="Type here.." type="text" class="form-control p-2 font-12"
+              <input placeholder="Type here.." type="text" class="form-control font-12"
                 formControlName="accountNumber"
                 [ngStyle]="controls['accountNumber'].invalid && (controls['accountNumber'].dirty || controls['accountNumber'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
               <div class="colorRed"
@@ -40,7 +40,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Debtor Name<span class="text-danger">*</span></label>
-              <input placeholder="Type here.." type="text" class="form-control p-2 font-12" formControlName="debtorName"
+              <input placeholder="Type here.." type="text" class="form-control font-12" formControlName="debtorName"
                 [ngStyle]="controls['debtorName'].invalid && (controls['debtorName'].dirty || controls['debtorName'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
               <div class="colorRed"
                 *ngIf="controls['debtorName'].invalid && (controls['debtorName'].dirty || controls['debtorName'].touched  || submitted)">
@@ -51,7 +51,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Bank Name<span class="text-danger">*</span></label>
-              <input placeholder="Type here.." type="text" class="form-control p-2 font-12" formControlName="bankName"
+              <input placeholder="Type here.." type="text" class="form-control font-12" formControlName="bankName"
                 [ngStyle]="controls['bankName'].invalid && (controls['bankName'].dirty || controls['bankName'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
               <div class="colorRed"
                 *ngIf="controls['bankName'].invalid && (controls['bankName'].dirty || controls['bankName'].touched  || submitted)">
@@ -62,7 +62,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Client Id<span class="text-danger">*</span></label>
-              <input placeholder="Type here.." type="text" class="form-control p-2 font-12" formControlName="clientId"
+              <input placeholder="Type here.." type="text" class="form-control font-12" formControlName="clientId"
                 maxlength="9"
                 [ngStyle]="controls['clientId'].invalid && (controls['clientId'].dirty || controls['clientId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
               <div class="colorRed"
@@ -74,7 +74,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Sender Type<span class="text-danger">*</span></label>
-              <select class="form-select p-2 font-12" formControlName="senderType"
+              <select class="form-select font-12" formControlName="senderType"
                 [ngStyle]="controls['senderType'].invalid && (controls['senderType'].dirty || controls['senderType'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
                 <option hidden selected [ngValue]="null">Select Sender</option>
                 <option *ngFor="let data of senderType">{{data.display_field}}</option>
@@ -88,7 +88,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Description<span class="text-danger"></span></label>
-              <input placeholder="Type here.." type="text" class="form-control p-2 font-12"
+              <input placeholder="Type here.." type="text" class="form-control font-12"
                 formControlName="description">
             </div>
             <div class="col-xl-3 mb-3">

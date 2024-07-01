@@ -14,7 +14,7 @@
             <div formGroupName="request" >
               <div class="col-xl-3 mb-3" formGroupName="body">
                 <label class="form-label">Module<span class="text-danger">*</span></label>
-                <select class="form-select p-2" formControlName="moduleId" (ngModelChange)="getModuleId()"
+                <select class="form-select" formControlName="moduleId" (ngModelChange)="getModuleId()"
                   [ngStyle]="control1['moduleId'].invalid && (control1['moduleId'].dirty || control1['moduleId'].touched || submitted)?{color:'red',border:'1px solid red'}:{color:'black'}">
                   <option selected [ngValue]=null>--Select--</option>
                   <option *ngFor="let data of moduleDropdown" [ngValue]="data.id">{{data.display_field}}</option>
@@ -28,7 +28,7 @@
               </div>
               <div class="col-xl-3 mb-3" formGroupName="body">
                 <label class="form-label">Company<span class="text-danger">*</span></label>
-                <select class="form-select p-2" formControlName="companyId" (ngModelChange)="companyName()"
+                <select class="form-select" formControlName="companyId" (ngModelChange)="companyName()"
                   [ngStyle]="control1['companyId'].invalid && (control1['companyId'].dirty || control1['companyId'].touched || submitted)?{color:'red',border:'1px solid red'}:{color:'black'}">
                   <option selected [ngValue]=null>--Select--</option>
                   <option *ngFor="let data of companyResponse" [ngValue]="data.key">{{data.value}}</option>
@@ -46,7 +46,7 @@
             <div formGroupName="request">
               <div class="col-xl-3 mb-3" formGroupName="body">
                 <label class="form-label">BlackList Type<span class="text-danger">*</span></label>
-                <select class="form-select p-2" formControlName="blackListTypeId"
+                <select class="form-select" formControlName="blackListTypeId"
                   (ngModelChange)="blackListTypeIdIndex($event)"
                   [ngStyle]="control2['blackListTypeId'].invalid && (control2['blackListTypeId'].dirty || control2['blackListTypeId'].touched || submitted)?{color:'red',border:'1px solid red'}:{color:'black'}">
                   <option selected [ngValue]=null>--Select--</option>
@@ -100,7 +100,7 @@
       <div class="card">
           <div class="card-header justify-content-between d-flex align-items-center border-0">
               <h4 class="card-title">Blacklist Type<span class="badge badge-soft-primary py-2">{{blacklistdetailAll?.length}} Blacklist Details</span></h4>
-              <button routerLink="/Configuration/Blacklist_Type_Master" type="button" class="btn btn-success"><i data-feather="plus" class="icon15x15"></i> Add new</button>
+              <!-- <button routerLink="/Configuration/Blacklist_Type_Master" type="button" class="btn btn-success"><i data-feather="plus" class="icon15x15"></i> Add new</button> -->
           </div><!-- end card header -->
           <div class="row">
               <div class="card-body pt-0">

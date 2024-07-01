@@ -1,192 +1,122 @@
-<!-- <app-loaddata class=""></app-loaddata> -->
-<!-- <app-customrule class=""></app-customrule> -->
 <div class="row mb-2">
-  <div class="col-lg-12">
-      <div class="card card-h-100">
-        <form [formGroup]="customCheckDetailsForm">
-          <div class="card-body" formGroupName="request">
-              <div class="d-flex justify-content-between" formGroupName="body">
-                  <div class="col-xl-3 pe-3 mb-3">
-                      <label class="form-label">Company</label>
-                      <select class="form-select" formControlName="companyId"
-                        (ngModelChange)="serviceType($event)">
-                        <option selected [ngValue]=null>--Select--</option>
-                        <option *ngFor="let data of companyDropdown"
-                                [ngValue]="data.key">{{ data.value }}
-                        </option>
-                      </select>
-                  </div>
-                  <div class="col-xl-3 pe-3 mb-3">
-                      <label class="form-label">Module</label>
-                      <select class="form-select" formControlName="moduleId"
-                              (ngModelChange)="serviceType($event)">
-                        <option selected [ngValue]=null>--Select--</option>
-                        <option *ngFor="let data of moduleDropdown"
-                                [ngValue]="data.id">{{ data.display_field }}
-                        </option>
-                      </select>
-                  </div>
-                  <div class="col-xl-3 pe-3 mb-3">
-                    <label class="form-label">Check type</label>
-                    <select class="form-select" formControlName="checkType"
-                      (ngModelChange)="checkType($event)">
-                      <option selected [ngValue]=null>--Select--</option>
-                      <option *ngFor="let data of checkTypeValues">{{ data.display_field }}</option>
-                    </select>
-                  </div>
-                  <div class="col-xl-3 mb-3">
-                      <label class="form-label">Status</label>
-                      <div class="d-flex justify-content-start form-check form-switch pt-1">
-                          <input class="form-check-input float-end valign-middle mt-1" formControlName="active"
-                           type="checkbox" id="blacklist">
-                          <div class="inactive float-end ms-3">Inactive</div>
-                      </div>
-                  </div>
+    <div class="col-lg-12">
+        <div class="card card-h-100">
+            <form [formGroup]="customCheckDetailsForm">
+                <div class="card-body" formGroupName="request">
+                    <div class="d-flex justify-content-between" formGroupName="body">
+                        <div class="col-xl-3 pe-3 mb-3">
+                            <label class="form-label">Company</label>
+                            <select class="form-select" formControlName="companyId"
+                                (ngModelChange)="serviceType($event)">
+                                <option selected [ngValue]=null>--Select--</option>
+                                <option *ngFor="let data of companyDropdown" [ngValue]="data.key">{{ data.value }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-xl-3 pe-3 mb-3">
+                            <label class="form-label">Module</label>
+                            <select class="form-select" formControlName="moduleId"
+                                (ngModelChange)="serviceType($event)">
+                                <option selected [ngValue]=null>--Select--</option>
+                                <option *ngFor="let data of moduleDropdown" [ngValue]="data.id">{{ data.display_field }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-xl-3 pe-3 mb-3">
+                            <label class="form-label">Check type</label>
+                            <select class="form-select" formControlName="checkType" (ngModelChange)="checkType($event)">
+                                <option selected [ngValue]=null>--Select--</option>
+                                <option *ngFor="let data of checkTypeValues">{{ data.display_field }}</option>
+                            </select>
+                        </div>
+                        <div class="col-xl-3 mb-3">
+                            <label class="form-label">Status</label>
+                            <div class="d-flex justify-content-start form-check form-switch pt-1">
+                                <input class="form-check-input float-end valign-middle mt-1" formControlName="active"
+                                    type="checkbox" id="blacklist">
+                                <div class="inactive float-end ms-3">Inactive</div>
+                            </div>
+                        </div>
 
-              </div>
-              <div class="d-flex justify-content-start">
-                  <button type="button" class="btn btn-success" (click)="customCheckDetailsAPI()">Load data</button>
-              </div>
-          </div> <!-- end card-body-->
-          </form>
-      </div> <!-- end card-->
-  </div> <!-- end col-->
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <button type="button" class="btn btn-success" (click)="customCheckDetailsAPI()">Load
+                            data</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <div class="row">
-  <div class="col-lg-12">
-      <div class="card">
-          <div class="card-header justify-content-between d-flex align-items-center border-0">
-              <h4 class="card-title">Custom rule <span class="badge badge-soft-primary py-2">100 users</span></h4>
-              <button type="button" (click)="addNew()"  class="btn btn-success"><i data-feather="plus" class="icon15x15"></i> Add new</button>
-          </div><!-- end card header -->
-              <div class="row">
-                  <div class="card-body pt-0">
-                      <div class="table mb-0">
-                          <div class="gridjs gridjs-container" style="width: 100%;">
-                              <div class="gridjs-wrapper" style="height: 400px;">
-                                  <table class="gridjs-table " style="height: 400px;">
-                                      <thead class="gridjs-thead">
-                                          <tr class="gridjs-tr">
-                                              <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Details</th>
-                                              <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Rule name</th>
-                                              <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Check type</th>
-                                              <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Created by</th>
-                                              <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Created date</th>
-                                              <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Updated by</th>
-                                              <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Updated date</th>
-                                              <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Status <i data-feather="arrow-down" class="icon15x15"></i></th>
-                                              <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Active</th>
-                                          </tr>
-                                      </thead>
-                                      <tbody class="gridjs-tbody">
-                                          <tr class="gridjs-tr">
-                                              <td class="gridjs-td">Clearbank</td>
-                                              <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">USD</td>
-                                              <td class="gridjs-td">Olivia Rhye</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td"><div class="activeStatus float-start fn11">Active</div></td>
-                                              <td class="gridjs-td text-center">Olivia Rhye</td>
-                                          </tr>
-                                          <tr class="gridjs-tr">
-                                              <td class="gridjs-td">Clearbank</td>
-                                              <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">USD</td>
-                                              <td class="gridjs-td">Olivia Rhye</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td"><div class="activeStatus float-start fn11">Active</div></td>
-                                              <td class="gridjs-td text-center">Olivia Rhye</td>
-                                          </tr>                                                                <tr class="gridjs-tr">
-                                              <td class="gridjs-td">Clearbank</td>
-                                              <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">USD</td>
-                                              <td class="gridjs-td">Olivia Rhye</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td"><div class="activeStatus float-start fn11">Active</div></td>
-                                              <td class="gridjs-td text-center">Olivia Rhye</td>
-                                          </tr>                                                                <tr class="gridjs-tr">
-                                              <td class="gridjs-td">Clearbank</td>
-                                              <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">USD</td>
-                                              <td class="gridjs-td">Olivia Rhye</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td"><div class="activeStatus float-start fn11">Active</div></td>
-                                              <td class="gridjs-td text-center">Olivia Rhye</td>
-                                          </tr>                                                                <tr class="gridjs-tr">
-                                              <td class="gridjs-td">Clearbank</td>
-                                              <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">USD</td>
-                                              <td class="gridjs-td">Olivia Rhye</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td"><div class="activeStatus float-start fn11">Active</div></td>
-                                              <td class="gridjs-td text-center">Olivia Rhye</td>
-                                          </tr>                                                                <tr class="gridjs-tr">
-                                              <td class="gridjs-td">Clearbank</td>
-                                              <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">USD</td>
-                                              <td class="gridjs-td">Olivia Rhye</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td"><div class="activeStatus float-start fn11">Active</div></td>
-                                              <td class="gridjs-td text-center">Olivia Rhye</td>
-                                          </tr>                                                                <tr class="gridjs-tr">
-                                              <td class="gridjs-td">Clearbank</td>
-                                              <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">USD</td>
-                                              <td class="gridjs-td">Olivia Rhye</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td"><div class="activeStatus float-start fn11">Active</div></td>
-                                              <td class="gridjs-td text-center">Olivia Rhye</td>
-                                          </tr>                                                                <tr class="gridjs-tr">
-                                              <td class="gridjs-td">Clearbank</td>
-                                              <td class="gridjs-td"><img src="assets/images/flags/us.jpg" class="flagHolder">USD</td>
-                                              <td class="gridjs-td">Olivia Rhye</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td">2024:03:08 14:03:23</td>
-                                              <td class="gridjs-td"><div class="activeStatus float-start fn11">Active</div></td>
-                                              <td class="gridjs-td text-center">Olivia Rhye</td>
-                                          </tr>                                                            </tbody>
-                                  </table>
-                              </div>
-                              <div class="gridjs-footer p-0 mt-3">
-                                  <div class="gridjs-pagination">
-                                      <div class="gridjs-pages float-none d-flex justify-content-between">
-                                          <a title="Previous" href="javascript:void();" class="btn btn-outline-purple"><i class="fas fa-long-arrow-alt-left"></i> Previous</a>
-                                          <div class="d-flex">
-                                              <a href="javascript:void();" class="btn btn-light" title="Page 1">1</a>
-                                              <a href="javascript:void();" class="btn" title="Page 2">2</a>
-                                              <a href="javascript:void();" class="btn" title="Page 3">3</a>
-                                              <a href="javascript:void();" class="btn" title="Page 4">4</a>
-                                              <a href="javascript:void();" class="btn" title="Page 5">5</a>
-                                              <a href="javascript:void();" class="btn" title="Page 6">6</a>
-                                              <a href="javascript:void();" class="btn" title="Page 7">7</a>
-                                          </div>
-                                          <a title="Next" href="javascript:void();" class="btn btn-outline-purple">Next <i class="fas fa-long-arrow-alt-right"></i></a>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          <!-- end card body -->
-      </div>
-      <!-- end card -->
-  </div>
-  <!-- end col -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header justify-content-between d-flex align-items-center border-0">
+                <h4 class="card-title">Custom rule <span
+                        class="badge badge-soft-primary py-2">{{customCheckDetailsByModuleAndCompany?.length}}
+                        users</span></h4>
+                <button type="button" (click)="addNew()" class="btn btn-success"><i data-feather="plus"
+                        class="icon15x15"></i> Add new</button>
+            </div>
+            <div class="row">
+                <div class="card-body pt-0">
+                    <div class="table mb-0">
+                        <div class="gridjs gridjs-container" style="width: 100%;">
+                            <div class="gridjs-wrapper" style="height: 400px;">
+                                <table class="gridjs-table " style="height: 400px;">
+                                    <thead class="gridjs-thead">
+                                        <tr class="gridjs-tr">
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0">Details</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0">Rule name</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0">Check type</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0">Created by</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0">Created date</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0">Updated by</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0">Updated date</th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0">Status <i data-feather="arrow-down" class="icon15x15"></i>
+                                            </th>
+                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                                style="top:0">Active</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="gridjs-tbody">
+                                        <tr class="gridjs-tr"
+                                            *ngFor="let data of customCheckDetailsByModuleAndCompany;index as i">
+                                            <td class="gridjs-td text-center">+</td>
+                                            <td class="gridjs-td">{{ data.customCheckRuleName }}</td>
+                                            <td class="gridjs-td">{{ data.checkType }}</td>
+                                            <td class="gridjs-td">{{ data.createdByName }}</td>
+                                            <td class="gridjs-td">{{ data.createdDate }}</td>
+                                            <td class="gridjs-td">{{ data.updatedByName }}</td>
+                                            <td class="gridjs-td">{{ data.updateDate }}</td>
+                                            <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
+                                                <div class="inactiveStatus float-start fn11">{{ data.status ? 'Active' :
+                                                    'Inactive' }}</div>
+                                            </td>
+                                            <td class="gridjs-td"
+                                                (click)="updateRulesStatus(data.id,data.moduleId,data.companyId,data.status)">
+                                                <div class="d-flex justify-content-start hover-cursor"
+                                                    matTooltipPosition="above"
+                                                    matTooltip="Set to {{data.status?'Inactive':'Active'}}">
+                                                    <div class="mt-2 ms-3"><i class="ti-more-alt colorGray"></i>::</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

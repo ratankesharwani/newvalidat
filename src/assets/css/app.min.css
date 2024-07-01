@@ -288,7 +288,7 @@ body:not([data-sidebar-size=sm]) .app-search{
     padding:calc(70px + 20px) calc(20px / 2) 60px calc(20px / 2)
 }
 .header-item{
-    height:70px;
+    height:37px;
     -webkit-box-shadow:none!important;
     box-shadow:none!important;
     color:#555b6d;

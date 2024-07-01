@@ -9,7 +9,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="col-xl-4 pe-3 mb-3">
                                 <label class="form-label">Company</label>
-                                <select class="form-select p-2" formControlName="companyId"
+                                <select class="form-select" formControlName="companyId"
                                     (ngModelChange)="getCompanyId($event)"
                                     [ngStyle]="controls['companyId'].invalid && (controls['companyId'].dirty || controls['companyId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
                                     <option selected [ngValue]=null>--Select--</option>
@@ -25,7 +25,7 @@
                             </div>
                             <div class="col-xl-4  pe-3 mb-3">
                                 <label class="form-label">Module</label>
-                                <select class="form-select p-2" formControlName="moduleId"
+                                <select class="form-select" formControlName="moduleId"
                                     (ngModelChange)="getModuleId($event)"
                                     [ngStyle]="controls['moduleId'].invalid && (controls['moduleId'].dirty || controls['moduleId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
                                     <option selected [ngValue]=null>--Select--</option>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-xl-3 pe-3 mb-3">
                                 <label class="form-label">Rule Name</label>
-                                <input type="text" class="form-control p-2" placeholder="Type Rule Name"
+                                <input type="text" class="form-control" placeholder="Type Rule Name"
                                     formControlName="ruleName" (ngModelChange)="ruleName($event)"
                                     [ngStyle]="controls['ruleName'].invalid && (controls['ruleName'].dirty || controls['ruleName'].touched || submitted)?{color:'red',border:'1px solid red'}:{}" />
                                 <div style="color: red"
@@ -67,12 +67,11 @@
                 <div class="card card-h-100">
                     <div class="card-body">
                         <h4 class="card-title mb-4">Check rules</h4>
-                        <div id="service-rule">
-                        <div *ngFor="let totalService of detailsControl.controls;index as i" formArrayName="details">
+                        <div id="service-rule" *ngFor="let totalService of detailsControl.controls;index as i" formArrayName="details">
                             <div class="d-flex justify-content-between" [formGroupName]="i">
                                 <div class="col-xl-4 pe-3 mb-3">
                                     <label class="form-label">Service Type</label>
-                                    <select class="form-select p-2" formControlName="serviceTypeId"
+                                    <select class="form-select" formControlName="serviceTypeId"
                                         (ngModelChange)="unBlockAdd()" id="selServiceTypeId">
                                         <option selected [ngValue]=null>--Select--</option>
                                         <option *ngFor="let data of serviceTypeDropdown" [ngValue]="data.id">
@@ -81,7 +80,7 @@
                                 </div>
                                 <div class="col-xl-4 pe-3 mb-3">
                                     <label class="form-label">Operator</label>
-                                    <select class="form-select p-2" formControlName="operatorId"
+                                    <select class="form-select" formControlName="operatorId"
                                         (ngModelChange)="unBlockAdd()">
                                         <option selected [ngValue]=null>--Select--</option>
                                         <option [ngValue]=1>=</option>
@@ -89,7 +88,7 @@
                                 </div>
                                 <div class="col-xl-3 mb-3 pe-3">
                                     <label class="form-label">Value</label>
-                                    <select class="form-select p-2" formControlName="status"
+                                    <select class="form-select" formControlName="status"
                                         (ngModelChange)="unBlockAdd()"
                                         [ngStyle]="totalService['status'].invalid && (totalService['status'].dirty || totalService['status'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
                                         <option selected [ngValue]=null>--Select-</option>
@@ -110,12 +109,11 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
                         <hr>
-                        <div class="d-flex justify-content-end">
-                            <button style="margin-right: 43rem" id="add-more" (click)="addMoreService()" type="button"  
-                                class="btn btn-outline-secondary float-start"><i data-feather="trash-2">Add
+                        <button id="add-more" (click)="addMoreService()" type="button"  
+                                class="btn btn-outline-secondary"><i data-feather="trash-2">Add
                                     More</i></button>
+                        <div class="d-flex justify-content-end">
                             <button (click)="goBack()" type="button"
                                 class="btn btn-outline-secondary me-3">Cancel</button>
                             <button type="button" class="btn btn-primary" (click)="saveServiceConfigs()">Save</button>

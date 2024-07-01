@@ -120,7 +120,7 @@ export class PaymentinComponent {
       name:"Created date",
       key:'createdDate',
       search:true,
-      dataType:"input",
+      dataType:"date",
       value:'',
       class:'form-control'
     },
@@ -128,7 +128,7 @@ export class PaymentinComponent {
       name:"Cleared date",
       key:'transactionDate',
       search:true,
-      dataType:"input",
+      dataType:"date",
       value:'',
       class:'form-control'
     },

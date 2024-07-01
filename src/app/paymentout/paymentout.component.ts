@@ -124,7 +124,7 @@ export class PaymentoutComponent {
       name:"Value Date",
       key:'valueDate',
       search:true,
-      dataType:"input",
+      dataType:"date",
       value:'',
       class:'form-control'
     },
@@ -132,7 +132,7 @@ export class PaymentoutComponent {
       name:"Created Date",
       key:'createdDate',
       search:true,
-      dataType:"input",
+      dataType:"date",
       value:'',
       class:'form-control'
     },
@@ -140,7 +140,7 @@ export class PaymentoutComponent {
       name:"Cleared Date",
       key:'clearedDate',
       search:true,
-      dataType:"input",
+      dataType:"date",
       value:'',
       class:'form-control'
     },

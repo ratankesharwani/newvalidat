@@ -13,7 +13,7 @@
           <div class="row d-flex justify-content-start">
             <div class="col-xl-3 mb-3">
               <label class="form-label">Module<span class="text-danger">*</span></label>
-              <select class="form-select p-2" formControlName="moduleId" (ngModelChange)="getModule($event)"
+              <select class="form-select" formControlName="moduleId" (ngModelChange)="getModule($event)"
                 [ngStyle]="controls['moduleId'].invalid && (controls['moduleId'].dirty || controls['moduleId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
                 <option selected [ngValue]=null>--Select--</option>
                 <option *ngFor="let data of ModuleDropdown" [ngValue]="data.id">{{data.display_field}}</option>
@@ -27,7 +27,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Company<span class="text-danger">*</span></label>
-              <select class="form-select p-2" formControlName="companyId"
+              <select class="form-select" formControlName="companyId"
                 [ngStyle]="controls['companyId'].invalid && (controls['companyId'].dirty || controls['companyId'].touched  || submitted)?{color:'red',border:'1px solid red'}:{}">
                 <option selected [ngValue]=null>--Select--</option>
                 <option *ngFor="let data of companyResponse" [ngValue]="data.key">{{data.value}}</option>
@@ -41,7 +41,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">BlackList Type Name<span class="text-danger">*</span></label>
-              <input type="text" class="form-control p-2 font-12" placeholder="Type here.."
+              <input type="text" class="form-control font-12" placeholder="Type here.."
                 formControlName="blackListType"
                 [ngStyle]="controls['blackListType'].invalid && (controls['blackListType'].dirty || controls['blackListType'].touched  || submitted)?{color:'red',border:'1px solid red'}:{}">
               <div style="color: red"
@@ -53,7 +53,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Blacklist Column Name<span class="text-danger">*</span></label>
-              <select class="form-select p-2" formControlName="blackListColumn"
+              <select class="form-select" formControlName="blackListColumn"
                 (ngModelChange)="blacklistTypeCheck($event)"
                 [ngStyle]="controls['blackListColumn'].invalid && (controls['blackListColumn'].dirty || controls['blackListColumn'].touched  || submitted) || blacklistTypeDisable?{color:'red',border:'1px solid red'}:{}">
                 <option selected [ngValue]=null>--Select--</option>

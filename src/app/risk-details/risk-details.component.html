@@ -14,7 +14,7 @@
                     <div class="row d-flex justify-content-start">
                         <div class="col-xl-3 mb-3">
                             <label class="form-label">Module<span class="text-danger">*</span></label>
-                            <select class="form-select p-2"  disabled>
+                            <select class="form-select"  disabled>
                                 <!--                <option  selected [ngValue]=null>&#45;&#45;Select&#45;&#45;</option>-->
                                                 <option  [selected]="moduleId" disabled [ngValue]=null>{{moduleName}}</option>
                                                 <option *ngFor="let data of moduleResponse" [ngValue]="data.id">{{data.display_field}}</option>
@@ -22,21 +22,21 @@
                         </div>
                         <div class="col-xl-3 mb-3">
                             <label class="form-label">Company<span class="text-danger">*</span></label>
-                            <select class="form-select p-2" disabled>
+                            <select class="form-select" disabled>
                                 <option  [selected]="companyId" disabled [ngValue]=null>{{companyName}}</option>
                                 <option *ngFor="let data of companyResponse" [ngValue]="data.key">{{data.value}}</option>
                               </select>
                         </div>
                         <div class="col-xl-3 mb-3">
                             <label class="form-label">Data PointName<span class="text-danger">*</span></label>
-                            <select class="form-select p-2" disabled>
+                            <select class="form-select" disabled>
                                 <option  [selected]="companyId">{{dataPointName}}</option>
                                 <option *ngFor="let data of dataPointResponse" [ngValue]="data.id">{{data.value}}</option>
                               </select>
                         </div>
                         <div class="col-xl-3 mb-3">
                             <label class="form-label">Assessment Name<span class="text-danger">*</span></label>
-                            <select class="form-select p-2"   (change)="assessmentNameDropdown($event)">
+                            <select class="form-select"   (change)="assessmentNameDropdown($event)">
                                 <option  [selected]="companyId" >{{assessmentName}}</option>
                                 <option *ngFor="let data of riskAssessmentListResponse">{{data.name}}</option>
                               </select>

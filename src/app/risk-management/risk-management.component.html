@@ -14,7 +14,7 @@
                     <div class="row d-flex justify-content-start">
                         <div class="col-xl-3 mb-3">
                             <label class="form-label">Module<span class="text-danger">*</span></label>
-                            <select class="form-select p-2" formControlName="moduleId"
+                            <select class="form-select" formControlName="moduleId"
                                 (ngModelChange)="getModule($event)"
                                 [ngStyle]="controls['moduleId'].invalid && (controls['moduleId'].dirty || controls['moduleId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
                                 >
@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-xl-3 mb-3">
                             <label class="form-label">Company<span class="text-danger">*</span></label>
-                            <select class="form-select p-2" formControlName="companyId"
+                            <select class="form-select" formControlName="companyId"
                                 (ngModelChange)="companyDropdown($event)"
                                 [ngStyle]="controls['companyId'].invalid && (controls['companyId'].dirty || controls['companyId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
                                 >

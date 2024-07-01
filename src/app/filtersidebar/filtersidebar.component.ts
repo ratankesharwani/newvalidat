@@ -16,11 +16,14 @@ export class FiltersidebarComponent {
 
   @ViewChild('inputTemplate', { static: true }) inputTemplate: TemplateRef<any>;
   @ViewChild('selectTemplate', { static: true }) selectTemplate: TemplateRef<any>;
+  @ViewChild('dateTemplate', { static: true }) dateTemplate: TemplateRef<any>;
 
 
   private isBrowser: boolean;
   @Input() searchOptions:any[]=[]
   @Input() toggleButton:boolean=false
+
+  maxDate = new Date();
 
   constructor(private renderer: Renderer2,
      @Inject(PLATFORM_ID) private platformId: any,
@@ -51,7 +54,10 @@ export class FiltersidebarComponent {
     switch (dataType) {
       case 'select':
         return this.selectTemplate;
+      case 'date':
+        return this.dateTemplate;
       case 'input':
+        return this.inputTemplate;
       default:
         return this.inputTemplate;
     }
