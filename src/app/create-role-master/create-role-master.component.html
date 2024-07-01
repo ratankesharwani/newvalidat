@@ -15,7 +15,7 @@
           <div class="row d-flex justify-content-start">
             <div class="col-xl-3 mb-3">
               <label class="form-label">Role Name</label><span class="text-danger">*</span>
-              <input placeholder="Type here.."  [ngStyle]="{'border':roleNameControl.invalid && (roleNameControl.dirty || roleNameControl.touched || submitted)?'1px solid red':''}" type="text" class="form-control p-2" (input)="roleName($event)" formControlName="roleName">
+              <input placeholder="Type here.."  [ngStyle]="{'border':roleNameControl.invalid && (roleNameControl.dirty || roleNameControl.touched || submitted)?'1px solid red':''}" type="text" class="form-control" (input)="roleName($event)" formControlName="roleName">
               <div style="color: red" *ngIf="roleNameControl.invalid && (roleNameControl.dirty || roleNameControl.touched || submitted)">
                 <small *ngIf="roleNameControl.errors?.['required']" >
                   Role Name is Required
@@ -24,7 +24,7 @@
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Remark</label>
-              <input placeholder="Type here.." name="remark" rows="2" resize="no" class="form-control p-2"  formControlName="remark" (input)="remark($event)"/>
+              <input placeholder="Type here.." name="remark" rows="2" resize="no" class="form-control"  formControlName="remark" (input)="remark($event)"/>
             </div>
             <div class="col-xl-3 mb-3">
               <label class="form-label">Status</label>

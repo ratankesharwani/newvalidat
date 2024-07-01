@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-xl-3 mb-3">
                             <label class="form-label">Name<span class="text-danger">*</span></label>
-                            <input style="height: 29px" type="text" class="form-control p-2 font-12"
+                            <input style="height: 29px" type="text" class="form-control font-12"
                                 placeholder="Type here.." formControlName="name"
                                 [ngStyle]="controls['name'].invalid && (controls['name'].dirty || controls['name'].touched  || submitted)?{color:'red',border:'1px solid red'}:{}">
                             <div style="color: red"
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-xl-3 mb-3">
                             <label class="form-label">Data Point<span class="text-danger">*</span></label>
-                            <select class="form-control p-2" formControlName="dataPointId"
+                            <select class="form-control" formControlName="dataPointId"
                                 (ngModelChange)="dataPointValue($event)"
                                 [ngStyle]="controls['dataPointId'].invalid && (controls['dataPointId'].dirty || controls['dataPointId'].touched || submitted)|| dataPointValidation?{color:'red',border:'1px solid red'}:{}">
                                 >
@@ -77,7 +77,7 @@
                         </div>
                         <div class="col-xl-3 mb-3">
                             <label class="form-label">Description<span class="text-danger">*</span></label>
-                            <input placeholder="Type here.." type="text" class="form-control p-2 font-12"
+                            <input placeholder="Type here.." type="text" class="form-control font-12"
                                 formControlName="description"
                                 [ngStyle]="controls['description'].invalid && (controls['description'].dirty || controls['description'].touched  || submitted)?{color:'red',border:'1px solid red'}:{}">
                             <div style="color: red"

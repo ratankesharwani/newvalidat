@@ -39,7 +39,8 @@ export class GraphReportComponent {
   viewMode:any='day'
   route:any
   name:any
-  constructor(private service :AdminService,private shared : SharedService,private active :ActivatedRoute) {
+  private chartInstance: any;
+  constructor(private service :AdminService,private shared : SharedService,private active :ActivatedRoute,private el: ElementRef) {
     this.active.queryParamMap.subscribe((param)=>{
      this.route= param.get('route')
     })
@@ -79,10 +80,11 @@ export class GraphReportComponent {
         this.totalCount.push('Total')
         this.failCount.push('Fail')
         this.value.push('product')
-        this.DashboardValue.forEach(({pass, fail, total,createdDate})=>{
+        this.DashboardValue.forEach(({pass, fail, total,pending,created_date,createdDate})=>{
           this.holdCount.push(pass)
           this.totalCount.push(total)
           this.failCount.push(fail)
+          this.value.push(created_date)
           this.value.push(createdDate)
           this.createGraph()
         })
@@ -231,8 +233,10 @@ export class GraphReportComponent {
     return this.Dashboard['controls']['request']['controls']['body']['controls'];
   }
 
-  option: echarts.EChartsOption;
+  option: any;
   createGraph(){
+    const chartDom = this.el.nativeElement.querySelector('#chart');
+    this.chartInstance = echarts.init(chartDom);
     this.option = {
       legend: {},
       toolbox: {
@@ -303,5 +307,8 @@ export class GraphReportComponent {
         // }
       ]
     };
+    if (this.option) {
+      this.chartInstance.setOption(this.option,true);
+    }
   }
 }

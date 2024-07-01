@@ -5,7 +5,7 @@
         <div class="col-md-3 px-4" formGroupName="body">
           <div class="form-group position-relative mb-2">
             <i class="ti-angle-down formArrow top12"></i>
-            <select class="form-control p-2" formControlName="code" (ngModelChange)="lookForm($event)">
+            <select class="form-control" formControlName="code" (ngModelChange)="lookForm($event)">
               <option label="">DEFAULT</option>
               <option label="">CUSTOM</option>
               <option label="">YEAR</option>
@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-3 px-4" [ngClass]="{'pe-auto':disabledRange,'opacity-50 pe-none':!disabledRange}">
           <div class="form-group position-relative mb-2">
-            <input class="form-control p-2" placeholder="FROM" autocomplete="off" name="date"
+            <input class="form-control" placeholder="FROM" autocomplete="off" name="date"
                    bsDatepicker [bsConfig]="{dateInputFormat: dateInputFormat,minMode:viewMode,showWeekNumbers:false}"
                    (bsValueChange)="fromD($event)"
                    [(bsValue)]="from_Date"
@@ -25,7 +25,7 @@
         </div>
         <div class="col-md-3 px-4" [ngClass]="{'opacity-100 pe-auto':disabledRange,'opacity-50 pe-none':!disabledRange}">
           <div class="form-group position-relative mb-2">
-            <input class="form-control p-2" placeholder="TO" autocomplete="off" name="date"
+            <input class="form-control" placeholder="TO" autocomplete="off" name="date"
                    bsDatepicker [bsConfig]="{dateInputFormat: dateInputFormat,minMode:viewMode,showWeekNumbers:false}"
                    (bsValueChange)="toD($event)"
                    [(bsValue)]="to_Date"
@@ -37,4 +37,4 @@
     </form>
   </div>
 </div>
-<div id="chart" style="width: 100%; height: 40vh;"></div>
+<div id="chart" style="width: 100%; height: 50vh;"></div>
