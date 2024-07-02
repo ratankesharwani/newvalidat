@@ -41,12 +41,27 @@ export class FiltersidebarComponent {
       this.renderer.removeClass(document.body, 'right-bar-enabled');
     }
   }
-  // @HostListener('document:click', ['$event'])
-  // handleClick(event: Event) {
-  //   if (!this.elRef.nativeElement.contains(event.target)) {
-  //     this.renderer.removeClass(document.body, 'right-bar-enabled');
-  //   }
-  // }
+  @HostListener('document:click', ['$event'])
+  handleClick(event: Event) {
+    const targetElement = event.target as HTMLElement;
+    // const excludedElement = targetElement.querySelector('app-filterbutton');
+    // console.log(event.target,excludedElement,'excludedElement');
+    
+    // const excludedElement = document.querySelector('app-filterbutton');
+
+    // if (excludedElement && !excludedElement.contains(targetElement)) {
+    //   console.log('Clicked outside app-filterbutton:', targetElement);
+    //   // Your logic here
+    // } else {
+    //   console.log('Clicked inside app-filterbutton or it does not exist:', targetElement);
+    // }
+    // if (!this.elRef.nativeElement.contains(targetElement) && !excludedElement?.contains(targetElement)) {
+    //   const hasClass = document.body.classList.contains('right-bar-enabled');
+    //   if (hasClass) {
+    //     this.renderer.removeClass(document.body, 'right-bar-enabled');
+    //   }
+    // }
+  }
   getOptions(column: any): string[] {
     return ['Option 1', 'Option 2', 'Option 3'];
   }
