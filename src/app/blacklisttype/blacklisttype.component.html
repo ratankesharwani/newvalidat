@@ -27,16 +27,14 @@
                                           <td class="gridjs-td">{{data.creatorName}}</td>
                                           <td class="gridjs-td">{{data.updaterName}}</td>
                                           <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
-                                            {{data.status ? 'Active' : 'Inactive'}}
-                                          </td>
-                                          <td class="gridjs-td">
-                                            <div class="d-flex justify-content-start hover-cursor" (click)="openPopUp(data.id,data.status)"
-                                                 matTooltipPosition="above"
-                                                 matTooltip="Set to {{data.status?'Inactive':'Active'}}">
-                                              <div class="mt-2 ms-3"><i class="ti-more-alt colorGray"></i> #</div>
+                                            <div class="inactive float-start fn11">
+                                              {{data.status ? 'Active' : 'Inactive'}}
                                             </div>
                                           </td>
-
+                                          <td class="gridjs-td" matTooltipPosition="above"
+                                             matTooltip="Set to {{data.status?'Inactive':'Active'}}" (click)="openPopUp(data.id,data.status)">
+                                             <i class="fa fa-bars ms-3 font-size-15" style="cursor: pointer;"></i>
+                                          </td>
                                         </tr>
                                   </tbody>
                               </table>

@@ -30,7 +30,6 @@
             ],
             "styles": [
               "src/assets/css/custome.css",
-              "src/assets/css/feather.css",
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/assets/css/bootstrap.min.css",
               "node_modules/dropzone/dist/dropzone.css",

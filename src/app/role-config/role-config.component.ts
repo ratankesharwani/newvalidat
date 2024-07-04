@@ -225,7 +225,7 @@ export class RoleConfigComponent {
       this.service.menuPanel(this.roleConfigs.value).subscribe(response => {
         this.roleConfigsResponse = response;
         this.openPop = true
-        this.AlertMessage = 'Successful'
+        this.AlertMessage = 'Success ..'
         this.fontColor = 'green'
         this.alertMessage = this.roleConfigsResponse.MSG;
         // this.displayStyle = 'block'
@@ -242,7 +242,7 @@ export class RoleConfigComponent {
       this.service.menuPanel(this.updateRoleConfig.value).subscribe(response => {
         this.updateRoleConfigResponse = response;
         this.openPop = true
-        this.AlertMessage = 'Successful'
+        this.AlertMessage = 'Success ..'
         this.fontColor = 'green'
         this.alertMessage = this.updateRoleConfigResponse.MSG;
         // console.log(response)

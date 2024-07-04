@@ -5,13 +5,14 @@ import { AdminService } from '../Service/admin.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LocalStorageService } from '../Service/local-storage.service';
+import { PopupboxConfirmationComponent } from "../popupbox-confirmation/popupbox-confirmation.component";
 
 @Component({
     selector: 'app-add-user',
     standalone: true,
     templateUrl: './add-user.component.html',
     styleUrl: './add-user.component.css',
-    imports: [UserDetailsAddComponent,FormsModule,ReactiveFormsModule,RouterLink,CommonModule]
+    imports: [UserDetailsAddComponent, FormsModule, ReactiveFormsModule, RouterLink, CommonModule, PopupboxConfirmationComponent]
 })
 export class AddUserComponent {
   company: FormGroup;
@@ -212,7 +213,6 @@ export class AddUserComponent {
        this.fontColor='green'
        this.AlertMessage='Successful !!'
        this.alertMessage=response.MSG
-       alert(response.MSG)
        this.service.loggedIn = true;
        this.createUser.reset();
        this.submitted = false;
@@ -220,8 +220,7 @@ export class AddUserComponent {
         this.fontColor='red'
        this.openPop=true
        this.AlertMessage='Warning !!'
-       alert(error.error.ERROR)
-       this.alertMessage=error.error.ERROR;
+       this.alertMessage=error.ERROR;
      })
    }
   }

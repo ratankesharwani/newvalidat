@@ -266,7 +266,7 @@ export class AssignRoleComponent {
         this.roleDetailsResponse = response;
         this.alertMessage = response.MSG
         this.openPop=true
-        this.AlertMessage='Success'
+        this.AlertMessage='Success ..'
         this.roleDetails.patchValue({
           userId: new FormControl(null),
           status: new FormControl(null),
@@ -286,7 +286,7 @@ export class AssignRoleComponent {
         this.updateRoleResponse = response;
         this.alertMessage = response.MSG
         this.openPop=true
-        this.AlertMessage='Success'
+        this.AlertMessage='Success ..'
         this.roleDetails.patchValue({
           userId: new FormControl(null),
           status: new FormControl(null),

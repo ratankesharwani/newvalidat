@@ -53,7 +53,7 @@ export class AdminService {
     return this.http.post<any>(this.complianceUrl,data);
   }
   updateBlackListMaster(data:any):Observable<any>{
-    return  this.http.post(this.complianceUrl,data)
+    return  this.http.put(this.complianceUrl,data)
   }
   unAllocatedPayIn(data:any):Observable<any>{
     return this.http.post(this.bankInfoHubUrl,data);

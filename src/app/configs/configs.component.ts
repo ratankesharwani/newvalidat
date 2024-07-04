@@ -45,7 +45,6 @@ export class ConfigsComponent {
        this.activeComponent=event
        this.route.firstChild?.data.subscribe(data => {
         this.disableSearch = data['disableSearch'];
-        console.log(this.disableSearch);
       });
     }
   }

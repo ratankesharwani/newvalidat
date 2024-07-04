@@ -91,13 +91,13 @@ export class CreateRoleMasterComponent {
     if (this.addRoleMaster.valid) {
       this.service.menuPanel(this.addRoleMaster.value).subscribe(response => {
         this.openPop = true
-        this.AlertMessage = 'Successful'
+        this.AlertMessage = 'Success ..'
         this.addRoleMasterResponse = response;
         this.alertMessage = response.MSG
         // alert(response.MSG)
       }, error => {
         this.openPop = true
-        this.AlertMessage = 'Successful'
+        this.AlertMessage = 'Warning !!'
         this.fontColor = 'red'
         this.alertMessage = error.error.ERROR;
         // alert(error.error.ERROR)

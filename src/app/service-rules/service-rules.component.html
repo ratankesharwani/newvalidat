@@ -25,16 +25,14 @@
                                             <td class="gridjs-td" (dblclick)="ruleDetailsById(data.id,data.status,data.moduleId,data.companyId)">{{data.updatorName}}</td>
                                             <td class="gridjs-td" (dblclick)="ruleDetailsById(data.id,data.status,data.moduleId,data.companyId)">{{data.updatedDate}}</td>
                                             <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
-                                                {{data.status ? 'Active' : 'Inactive'}}
-                                            </td>
-                                            <td class="gridjs-td">
-                                                <div class="d-flex justify-content-start hover-cursor"  (click)="updateRulesStatus(data.id,data.moduleId,data.companyId,data.status)"
-                                                     matTooltipPosition="above"
-                                                     matTooltip="Set to {{data.status?'Inactive':'Active'}}">
-                                                  <div class="mt-2 ms-3"><i class="ti-more-alt colorGray"></i><button>Click</button></div>
+                                                <div class="inactive float-start fn11">
+                                                  {{data.status ? 'Active' : 'Inactive'}}
                                                 </div>
                                               </td>
-  
+                                              <td class="gridjs-td" matTooltipPosition="above"
+                                                 matTooltip="Set to {{data.status?'Inactive':'Active'}}" (click)="updateRulesStatus(data.id,data.moduleId,data.companyId,data.status)">
+                                                 <i class="fa fa-bars ms-3 font-size-15" style="cursor: pointer;"></i>
+                                            </td>
                                           </tr>
                                     </tbody>
                                 </table>

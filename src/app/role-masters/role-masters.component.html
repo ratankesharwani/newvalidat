@@ -27,16 +27,13 @@
                       <td class="gridjs-td">{{data.remark}}</td>
                       <td class="gridjs-td">{{data.createdDate}}</td>
                       <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
-                        <div class="activeStatus float-start fn11">
+                        <div class="inactive float-start fn11">
                           {{data.status ? 'Active' : 'Inactive'}}
                         </div>
                       </td>
-                      <td class="gridjs-td">
-                        <div class="d-flex justify-content-start hover-cursor" (click)="openPopUp(data.id,data.status)">
-                          <div class="mt-2 ms-3" matTooltipPosition="above"
-                            matTooltip="Set to {{data.status?'Inactive':'Active'}}"><i
-                              class="ti-more-alt colorGray"></i>#</div>
-                        </div>
+                      <td class="gridjs-td" matTooltipPosition="above"
+                         matTooltip="Set to {{data.status?'Inactive':'Active'}}" (click)="openPopUp(data.id,data.status)">
+                         <i class="fa fa-bars ms-3 font-size-15" style="cursor: pointer;"></i>
                       </td>
                     </tr>
                   </tbody>
