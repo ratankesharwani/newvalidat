@@ -33,8 +33,8 @@
                             <label class="form-label">Status</label>
                             <div class="d-flex justify-content-start form-check form-switch pt-1">
                                 <input class="form-check-input float-end valign-middle mt-1" formControlName="active"
-                                    type="checkbox" id="blacklist">
-                                <!-- <div class="inactive float-end ms-3">Inactive</div> -->
+                                    type="checkbox" id="blacklist" (change)="changeStatus()">
+                                <div class="inactive float-end ms-3">{{activeMsg}}</div>
                             </div>
                         </div>
 
@@ -84,7 +84,7 @@
                                                 style="top:0">Status <i data-feather="arrow-down" class="icon15x15"></i>
                                             </th>
                                             <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Active</th>
+                                                style="top:0">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody class="gridjs-tbody">
@@ -97,18 +97,14 @@
                                             <td class="gridjs-td">{{ data.createdDate }}</td>
                                             <td class="gridjs-td">{{ data.updatedByName }}</td>
                                             <td class="gridjs-td">{{ data.updateDate }}</td>
-                                            <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
-                                                <div class="inactiveStatus float-start fn11">{{ data.status ? 'Active' :
+                                            <td class="gridjs-td" [ngStyle]="{'color':data.bStatus ? 'green' : 'red'}">
+                                                <div class="inactiveStatus float-start fn11">{{ data.bStatus ? 'Active' :
                                                     'Inactive' }}</div>
                                             </td>
-                                            <td class="gridjs-td"
-                                                (click)="updateRulesStatus(data.id,data.moduleId,data.companyId,data.status)">
-                                                <div class="d-flex justify-content-start hover-cursor"
-                                                    matTooltipPosition="above"
-                                                    matTooltip="Set to {{data.status?'Inactive':'Active'}}">
-                                                    <div class="mt-2 ms-3"><i class="ti-more-alt colorGray"></i>::</div>
-                                                </div>
-                                            </td>
+                                              <td class="gridjs-td" matTooltipPosition="above"
+                                                 matTooltip="Set to {{data.bStatus?'Inactive':'Active'}}" (click)="updateRulesStatus(data.id,data.moduleId,data.companyId,data.bStatus)">
+                                                 <i class="fa fa-bars ms-3 font-size-15" style="cursor: pointer;"></i>
+                                              </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -120,3 +116,4 @@
         </div>
     </div>
 </div>
+<app-popupbox [display]=openPop [Description]="alertMessage" (action)="closePopup($event)" [AlertMessage]="AlertMessage"></app-popupbox>

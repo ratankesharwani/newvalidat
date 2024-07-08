@@ -57,6 +57,7 @@ export class AddWhitelistDetailsComponent {
       request: new FormGroup({
         module: new FormControl('COMPLIANCE'),
         subModule: new FormControl('CURRENCY_DROP_DOWN'),
+        body : new FormGroup({})
       })
     });
 

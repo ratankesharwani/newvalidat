@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { CustomruleComponent } from "../customrule/customrule.component";
 import { LoaddataComponent } from "../loaddata/loaddata.component";
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -7,13 +7,14 @@ import { AdminService } from '../Service/admin.service';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
+import { PopupboxComponent } from "../popupbox/popupbox.component";
 
 @Component({
     selector: 'app-custom-rules',
     standalone: true,
     templateUrl: './custom-rules.component.html',
     styleUrl: './custom-rules.component.css',
-    imports: [CustomruleComponent, LoaddataComponent,MatTooltip, FormsModule,ReactiveFormsModule,CommonModule,RouterLink]
+    imports: [CustomruleComponent, LoaddataComponent, MatTooltip, FormsModule, ReactiveFormsModule, CommonModule, RouterLink, PopupboxComponent]
 })
 export class CustomRulesComponent {
   customCheckDetailsForm:FormGroup
@@ -37,8 +38,6 @@ export class CustomRulesComponent {
   ServiceStatus:any[]=[]
   disabled:boolean=true
   display: boolean = false
-  statusActive: any
-  animation:boolean=true
   openPop:boolean=false
   AlertMessage=''
   alertMessage=''
@@ -86,7 +85,7 @@ export class CustomRulesComponent {
             moduleId:new FormControl(null,Validators.required),
             companyId:new FormControl(null,Validators.required),
             checkType:new FormControl(null,Validators.required),
-            active:new FormControl(false,Validators.required)
+            active:new FormControl(true,Validators.required)
             // moduleId:new FormControl({value: Number(this.customCheckDetails.moduleId), disabled: this.Disabled}, Validators.required),
             // companyId:new FormControl({value: Number(this.customCheckDetails.companyId), disabled: this.Disabled}, Validators.required)
           })
@@ -235,8 +234,6 @@ export class CustomRulesComponent {
     })
   }
   updateRulesStatus(Id: any, ModuleId: any, CompanyId: any, Status: any) {
-    this.statusActive=!Status
-    this.animation=!this.animation
     this.updateRulesForComp.patchValue({
       request: {
         body: {
@@ -247,26 +244,35 @@ export class CustomRulesComponent {
         }
       }
     })
+    this.openPop=true;
+    if (Status) {
+      this.AlertMessage = "Are you sure you want to apply 'Inactive' action?"
+    } else {
+      this.AlertMessage = "Are you sure you want to apply 'Active' action?"
+    }
   }
-  closeAlert() {
-    this.display = true
-    let Interval=setInterval(()=>{
-      this.animation=true
-      this.display=false
-      clearInterval(Interval)
-    },300)
-  }
-  // @HostListener('document:click', ['$event.target'])
-  // onPageClick(targetElement){
-  //   this.clickedInside=this.elementRef.nativeElement.querySelector('.alertHolder').contains(targetElement);
-  //   if(this.clickedInside){
-  //     if(!this.display){
-  //       this.closeAlert()
-  //     }
-  //   }
-  // }
+
   addNew(){
     this.router.navigate(['Configuration/Add_Custom_Rule'])
+  }
+  activeMsg='Active'
+  changeStatus(){
+     this.activeMsg=this.activeMsg==="Active"?'Inactive':'Active'
+  }
+  closePopup(event: any) {
+    if (event) {
+      this.service.payInList(this.updateRulesForComp.value).subscribe((data: any) => {
+        this.customCheckDetailsAPI()
+      }, error => {
+        this.openPop=true
+        this.alertMessage=error.error.ERROR || error.error.Warning
+        this.AlertMessage='Warning !!'
+        this.fontColor='red'
+      })
+    } else {
+      this.customCheckDetailsAPI()
+    }
+    this.openPop = false
   }
 
 }
