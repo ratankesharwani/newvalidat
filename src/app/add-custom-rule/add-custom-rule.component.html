@@ -97,44 +97,13 @@
         <div class="card card-h-100">
           <div class="card-body">
               <h4 class="card-title mb-4">Conditions</h4>
-              <!-- <div>
-                  <div class="d-flex justify-content-between">
-                      <div class="col-xl-4 pe-3 mb-3">
-                          <label class="form-label">Data point</label>
-                          <select class="form-select">
-                              <option selected>Select team member</option>
-                              <option>Option 1</option>
-                              <option>Option 1</option>
-                          </select>
-                      </div>
-                      <div class="col-xl-4 pe-3 mb-3">
-                          <label class="form-label">Operator</label>
-                          <select class="form-select">
-                              <option selected>greater than</option>
-                              <option>Option 1</option>
-                              <option>Option 1</option>
-                          </select>
-                      </div>
-                      <div class="col-xl-3 mb-3 pe-3">
-                          <label class="form-label">Value</label>
-                          <select class="form-select">
-                              <option selected>Select team member</option>
-                              <option>Option 1</option>
-                              <option>Option 1</option>
-                          </select>
-                      </div>
-                      <div class="col-xl-1">
-                          <button type="button" class="btn btn-soft-light float-start mt-4 p-1"><i data-feather="trash-2"></i></button>
-                      </div>
-                  </div>
-              </div> -->
               <div *ngFor="let totalService of detailsControl.controls;index as i" formArrayName="detail">
                   <div class="d-flex justify-content-start mt-3 mb-2" [formGroupName]="i-1" *ngIf="i!=0">
                       <div class="form-check me-2">
                           <input class="form-check-input" type="radio" name="formRadios" id="formRadios1" checked="" formControlName="andOr"
                           [ngStyle]="arrayControls(i-1,'andOr','invalid') && (arrayControls(i-1,'andOr','dirty') ||
                            arrayControls(i-1,'andOr','touched') || submitted)?{color:'red',border:'1px solid red'}:{}" [value]="'AND'">
-                          <label class="form-check-label" for="formRadios1">if</label>
+                          <label class="form-check-label" for="formRadios1">And</label>
                       </div>
                       <div class="form-check">
                           <input class="form-check-input" type="radio" name="formRadios" id="formRadios2" formControlName="andOr"
@@ -144,34 +113,63 @@
                       </div>
                       <div style="color: red" *ngIf="(arrayControls(i-1,'andOr','dirty') || arrayControls(i-1,'andOr','touched') || submitted)" class="pt-1">
                         <small *ngIf="arrayControls(i-1,'andOr','errors')?.['required']">
-                          If/Or is required.
+                          And/Or is required.
                         </small>
                       </div>
                   </div>
                   <div class="d-flex justify-content-between" [formGroupName]="i">
                       <div class="col-xl-4 pe-3 mb-3">
-                          <label class="form-label">Data point</label>
-                          <select class="form-select">
-                              <option selected>Select team member</option>
-                              <option>Option 1</option>
-                              <option>Option 1</option>
-                          </select>
+                        <label class="form-label">Data point</label>
+                        <select class="form-select" formControlName="dataPointId"
+                          [ngStyle]="arrayControls(i,'dataPointId','invalid') && (arrayControls(i,'dataPointId','dirty') ||
+                                                   arrayControls(i,'dataPointId','touched') || submitted)?{color:'red',border:'1px solid red'}:{}" (ngModelChange)="getOperators($event,i)"
+                          id="selServiceTypeId">
+                          <option selected [ngValue]=null>--Select--</option>
+                          <option *ngFor="let data of serviceTypeDropdown" [ngValue]="data.key">{{data.value}}</option>
+                        </select>
+                        <div style="color: red" *ngIf="(arrayControls(i,'dataPointId','dirty') || arrayControls(i,'dataPointId','touched') || submitted)" class="pt-1">
+                          <small *ngIf="arrayControls(i,'dataPointId','errors')?.['required']">
+                            Datapoint is required.
+                          </small>
+                        </div>
                       </div>
                       <div class="col-xl-4 pe-3 mb-3">
                           <label class="form-label">Operator</label>
-                          <select class="form-select">
-                              <option selected>greater than</option>
-                              <option>Option 1</option>
-                              <option>Option 1</option>
-                          </select>
+                          <select class="form-select" formControlName="operatorId"
+                            [ngStyle]="arrayControls(i,'operatorId','invalid') && (arrayControls(i,'operatorId','dirty') ||
+                             arrayControls(i,'operatorId','touched') || submitted)?{color:'red',border:'1px solid red'}:{}">
+                      <option selected [ngValue]=null>--Select--</option>
+                      <option *ngFor="let data of Operators[i]" [ngValue]="data.id">{{data.value}}</option>
+                    </select>
+                    <div style="color: red" *ngIf="(arrayControls(i,'operatorId','dirty') || arrayControls(i,'operatorId','touched') || submitted)" class="pt-1">
+                      <small *ngIf="arrayControls(i,'operatorId','errors')?.['required']">
+                        Operator is required.
+                      </small>
+                    </div>
                       </div>
                       <div class="col-xl-3 mb-3 pe-3">
-                          <label class="form-label">Value</label>
-                          <select class="form-select">
-                              <option selected>Select team member</option>
-                              <option>Option 1</option>
-                              <option>Option 1</option>
-                          </select>
+                        <label class="form-label">Value</label>
+                        <select *ngIf="enableDropdown[i]" class="form-select" formControlName="value" [ngStyle]="arrayControls(i,'value','invalid') && (arrayControls(i,'value','dirty') ||
+                                                   arrayControls(i,'value','touched') || submitted)?{color:'red',border:'1px solid red'}:{}">
+                          <option selected [ngValue]=null>--Select--</option>
+                          <option *ngFor="let serviceStatus of ServiceStatus[i]">{{serviceStatus}}</option>
+                        </select>
+                        <div *ngIf="!enableDropdown[i]">
+                          <input (keydown.dot)="(dataTypes[i]==='int' || dataTypes[i]=== 'date')?$event.preventDefault():null" id="num"
+                                 [type]="(dataTypes[i]==='int' || dataTypes[i]=== 'decimal' || dataTypes[i]=== 'date')?'number':'text'"
+                                 class="form-control" formControlName="value"
+                                 [placeholder]="'Type Value..'"
+                                 [ngStyle]="arrayControls(i,'value','invalid') && (arrayControls(i,'value','dirty') ||
+                                   arrayControls(i,'value','touched') || submitted)?{color:'red',border:'1px solid red'}:{}"
+                                 [ngClass]="arrayControls(i,'value','invalid') && (arrayControls(i,'value','dirty') ||
+                          arrayControls(i,'value','touched') || submitted)?'redPlaceholder':''">
+                          </div>
+                          <div style="color: red" *ngIf="(arrayControls(i,'value','dirty') || arrayControls(i,'value','touched')
+                          || submitted)" class="pt-1">
+                            <small *ngIf="arrayControls(i,'value','errors')?.['required']">
+                              Value is required.
+                            </small>
+                          </div>
                       </div>
                       <div class="col-xl-1">
                           <button type="button" (click)="removeService(i)" class="btn btn-soft-light float-start mt-4 p-1"><i data-feather="trash-2">X</i></button>
@@ -179,16 +177,17 @@
                   </div>
               </div>
               <hr >
-              <button style="margin-right: 43rem" (click)="addMoreService()" type="button" class="btn btn-outline-secondary float-start"><i data-feather="trash-2">Add More</i></button>
+              <button style="margin-right: 43rem" [ngClass]="{'opacity-100 pe-auto':( this.serviceConfigs.valid && !this.UniqueRuleName),'opacity-50 pe-none':!(this.serviceConfigs.valid && !this.UniqueRuleName)}" (click)="addMoreService()" type="button" class="btn btn-outline-secondary float-start"><i data-feather="trash-2">Add More</i></button>
               <div class="d-flex justify-content-end">
                   <button (click)="goBack()" type="button" class="btn btn-outline-secondary me-3">Cancel</button>
-                  <button type="button" class="btn btn-primary">Add custome rule</button>
+                  <button type="button" class="btn btn-primary" (click)="saveServiceConfigs()" [ngClass]="{'opacity-100 pe-auto':(this.serviceConfigs.valid && !this.UniqueRuleName && this.detailsControl.length>0),'opacity-50 pe-none':!(this.serviceConfigs.valid && !this.UniqueRuleName && this.detailsControl.length>0)}">Save</button>
               </div>
-
-
           </div> <!-- end card-body-->
       </div> <!-- end card-->
       </div>
   </div>
 </div>
 </form>
+<app-popupbox-confirmation [display]=openPop [Description]="alertMessage" (action)="closePopup()" [AlertMessage]="AlertMessage" [fontColor]="fontColor"></app-popupbox-confirmation>
+<!-- <app-popupbox [display]=openPopWithAction (action)="closePopup($event)"
+[AlertMessage]="AlertMessage"></app-popupbox> -->

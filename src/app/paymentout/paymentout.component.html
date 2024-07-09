@@ -58,6 +58,15 @@
                                                 <div *ngIf="data.customerSanctionCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
                                               </td>
                                               <td class="gridjs-td">
+                                                <div *ngIf="data.velocityCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
+                                                <div *ngIf="data.velocityCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>
+                                                <div *ngIf="data.velocityCheck=='PENDING'" class="text-center"><span class="material-symbols-outlined">
+                                                    PENDING
+                                                    </span></div>
+                                                <div *ngIf="data.velocityCheck=='NOT_AVAILABLE'" class="crossMarkBox">NA</div>
+                                                <div *ngIf="data.velocityCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
+                                              </td>
+                                              <!-- <td class="gridjs-td">
                                                 <div *ngIf="data.beneCifasCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
                                                 <div *ngIf="data.beneCifasCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>
                                                 <div *ngIf="data.beneCifasCheck=='PENDING'" class="text-center"><span class="material-symbols-outlined">
@@ -65,8 +74,8 @@
                                                     </span></div>
                                                 <div *ngIf="data.beneCifasCheck=='NOT_AVAILABLE'" class="crossMarkBox">NA</div>
                                                 <div *ngIf="data.beneCifasCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
-                                              </td>
-                                              <td class="gridjs-td">
+                                              </td> -->
+                                              <!-- <td class="gridjs-td">
                                                 <div *ngIf="data.customerCifasCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
                                                 <div *ngIf="data.customerCifasCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>
                                                 <div *ngIf="data.customerCifasCheck=='PENDING'" class="text-center"><span class="material-symbols-outlined">
@@ -74,7 +83,7 @@
                                                     </span></div>
                                                 <div *ngIf="data.customerCifasCheck=='NOT_AVAILABLE'" class="crossMarkBox">NA</div>
                                                 <div *ngIf="data.customerCifasCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
-                                              </td>
+                                              </td> -->
                                               <td class="gridjs-td">
                                                 <div *ngIf="data.customCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
                                                 <div *ngIf="data.customCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>

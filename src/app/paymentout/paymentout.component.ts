@@ -50,6 +50,7 @@ export class PaymentoutComponent {
     customerSanctionCheck: null,
     beneSanctionCheck : null,
     beneCifasCheck : null,
+    velocityCheck : null,
     custom : null,
     status: null,
     isLocked: null,
@@ -198,23 +199,32 @@ export class PaymentoutComponent {
       class:'form-select'
     },
     {
-      name:"Beneficiary Others",
-      key:'beneCifasCheck',
+      name:"Velocity",
+      key:'velocityCheck',
       search:true,
       dataType:"select",
       value:'',
       options:'',
       class:'form-select'
     },
-    {
-      name:"Customer Others",
-      key:'customerCifasCheck',
-      search:true,
-      dataType:"select",
-      value:'',
-      options:'',
-      class:'form-select'
-    },
+    // {
+    //   name:"Beneficiary Others",
+    //   key:'beneCifasCheck',
+    //   search:true,
+    //   dataType:"select",
+    //   value:'',
+    //   options:'',
+    //   class:'form-select'
+    // },
+    // {
+    //   name:"Customer Others",
+    //   key:'customerCifasCheck',
+    //   search:true,
+    //   dataType:"select",
+    //   value:'',
+    //   options:'',
+    //   class:'form-select'
+    // },
     {
       name:"Custom",
       key:'customCheck',
@@ -287,6 +297,7 @@ export class PaymentoutComponent {
           complianceStatus: new FormControl(this.filteredData?this.filteredData.status:null),
           blacklistCheck: new FormControl(this.filteredData?this.filteredData.blacklist:null),
           customerSanctionCheck: new FormControl(this.filteredData?this.filteredData.customerSanctionCheck:null),
+          velocityCheck: new FormControl(this.filteredData?this.filteredData.velocityCheck:null),
           beneSanctionCheck: new FormControl(this.filteredData?this.filteredData.beneSanctionCheck:null),
           customerSanction: new FormControl(this.filteredData?this.filteredData.custom:null),
           beneCifasCheck: new FormControl(this.filteredData?this.filteredData.beneCifasCheck:null),
@@ -370,7 +381,7 @@ export class PaymentoutComponent {
     this.service.payInList(this.serviceCheck.value).subscribe((response) => {
       this.serviceCheckResponse = response;
       this.tabColumns.forEach(column => {
-        if (column.key === 'blacklistCheck' || column.key==='beneCifasCheck' || column.key ==='customerCifasCheck' || column.key==='customCheck' || column.key==='customerSanctionCheck' || column.key==='beneSanctionCheck') {
+        if (column.key === 'blacklistCheck' || column.key === 'velocityCheck' || column.key==='beneCifasCheck' || column.key ==='customerCifasCheck' || column.key==='customCheck' || column.key==='customerSanctionCheck' || column.key==='beneSanctionCheck') {
           column.value = response;
         }
       });
@@ -437,6 +448,7 @@ export class PaymentoutComponent {
       blacklist : null,
       customerSanctionCheck: null,
       beneSanctionCheck : null,
+      velocityCheck : null,
       beneCifasCheck : null,
       custom : null,
       status: null,
@@ -529,6 +541,10 @@ export class PaymentoutComponent {
       case 'customerSanctionCheck':
         this.payoutDetails.patchValue({request: {body: {customerSanctionCheck: event === '0' ? null : event}}})
         this.ComplianceFilteredData.customerSanctionCheck=event === 'null' ? null : event
+        break
+      case 'velocityCheck':
+        this.payoutDetails.patchValue({request: {body: {velocityCheck: event === '0' ? null : event}}})
+        this.ComplianceFilteredData.velocityCheck=event === 'null' ? null : event
         break
       case 'beneCifasCheck':
         this.payoutDetails.patchValue({request: {body: {beneCifasCheck: event === '0' ? null : event}}})

@@ -5,15 +5,20 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 import { LocalStorageService } from '../Service/local-storage.service';
+import { PopupboxConfirmationComponent } from "../popupbox-confirmation/popupbox-confirmation.component";
+import { PopupboxComponent } from "../popupbox/popupbox.component";
 
 @Component({
   selector: 'app-add-custom-rule',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,CommonModule,RouterLink,MatTooltip],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterLink, MatTooltip, PopupboxConfirmationComponent, PopupboxComponent],
   templateUrl: './add-custom-rule.component.html',
   styleUrl: './add-custom-rule.component.css'
 })
 export class AddCustomRuleComponent {
+closePopup1() {
+throw new Error('Method not implemented.');
+}
   ModuleForm: FormGroup
   company: FormGroup
   alertMessage = ''
@@ -42,6 +47,8 @@ export class AddCustomRuleComponent {
   AlertMessage = 'Successfully'
   openPop: boolean = false
   fontColor = 'green'
+riskAssessmentCreationResponse: any;
+openPopWithAction: any;
   constructor(private service: AdminService,
               private router: Router,
               private fb: FormBuilder,
@@ -268,7 +275,7 @@ export class AddCustomRuleComponent {
     if (this.serviceConfigs.valid) {
       this.service.payInList(this.serviceConfigs.value).subscribe((data: any) => {
         this.submitted = false
-        this.AlertMessage = 'Successful'
+        this.AlertMessage = 'Successful ..'
         this.openPop = true
         this.alertMessage = data.MSG
         this.fontColor = 'green'

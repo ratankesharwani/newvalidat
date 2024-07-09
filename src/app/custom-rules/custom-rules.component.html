@@ -87,10 +87,13 @@
                                                 style="top:0">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="gridjs-tbody">
-                                        <tr class="gridjs-tr"
-                                            *ngFor="let data of customCheckDetailsByModuleAndCompany;index as i">
-                                            <td class="gridjs-td text-center">+</td>
+                                    <tbody class="gridjs-tbody" *ngFor="let data of customCheckDetailsByModuleAndCompany;index as i">
+                                        <tr class="gridjs-tr">
+                                            <td class="gridjs-td text-center">
+                                                <a class="btn btn-default btn-xs p-0 accordion-toggle" id="serviceName{{i}}" data-bs-toggle="collapse"
+                                                    href="#demo{{i}}" (click)="customCheckDetailsById(data.id,i)"><span
+                                                        class="glyphicon glyphicon-eye-open font-17">+</span></a>
+                                            </td>
                                             <td class="gridjs-td">{{ data.customCheckRuleName }}</td>
                                             <td class="gridjs-td">{{ data.checkType }}</td>
                                             <td class="gridjs-td">{{ data.createdByName }}</td>
@@ -106,6 +109,66 @@
                                                  <i class="fa fa-bars ms-3 font-size-15" style="cursor: pointer;"></i>
                                               </td>
                                         </tr>
+                                        <tr>
+                                            <td colspan="14" class="accordian-body collapse" id="demo{{i}}">
+                                              <div >
+                                                    <div class="row mb-2">
+                                                        <div class="col-xl-10 m-auto">
+                                                          <div class="card card-h-100">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title mb-4">Conditions</h4>
+                                                                <div *ngFor="let customCheck of customCheckDetailById[i];index as I">
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <div class="col-xl-4 pe-3 mb-3">
+                                                                          <label class="form-label">Data point</label>
+                                                                          <select class="form-select" disabled>
+                                                                            <option *ngFor="let data of serviceTypeDropdown" [ngValue]="data.key"
+                                                                                    [selected]="data.key===customCheckDetailById[i][I].dataPointId">
+                                                                              {{ data.value }}
+                                                                            </option>
+                                                                          </select>
+                                                                        </div>
+                                                                        <div class="col-xl-4 pe-3 mb-3">
+                                                                            <label class="form-label">Operator</label>
+                                                                            <select class="form-select" disabled>
+                                                                                <option *ngFor="let data of Operators[i][I]" [ngValue]="data.id"
+                                                                                        [selected]="data.id===customCheckDetailById[i][I].operatorId">
+                                                                                  {{ data.value }}
+                                                                                </option>
+                                                                              </select>
+                                                                        </div>
+                                                                        <div class="col-xl-3 mb-3 pe-3">
+                                                                            <label class="form-label">Value</label>
+                                                                            <select disabled class="form-select" *ngIf="customCheckDetailById[i][I].inputType==='select'">
+                                                                                <option *ngFor="let data of ServiceStatus[i][I]" [selected]="data===customCheckDetailById[i][I].value">
+                                                                                    {{ data }}
+                                                                                </option>
+                                                                            </select>
+                                                                            <input disabled class="form-control" *ngIf="customCheckDetailById[i][I].inputType==='input'"
+                                                                                [value]="customCheckDetailById[i][I].value" />
+                                                                        </div>
+                                                                       
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-start mt-3 mb-2" *ngIf="customCheck.andOr!='null'">
+                                                                        <div class="form-check me-2" disabled *ngIf="customCheckDetailById[i][I].andOr">
+                                                                            <input class="form-check-input" type="radio" name="formRadios" id="formRadios1" [checked]="customCheckDetailById[i][I].andOr==='AND'" [value]="'AND'">
+                                                                            <label class="form-check-label" for="formRadios1">And</label>
+                                                                        </div>
+                                                                        <div class="form-check" disabled *ngIf="customCheckDetailById[i][I].andOr">
+                                                                            <input class="form-check-input" type="radio" name="formRadios" id="formRadios2" [checked]="customCheckDetailById[i][I].andOr==='OR'"  [value]="'OR'">
+                                                                            <label class="form-check-label" for="formRadios2">Or</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <hr >
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                        
+                                              </div>
+                                            </td>
+                                          </tr>
                                     </tbody>
                                 </table>
                             </div>
