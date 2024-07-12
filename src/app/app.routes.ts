@@ -48,6 +48,7 @@ import { GraphComponent } from './graph/graph.component';
 import { PaymentInGraphComponent } from './payment-in-graph/payment-in-graph.component';
 import { PaymentOutGraphComponent } from './payment-out-graph/payment-out-graph.component';
 import { GraphReportComponent } from './graph-report/graph-report.component';
+import { ApiGuard } from './api.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -58,6 +59,7 @@ export const routes: Routes = [
   {
     path: 'out-dash', component: OutDashComponent,
     children: [
+      {path: '', redirectTo: 'graph', pathMatch: 'full'},
       {
         path: 'graph', component: GraphComponent,
         children: [
@@ -74,7 +76,7 @@ export const routes: Routes = [
     path: 'Admin', component: AdminComponent,
     children: [
       { path: '', redirectTo: 'Users', pathMatch: 'full' },
-      { path: 'Users', component: UserListComponent },
+      { path: 'Users', component: UserListComponent , canActivate: [ApiGuard] },
       { path: 'Add_User', component: AddUserComponent }
     ]
   },
@@ -82,8 +84,8 @@ export const routes: Routes = [
     path: 'Compliance', component: ComplianceComponent,
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'PayIn_Queue' },
-      { path: 'PayIn_Queue', component: PaymentinComponent },
-      { path: 'PayOut_Queue', component: PaymentoutComponent }
+      { path: 'PayIn_Queue', component: PaymentinComponent , canActivate: [ApiGuard]},
+      { path: 'PayOut_Queue', component: PaymentoutComponent, canActivate: [ApiGuard] }
     ]
   },
   {
@@ -109,10 +111,10 @@ export const routes: Routes = [
   {
     path: 'User_Permission', component: UserPermissionComponent,
     children: [
-      { path: 'Role_Master', component: RoleMastersComponent },
+      { path: 'Role_Master', component: RoleMastersComponent, canActivate: [ApiGuard] },
       { path: 'Add_Role', component: CreateRoleMasterComponent },
-      { path: 'Assign_Role', component: AssignRoleComponent, },
-      { path: 'Role_Configuration', component: RoleConfigComponent, }
+      { path: 'Assign_Role', component: AssignRoleComponent, canActivate: [ApiGuard]},
+      { path: 'Role_Configuration', component: RoleConfigComponent, canActivate: [ApiGuard] }
     ]
   },
   {

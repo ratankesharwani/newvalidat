@@ -1,1 +1,19 @@
-<p>authrization-alert works!</p>
+<div class="alertHolder" [ngClass]="{hideDisplay:animation,showDisplay:!animation}">
+    <div class="alertBox animated h-16 p-4" style="width: 29% !important;" id="alert" [ngClass]="{fadeOutDown:!display,fadeInDown:display}">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Access Denied</h5>
+          <button type="button" class="btn-close" style="margin-left: 14rem;
+      margin-top: -3px;" data-bs-dismiss="modal" aria-label="Close" (click)="closeAlert()"></button>
+        </div>
+        <div class="modal-body">
+          <p>{{message || "Something went wrong, please try again"}}</p>
+        </div>
+        <br>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" style="margin-right: 11px !important" data-bs-dismiss="modal"
+            (click)="closeAlert()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

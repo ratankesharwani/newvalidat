@@ -138,7 +138,7 @@ export class AddBlacklisttypeComponent {
       this.service.payInList(this.blacklistTypeMaster.value).subscribe((data: any) => {
         this.submitted = false
         this.openPop = true
-        this.AlertMessage = 'Success ..'
+        this.AlertMessage = 'Successfull ..'
         this.alertMessage = "Blacklist added successfully."
       }, error => {
         this.openPop = true

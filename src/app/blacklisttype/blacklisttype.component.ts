@@ -74,7 +74,7 @@ export class  BlacklisttypeComponent {
     },
     {
       name:"Blacklist Desc",
-      key:'blackListValue',
+      key:'blackListDesc',
       search:true,
       dataType:"input",
       value:'',

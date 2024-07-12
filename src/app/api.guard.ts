@@ -4,6 +4,7 @@ import {map, Observable} from 'rxjs';
 import {FormControl, FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import { AdminService } from './Service/admin.service';
+import { LocalStorageService } from './Service/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,9 @@ export class ApiGuard implements CanActivate {
 
   constructor(private service: AdminService,
               private router: Router,
-              public dialog: MatDialog) {
-    const queueData: any = localStorage.getItem("data")
+              public dialog: MatDialog,
+              private localStorage:LocalStorageService) {
+    const queueData: any = this.localStorage.getItem("data")
     this.queueParseData = JSON.parse(queueData)
 
     this.userAccess = new FormGroup({
