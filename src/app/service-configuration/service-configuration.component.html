@@ -110,13 +110,10 @@
                             </div>
                         </div>
                         <hr>
-                        <button id="add-more" (click)="addMoreService()" type="button"  
-                                class="btn btn-outline-secondary"><i data-feather="trash-2">Add
-                                    More</i></button>
+                        <button style="margin-right: 43rem" [ngClass]="{'opacity-100 pe-auto':( this.serviceConfigs.valid),'opacity-50 pe-none':!(this.serviceConfigs.valid)}" (click)="addMoreService()" type="button" class="btn btn-outline-secondary float-start"><i data-feather="trash-2">Add More</i></button>
                         <div class="d-flex justify-content-end">
-                            <button (click)="goBack()" type="button"
-                                class="btn btn-outline-secondary me-3">Cancel</button>
-                            <button type="button" class="btn btn-primary" (click)="saveServiceConfigs()">Save</button>
+                            <button (click)="goBack()" type="button" class="btn btn-outline-secondary me-3">Cancel</button>
+                            <button type="button" class="btn btn-primary" (click)="saveServiceConfigs()" [ngClass]="{'opacity-100 pe-auto':(this.serviceConfigs.valid&& this.detailsControl.length>0),'opacity-50 pe-none':!(this.serviceConfigs.valid && this.detailsControl.length>0)}">Save</button>
                         </div>
                     </div>
                 </div>
