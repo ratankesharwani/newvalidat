@@ -36,26 +36,26 @@ export class FiltersidebarComponent {
         this.renderer.removeClass(document.body, 'right-bar-enabled');
       }
   }
+  
   ngOnDestroy() {
     if (this.isBrowser) {
       this.renderer.removeClass(document.body, 'right-bar-enabled');
     }
   }
+
   @HostListener('document:click', ['$event'])
   handleClick(event: Event) {
-    const target = event.target as Node;
     const hasClass = document.body.classList.contains('right-bar-enabled');
-    const clickedInside = this.elRef.nativeElement.contains(event.target);
-    const filterButton = document.getElementById('right-bar-toggle');
-    const clickedOnFilterButton = filterButton ? filterButton.contains(target) : false;
+    const clickedInside = this.elRef.nativeElement.contains(event.target as Node);
 
-    if (!clickedInside) {
-      console.log('clicked outside',clickedOnFilterButton);
-      
+    const filterButton = document.getElementById('specific-filter');
+    const button = filterButton?.querySelector('button');
+
+    let clickedOnFilterButton = button ? button.contains(event.target as Node) : false;
+
+    if (!clickedInside && !clickedOnFilterButton) {
       if (this.isBrowser && hasClass) {
-        console.log("ok");
-        
-        // this.renderer.removeClass(document.body, 'right-bar-enabled');
+         this.renderer.removeClass(document.body, 'right-bar-enabled');
       }
     }
   }
