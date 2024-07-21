@@ -43,7 +43,7 @@
     background-color: #038585;
   }
   .toggle input+.slider {
-    background-color: #ffffff;
+    background-color: #d9d9d9;
   }
   
   .toggle input:checked+.slider::before {
@@ -75,13 +75,13 @@
     content: attr(data-on);
     position: absolute;
     left: 5px;
-    color: #ffffff;
+    color: #fff;
     opacity: 0;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
     transition: all 0.4s ease-in-out;
   }
   .toggle .labels::after {
-    color: #060606;
+    color: #000;
   }
   
   .toggle input:checked~.labels::after {

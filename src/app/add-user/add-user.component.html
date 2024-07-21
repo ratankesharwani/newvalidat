@@ -82,7 +82,7 @@
             <div class="col-xl-3 mb-3">
               <label class="form-label">Company</label><span class="text-danger">*</span>
               <select class="form-select"
-                [ngClass]="{'opacity-100 pe-auto':!companyHidden,'opacity-50 pe-none bg-beb9b9':companyHidden}"
+                [ngClass]="{'opacity-100 pe-auto':!companyHidden,'opacity-100 pe-none bg-beb9b9':companyHidden}"
                 [ngStyle]="{'border':companyIdControl.invalid && (companyIdControl.dirty || companyIdControl.touched ||submitted)?'1px solid red':''}"
                 formControlName="companyId" (change)="companyValue($event)">
                 <option hidden [ngValue]=null>Company</option>
@@ -159,11 +159,11 @@
         </div>
       </div><br>
       <div class="clearfix"></div>
-      <button type="button" class="btn btn-success mb-3 float-end" style="cursor: pointer;"
+      <button type="button" class="btn btn-primary  mb-3 float-end" style="cursor: pointer;"
         (click)="save()">
         <i data-feather="plus" class="icon15x15"></i> Add new
       </button>
-      <button type="button" class="btn mb-3 btn-success float-end" routerLink="/Admin/Users"  style="cursor: pointer; margin-right: 11px !important;background-color: rgb(91, 91, 231);">
+      <button type="button" class="btn mb-3 btn-outline-secondary float-end me-3" routerLink="/Admin/Users">
         <i data-feather="plus" class="icon15x15"></i> Back
       </button>
     </div>

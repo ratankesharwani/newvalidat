@@ -10,8 +10,8 @@
     <div class="card">
       <div class="card-body">
         <div class="row d-flex justify-content-start">
-          <form [formGroup]="blacklistTypeDropdown">
-            <div formGroupName="request" >
+          <form [formGroup]="blacklistTypeDropdown" >
+            <div class="row" formGroupName="request" >
               <div class="col-xl-3 mb-3" formGroupName="body">
                 <label class="form-label">Module<span class="text-danger">*</span></label>
                 <select class="form-select" formControlName="moduleId" (ngModelChange)="getModuleId()"
@@ -43,7 +43,7 @@
             </div>
           </form>
           <form [formGroup]="blacklistTypeMaster">
-            <div formGroupName="request">
+            <div class="row" formGroupName="request">
               <div class="col-xl-3 mb-3" formGroupName="body">
                 <label class="form-label">BlackList Type<span class="text-danger">*</span></label>
                 <select class="form-select" formControlName="blackListTypeId"
