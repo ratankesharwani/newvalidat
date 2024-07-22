@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-xl-3 mb-3">
                             <label class="form-label">Name<span class="text-danger">*</span></label>
-                            <input style="height: 29px" type="text" class="form-control font-12"
+                            <input type="text" class="form-control font-12"
                                 placeholder="Type here.." formControlName="name"
                                 [ngStyle]="controls['name'].invalid && (controls['name'].dirty || controls['name'].touched  || submitted)?{color:'red',border:'1px solid red'}:{}">
                             <div style="color: red"
@@ -100,7 +100,7 @@
             <div class="clearfix"></div>
             <br>
             <div class="clearfix"></div>
-            <button type="button" class="btn btn-success mb-3 float-end" style="cursor: pointer;" (click)="save()">
+            <button type="button" class="btn btn-primary mb-3 float-end" style="cursor: pointer;" (click)="save()">
                 <i data-feather="plus" class="icon15x15"></i> Add new
             </button>
             <!-- <button type="button" class="btn mb-3 btn-success float-end"
@@ -117,7 +117,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header justify-content-between d-flex align-items-center border-0">
-                <h4 class="card-title">Risk Assessment<span class="badge badge-soft-primary py-2">{{riskAssessmentListResponse?.length}} Blacklist</span></h4>
+                <h4 class="card-title">Risk Assessment<span class="badge badge-soft-primary py-2">{{riskAssessmentListResponse?.length}} assessment</span></h4>
                 <!-- <button routerLink="/Configuration/Blacklist_Details" type="button" class="btn btn-success"><i data-feather="plus" class="icon15x15"></i> Add new</button> -->
             </div>
             <div class="row">
@@ -139,14 +139,10 @@
                                             <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
                                               {{data.status ? 'Active' : 'Inactive'}}
                                             </td>
-                                            <td class="gridjs-td">
-                                              <div class="d-flex justify-content-start hover-cursor" (click)="openPopUp(data.id,data.status)"
-                                                   matTooltipPosition="above"
-                                                   matTooltip="Set to {{data.status?'Inactive':'Active'}}">
-                                                <div class="mt-2 ms-3"><i class="ti-more-alt colorGray"></i> #</div>
-                                              </div>
+                                            <td class="gridjs-td" matTooltipPosition="above"
+                                            matTooltip="Set to {{data.status?'Inactive':'Active'}}" (click)="openPopUp(data.id,data.status)">
+                                            <i class="fa fa-bars ms-3 font-size-15" style="cursor: pointer;"></i>
                                             </td>
-  
                                           </tr>
                                     </tbody>
                                 </table>

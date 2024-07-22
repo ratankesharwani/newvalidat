@@ -6,11 +6,12 @@ import { AdminService } from '../Service/admin.service';
 import { CommonModule } from '@angular/common';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { PopupboxConfirmationComponent } from '../popupbox-confirmation/popupbox-confirmation.component';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-service-configuration',
   standalone: true,
-  imports: [CommonModule,RouterLink,ReactiveFormsModule,FormsModule,PopupboxConfirmationComponent],
+  imports: [CommonModule,RouterLink,ReactiveFormsModule,FormsModule,PopupboxConfirmationComponent,MatTooltip],
   templateUrl: './service-configuration.component.html',
   styleUrl: './service-configuration.component.css'
 })

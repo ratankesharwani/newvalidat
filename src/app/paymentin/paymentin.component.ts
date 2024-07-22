@@ -312,14 +312,14 @@ export class PaymentinComponent {
   XLS() {
     this.payInForm.controls['request'].value.body.numberOfElements = this.TotalElements
     this.service.payInList(this.payInForm.value).subscribe(data => {
-      this.downloadService.exportAsExcelFile(data.content, "PayinQueue-" + this.currentDate)
+      this.downloadService.exportAsExcelFile(data.content, "PAYIN-" + this.currentDate)
     })
   }
 
   CSV() {
     this.payInForm.controls['request'].value.body.numberOfElements = this.TotalElements
     this.service.payInList(this.payInForm.value).subscribe((data: any) => {
-      this.downloadService.exportAsCsvFile(data.content, "PayinQueue-" + this.currentDate)
+      this.downloadService.exportAsCsvFile(data.content, "PAYIN-" + this.currentDate)
     })
   }
 

@@ -420,17 +420,17 @@ export class PaymentoutComponent {
       this.payoutList();
     }
   }
-  csv() {
+  CSV() {
     this.payoutDetails.controls['request'].value.body.numberOfElements = this.TotalElements
     this.service.payInList(this.payoutDetails.value).subscribe((data: any) => {
-      this.downloadService.exportAsCsvFile(data.content, "PayOutQueue-" + this.currentDate)
+      this.downloadService.exportAsCsvFile(data.content, "PAYOUT-" + this.currentDate)
     })
   }
 
-  xls() {
+  XLS() {
     this.payoutDetails.controls['request'].value.body.numberOfElements = this.TotalElements
     this.service.payInList(this.payoutDetails.value).subscribe(data => {
-      this.downloadService.exportAsExcelFile(data.content, "PayOutQueue-" + this.currentDate)
+      this.downloadService.exportAsExcelFile(data.content, "PAYOUT-" + this.currentDate)
     })
   }
   searchEmited(event:any){

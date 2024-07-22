@@ -46,6 +46,7 @@
                                               <div *ngIf="payin.sanctionCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>
                                               <div *ngIf="payin.sanctionCheck=='NOT_AVAILABLE'" class="crossMarkBox">NA</div>
                                               <div *ngIf="payin.sanctionCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
+                                              <div *ngIf="payin.sanctionCheck=='PENDING'" >PENDING</div>
                                             </td>
                                             <td class="gridjs-td" (dblclick)="onRoute(i)">
                                               <div *ngIf="payin.cifasCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>

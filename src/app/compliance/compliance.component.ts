@@ -38,7 +38,7 @@ export class ComplianceComponent {
   click(){
     if (this.isBrowser) {
         this.toggleButton=true
-        if(this.activeComponent instanceof PaymentinComponent){
+        if(this.activeComponent instanceof PaymentinComponent || this.activeComponent instanceof PaymentoutComponent){
           this.activeComponent.toggleButton=this.toggleButton
         }
         this.renderer.addClass(document.body, 'right-bar-enabled');
@@ -51,5 +51,15 @@ export class ComplianceComponent {
   }
   onRouterActivate(event:any){
      this.activeComponent=event
+  }
+
+  lockedBy(event:any){
+    console.log(event.target.checked);
+  }
+
+  download(event:string){
+    console.log(this.activeComponent);
+    
+    event==='csv'?this.activeComponent.CSV():this.activeComponent.XLS()
   }
 }
