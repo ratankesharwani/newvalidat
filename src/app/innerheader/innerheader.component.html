@@ -18,7 +18,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu p-2">
                     <div class="row" *ngFor="let subModule of role.subMenu;index as i">
-                        <div class="col-md-12" *ngIf="subModule.key!='Add_Whitelist_Details' && subModule.key!='Banned_Bene'">
+                        <div class="col-md-12" *ngIf="subModule.key!='Add_Whitelist_Details' && subModule.key!='Banned_Bene' && subModule.key!='Risk_Score_Config'">
                             <a class="dropdown-item" [routerLink]="['/',role.key, subModule.key]">{{subModule.display}}</a>
                         </div>
                     </div>
