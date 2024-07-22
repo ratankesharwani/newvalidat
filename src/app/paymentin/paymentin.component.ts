@@ -494,7 +494,7 @@ export class PaymentinComponent {
         this.ComplianceFilteredData.cifasCheck=event === '0' ? null : event
         break
       case 'lockedBy':
-        this.payInForm.patchValue({request: {body: {lockedBy: event.checked ? this.localStorage.getItem("userId") : null}}})
+        this.payInForm.patchValue({request: {body: {lockedBy: event ? this.localStorage.getItem("userId") : null}}})
         this.ComplianceFilteredData.lockedBy=event.checked
         break
       case 'locked':

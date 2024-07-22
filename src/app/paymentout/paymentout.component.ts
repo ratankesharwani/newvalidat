@@ -527,7 +527,7 @@ export class PaymentoutComponent {
         this.ComplianceFilteredData.isLocked=event === 'null' ? null : event
         break
       case 'lockedBy':
-        this.payoutDetails.patchValue({request: {body: {lockedBy: event.checked ? this.localStorage.getItem("userId") : null}}})
+        this.payoutDetails.patchValue({request: {body: {lockedBy: event ? this.localStorage.getItem("userId") : null}}})
         this.ComplianceFilteredData.lockedBy=event.checked
         break
       case 'blacklistCheck':

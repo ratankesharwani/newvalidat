@@ -8,6 +8,7 @@ import { PaymentoutComponent } from "../paymentout/paymentout.component";
 import { FiltersidebarComponent } from "../filtersidebar/filtersidebar.component";
 import { AddserviceruleComponent } from "../addservicerule/addservicerule.component";
 import { RouterOutlet } from '@angular/router';
+import { LocalStorageService } from '../Service/local-storage.service';
 
 @Component({
     selector: 'app-compliance',
@@ -31,7 +32,7 @@ export class ComplianceComponent {
   activeComponent:any
 
   title = 'newvalidat';
-  constructor(private renderer: Renderer2,
+  constructor(private renderer: Renderer2,private localStorage:LocalStorageService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {this.isBrowser = isPlatformBrowser(this.platformId);}
 
@@ -54,12 +55,10 @@ export class ComplianceComponent {
   }
 
   lockedBy(event:any){
-    console.log(event.target.checked);
+    this.activeComponent.searchEmited({value:event.target.checked,key:'lockedBy'})
   }
 
   download(event:string){
-    console.log(this.activeComponent);
-    
     event==='csv'?this.activeComponent.CSV():this.activeComponent.XLS()
   }
 }
