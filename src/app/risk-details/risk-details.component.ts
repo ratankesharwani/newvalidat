@@ -5,11 +5,12 @@ import {RxwebValidators} from "@rxweb/reactive-form-validators";
 import { AdminService } from '../Service/admin.service';
 import { CommonModule } from '@angular/common';
 import { LocalStorageService } from '../Service/local-storage.service';
+import { PopupboxConfirmationComponent } from "../popupbox-confirmation/popupbox-confirmation.component";
 
 @Component({
   selector: 'app-risk-details',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,FormsModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterLink, PopupboxConfirmationComponent],
   templateUrl: './risk-details.component.html',
   styleUrl: './risk-details.component.css'
 })

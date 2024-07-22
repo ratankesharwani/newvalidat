@@ -1,72 +1,147 @@
-<div class="row">
-    <div class="col-12">
-        <div class="page-title-box d-flex align-items-center justify-content-between">
-            <h4 class="card-title">Risk Assessment Details<br><span class="fn12 text-dark">Clients we work with and their
-                    transactions</span></h4>
-        </div>
-    </div>
-</div>
-<form [formGroup]="riskAssessmentDetails" autocomplete="">
-    <div class="row" formGroupName="request">
-        <div class="col-lg-12" formGroupName="body">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row d-flex justify-content-start">
-                        <div class="col-xl-3 mb-3">
-                            <label class="form-label">Module<span class="text-danger">*</span></label>
-                            <select class="form-select"  disabled>
-                                <!--                <option  selected [ngValue]=null>&#45;&#45;Select&#45;&#45;</option>-->
-                                                <option  [selected]="moduleId" disabled [ngValue]=null>{{moduleName}}</option>
-                                                <option *ngFor="let data of moduleResponse" [ngValue]="data.id">{{data.display_field}}</option>
-                                              </select>
-                        </div>
-                        <div class="col-xl-3 mb-3">
-                            <label class="form-label">Company<span class="text-danger">*</span></label>
-                            <select class="form-select" disabled>
-                                <option  [selected]="companyId" disabled [ngValue]=null>{{companyName}}</option>
-                                <option *ngFor="let data of companyResponse" [ngValue]="data.key">{{data.value}}</option>
-                              </select>
-                        </div>
-                        <div class="col-xl-3 mb-3">
-                            <label class="form-label">Data PointName<span class="text-danger">*</span></label>
-                            <select class="form-select" disabled>
-                                <option  [selected]="companyId">{{dataPointName}}</option>
-                                <option *ngFor="let data of dataPointResponse" [ngValue]="data.id">{{data.value}}</option>
-                              </select>
-                        </div>
-                        <div class="col-xl-3 mb-3">
-                            <label class="form-label">Assessment Name<span class="text-danger">*</span></label>
-                            <select class="form-select"   (change)="assessmentNameDropdown($event)">
-                                <option  [selected]="companyId" >{{assessmentName}}</option>
-                                <option *ngFor="let data of riskAssessmentListResponse">{{data.name}}</option>
-                              </select>
-                        </div>
-                        <div class="col-xl-3 mb-3">
-                            <label class="form-label">Description<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control p-2" placeholder="Type Rule Name" [value]="description"  disabled/>
-                        </div>
-                        <div class="col-xl-3 mb-3">
-                            <label class="form-label">Status</label>
-                            <div class="d-flex justify-content-start form-check form-switch pt-1">
-                                <input class="form-check-input float-end valign-middle mt-1"
-                                    type="checkbox" id="blacklist">
+<form [formGroup]="riskAssessmentDetails">
+    <div class="container" formGroupName="request">
+        <div class="row mb-2" formGroupName="body">
+            <div class="col-xl-12 m-auto">
+                <div class="card card-h-100">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Risk Assessment Details</h4>
+                        <hr>
+                        <div class="row d-flex justify-content-between">
+                            <div class="col-xl-4 pe-3 mb-3">
+                                <label class="form-label">Module</label>
+                                <select class="form-select" disabled>
+                                    <option [selected]="moduleId" disabled [ngValue]=null>{{moduleName}}</option>
+                                    <option *ngFor="let data of moduleResponse" [ngValue]="data.id">
+                                        {{data.display_field}}</option>
+                                </select>
+                            </div>
+                            <div class="col-xl-4  pe-3 mb-3">
+                                <label class="form-label">Company</label>
+                                <select class="form-select" disabled>
+                                    <option [selected]="companyId" disabled [ngValue]=null>{{companyName}}</option>
+                                    <option *ngFor="let data of companyResponse" [ngValue]="data.key">{{data.value}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-xl-4 pe-3 mb-3">
+                                <label class="form-label">Data Point Name</label>
+                                <select class="form-control" disabled>
+                                    <option [selected]="companyId">{{dataPointName}}</option>
+                                    <option *ngFor="let data of dataPointResponse" [ngValue]="data.id">{{data.value}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-xl-4 pe-3 mb-3">
+                                <label class="form-label">Assessment Name</label>
+                                <select class="form-select" (change)="assessmentNameDropdown($event)">
+                                    <option [selected]="companyId">{{assessmentName}}</option>
+                                    <option *ngFor="let data of riskAssessmentListResponse">{{data.name}}</option>
+                                </select>
+                            </div>
+                            <div class="col-xl-4 pe-3 mb-3">
+                                <label class="form-label">Description</label>
+                                <input type="text" class="form-control" placeholder="Type Rule Name"
+                                    [value]="description" disabled />
+                            </div>
+                            <div class="col-xl-4 mb-3">
+                                <label class="form-label">Status</label>
+                                <div class="d-flex justify-content-start form-check form-switch pt-1">
+                                    <input class="form-check-input float-end valign-middle mt-1" formControlName="status"
+                                        type="checkbox" id="blacklist">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="clearfix"></div>
-            <br>
-            <div class="clearfix"></div>
-            <button type="button" class="btn btn-success mb-3 float-end" style="cursor: pointer;" (click)="save()">
-                <i data-feather="plus" class="icon15x15"></i> Add new
-            </button>
-            <!-- <button type="button" class="btn mb-3 btn-success float-end"
-                routerLink="/Configuration/Add_Whitelist_Details"
-                style="cursor: pointer; margin-right: 11px !important;background-color: rgb(91, 91, 231);">
-                <i data-feather="plus" class="icon15x15"></i> Back
-            </button> -->
         </div>
     </div>
-    <br>
+    <div class="container" formGroupName="request">
+    <div class="row mb-2" formGroupName="body">
+        <div class="col-xl-12 m-auto">
+            <div class="card card-h-100">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Scores</h4>
+                    <div *ngFor="let totalService of detailsControl.controls;index as i" formArrayName="riskDetails">
+                        <div class="d-flex justify-content-start mt-3 mb-2" [formGroupName]="i">
+                            <div class="form-check me-2">
+                                <label class="form-label">Data point</label>
+                                <select class="form-control" formControlName="value" (change)="selectAssessment($event)"
+                                    [ngStyle]="arrayControls(i,'value','invalid') && (arrayControls(i,'value','dirty') ||
+                                               arrayControls(i,'value','touched') || submitted)?{color:'red',border:'1px solid red'}:{}"
+                                    id="selServiceTypeId">
+                                    <option selected [ngValue]="null">--Select--</option>
+                                    <option *ngFor="let data of datapoint[0]; index as i;" [ngValue]=data>{{data}}
+                                    </option>
+                                </select>
+                                <div style="color: red"
+                                    *ngIf="(arrayControls(i,'value','dirty') || arrayControls(i,'value','touched') || submitted)"
+                                    class="pt-1">
+                                    <small *ngIf="arrayControls(i,'value','errors')?.['required']">
+                                        Datapoint is required.
+                                    </small>
+                                </div>
+                                <div style="color: red" *ngIf="arrayControls(i,'value','errors')?.['unique']"
+                                    class="pt-1">
+                                    <small *ngIf="arrayControls(i,'value','errors')?.['unique']">
+                                        Datapoint is already selected.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <select class="form-control p-2" disabled>
+                                    <option selected>=</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between" [formGroupName]="i">
+                            <div class="col-xl-4 pe-3 mb-3">
+                                <label class="form-label">Data point</label>
+                                <select class="form-control p-2" formControlName="score" [ngStyle]="arrayControls(i,'score','invalid') && (arrayControls(i,'score','dirty') ||
+                             arrayControls(i,'score','touched') || submitted)?{color:'red',border:'1px solid red'}:{}">
+                                    <option selected [ngValue]="null">--Select--</option>
+                                    <option *ngFor="let data of score" [ngValue]=data>{{data}}</option>
+
+                                </select>
+                                <div style="color: red"
+                                    *ngIf="(arrayControls(i,'score','dirty') || arrayControls(i,'score','touched') || submitted)"
+                                    class="pt-1">
+                                    <small *ngIf="arrayControls(i,'score','errors')?.['required']">
+                                        Score is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-xl-1 svgBtn">
+                                <a type="button" (click)="removeService(i)" class="float-start mt-4 p-1"
+                                    matTooltip="Remove" matTooltipPosition="above">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <button style="margin-right: 43rem"
+                        [ngClass]="{'opacity-100 pe-auto':(detailsControl.controls?.length<datapoint[0]?.length && riskAssessmentDetails.valid),'opacity-50 pe-none':!(detailsControl.controls?.length<datapoint[0]?.length) || riskAssessmentDetails.invalid}"
+                        (click)="addMoreService()" type="button" class="btn btn-outline-secondary float-start"><i
+                            data-feather="trash-2">Add More</i></button>
+                    <div class="d-flex justify-content-end">
+                        <button routerLink="/Configuration/Risk_Assessment" type="button"
+                            class="btn btn-outline-secondary me-3">Cancel</button>
+                        <button type="button" class="btn btn-primary" (click)="save()"
+                            [ngClass]="{'opacity-100 pe-auto':(detailsControl.controls?.length<datapoint[0]?.length && riskAssessmentDetails.valid),'opacity-50 pe-none':!(detailsControl.controls?.length<datapoint[0]?.length) || riskAssessmentDetails.invalid}">Save
+                            Rule</button>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div>
+    </div>
+    </div>
 </form>
+<app-popupbox-confirmation [display]=openPop [Description]="alertMessage" (action)="closePopup()"
+    [AlertMessage]="AlertMessage" [fontColor]="fontColor"></app-popupbox-confirmation>
+<!-- <app-popupbox [display]=openPopWithAction (action)="closePopup($event)"
+  [AlertMessage]="AlertMessage"></app-popupbox> -->

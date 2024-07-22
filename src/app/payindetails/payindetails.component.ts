@@ -46,7 +46,7 @@ export class PayindetailsComponent {
 
   constructor(private service: AdminService,private localStorage:LocalStorageService) {
 
-    const queueDataa: any = localStorage.getItem("queueData")
+    const queueDataa: any = this.localStorage.getItem("queueData")
     this.queueParseData = JSON.parse(queueDataa)
 
     const loginData: any = this.localStorage.getItem("data")
