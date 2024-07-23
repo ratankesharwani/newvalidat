@@ -37,7 +37,10 @@ export class ApiGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.userAccess.controls['request'].value.body.router = window.location.hash.split("/")[2];
+    // this.userAccess.controls['request'].value.body.router = window.location.hash.split("/")[2];
+    if (typeof window !== 'undefined') {
+      this.userAccess.controls['request'].value.body.router = window.location.hash.split("/")[2];
+    }
     this.userAccess.controls['request'].value.body.userId=this.queueParseData?.USER_ID
     this.userAccess.controls['request'].value.body.companyId=this.queueParseData?.COMPANY_ID
     return this.service.apiCheck(this.userAccess.value).pipe(

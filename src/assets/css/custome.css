@@ -553,3 +553,10 @@ bs-datepicker-container, bs-daterangepicker-container {
 .accordianPlus a svg{color: #000; width: 15px; height: auto;}
 .accordianPlus a:hover svg{color: #098b8b;}
 .buttonGroup .dropdown-menu{--bs-dropdown-min-width:50px !important}
+
+
+.gridjs-td svg {
+  width: 49px;
+  height: 20px;
+  margin: 0 auto;
+}
