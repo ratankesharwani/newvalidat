@@ -55,93 +55,73 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container" formGroupName="request">
-    <div class="row mb-2" formGroupName="body">
-        <div class="col-xl-12 m-auto">
-            <div class="card card-h-100">
+        <div class="row mb-2" formGroupName="body">
+            <div class="col-xl-12 m-auto">
+              <div class="card card-h-100">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Scores</h4>
+                    <h4 class="card-title mb-4">Conditions</h4>
                     <div *ngFor="let totalService of detailsControl.controls;index as i" formArrayName="riskDetails">
-                        <div class="d-flex justify-content-start mt-3 mb-2" [formGroupName]="i">
-                            <div class="form-check me-2">
-                                <label class="form-label">Data point</label>
-                                <select class="form-control" formControlName="value" (change)="selectAssessment($event)"
-                                    [ngStyle]="arrayControls(i,'value','invalid') && (arrayControls(i,'value','dirty') ||
-                                               arrayControls(i,'value','touched') || submitted)?{color:'red',border:'1px solid red'}:{}"
-                                    id="selServiceTypeId">
-                                    <option selected [ngValue]="null">--Select--</option>
-                                    <option *ngFor="let data of datapoint[0]; index as i;" [ngValue]=data>{{data}}
-                                    </option>
-                                </select>
-                                <div style="color: red"
-                                    *ngIf="(arrayControls(i,'value','dirty') || arrayControls(i,'value','touched') || submitted)"
-                                    class="pt-1">
-                                    <small *ngIf="arrayControls(i,'value','errors')?.['required']">
-                                        Datapoint is required.
-                                    </small>
-                                </div>
-                                <div style="color: red" *ngIf="arrayControls(i,'value','errors')?.['unique']"
-                                    class="pt-1">
-                                    <small *ngIf="arrayControls(i,'value','errors')?.['unique']">
-                                        Datapoint is already selected.
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="form-check">
-                                <select class="form-control p-2" disabled>
-                                    <option selected>=</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="d-flex justify-content-between" [formGroupName]="i">
                             <div class="col-xl-4 pe-3 mb-3">
-                                <label class="form-label">Data point</label>
-                                <select class="form-control p-2" formControlName="score" [ngStyle]="arrayControls(i,'score','invalid') && (arrayControls(i,'score','dirty') ||
-                             arrayControls(i,'score','touched') || submitted)?{color:'red',border:'1px solid red'}:{}">
-                                    <option selected [ngValue]="null">--Select--</option>
-                                    <option *ngFor="let data of score" [ngValue]=data>{{data}}</option>
+                              <label class="form-label">Data point</label>
+                            <select class="form-select" formControlName="value" (change)="selectAssessment($event)" [ngStyle]="arrayControls(i,'value','invalid') && (arrayControls(i,'value','dirty') ||
+                                                         arrayControls(i,'value','touched') || submitted)?{color:'red',border:'1px solid red'}:{}"
+                                id="selServiceTypeId">
+                                <option selected [ngValue]="null">--Select--</option>
+                                <option *ngFor="let data of datapoint[0]; index as i;" [ngValue]=data>{{data}}</option>
+                            
+                            </select>
+                            <div style="color: red" *ngIf="(arrayControls(i,'value','dirty') || arrayControls(i,'value','touched') || submitted)" class="pt-1">
+                                <small *ngIf="arrayControls(i,'value','errors')?.['required']">
+                                  Datapoint is required.
+                                </small>
+                              </div>
+                              <div style="color: red"  *ngIf="arrayControls(i,'value','errors')?.['unique']" class="pt-1">
+                                <small *ngIf="arrayControls(i,'value','errors')?.['unique']">
+                                  Datapoint is already selected.
+                                </small>
+                              </div>
+                            </div>
+                            <div class="col-xl-4 pe-3 mb-3">
+                                <label class="form-label">Operator</label>
+                                <select class="form-control p-2" disabled>
+                                    <option selected>=</option>
+                                  </select>
+                            </div>
+                            <div class="col-xl-3 mb-3 pe-3">
+                              <label class="form-label">Score</label>
+                              <select class="form-select" formControlName="score"     [ngStyle]="arrayControls(i,'score','invalid') && (arrayControls(i,'score','dirty') ||
+                             arrayControls(i,'score','touched') || submitted)?{color:'red',border:'1px solid red'}:{}" >
+                            <option selected [ngValue]="null">--Select--</option>
+                            <option *ngFor="let data of score" [ngValue]=data>{{data}}</option>
 
-                                </select>
-                                <div style="color: red"
-                                    *ngIf="(arrayControls(i,'score','dirty') || arrayControls(i,'score','touched') || submitted)"
-                                    class="pt-1">
-                                    <small *ngIf="arrayControls(i,'score','errors')?.['required']">
-                                        Score is required.
-                                    </small>
-                                </div>
+                          </select>
+                          <div style="color: red" *ngIf="(arrayControls(i,'score','dirty') || arrayControls(i,'score','touched') || submitted)" class="pt-1">
+                            <small *ngIf="arrayControls(i,'score','errors')?.['required']">
+                              Score is required.
+                            </small>
+                          </div>
                             </div>
                             <div class="col-xl-1 svgBtn">
-                                <a type="button" (click)="removeService(i)" class="float-start mt-4 p-1"
-                                    matTooltip="Remove" matTooltipPosition="above">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                              <a type="button" (click)="removeService(i)" class="float-start mt-4 p-1" matTooltip="Remove" matTooltipPosition="above">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                     </svg>
-                                </a>
-                            </div>
+                                  </a>
+                          </div>
                         </div>
                     </div>
-                    <hr>
-                    <button style="margin-right: 43rem"
-                        [ngClass]="{'opacity-100 pe-auto':(detailsControl.controls?.length<datapoint[0]?.length && riskAssessmentDetails.valid),'opacity-50 pe-none':!(detailsControl.controls?.length<datapoint[0]?.length) || riskAssessmentDetails.invalid}"
-                        (click)="addMoreService()" type="button" class="btn btn-outline-secondary float-start"><i
-                            data-feather="trash-2">Add More</i></button>
+                    <hr >
+                    <button style="margin-right: 43rem" [ngClass]="{'opacity-100 pe-auto':(detailsControl.controls?.length<datapoint[0]?.length && riskAssessmentDetails.valid),'opacity-50 pe-none':!(detailsControl.controls?.length<datapoint[0]?.length) || riskAssessmentDetails.invalid}" (click)="addMoreService()" type="button" class="btn btn-outline-secondary float-start"><i data-feather="trash-2">Add More</i></button>
                     <div class="d-flex justify-content-end">
-                        <button routerLink="/Configuration/Risk_Assessment" type="button"
-                            class="btn btn-outline-secondary me-3">Cancel</button>
-                        <button type="button" class="btn btn-primary" (click)="save()"
-                            [ngClass]="{'opacity-100 pe-auto':(detailsControl.controls?.length<datapoint[0]?.length && riskAssessmentDetails.valid),'opacity-50 pe-none':!(detailsControl.controls?.length<datapoint[0]?.length) || riskAssessmentDetails.invalid}">Save
-                            Rule</button>
+                        <button routerLink="/Configuration/Risk_Assessment" type="button" class="btn btn-outline-secondary me-3">Cancel</button>
+                        <button type="button" class="btn btn-primary" (click)="save()">{{saveValue}}</button>
                     </div>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
+                </div>
+            </div>
+            </div>
         </div>
-    </div>
     </div>
 </form>
 <app-popupbox-confirmation [display]=openPop [Description]="alertMessage" (action)="closePopup()"
     [AlertMessage]="AlertMessage" [fontColor]="fontColor"></app-popupbox-confirmation>
-<!-- <app-popupbox [display]=openPopWithAction (action)="closePopup($event)"
-  [AlertMessage]="AlertMessage"></app-popupbox> -->

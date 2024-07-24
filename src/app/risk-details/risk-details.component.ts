@@ -170,7 +170,6 @@ export class RiskDetailsComponent {
   ngOnInit() {
     this.service.payInList(this.getRiskAssessmentDetails.value).subscribe(response => {
       this.getRiskAssessmentDetailsResponse = response;
-      console.log(this.getRiskAssessmentDetailsResponse);
       if (this.getRiskAssessmentDetailsResponse) {
         this.saveValue = "Update";
         for (let i = 0; i < this.getRiskAssessmentDetailsResponse.length; i++) {
@@ -235,7 +234,6 @@ export class RiskDetailsComponent {
   assessmentNameDropdown(data: any) {
     this.datapoint.splice(0);
     this.detailsControl.clear();
-    console.log(this.details);
     for (let i = 0; i < this.riskAssessmentListResponse.length; i++) {
       if (this.riskAssessmentListResponse[i].name == data.target.value) {
         this.riskAssessmentDetailsDataPoint.controls['request'].value.body.name = this.riskAssessmentListResponse[i].datapoint;
@@ -243,7 +241,6 @@ export class RiskDetailsComponent {
         this.getRiskAssessmentDetails.controls['request'].value.body.masterId = this.riskAssessmentListResponse[i].id;
         this.service.payInList(this.getRiskAssessmentDetails.value).subscribe(response => {
           this.getRiskAssessmentDetailsResponse = response;
-          console.log(this.getRiskAssessmentDetailsResponse);
           if (this.getRiskAssessmentDetailsResponse) {
             this.saveValue = "Update";
             for (let i = 0; i < this.getRiskAssessmentDetailsResponse.length; i++) {
@@ -278,7 +275,6 @@ export class RiskDetailsComponent {
         score: new FormControl(null, Validators.required),
       })
     );
-    console.log(detail);
   }
 
   arrayControls(index: any, data: any, operation: any): any {
@@ -304,7 +300,6 @@ export class RiskDetailsComponent {
     if (this.getRiskAssessmentDetailsResponse) {
       this.riskAssessmentDetails.controls['request'].value.body.updatedBy = Number(this.localStorage.getItem('userId'));
       if (this.riskAssessmentDetails.valid) {
-        console.log(this.riskAssessmentDetails.value);
         this.service.payInList(this.riskAssessmentDetails.value).subscribe((data: any) => {
           this.submitted = false
           this.AlertMessage = 'Successful'
@@ -321,7 +316,6 @@ export class RiskDetailsComponent {
     } else {
       if (this.riskAssessmentDetails.valid) {
         this.riskAssessmentDetails.controls['request'].value.body.createdBy = Number(this.localStorage.getItem('userId'));
-        console.log(this.riskAssessmentDetails.value);
         this.service.payInList(this.riskAssessmentDetails.value).subscribe((data: any) => {
           this.submitted = false
           this.AlertMessage = 'Successful'
