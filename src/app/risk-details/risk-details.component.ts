@@ -15,7 +15,6 @@ import { PopupboxConfirmationComponent } from "../popupbox-confirmation/popupbox
   styleUrl: './risk-details.component.css'
 })
 export class RiskDetailsComponent {
-  riskAssessmentCreation: FormGroup;
   company: FormGroup;
   dataPoint: FormGroup;
   module: FormGroup;
@@ -57,22 +56,6 @@ export class RiskDetailsComponent {
     this.description = this.active.snapshot.queryParams['description'];
     this.dataPointName = this.active.snapshot.queryParams['dataPoint'];
     this.assessmentName = this.active.snapshot.queryParams['name'];
-
-    this.riskAssessmentCreation = new FormGroup({
-      request: new FormGroup({
-        module: new FormControl('COMPLIANCE'),
-        subModule: new FormControl('RISK_ASSESSMENT_MASTER_CREATION'),
-        body: new FormGroup({
-          moduleId: new FormControl({value: null, disabled: true}, Validators.required),
-          companyId: new FormControl({value: null, disabled: true}, Validators.required),
-          dataPointId: new FormControl({value: null, disabled: true}, Validators.required),
-          createdBy: new FormControl(Number(this.localStorage.getItem("userId"))),
-          status: new FormControl(false),
-          name: new FormControl(null, Validators.required),
-          description: new FormControl({value: null, disabled: true}, Validators.required),
-        })
-      })
-    });
 
     this.module = new FormGroup({
       request: new FormGroup({
@@ -184,7 +167,6 @@ export class RiskDetailsComponent {
     })
 
     if (this.active.snapshot.queryParams['id']) {
-      this.riskAssessmentCreation.controls['request'].value.body.moduleId = this.moduleId;
       this.service.payInList(this.module.value).subscribe((response: any) => {
         this.moduleResponse = response;
         for (let i = 0; i < this.moduleResponse.length; i++) {
@@ -205,11 +187,8 @@ export class RiskDetailsComponent {
       }, error => {
         console.log(error);
       })
-      this.riskAssessmentCreation.controls['request'].value.body.companyId = this.companyId;
-      this.riskAssessmentCreation.controls['request'].value.body.name = this.assessmentName;
     }
-    this.riskAssessmentList.controls['request'].value.body.moduleId = this.active.snapshot.queryParams['moduleId']
-    this.riskAssessmentList.controls['request'].value.body.companyId = this.active.snapshot.queryParams['companyId']
+    this.riskAssessmentList.patchValue({request:{body:{moduleId:this.moduleId,companyId:this.companyId}}})
     this.service.payInList(this.riskAssessmentList.value).subscribe(response => {
       this.riskAssessmentListResponse = response;
     }, error => {
