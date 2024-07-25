@@ -4,11 +4,11 @@
       <div class="col-xl-12 m-auto">
         <div class="card card-h-100">
           <div class="card-body">
-              <h4 class="card-title mb-4">Add custome rule</h4>
+              <h4 class="card-title mb-4">Rule Details</h4>
               <hr >
               <div class="d-flex justify-content-between">
                 <div class="col-xl-4 pe-3 mb-3">
-                  <label class="form-label">Company</label>
+                  <label class="form-label">Company<span class="text-danger">*</span></label>
                   <select class="form-select" formControlName="companyId" (ngModelChange)="getCompanyId($event)"
                   [ngStyle]="controls['companyId'].invalid && (controls['companyId'].dirty || controls['companyId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
             <option  selected [ngValue]=null>--Select--</option>
@@ -22,7 +22,7 @@
           </div>
               </div>
               <div class="col-xl-4  pe-3 mb-3">
-                  <label class="form-label">Module</label>
+                  <label class="form-label">Module<span class="text-danger">*</span></label>
                   <select class="form-select" formControlName="moduleId" (ngModelChange)="getModuleId($event)"
                   [ngStyle]="controls['moduleId'].invalid && (controls['moduleId'].dirty || controls['moduleId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
             <option selected [ngValue]=null>--Select--</option>
@@ -36,7 +36,7 @@
           </div>
               </div>
                   <div class="col-xl-4 pe-3 mb-3">
-                      <label class="form-label">Check type</label>
+                      <label class="form-label">Check type<span class="text-danger">*</span></label>
                       <select class="form-select" formControlName="checkTypeId" (ngModelChange)="getCheckType($event)"
                       [ngStyle]="controls['checkTypeId'].invalid && (controls['checkTypeId'].dirty || controls['checkTypeId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
                 <option selected [ngValue]=null>--Select--</option>
@@ -54,7 +54,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between">
                 <div class="col-xl-4 pe-3 mb-3">
-                    <label class="form-label">Rule Name</label>
+                    <label class="form-label">Rule Name<span class="text-danger">*</span></label>
                     <input type="text" class="form-control" placeholder="Type Rule Name" formControlName="customCheckRuleName"
                      (ngModelChange)="ruleName($event)"
                      [ngStyle]="controls['customCheckRuleName'].invalid && (controls['customCheckRuleName'].dirty || controls['customCheckRuleName'].touched || submitted) || UniqueRuleName?{color:'red',border:'1px solid red'}:{}"
@@ -69,7 +69,7 @@
               </div>
                 </div>
                 <div class="col-xl-4 pe-3 mb-3">
-                  <label class="form-label">Description</label>
+                  <label class="form-label">Description<span class="text-danger">*</span></label>
                   <input type="text" class="form-control" placeholder="Type Description" formControlName="description"
                      (ngModelChange)="getDesc($event)"
                      [ngStyle]="controls['description'].invalid && (controls['description'].dirty || controls['description'].touched || submitted)?{color:'red',border:'1px solid red'}:{}"
@@ -119,7 +119,7 @@
                   </div>
                   <div class="d-flex justify-content-between" [formGroupName]="i">
                       <div class="col-xl-4 pe-3 mb-3">
-                        <label class="form-label">Data point</label>
+                        <label class="form-label">Data point<span class="text-danger">*</span></label>
                         <select class="form-select" formControlName="dataPointId"
                           [ngStyle]="arrayControls(i,'dataPointId','invalid') && (arrayControls(i,'dataPointId','dirty') ||
                                                    arrayControls(i,'dataPointId','touched') || submitted)?{color:'red',border:'1px solid red'}:{}" (ngModelChange)="getOperators($event,i)"
@@ -134,7 +134,7 @@
                         </div>
                       </div>
                       <div class="col-xl-4 pe-3 mb-3">
-                          <label class="form-label">Operator</label>
+                          <label class="form-label">Operator<span class="text-danger">*</span></label>
                           <select class="form-select" formControlName="operatorId"
                             [ngStyle]="arrayControls(i,'operatorId','invalid') && (arrayControls(i,'operatorId','dirty') ||
                              arrayControls(i,'operatorId','touched') || submitted)?{color:'red',border:'1px solid red'}:{}">
@@ -148,7 +148,7 @@
                     </div>
                       </div>
                       <div class="col-xl-3 mb-3 pe-3">
-                        <label class="form-label">Value</label>
+                        <label class="form-label">Value<span class="text-danger">*</span></label>
                         <select *ngIf="enableDropdown[i]" class="form-select" formControlName="value" [ngStyle]="arrayControls(i,'value','invalid') && (arrayControls(i,'value','dirty') ||
                                                    arrayControls(i,'value','touched') || submitted)?{color:'red',border:'1px solid red'}:{}">
                           <option selected [ngValue]=null>--Select--</option>
