@@ -157,13 +157,13 @@
                                                                        
                                                                     </div>
                                                                     <div class="d-flex justify-content-start mt-3 mb-2" *ngIf="customCheck.andOr!='null'">
-                                                                        <div class="form-check me-2" disabled *ngIf="customCheckDetailById[i][I].andOr">
-                                                                            <input class="form-check-input" type="radio" name="formRadios" id="formRadios1" [checked]="customCheckDetailById[i][I].andOr=='AND'" [value]="'AND'">
-                                                                            <label class="form-check-label" for="formRadios1">And</label>
+                                                                        <div class="form-check me-2" *ngIf="customCheckDetailById[i][I].andOr">
+                                                                            <input class="form-check-input" type="radio" [name]="'formRadios' + i + '_' + I" id="formRadios1_{{i}}_{{I}}" [checked]="customCheckDetailById[i][I].andOr=='AND'" [value]="'AND'">
+                                                                            <label class="form-check-label" for="formRadios1_{{i}}_{{I}}">And</label>
                                                                         </div>
-                                                                        <div class="form-check" disabled *ngIf="customCheckDetailById[i][I].andOr">
-                                                                            <input class="form-check-input" type="radio" name="formRadios" id="formRadios2" [checked]="customCheckDetailById[i][I].andOr=='OR'"  [value]="'OR'">
-                                                                            <label class="form-check-label" for="formRadios2">Or</label>
+                                                                        <div class="form-check" *ngIf="customCheckDetailById[i][I].andOr">
+                                                                            <input class="form-check-input" type="radio" [name]="'formRadios' + i + '_' + I" id="formRadios2_{{i}}_{{I}}" [checked]="customCheckDetailById[i][I].andOr=='OR'" [value]="'OR'">
+                                                                            <label class="form-check-label" for="formRadios2_{{i}}_{{I}}">Or</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>

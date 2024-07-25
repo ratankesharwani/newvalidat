@@ -100,16 +100,16 @@
               <div *ngFor="let totalService of detailsControl.controls;index as i" formArrayName="detail">
                   <div class="d-flex justify-content-start mt-3 mb-2" [formGroupName]="i-1" *ngIf="i!=0">
                       <div class="form-check me-2">
-                          <input class="form-check-input" type="radio" name="formRadios" id="formRadios1" checked="" formControlName="andOr"
+                          <input class="form-check-input" type="radio" [name]="'andOr'" id="formRadios1_{{i}}_" formControlName="andOr"
                           [ngStyle]="arrayControls(i-1,'andOr','invalid') && (arrayControls(i-1,'andOr','dirty') ||
                            arrayControls(i-1,'andOr','touched') || submitted)?{color:'red',border:'1px solid red'}:{}" [value]="'AND'">
-                          <label class="form-check-label" for="formRadios1">And</label>
+                          <label class="form-check-label" for="formRadios1_{{i}}_">And</label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="radio" name="formRadios" id="formRadios2" formControlName="andOr"
+                          <input class="form-check-input" type="radio" [name]="'andOr'" id="formRadios2_{{i}}_" formControlName="andOr"
                           [ngStyle]="arrayControls(i-1,'andOr','invalid') && (arrayControls(i-1,'andOr','dirty') ||
                            arrayControls(i-1,'andOr','touched') || submitted)?{color:'red',border:'1px solid red'}:{}"  [value]="'OR'">
-                          <label class="form-check-label" for="formRadios2">Or</label>
+                          <label class="form-check-label" for="formRadios2_{{i}}_">Or</label>
                       </div>
                       <div style="color: red" *ngIf="(arrayControls(i-1,'andOr','dirty') || arrayControls(i-1,'andOr','touched') || submitted)" class="pt-1">
                         <small *ngIf="arrayControls(i-1,'andOr','errors')?.['required']">
