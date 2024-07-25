@@ -60,6 +60,9 @@
               <div class="card card-h-100">
                 <div class="card-body">
                     <h4 class="card-title mb-4">Conditions</h4>
+                    <div style="color: red" class="pt-1" *ngIf="datapoint[0]?.length<=0">
+                          No data points configured for {{dataPointName}}
+                      </div>
                     <div *ngFor="let totalService of detailsControl.controls;index as i" formArrayName="riskDetails">
                         <div class="d-flex justify-content-between" [formGroupName]="i">
                             <div class="col-xl-4 pe-3 mb-3">

@@ -266,10 +266,10 @@ export class RiskManagementComponent {
       this.service.payInList(this.riskAssessmentCreation.value).subscribe(response => {
         this.riskAssessmentCreationResponse = response;
         this.submitted = false
-        this.fontColor = 'green'
+        this.fontColor = this.riskAssessmentCreationResponse.Error?'red':'green'
         this.openPop = true
-        this.AlertMessage = 'Successful'
-        this.alertMessage = this.riskAssessmentCreationResponse.Msg;
+        this.AlertMessage = this.riskAssessmentCreationResponse.Error?'Warning !!':'Successful'
+        this.alertMessage = this.riskAssessmentCreationResponse.Error || this.riskAssessmentCreationResponse.Msg;
         this.service.payInList(this.riskAssessmentList.value).subscribe(response => {
           this.riskAssessmentListResponse = response;
         }, error => {
