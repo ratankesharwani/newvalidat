@@ -1,14 +1,12 @@
-        <div class="row">
-          <div class="col-12">
-            <div class="page-title-box d-flex align-items-center justify-content-between">
-              <h4 class="mb-0">Pay in details<br><span class="fn12 text-dark">Clients we work with and their transactions</span></h4>
-              <!-- <div class="form-check form-switch form-switch-md mt-1 p-0 col-xl-5">
-                  <input class="form-check-input float-end valign-middle" type="checkbox" id="blacklist">
-              </div> -->
-          </div>
-          </div>
-        </div>
-        <div class="row mb-2">
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+      <h5 class="mb-0 fn18 text-black">Pay in details<span class="fn14 fw-500 d-block">Clients we work with and their
+          transactions</span></h5>
+    </div>
+  </div>
+</div>
+<div class="row mb-2">
           <div class="col-xl-12">
             <div class="card card-h-100">
               <div class="card-body">
@@ -27,7 +25,7 @@
                     <div class="col-xl-4 pe-3 mb-3" formGroupName="body">
                       <label class="form-label">Select reason</label>
                       <select class="form-select" formControlName="complianceReasonId">
-                        <option hidden selected [ngValue]=null>--Select--</option>
+                        <option hidden selected [ngValue]=null>Reason</option>
                         <option *ngFor="let reason of paymentInReasonDropdown" [ngValue]="reason.id"
                                 [selected]="reason.id===paymentInDetailsAction?.REASON_ID">{{reason.display_field}}</option>
                       </select>
@@ -48,12 +46,10 @@
         </div>
         <div class="row">
           <div class="col-xl-12">
-            <div class="card">
-              <div class="card-body">
                 <div class="accordion" id="accordionExample">
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
-                      <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse"
+                      <button class="accordion-button fw-medium collapsed bg-white" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                         Senders details 
                         <!-- <span class="badge badge-soft-primary py-2 ms-2">6 accounts</span> -->
@@ -72,7 +68,7 @@
                   </div>
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
-                      <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse"
+                      <button class="accordion-button fw-medium collapsed bg-white" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         Customer details
                       </button>
@@ -90,7 +86,7 @@
                   </div>
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="headingThree">
-                      <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse"
+                      <button class="accordion-button fw-medium collapsed bg-white" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         Other details
                       </button>
@@ -101,13 +97,15 @@
                           <div class="col-2 mb-3 pe-1" *ngFor="let beneDetails of payinOtherDetails">
                             <p class="mb-1 text-uppercase">{{beneDetails.display}}</p>
                             <p class="fw-semibold mb-2">{{beneDetails.value}}</p>
+                            <p class="fw-semibold mb-2" *ngIf="payinOtherDetails.length<=0">No data .</p>
+                          </div>
+                          <div class="col-2 mb-3 pe-1" *ngIf="payinOtherDetails?.length<=0">
+                            <p class="fw-semibold mb-2" >No data .</p>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div><!-- end card body -->
-            </div><!-- end card -->
           </div><!-- end col -->
         </div>

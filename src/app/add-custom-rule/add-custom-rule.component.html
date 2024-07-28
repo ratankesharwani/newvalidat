@@ -82,8 +82,8 @@
               </div>
               <div class="col-xl-4 mb-3">
                 <label class="form-label">Status</label>
-                <div class="d-flex justify-content-start form-check form-switch pt-1">
-                    <input class="form-check-input float-end valign-middle mt-1"  formControlName="status" type="checkbox" id="blacklist">
+                <div class="form-check form-switch form-switch-md p-2">
+                    <input formControlName="status" class="form-check-input ms-0" type="checkbox" id="blacklist">
                 </div>
               </div>
             </div>
@@ -181,8 +181,11 @@
                   </div>
               </div>
               <hr >
-              <button style="margin-right: 43rem" [ngClass]="{'opacity-100 pe-auto':( this.serviceConfigs.valid && !this.UniqueRuleName),'opacity-50 pe-none':!(this.serviceConfigs.valid && !this.UniqueRuleName)}" (click)="addMoreService()" type="button" class="btn btn-outline-secondary float-start"><i data-feather="trash-2">Add More</i></button>
-              <div class="d-flex justify-content-end">
+              <button style="margin-right: 43rem" [ngClass]="{'opacity-100 pe-auto':( this.serviceConfigs.valid && !this.UniqueRuleName),'opacity-50 pe-none':!(this.serviceConfigs.valid  && !this.UniqueRuleName)}" (click)="addMoreService()" type="button" class="btn btn-primary float-start">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon20x20">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>Add More</button>
+             <div class="d-flex justify-content-end">
                   <button (click)="goBack()" type="button" class="btn btn-outline-secondary me-3">Cancel</button>
                   <button type="button" class="btn btn-primary" (click)="saveServiceConfigs()" [ngClass]="{'opacity-100 pe-auto':(this.serviceConfigs.valid && !this.UniqueRuleName && this.detailsControl.length>0),'opacity-50 pe-none':!(this.serviceConfigs.valid && !this.UniqueRuleName && this.detailsControl.length>0)}">Save Rule</button>
               </div>

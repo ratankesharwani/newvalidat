@@ -1,69 +1,77 @@
 <div class="row">
   <div class="col-lg-12">
-      <div class="card">
-          <div class="card-header justify-content-between d-flex align-items-center border-0">
-              <h4 class="card-title">Blacklist Details<span class="badge badge-soft-primary py-2">{{apiResponse.length}} Blacklist Details</span></h4>
-              <button routerLink="/Configuration/Blacklist_Type_Master" type="button" class="btn btn-primary"><i data-feather="plus" class="icon15x15"></i> Add Details</button>
-          </div><!-- end card header -->
-          <div class="row">
-              <div class="card-body pt-0">
-                  <div class="table mb-0">
-                      <div class="gridjs gridjs-container" style="width: 100%;">
-                          <div class="gridjs-wrapper" style="height: 400px;">
-                              <table class="gridjs-table " style="height: 400px;">
-                                  <thead class="gridjs-thead">
-                                      <tr class="gridjs-tr">
-                                          <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0" *ngFor="let tab of tabColumns">{{tab.name}}</th>
-                                  </thead>
-                                  <tbody class="gridjs-tbody">
-                                      <tr class="gridjs-tr" *ngFor="let data of apiResponse; index as i">
-                                          <td class="gridjs-td">{{data.module}}</td>
-                                          <td class="gridjs-td">{{data.companyName}}</td>
-                                          <td class="gridjs-td">{{data.blacklistType}}</td>
-                                          <td class="gridjs-td">{{data.blacklistValue}}</td>
-                                          <td class="gridjs-td">{{data.createdDate}}</td>
-                                          <td class="gridjs-td">{{data.creatorName}}</td>
-                                          <td class="gridjs-td">{{data.updateDate}}</td>
-                                          <td class="gridjs-td">{{data.updaterName}}</td>
-                                          <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
-                                            <div class="inactive float-start fn11">
-                                              {{data.status ? 'Active' : 'Inactive'}}
-                                            </div>
-                                          </td>
-                                          <td class="gridjs-td" matTooltipPosition="above"
-                                          matTooltip="Set to {{data.status?'Inactive':'Active'}}" (click)="openPopUp(data.id,data.status)">
-                                          <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                           <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                         </svg>                                              
-                                       </td>
+    <div class="table mb-0">
+        <div class="gridjs gridjs-container" style="width: 100%;">
+        <div class="card-header justify-content-between d-flex align-items-center border-0">
+            <h4 class="fn18 pt-3 pb-2 ps-3 text-black">Blacklist Details <span class="badge badge-soft-primary py-2">{{apiResponse.length}} Blacklist Details</span></h4>
+            <div class="text-center d-flex justify-content-end col-md-4">
+                <a routerLink="/Configuration/Blacklist_Type_Master" class="btn btn-primary addBtns">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon20x20">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg> Add new
+                </a>
+            </div>
+            </div><!-- end card header -->
 
-                                        </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                          <!-- <div class="gridjs-footer p-0 mt-3">
-                              <div class="gridjs-pagination">
-                                  <div class="gridjs-pages float-none d-flex justify-content-between">
-                                      <a title="Previous" href="javascript:void();" class="btn btn-outline-purple"><i class="fas fa-long-arrow-alt-left"></i> Previous</a>
-                                      <div class="d-flex">
-                                          <a href="javascript:void();" class="btn btn-light" title="Page 1">1</a>
-                                          <a href="javascript:void();" class="btn" title="Page 2">2</a>
-                                          <a href="javascript:void();" class="btn" title="Page 3">3</a>
-                                          <a href="javascript:void();" class="btn" title="Page 4">4</a>
-                                          <a href="javascript:void();" class="btn" title="Page 5">5</a>
-                                          <a href="javascript:void();" class="btn" title="Page 6">6</a>
-                                          <a href="javascript:void();" class="btn" title="Page 7">7</a>
-                                      </div>
-                                      <a title="Next" href="javascript:void();" class="btn btn-outline-purple">Next <i class="fas fa-long-arrow-alt-right"></i></a>
-                                  </div>
-                              </div>
-                          </div> -->
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <!-- end card body -->
-      </div>
+            <div class="gridjs-wrapper" style="height: 400px;">
+                <table class="gridjs-table " style="height: 400px;">
+                    <thead class="gridjs-thead">
+                        <tr class="gridjs-tr">
+                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0" *ngFor="let tab of tabColumns">{{tab.name}}</th>
+                    </thead>
+                    <tbody class="gridjs-tbody">
+                        <tr class="gridjs-tr" *ngFor="let data of apiResponse; index as i">
+                            <td class="gridjs-td">{{data.module}}</td>
+                            <td class="gridjs-td">{{data.companyName}}</td>
+                            <td class="gridjs-td">{{data.blacklistType}}</td>
+                            <td class="gridjs-td">{{data.blacklistValue}}</td>
+                            <td class="gridjs-td">{{data.createdDate}}</td>
+                            <td class="gridjs-td">{{data.creatorName}}</td>
+                            <td class="gridjs-td">{{data.updateDate}}</td>
+                            <td class="gridjs-td">{{data.updaterName}}</td>
+                            <td class="gridjs-td">
+                            <div class="inactive float-start fn11" [ngStyle]="{'color':data.status ? '#098b8b' : '#E72929'}">
+                                {{data.status ? 'Active' : 'Inactive'}}
+                            </div>
+                            </td>
+                            <td class="gridjs-td" matTooltipPosition="above"
+                            matTooltip="Set to {{data.status?'Inactive':'Active'}}" (click)="openPopUp(data.id,data.status)">
+                            <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 icon20x20">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                            </svg>                                              
+                        </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="gridjs-footer p-0">
+                <div class="gridjs-pagination pt-4">
+                    <div class="gridjs-pages float-none d-flex justify-content-between">
+                        <a href="javascript:void();" title="Previous" class="btn btn-outline-purple directionArrow me-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+                            </svg> Previous
+                        </a>
+                        <div class="d-flex tablepagination">
+                            <a href="javascript:void();" class="fn14 fw-500 active" title="Page 1">1</a>
+                            <a href="javascript:void();" class="fn14 fw-500" title="Page 2">2</a>
+                            <a href="javascript:void();" class="fn14 fw-500" title="Page 3">3</a>
+                            <a href="javascript:void();" class="fn14 fw-500" title="Page 4">4</a>
+                            <a href="javascript:void();" class="fn14 fw-500" title="Page 5">5</a>
+                            <a href="javascript:void();" class="fn14 fw-500" title="Page 6">6</a>
+                            <a href="javascript:void();" class="fn14 fw-500" title="Page 7">7</a>
+                        </div>
+                        <a href="javascript:void();" title="Next" class="btn btn-outline-purple directionArrow">Next 
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
       <!-- end card -->
   </div>
   <!-- end col -->

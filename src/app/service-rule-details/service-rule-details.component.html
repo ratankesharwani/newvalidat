@@ -3,7 +3,7 @@
             <div class="col-xl-10 m-auto">
                 <div class="card card-h-100">
                     <div class="card-body">
-                        <h4 class="card-title mb-4">Add service rule</h4>
+                        <h4 class="card-title mb-4">Update service rule</h4>
                         <hr>
                         <div class="d-flex justify-content-between">
                             <div class="col-xl-4 pe-3 mb-3">
@@ -18,9 +18,9 @@
                                 <label class="form-label">Rule Name<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" [(ngModel)]="RuleName" disabled>
                             </div>
-                            <div class="col-xl-4 mb-3">
+                              <div class="col-xl-1 pe-3 mb-3">
                                 <label class="form-label">Status</label>
-                                <div class="d-flex justify-content-start form-check form-switch pt-1">
+                                <div class="form-check form-switch form-switch-md p-2">
                                     <input class="form-check-input float-end valign-middle mt-1" [(ngModel)]="flag" type="checkbox" id="blacklist"  (change)="changeStatus($event)" matTooltipPosition="above"
                                     matTooltip="Set as {{flag?'Inactive':'Active'}}">
                                 </div>

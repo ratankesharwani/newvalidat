@@ -24,6 +24,7 @@
     "@angular/router": "^17.3.0",
     "@angular/ssr": "^17.3.7",
     "@rxweb/reactive-form-validators": "^13.0.1",
+    "@types/dropzone": "^5.7.8",
     "angular-cd-timer": "^3.0.0",
     "angular-feather": "^6.5.1",
     "angular-mydatepicker": "^0.11.5",
@@ -46,7 +47,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.7",
-    "@angular/cli": "^17.3.7",
+    "@angular/cli": "^17.3.8",
     "@angular/compiler-cli": "^17.3.0",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",

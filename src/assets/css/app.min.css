@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap);
+/* @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap); */
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap);
 :root{
     --bs-footer-color:#74788d;
     --bs-footer-shadow:0 0px 4px rgba(15, 34, 58, .12);
@@ -288,7 +289,7 @@ body:not([data-sidebar-size=sm]) .app-search{
     padding:calc(70px + 20px) calc(20px / 2) 60px calc(20px / 2)
 }
 .header-item{
-    height:37px;
+    height:70px;
     -webkit-box-shadow:none!important;
     box-shadow:none!important;
     color:#555b6d;
@@ -1045,7 +1046,7 @@ body[data-sidebar=brand] .vertical-menu::before{
     left:0;
     right:0;
     bottom:0;
-    background-image:url(../images/profile-bg.jpg);
+    /* background-image:url(../images/profile-bg.jpg); */
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
@@ -3845,7 +3846,7 @@ span.flatpickr-weekday{
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-    background-image:url(../images/auth-bg.jpg);
+    /* background-image:url(../images/auth-bg.jpg); */
     display:-webkit-box;
     display:-ms-flexbox;
     display:flex;
@@ -4952,7 +4953,7 @@ span.flatpickr-weekday{
 }
 .profile-bg{
     height:210px;
-    background-image:url(../images/profile-bg.jpg);
+    /* background-image:url(../images/profile-bg.jpg); */
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat
@@ -4964,7 +4965,7 @@ span.flatpickr-weekday{
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-    background-image:url(../images/profile-bg.jpg)
+    /* background-image:url(../images/profile-bg.jpg) */
 }
 .pricing-box{
     border-top:2px solid #038edc

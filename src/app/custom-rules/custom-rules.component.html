@@ -3,7 +3,7 @@
         <div class="card card-h-100">
             <form [formGroup]="customCheckDetailsForm">
                 <div class="card-body" formGroupName="request">
-                    <div class="d-flex justify-content-between" formGroupName="body">
+                    <div class="d-flex justify-content-start" formGroupName="body">
                         <div class="col-xl-3 pe-3 mb-3">
                             <label class="form-label">Company</label>
                             <select class="form-select" formControlName="companyId"
@@ -30,15 +30,13 @@
                                 <option *ngFor="let data of checkTypeValues">{{ data.display_field }}</option>
                             </select>
                         </div>
-                        <div class="col-xl-3 mb-3">
+                        <div class="col-xl-1 pe-3 mb-3">
                             <label class="form-label">Status</label>
-                            <div class="d-flex justify-content-start form-check form-switch pt-1">
-                                <input class="form-check-input float-end valign-middle mt-1" formControlName="active"
+                            <div class="form-check form-switch form-switch-md p-2">
+                                <input class="form-check-input ms-0 valign-middle mt-1" formControlName="active"
                                     type="checkbox" id="blacklist" (change)="changeStatus()" (ngModelChange)="customCheckDetailsAPI()">
-                                <!-- <div class="inactive float-end ms-3">{{activeMsg}}</div> -->
                             </div>
                         </div>
-
                     </div>
                     <!-- <div class="d-flex justify-content-start">
                         <button type="button" class="btn btn-success" (click)="customCheckDetailsAPI()">Load
@@ -51,136 +49,135 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header justify-content-between d-flex align-items-center border-0">
-                <h4 class="card-title">Custom Rules <span
-                        class="badge badge-soft-primary py-2">{{customCheckDetailsByModuleAndCompany?.length}}
-                        users</span></h4>
-                <button type="button" (click)="addNew()" class="btn btn-primary"><i data-feather="plus"
-                        class="icon15x15"></i> Add Rule</button>
-            </div>
-            <div class="row">
-                <div class="card-body pt-0">
-                    <div class="table mb-0">
-                        <div class="gridjs gridjs-container" style="width: 100%;">
-                            <div class="gridjs-wrapper" style="height: 400px;">
-                                <table class="gridjs-table " style="height: 400px;">
-                                    <thead class="gridjs-thead">
-                                        <tr class="gridjs-tr">
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Details</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Rule name</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Check type</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Created by</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Created date</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Updated by</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Updated date</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Status <i data-feather="arrow-down" class="icon15x15"></i>
-                                            </th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="gridjs-tbody" *ngFor="let data of customCheckDetailsByModuleAndCompany;index as i">
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td accordianPlus">
-                                                <a class="p-0 ms-2 accordion-toggle" id="serviceName{{i}}" data-bs-toggle="collapse"
-                                                    href="#demo{{i}}" (click)="customCheckDetailsById(data.id,i)">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                                    </svg>
-                                                </a>
-                                            </td>
-                                            <td class="gridjs-td">{{ data.customCheckRuleName }}</td>
-                                            <td class="gridjs-td">{{ data.checkType }}</td>
-                                            <td class="gridjs-td">{{ data.createdByName }}</td>
-                                            <td class="gridjs-td">{{ data.createdDate }}</td>
-                                            <td class="gridjs-td">{{ data.updatedByName }}</td>
-                                            <td class="gridjs-td">{{ data.updateDate }}</td>
-                                            <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
-                                                <div class="inactive float-start fn11">
-                                                  {{data.bStatus ? 'Active' : 'Inactive'}}
-                                                </div>
-                                              </td>
-                                            <td class="gridjs-td" matTooltipPosition="above"
-                                              matTooltip="Set to {{data.status?'Inactive':'Active'}}" (click)="updateRulesStatus(data.id,data.moduleId,data.companyId,data.bStatus)">
-                                              <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                               <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                             </svg>                                              
-                                           </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="14" class="accordian-body collapse" id="demo{{i}}">
-                                              <div style="background-color: #f1f5f6 !important;;">
-                                                    <div class="row mb-2">
-                                                        <div class="col-xl-11 m-auto mt-4">
-                                                          <div class="card card-h-100">
-                                                            <div class="card-body">
-                                                                <h4 class="card-title mb-4">Conditions</h4>
-                                                                <div *ngFor="let customCheck of customCheckDetailById[i];index as I">
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <div class="col-xl-4 pe-3 mb-3">
-                                                                          <label class="form-label">Data point</label>
-                                                                          <select class="form-select" disabled>
-                                                                            <option *ngFor="let data of serviceTypeDropdown" [ngValue]="data.key"
-                                                                                    [selected]="data.key===customCheckDetailById[i][I].dataPointId">
-                                                                              {{ data.value }}
-                                                                            </option>
-                                                                          </select>
-                                                                        </div>
-                                                                        <div class="col-xl-4 pe-3 mb-3">
-                                                                            <label class="form-label">Operator</label>
-                                                                            <select class="form-select" disabled>
-                                                                                <option *ngFor="let data of Operators[i][I]" [ngValue]="data.id"
-                                                                                        [selected]="data.id===customCheckDetailById[i][I].operatorId">
-                                                                                  {{ data.value }}
-                                                                                </option>
-                                                                              </select>
-                                                                        </div>
-                                                                        <div class="col-xl-3 mb-3 pe-3">
-                                                                            <label class="form-label">Value</label>
-                                                                            <select disabled class="form-select" *ngIf="customCheckDetailById[i][I].inputType==='select'">
-                                                                                <option *ngFor="let data of ServiceStatus[i][I]" [selected]="data===customCheckDetailById[i][I].value">
-                                                                                    {{ data }}
-                                                                                </option>
-                                                                            </select>
-                                                                            <input disabled class="form-control" *ngIf="customCheckDetailById[i][I].inputType==='input'"
-                                                                                [value]="customCheckDetailById[i][I].value" />
-                                                                        </div>
-                                                                       
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-start mt-3 mb-2" *ngIf="customCheck.andOr!='null'">
-                                                                        <div class="form-check me-2" *ngIf="customCheckDetailById[i][I].andOr">
-                                                                            <input class="form-check-input" type="radio" [name]="'formRadios' + i + '_' + I" id="formRadios1_{{i}}_{{I}}" [checked]="customCheckDetailById[i][I].andOr=='AND'" [value]="'AND'">
-                                                                            <label class="form-check-label" for="formRadios1_{{i}}_{{I}}">And</label>
-                                                                        </div>
-                                                                        <div class="form-check" *ngIf="customCheckDetailById[i][I].andOr">
-                                                                            <input class="form-check-input" type="radio" [name]="'formRadios' + i + '_' + I" id="formRadios2_{{i}}_{{I}}" [checked]="customCheckDetailById[i][I].andOr=='OR'" [value]="'OR'">
-                                                                            <label class="form-check-label" for="formRadios2_{{i}}_{{I}}">Or</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <hr >
+        <div class="table mb-0">
+            <div class="gridjs gridjs-container" style="width: 100%;">
+                <div class="card-header justify-content-between d-flex align-items-center border-0">
+                    <h4 class="fn18 pt-3 pb-2 ps-3 text-black">Custom Rules <span class="badge badge-soft-primary py-2">{{customCheckDetailsByModuleAndCompany?.length}} rules</span></h4>
+                    <div class="text-center d-flex justify-content-end col-md-4">
+                        <a (click)="addNew()" class="btn btn-primary addBtns">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon20x20">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg> Add new
+                        </a>
+                    </div>
+                </div><!-- end card header -->
+    
+
+                <div class="gridjs-wrapper" style="height: 400px;">
+                    <table class="gridjs-table " style="height: 400px;">
+                        <thead class="gridjs-thead">
+                            <tr class="gridjs-tr">
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                    style="top:0">Details</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                    style="top:0">Rule name</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                    style="top:0">Check type</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                    style="top:0">Created by</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                    style="top:0">Created date</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                    style="top:0">Updated by</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                    style="top:0">Updated date</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                    style="top:0">Status <i data-feather="arrow-down" class="icon15x15"></i>
+                                </th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
+                                    style="top:0">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="gridjs-tbody" *ngFor="let data of customCheckDetailsByModuleAndCompany;index as i">
+                            <tr class="gridjs-tr">
+                                <td class="gridjs-td accordianPlus">
+                                    <a class="p-0 ms-2 accordion-toggle" id="serviceName{{i}}" data-bs-toggle="collapse"
+                                        href="#demo{{i}}" (click)="customCheckDetailsById(data.id,i)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                        </svg>
+                                    </a>
+                                </td>
+                                <td class="gridjs-td">{{ data.customCheckRuleName }}</td>
+                                <td class="gridjs-td">{{ data.checkType }}</td>
+                                <td class="gridjs-td">{{ data.createdByName }}</td>
+                                <td class="gridjs-td">{{ data.createdDate }}</td>
+                                <td class="gridjs-td">{{ data.updatedByName }}</td>
+                                <td class="gridjs-td">{{ data.updateDate }}</td>
+                                <td class="gridjs-td">
+                                    <div class="inactive float-start fn11" [ngStyle]="{'color':data.bStatus ? '#098b8b' : '#E72929'}">
+                                        {{data.bStatus ? 'Active' : 'Inactive'}}
+                                    </div>
+                                    </td>
+                                <td class="gridjs-td" matTooltipPosition="above"
+                                    matTooltip="Set to {{data.bStatus?'Inactive':'Active'}}" (click)="updateRulesStatus(data.id,data.moduleId,data.companyId,data.bStatus)">
+                                    <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 icon20x20">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                    </svg>                                              
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="14" class="accordian-body collapse" id="demo{{i}}">
+                                    <div style="background-color: #f1f5f6 !important;;">
+                                        <div class="row mb-2">
+                                            <div class="col-xl-11 m-auto mt-4">
+                                                <div class="card card-h-100">
+                                                <div class="card-body">
+                                                    <h4 class="card-title mb-4">Conditions</h4>
+                                                    <div *ngFor="let customCheck of customCheckDetailById[i];index as I">
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="col-xl-4 pe-3 mb-3">
+                                                                <label class="form-label">Data point</label>
+                                                                <select class="form-select" disabled>
+                                                                <option *ngFor="let data of serviceTypeDropdown" [ngValue]="data.key"
+                                                                        [selected]="data.key===customCheckDetailById[i][I].dataPointId">
+                                                                    {{ data.value }}
+                                                                </option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xl-4 pe-3 mb-3">
+                                                                <label class="form-label">Operator</label>
+                                                                <select class="form-select" disabled>
+                                                                    <option *ngFor="let data of Operators[i][I]" [ngValue]="data.id"
+                                                                            [selected]="data.id===customCheckDetailById[i][I].operatorId">
+                                                                        {{ data.value }}
+                                                                    </option>
+                                                                    </select>
+                                                            </div>
+                                                            <div class="col-xl-3 mb-3 pe-3">
+                                                                <label class="form-label">Value</label>
+                                                                <select disabled class="form-select" *ngIf="customCheckDetailById[i][I].inputType==='select'">
+                                                                    <option *ngFor="let data of ServiceStatus[i][I]" [selected]="data===customCheckDetailById[i][I].value">
+                                                                        {{ data }}
+                                                                    </option>
+                                                                </select>
+                                                                <input disabled class="form-control" *ngIf="customCheckDetailById[i][I].inputType==='input'"
+                                                                    [value]="customCheckDetailById[i][I].value" />
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="d-flex justify-content-start mt-3 mb-2" *ngIf="customCheck.andOr!='null'">
+                                                            <div class="form-check me-2" *ngIf="customCheckDetailById[i][I].andOr">
+                                                                <input class="form-check-input" type="radio" [name]="'formRadios' + i + '_' + I" id="formRadios1_{{i}}_{{I}}" [checked]="customCheckDetailById[i][I].andOr=='AND'" [value]="'AND'">
+                                                                <label class="form-check-label" for="formRadios1_{{i}}_{{I}}">And</label>
+                                                            </div>
+                                                            <div class="form-check" *ngIf="customCheckDetailById[i][I].andOr">
+                                                                <input class="form-check-input" type="radio" [name]="'formRadios' + i + '_' + I" id="formRadios2_{{i}}_{{I}}" [checked]="customCheckDetailById[i][I].andOr=='OR'" [value]="'OR'">
+                                                                <label class="form-check-label" for="formRadios2_{{i}}_{{I}}">Or</label>
                                                             </div>
                                                         </div>
-                                                        </div>
                                                     </div>
-                        
-                                              </div>
-                                            </td>
-                                          </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                                                    <hr >
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+            
+                                    </div>
+                                </td>
+                                </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

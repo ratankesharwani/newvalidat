@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AdminService } from '../Service/admin.service';
 import { CommonModule } from '@angular/common';
@@ -19,6 +19,14 @@ export class InnerheaderComponent {
   roleBaseMenuPanel:any
   queueParseData:any
   Sorting:any[]=[]
+
+  @ViewChild('Admin', { static: true }) Admin: TemplateRef<any>;
+  @ViewChild('User_Permission', { static: true }) User_Permission: TemplateRef<any>;
+  @ViewChild('Compliance', { static: true }) Compliance: TemplateRef<any>;
+  @ViewChild('Configuration', { static: true }) Configuration: TemplateRef<any>;
+  @ViewChild('Report', { static: true }) Report: TemplateRef<any>;
+
+  
   constructor(private localStorage :LocalStorageService,private service:AdminService) {
     const queueData:any = this.localStorage.getItem("data")
     this.queueParseData=JSON.parse(queueData)
@@ -109,4 +117,22 @@ export class InnerheaderComponent {
       array[j + 1] = current;
     }
   }
+
+  getSvgTemplate(svgKey: string): TemplateRef<any> {
+    switch (svgKey) {
+      case 'Admin':
+        return this.Admin;
+      case 'User_Permission':
+        return this.User_Permission;
+      case 'Compliance':
+        return this.Compliance;
+      case 'Configuration':
+        return this.Configuration;
+      case 'Report':
+        return this.Report;
+      default:
+        return this.Admin; 
+    }
+  }
+
 }

@@ -49,7 +49,7 @@ export class FiltersidebarComponent {
     const clickedInside = this.elRef.nativeElement.contains(event.target as Node);
 
     const filterButton = document.getElementById('specific-filter');
-    const button = filterButton?.querySelector('button');
+    const button = filterButton?.querySelector('a');
 
     let clickedOnFilterButton = button ? button.contains(event.target as Node) : false;
 

@@ -1,19 +1,18 @@
 <div class="row">
-  <div class="col-12">
+  <div class="col-8 m-auto">
     <div class="page-title-box d-flex align-items-center justify-content-between">
-      <h4 class="card-title">Roles Details<br><span
-          class="fn12 text-dark">Create role detail</span></h4>
+      <h5 class="mb-0 fn30 text-black">Roles Details <span class="fn16 fw-500 d-block">Create role detail</span></h5>
     </div>
   </div>
 </div>
 <form [formGroup]="addRoleMaster" autocomplete="">
   <br>
   <div class="row" formGroupName="request">
-    <div class="col-lg-12" formGroupName="body">
+    <div class="col-lg-8 m-auto" formGroupName="body">
       <div class="card">
         <div class="card-body">
           <div class="row d-flex justify-content-start">
-            <div class="col-xl-3 mb-3">
+            <div class="col-xl-4 mb-3">
               <label class="form-label">Role Name</label><span class="text-danger">*</span>
               <input placeholder="Type here.."  [ngStyle]="{'border':roleNameControl.invalid && (roleNameControl.dirty || roleNameControl.touched || submitted)?'1px solid red':''}" type="text" class="form-control" (input)="roleName($event)" formControlName="roleName">
               <div style="color: red" *ngIf="roleNameControl.invalid && (roleNameControl.dirty || roleNameControl.touched || submitted)">
@@ -22,24 +21,24 @@
                 </small>
               </div>
             </div>
-            <div class="col-xl-3 mb-3">
+            <div class="col-xl-4 mb-3">
               <label class="form-label">Remark</label>
               <input placeholder="Type here.." name="remark" rows="2" resize="no" class="form-control"  formControlName="remark" (input)="remark($event)"/>
             </div>
-            <div class="col-xl-3 mb-3">
+            <div class="col-xl-4 mb-3">
               <label class="form-label">Status</label>
-              <div class="d-flex justify-content-start form-check form-switch pt-1">
-                  <input (change)="status($event)" class="form-check-input float-end valign-middle mt-1" type="checkbox" id="blacklist">
+              <div class="form-check form-switch form-switch-md p-2">
+                  <input (change)="status($event)" class="form-check-input ms-0" type="checkbox" id="blacklist">
               </div>
             </div>
           </div>
         </div>
       </div><br>
       <div class="clearfix"></div>
-      <button type="button" class="btn btn-primary mb-3 float-end" (click)="save()"><i data-feather="plus" class="icon15x15"></i> Save Role</button>
-      <button type="button" class="btn mb-3 btn-outline-secondary float-end me-3" routerLink="/User_Permission/Role_Master">
-        <i data-feather="plus" class="icon15x15"></i> Cancel
-      </button>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-secondary whiteBtn me-3" routerLink="/User_Permission/Role_Master">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="save()">Save Role</button>
+      </div>
     </div>
   </div>
 </form>

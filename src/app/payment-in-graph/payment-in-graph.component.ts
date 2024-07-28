@@ -52,6 +52,7 @@ export class PaymentInGraphComponent{
   }
   ngOnInit() {
     this.reloadGraph()
+    this.createGraph()
     type EChartsOption = echarts.EChartsOption;
   }
   reloadGraph(){
@@ -220,64 +221,73 @@ export class PaymentInGraphComponent{
     const chartDom = this.el.nativeElement.querySelector('#chart');
     this.chartInstance = echarts.init(chartDom);
     this.option = {
-      legend: {},
-      toolbox: {
-        show: true,
-        feature: {
-          dataView: { readOnly: false },
-          magicType: { type: ['line', 'bar'] },
-          restore: {},
-          saveAsImage: {},
-        },
+      title: {
+        text: 'Stacked Area Chart'
       },
       tooltip: {
         trigger: 'axis',
-        showContent: false
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#6a7985'
+          }
+        }
       },
-      dataset: {
-        source: [
-          this.value,
-          this.totalCount,
-          this.holdCount,
-          // ['Cleared', 40.1, 62.2, 69.5, 36.4, 45.2, 32.5],
-          // ['Walnut Brownie', 25.2, 37.1, 41.2, 18, 33.9, 49.1]
-        ]
+      legend: {
+        data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
       },
-      xAxis: { type: 'category' },
-      yAxis: { gridIndex: 0 },
-      grid: { top: '55%' },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'category',
+          boundaryGap: false,
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
       series: [
         {
+          name: 'Email',
           type: 'line',
-          smooth: true,
-          seriesLayoutBy: 'row',
-          emphasis: { focus: 'series' }
-        },
-        {
-          type: 'line',
-          smooth: true,
-          seriesLayoutBy: 'row',
-          emphasis: { focus: 'series' }
-        },
-        {
-          type: 'pie',
-          id: 'pie',
-          radius: '30%',
-          center: ['50%', '25%'],
+          stack: 'Total',
+          areaStyle: {},
           emphasis: {
-            focus: 'self'
+            focus: 'series'
           },
+          data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+          name: 'Search Engine',
+          type: 'line',
+          stack: 'Total',
           label: {
-            formatter: '{b}: {@2012} ({d}%)'
+            show: true,
+            position: 'top'
           },
-          encode: {
-            itemName: 'product',
-            value: this.value[1],
-            tooltip: '2012'
-          }
+          areaStyle: {},
+          emphasis: {
+            focus: 'series'
+          },
+          data: [820, 932, 901, 934, 1290, 1330, 1320]
         }
       ]
     };
+    
+    
     if (this.option) {
       this.chartInstance.setOption(this.option,true);
     }

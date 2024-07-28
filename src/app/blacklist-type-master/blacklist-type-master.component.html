@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12">
     <div class="page-title-box d-flex align-items-center justify-content-between">
-      <h4 class="card-title">Blacklist Type Details</h4>
+      <h5 class="mb-0 fn30 text-black">Blacklist Type Details</h5>
     </div>
   </div>
 </div>
@@ -71,11 +71,10 @@
                   </small>
                 </div>
               </div>
-              <div class="col-xl-3 mb-3" formGroupName="body">
+              <div class="col-xl-4 mb-3">
                 <label class="form-label">Status</label>
-                <div class="d-flex justify-content-start form-check form-switch pt-1">
-                  <input formControlName="status" class="form-check-input float-end valign-middle mt-1" type="checkbox"
-                    id="blacklist">
+                <div class="form-check form-switch form-switch-md p-2">
+                    <input formControlName="status" class="form-check-input ms-0" type="checkbox" id="blacklist">
                 </div>
               </div>
             </div>
@@ -88,48 +87,42 @@
     <button type="button" class="btn btn-primary mb-3 float-end" style="cursor: pointer;" (click)="save()">
       <i data-feather="plus" class="icon15x15"></i> Save Details
     </button>
-    <button type="button" class="btn mb-3 btn-outline-secondary float-end me-3" routerLink="/Configuration/Add_BlackList_Details">
-      <i data-feather="plus" class="icon15x15"></i> Cancel
+    <button type="button" class="btn mb-3 btn-outline-secondary whiteBtn float-end me-3" routerLink="/Configuration/Add_BlackList_Details">
+      <i data-feather="plus" class="icon15x15 "></i> Cancel
     </button>
   </div>
 </div>
 <br>
 <div class="row">
   <div class="col-lg-12">
-      <div class="card">
-          <div class="card-header justify-content-between d-flex align-items-center border-0">
-              <h4 class="card-title">Blacklist Details<span class="badge badge-soft-primary py-2">{{blacklistdetailAll?.length}} Blacklist Details</span></h4>
+      <div class="table mb-0">
+          <div class="gridjs gridjs-container" style="width: 100%;">
+            <div class="card-header justify-content-between d-flex align-items-center border-0">
+              <h4 class="fn18 pt-3 pb-2 ps-3 text-black">Blacklist Details<span class="badge badge-soft-primary py-2">{{blacklistdetailAll?.length}} Blacklist Details</span></h4>
               <!-- <button routerLink="/Configuration/Blacklist_Type_Master" type="button" class="btn btn-success"><i data-feather="plus" class="icon15x15"></i> Add new</button> -->
-          </div><!-- end card header -->
-          <div class="row">
-              <div class="card-body pt-0">
-                  <div class="table mb-0">
-                      <div class="gridjs gridjs-container" style="width: 100%;">
-                          <div class="gridjs-wrapper" style="height: 400px;">
-                              <table class="gridjs-table " style="height: 400px;">
-                                  <thead class="gridjs-thead">
-                                      <tr class="gridjs-tr">
-                                          <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0" *ngFor="let tab of tabColumns">{{tab.name}}</th>
-                                  </thead>
-                                  <tbody class="gridjs-tbody">
-                                      <tr class="gridjs-tr" *ngFor="let data of blacklistdetailAll; index as i">
-                                          <td class="gridjs-td">{{data.module}}</td>
-                                          <td class="gridjs-td">{{data.companyName}}</td>
-                                          <td class="gridjs-td">{{data.blacklistType}}</td>
-                                          <td class="gridjs-td">{{data.blacklistValue}}</td>
-                                          <td class="gridjs-td">{{data.createdDate}}</td>
-                                          <td class="gridjs-td">{{data.creatorName}}</td>
-                                          <td class="gridjs-td">{{data.updateDate}}</td>
-                                          <td class="gridjs-td">{{data.updaterName}}</td>
-                                          <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
-                                            {{data.status ? 'Active' : 'Inactive'}}
-                                          </td>
-                                        </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
+            </div><!-- end card header -->
+              <div class="gridjs-wrapper" style="height: 400px;">
+                  <table class="gridjs-table " style="height: 400px;">
+                      <thead class="gridjs-thead">
+                          <tr class="gridjs-tr">
+                              <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0" *ngFor="let tab of tabColumns">{{tab.name}}</th>
+                      </thead>
+                      <tbody class="gridjs-tbody">
+                          <tr class="gridjs-tr" *ngFor="let data of blacklistdetailAll; index as i">
+                              <td class="gridjs-td">{{data.module}}</td>
+                              <td class="gridjs-td">{{data.companyName}}</td>
+                              <td class="gridjs-td">{{data.blacklistType}}</td>
+                              <td class="gridjs-td">{{data.blacklistValue}}</td>
+                              <td class="gridjs-td">{{data.createdDate}}</td>
+                              <td class="gridjs-td">{{data.creatorName}}</td>
+                              <td class="gridjs-td">{{data.updateDate}}</td>
+                              <td class="gridjs-td">{{data.updaterName}}</td>
+                              <td class="gridjs-td" [ngStyle]="{'color':data.status ? 'green' : 'red'}">
+                                {{data.status ? 'Active' : 'Inactive'}}
+                              </td>
+                            </tr>
+                      </tbody>
+                  </table>
               </div>
           </div>
       </div>

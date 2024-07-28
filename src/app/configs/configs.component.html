@@ -5,10 +5,11 @@
   <div class="main-content mleft0">
       <div class="page-content">
           <div class="container-fluid">
-              <app-filterbutton *ngIf="!disableSearch" (clickSearch)="click()"></app-filterbutton>
+            <div class="d-flex justify-content-end mb-4">
+                    <app-filterbutton *ngIf="!disableSearch" (clickSearch)="click()" class="me-3"></app-filterbutton>
+            </div>
               <router-outlet (activate)="onRouterActivate($event)"></router-outlet>
           </div>
       </div>
-      <app-footer></app-footer>
   </div>
 </div>

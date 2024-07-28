@@ -4,10 +4,11 @@ import { AdminService } from '../Service/admin.service';
 import { CommonModule } from '@angular/common';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { DropzoneDirective } from '../dropzone.directive';
+import { DropzoneComponent } from "../dropzone/dropzone.component";
 @Component({
   selector: 'app-payin-docs',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, DropzoneComponent],
   templateUrl: './payin-docs.component.html',
   styleUrl: './payin-docs.component.css',
   providers:[DropzoneDirective]

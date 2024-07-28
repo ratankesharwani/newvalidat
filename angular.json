@@ -32,7 +32,6 @@
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/assets/css/bootstrap.min.css",
               "node_modules/dropzone/dist/dropzone.css",
-              "src/assets/css/dropzone.min.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/assets/libs/jsvectormap/css/jsvectormap.min.css",
               "src/assets/css/mermaid.min.css",

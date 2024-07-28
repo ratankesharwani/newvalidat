@@ -1,0 +1,31 @@
+.dropzone {
+    border: 2px dashed #cccccc;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .dz-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+  }
+  
+  .dz-error-message {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 0, 0, 0.8); /* Example background color */
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 9999; /* Ensures it appears above other elements */
+  }
+  

@@ -13,11 +13,10 @@
                 <option *ngFor="let data of logInResponse">{{data.firstName}} {{data.lastName}}</option>
               </select>
             </div>
-            <div class="col-xl-4">
+            <div class="col-xl-4 mb-3">
               <label class="form-label">Status</label>
-              <div class="d-flex justify-content-start form-check form-switch pt-1">
-                <input [checked]="statusValue" (change)="status($event)"
-                  class="form-check-input float-end valign-middle mt-1" type="checkbox" id="blacklist">
+              <div class="form-check form-switch form-switch-md p-2">
+                  <input [checked]="statusValue" (change)="status($event)" class="form-check-input ms-0" type="checkbox" id="blacklist">
               </div>
             </div>
           </div>

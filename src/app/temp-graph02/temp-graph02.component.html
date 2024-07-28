@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-3 mb-3">
+        <div class="d-flex justify-content-between mb-2">
+            <h6 class="mb-0 lineHeight">
+                <svg width="18" height="18" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
+                    <path d="M6.5 2C7.11807 2 7.72225 2.18328 8.23616 2.52666C8.75006 2.87004 9.1506 3.3581 9.38712 3.92911C9.62365 4.50013 9.68553 5.12847 9.56495 5.73466C9.44438 6.34085 9.14675 6.89767 8.70971 7.33471C8.27267 7.77175 7.71585 8.06938 7.10966 8.18995C6.50347 8.31053 5.87513 8.24865 5.30411 8.01212C4.7331 7.7756 4.24504 7.37506 3.90166 6.86116C3.55828 6.34725 3.375 5.74307 3.375 5.125C3.375 4.2962 3.70424 3.50134 4.29029 2.91529C4.87634 2.32924 5.6712 2 6.5 2ZM6.5 0.75C5.63471 0.75 4.78885 1.00659 4.06938 1.48732C3.34992 1.96805 2.78916 2.65133 2.45803 3.45076C2.12689 4.25019 2.04025 5.12985 2.20906 5.97852C2.37787 6.82719 2.79455 7.60674 3.40641 8.21859C4.01826 8.83045 4.79781 9.24712 5.64648 9.41594C6.49515 9.58475 7.37481 9.49811 8.17424 9.16697C8.97367 8.83584 9.65695 8.27508 10.1377 7.55562C10.6184 6.83615 10.875 5.99029 10.875 5.125C10.875 3.96468 10.4141 2.85188 9.59359 2.03141C8.77312 1.21094 7.66032 0.75 6.5 0.75ZM12.75 18.25H11.5V15.125C11.5 14.2962 11.1708 13.5013 10.5847 12.9153C9.99866 12.3292 9.2038 12 8.375 12H4.625C3.7962 12 3.00134 12.3292 2.41529 12.9153C1.82924 13.5013 1.5 14.2962 1.5 15.125V18.25H0.25V15.125C0.25 13.9647 0.710936 12.8519 1.53141 12.0314C2.35188 11.2109 3.46468 10.75 4.625 10.75H8.375C9.53532 10.75 10.6481 11.2109 11.4686 12.0314C12.2891 12.8519 12.75 13.9647 12.75 15.125V18.25ZM14.625 9.6125L13.0063 7.99375L12.125 8.875L14.625 11.375L19 7L18.1187 6.11875L14.625 9.6125Z" fill="black"/>
+                    </svg>
+                    Compliance Completed</h6>
+            <span class="float-end valueBoxGreen">{{PayoutDashDetails?.on_hold_payment_out || 0}}</span>
+        </div>
+        <div class="d-flex justify-content-between">
+            <h6 class="mb-0 lineHeight">
+                <svg width="18" height="19" viewBox="0 0 20 21" class="me-2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 5.5V11.2143L13.7143 13.0714" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19.0371 12.643C18.5345 14.7615 17.3035 16.636 15.5591 17.939C13.8147 19.242 11.6678 19.8906 9.49377 19.7714C7.31971 19.6522 5.25667 18.7728 3.66518 17.2869C2.07369 15.801 1.05496 13.803 0.787025 11.6423C0.519088 9.48148 1.01898 7.29526 2.19935 5.46564C3.37971 3.63603 5.16548 2.27938 7.24458 1.63278C9.32369 0.986177 11.5639 1.09074 13.5737 1.92821C15.5836 2.76567 17.2352 4.28277 18.24 6.21439" stroke="black" stroke-linecap="round"/>
+                <path d="M19.2857 3.35718V6.92861H15.7142" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                
+                Compliance Total</h6>
+            <span class="float-end valueBox">{{PayoutDashDetails?.total_payment_out || 0}}</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-4">
+                    <div class="btn-group radiobtnGroup" role="times" aria-label="Basic radio toggle button times">
+                        <input type="radio" class="btn-check" name="btnradio" id="12months" autocomplete="off" checked>
+                        <label class="btn btn-outline-secondary mb-0" for="12months">12 months</label>
+                        <input type="radio" class="btn-check" name="btnradio" id="30days" autocomplete="off">
+                        <label class="btn btn-outline-secondary mb-0" for="30days">30 days</label>
+                        <input type="radio" class="btn-check" name="btnradio" id="7days" autocomplete="off">
+                        <label class="btn btn-outline-secondary mb-0" for="7days">7 days</label>
+                        <input type="radio" class="btn-check" name="btnradio" id="24hours" autocomplete="off">
+                        <label class="btn btn-outline-secondary mb-0" for="24hours">24 hours</label>
+                    </div>
+                    <div class="d-flex">
+                        <div class="search-box me-3">
+                            <div class="position-relative">
+                                <input type="text" class="form-control rounded ps-2" placeholder="Apr 1, 2024 - Apr 24, 2024">
+                                <img src="assets/images/svg/calenderIcon.svg" class="search-icon">
+                            </div>
+                        </div>
+                        <a href="javascript:void()" class="btn btn-outline-gray right-bar-toggle pt-2" id="right-bar-toggle">
+                            <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6H14M1.5 1H16.5M6.5 11H11.5"  stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg> Filter
+                        </a>
+
+                    </div>
+                </div>
+                <div class="dataoutputHolder position-relative" >
+                    <div class="datagridIcon d-flex justify-content-end gap-2">
+                        <ul class="d-flex justify-content-between">
+                            <li>
+                                <a href="javascript:void();">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                                    </svg>
+                                  </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void();">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+                                      </svg>
+                                  </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void();" class="avtive">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
+                                    </svg>
+                                  </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void();">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                      </svg>
+                                  </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="datacolorul position-absolute d-flex">
+                        <ul class="d-flex justify-content-between">
+                            <li class="me-2"><i class="fa fa-circle me-1 mb-2 text-green"></i>Payment In</li>
+                            <li><i class="fa fa-circle me-1 text-blue"></i> Payment Out</li>
+                        </ul>
+                    </div>
+                    <img src="assets/images/datagrid.jpg" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

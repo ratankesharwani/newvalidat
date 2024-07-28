@@ -9,6 +9,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { PaymentinComponent } from "./paymentin/paymentin.component";
 import { PaymentoutComponent } from "./paymentout/paymentout.component";
 import { AddserviceruleComponent } from "./addservicerule/addservicerule.component";
+import { TempGraphComponent } from "./temp-graph/temp-graph.component";
 
 @Component({
     selector: 'app-root',
@@ -16,7 +17,7 @@ import { AddserviceruleComponent } from "./addservicerule/addservicerule.compone
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
     encapsulation: ViewEncapsulation.None,
-    imports: [HttpClientModule, RouterOutlet, InnerheaderComponent, FooterComponent, FilterbuttonComponent, FiltersidebarComponent, PaymentinComponent, PaymentoutComponent, AddserviceruleComponent]
+    imports: [HttpClientModule, RouterOutlet, InnerheaderComponent, FooterComponent, FilterbuttonComponent, FiltersidebarComponent, PaymentinComponent, PaymentoutComponent, AddserviceruleComponent, TempGraphComponent]
 })
 export class AppComponent {
   private isBrowser: boolean;
