@@ -59,6 +59,19 @@ export class PayinActivityLogComponent {
   toD(event: any) {
     this.ActivityLog.patchValue({request: {body: {toCreatedOn: event ? moment(event).format('YYYY-MM-DD'+'T23:59:59'+'.000Z') : null}}})
   }
+
+  dateChange(event: any) {
+    this.ActivityLog.patchValue({
+      request: {
+        body: {
+          fromCreatedOn: event ? moment(event[0]).format('YYYY-MM-DD' + 'T00:00:00' + '.000Z') : null,
+          toCreatedOn: event ? moment(event[1]).format('YYYY-MM-DD' + 'T23:59:59' + '.000Z') : null
+        }
+      }
+    })
+   this.activityLog();
+  }
+
   activityLog() {this.service.login(this.ActivityLog.value).subscribe(data => {this.memodata = data})}
   activityForm() {
     this.ActivityLog = new FormGroup({

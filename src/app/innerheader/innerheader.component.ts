@@ -4,11 +4,12 @@ import { AdminService } from '../Service/admin.service';
 import { CommonModule } from '@angular/common';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-innerheader',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,RouterLink,RouterLinkActive],
+  imports: [CommonModule,ReactiveFormsModule,RouterLink,RouterLinkActive,MatTooltip],
   templateUrl: './innerheader.component.html',
   styleUrl: './innerheader.component.css'
 })
