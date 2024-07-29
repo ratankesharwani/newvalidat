@@ -25,6 +25,7 @@ export class PayoutActivityLogComponent {
   maxToDate = new Date();
   from_Date: any
   to_Date: any
+  hideColumn: boolean = true
 
   constructor(private service: AdminService,private localStorage :LocalStorageService) {
     const queueData: any = this.localStorage.getItem("payoutData")
@@ -63,6 +64,18 @@ export class PayoutActivityLogComponent {
     this.ActivityLog.patchValue({request: {body: {toCreatedOn: event ? event : null}}})
   }
 
+  dateChange(event: any) {
+    this.ActivityLog.patchValue({
+      request: {
+        body: {
+          fromCreatedOn: event ? moment(event[0]).format('YYYY-MM-DD' + 'T00:00:00' + '.000Z') : null,
+          toCreatedOn: event ? moment(event[1]).format('YYYY-MM-DD' + 'T23:59:59' + '.000Z') : null
+        }
+      }
+    })
+   this.activityLog();
+  }
+
   activityLog() {
     this.service.login(this.ActivityLog.value).subscribe(data => {
       this.memodata = data
@@ -87,17 +100,24 @@ export class PayoutActivityLogComponent {
   }
 
   clearMemo() {
-    this.activityForm()
+    this.ActivityLog.patchValue({
+      request: {
+        body: {
+          fromCreatedOn:  null,
+          toCreatedOn: null,
+          memoCategoryId:17
+        }
+      }
+    })
+    this.activityLog()
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (input.value = '01-01-2023 - 01-01-2024')
+    );
   }
 
-  hideColumn: boolean = true
 
   onChangeMemoType(memo: any) {
-    if (memo === 18) {
-      this.hideColumn = false
-    } else {
-      this.hideColumn = true
-    }
+    this.hideColumn = memo !== 18;
     this.activityLog();
   }
   @HostListener('document:keydown.enter', ['$event']) onKeydownHandler(event: KeyboardEvent) {

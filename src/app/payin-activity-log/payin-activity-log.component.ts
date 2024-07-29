@@ -25,6 +25,7 @@ export class PayinActivityLogComponent {
   maxToDate = new Date();
   from_Date: any
   to_Date: any
+  hideColumn: boolean = true
 
   constructor(private service: AdminService,private localStorage:LocalStorageService) {
     const queueData: any = this.localStorage.getItem("queueData")
@@ -88,8 +89,23 @@ export class PayinActivityLogComponent {
       })
     });
   }
-  clearMemo() {this.activityForm()}
-  hideColumn: boolean = true
+
+  clearMemo() {
+    this.ActivityLog.patchValue({
+      request: {
+        body: {
+          fromCreatedOn:  null,
+          toCreatedOn: null,
+          memoCategoryId:17
+        }
+      }
+    })
+    this.activityLog()
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (input.value = '01-01-2023 - 01-01-2024')
+    );
+  }
+
   onChangeMemoType(memo: any) {
     this.hideColumn = memo !== 18;
     this.activityLog();

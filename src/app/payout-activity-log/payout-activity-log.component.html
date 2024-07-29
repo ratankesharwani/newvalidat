@@ -1,12 +1,11 @@
-<div class="row">
+<div class="row mb-4">
     <div class="col-12">
         <div class="page-title-box d-flex align-items-center justify-content-between">
-            <h4 class="mb-0">Activity Log<br><span class="fn12 text-dark">Clients we work with and their
-                    transactions</span></h4>
+            <h5 class="mb-0 fn18 text-black">Activity Log<span class="fn14 fw-500 d-block">Clients we work with and their transactions</span></h5>
         </div>
     </div>
 </div>
-<div class="row mb-2">
+<!-- <div class="row mb-2">
     <div class="col-xl-12">
         <div class="card card-h-100">
             <div class="card-body">
@@ -36,67 +35,89 @@
                     </div>
                 </form>
                 <div class="d-flex justify-content-end">
-                    <!-- <button type="button" class="btn btn-outline-secondary me-3" >Apply</button> -->
                     <button type="button" class="btn btn-primary" (click)="save()">Apply &amp; Search</button>
                 </div>
             </div>
         </div>
     </div>
+</div> -->
+<form [formGroup]="ActivityLog" (ngSubmit)="save()">
+<div class="row">
+    <div class="d-flex justify-content-between mb-4" formGroupName="request">
+        <div class="search-box col-md-3" formGroupName="body">
+            <div class="position-relative">
+                <select class="form-select rounded ps-2" formControlName="memoCategoryId"
+                                (ngModelChange)="onChangeMemoType($event)">
+                                <option selected hidden [ngValue]="17">--Select Type--</option>
+                                <option *ngFor="let type of logType" [ngValue]="type.id">{{type.display_field}}</option>
+                            </select>
+                <!-- <img class="search-icon" src="assets/images/svg/searchIcon.svg"> -->
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="search-box me-3">
+                <div class="position-relative">
+                    <input type="text" class="form-control rounded ps-2"
+                    (bsValueChange)="dateChange($event)"
+                    placeholder="01-01-2023 - 01-01-2024"
+                    [maxDate]="maxToDate"
+                    [bsConfig]="{ isAnimated: true,rangeInputFormat : 'DD-MM-YYYY',showWeekNumbers:false}" 
+                    bsDaterangepicker>
+                    <img src="assets/images/svg/calenderIcon.svg" class="search-icon">
+                </div>
+            </div>
+            <a  class="btn btn-outline-gray right-bar-toggle pt-2" id="right-bar-toggle" (click)="clearMemo()">
+                <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6H14M1.5 1H16.5M6.5 11H11.5"  stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg> Clear
+            </a>
+
+        </div>
+    </div>
 </div>
+</form>
 <div class="row">
     <div class="col-lg-12">
-        <div class="card">
-            <div class="row">
-                <div class="card-body pt-0">
-                    <div class="table mb-0 mt-2">
-                        <div class="gridjs gridjs-container" style="width: 100%;">
-                            <div class="gridjs-wrapper" style="height: 400px;">
-                                <table class="gridjs-table " style="height: 400px;">
-                                    <thead class="gridjs-thead">
-                                        <tr class="gridjs-tr">
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Created date</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0">Added by</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0" *ngIf="hideColumn">Description</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0" *ngIf="hideColumn">Reason</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0"
-                                                style="top:0" *ngIf="!hideColumn">Notes</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="gridjs-tbody">
-                                        <tr class="gridjs-tr" *ngFor="let memo of memodata">
-                                            <td class="gridjs-td">{{memo.createdDate}}</td>
-                                            <td class="gridjs-td">{{memo.userName}}</td>
-                                            <td class="gridjs-td" *ngIf="hideColumn">
-                                                <ul>
-                                                    <li><span>{{memo.description}}</span></li>
-                                                </ul>
-                                            </td>
-                                            <td class="gridjs-td" *ngIf="hideColumn">{{memo.reason}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+        <div class="table mb-0 mt-2">
+            <div class="gridjs gridjs-container" style="width: 100%;">
+                <div class="gridjs-wrapper" style="height: 400px;">
+                    <table class="gridjs-table " style="height: 400px;">
+                        <thead class="gridjs-thead">
+                            <tr class="gridjs-tr">
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="min-width: 40px; width: 40px; top:0">Created date</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="min-width: 30px; width: 30px; top:0">Added by</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="min-width: 140px; width: 150px; top:0">Description</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="min-width: 120px; width: 130px; top:0">Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody class="gridjs-tbody">
+                            <tr class="gridjs-tr" *ngFor="let memo of memodata">
+                                <td class="gridjs-td">{{memo.createdDate}}</td>
+                                <td class="gridjs-td">{{memo.userName}}</td>
+                                <td class="gridjs-td" *ngIf="hideColumn">
+                                    <ul>
+                                        <li><span>{{memo.description}}</span></li>
+                                    </ul>
+                                </td>
+                                <td class="gridjs-td" *ngIf="hideColumn">{{memo.reason}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="gridjs-footer p-0 mt-3">
+                    <div class="gridjs-pagination">
+                        <div class="gridjs-pages float-none d-flex justify-content-between">
+                            <a title="Previous" href="javascript:void();" class="btn btn-outline-purple"><i class="fas fa-long-arrow-alt-left"></i> Previous</a>
+                            <div class="d-flex">
+                                <a href="javascript:void();" class="btn btn-light" title="Page 1">1</a>
+                                <a href="javascript:void();" class="btn" title="Page 2">2</a>
+                                <a href="javascript:void();" class="btn" title="Page 3">3</a>
+                                <a href="javascript:void();" class="btn" title="Page 4">4</a>
+                                <a href="javascript:void();" class="btn" title="Page 5">5</a>
+                                <a href="javascript:void();" class="btn" title="Page 6">6</a>
+                                <a href="javascript:void();" class="btn" title="Page 7">7</a>
                             </div>
-                            <!-- <div class="gridjs-footer p-0 mt-3">
-                                <div class="gridjs-pagination">
-                                    <div class="gridjs-pages float-none d-flex justify-content-between">
-                                        <a title="Previous" href="javascript:void();" class="btn btn-outline-purple"><i class="fas fa-long-arrow-alt-left"></i> Previous</a>
-                                        <div class="d-flex">
-                                            <a href="javascript:void();" class="btn btn-light" title="Page 1">1</a>
-                                            <a href="javascript:void();" class="btn" title="Page 2">2</a>
-                                            <a href="javascript:void();" class="btn" title="Page 3">3</a>
-                                            <a href="javascript:void();" class="btn" title="Page 4">4</a>
-                                            <a href="javascript:void();" class="btn" title="Page 5">5</a>
-                                            <a href="javascript:void();" class="btn" title="Page 6">6</a>
-                                            <a href="javascript:void();" class="btn" title="Page 7">7</a>
-                                        </div>
-                                        <a title="Next" href="javascript:void();" class="btn btn-outline-purple">Next <i class="fas fa-long-arrow-alt-right"></i></a>
-                                    </div>
-                                </div>
-                            </div> -->
+                            <a title="Next" href="javascript:void();" class="btn btn-outline-purple">Next <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
                     </div>
                 </div>

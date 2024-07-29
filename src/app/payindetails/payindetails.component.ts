@@ -153,7 +153,7 @@ export class PayindetailsComponent {
       } else {
         this.onClear.emit(true)
       }
-      this.applyNUnlock.patchValue({request: {body: {complianceReasonId: this.paymentInDetailsAction?.REASON_ID}}})
+      this.applyNUnlock.patchValue({request: {body: {complianceReasonId: this.paymentInDetailsAction?.REASON_ID || null}}})
       this.statusIdByStatus(this.paymentInDetailsAction.STATUS)
     }, error => {
       console.log(error)

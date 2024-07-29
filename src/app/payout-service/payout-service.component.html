@@ -1,30 +1,28 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-flex align-items-center justify-content-between">
-            <h4 class="mb-0">Service checks<br><span class="fn12 text-dark">Clients we work with and their transactions</span></h4>
+            <h5 class="mb-0 fn18 text-black">Service checks<span class="fn14 fw-500 d-block">Clients we work with and their transactions</span></h5>
         </div>
     </div>
 </div>
  <div class="row">
     <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item"  *ngFor="let finalResponse of Display;index as i" (click)="onClick(finalResponse.service_name,i)">
                         <h2 class="accordion-header" id="heading{{i}}">
-                            <button class="accordion-button fw-medium" id="serviceName{{i}}" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="true" [attr.aria-controls]="'collapse' + i">
+                            <button class="accordion-button fw-medium bg-white" id="serviceName{{i}}" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="true" [attr.aria-controls]="'collapse' + i">
                                 {{finalResponse.service_name}}
-                                <span class="badge badge-soft-primary py-2 ms-2" *ngIf="finalResponse.status">pass</span>
-                                <span class="badge badge-soft-primary redbadge py-2 ms-2" *ngIf="!finalResponse.status">fail</span>
+                                <span class="badge badge-soft-primary py-2 ms-2" *ngIf="finalResponse.status">Pass</span>
+                                <span class="badge badge-soft-primary redbadge py-2 ms-2" *ngIf="!finalResponse.status">Fail</span>
                             </button>
                         </h2>
                         <!-- <div [id]="'collapse' + i" class="accordion-collapse collapse" [class.show]="i === 0" [attr.aria-labelledby]="'heading{{i}}'" data-bs-parent="#accordionExample"> -->
                         <div [id]="'collapse' + i" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading{{i}}'">
                             <div class="accordion-body">
                               <div class="table mb-0">
-                                <div class="gridjs gridjs-container" style="width: 100%;" *ngFor="let detail of Details[i]">
+                                <div class="gridjs gridjs-container" style="width: 100%;" >
                                     <div class="gridjs-wrapper" style="height: 70px;">
-                                        <table class="gridjs-table " style="height: 400px;" >
+                                        <table class="gridjs-table " style="height: 400px;" *ngFor="let detail of Details[i]">
                                             <thead class="gridjs-thead">
                                                 <tr class="gridjs-tr">
                                                     <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0" *ngIf="detail.externalServiceCheckId || finalResponse.service_name=='RISK_ASSESSMENT'">Details</th>
@@ -56,7 +54,5 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- end card body -->
-        </div><!-- end card -->
-    </div><!-- end col -->
-</div><!-- end row -->
+            </div>
+</div>

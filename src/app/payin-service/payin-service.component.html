@@ -10,7 +10,7 @@
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item"  *ngFor="let finalResponse of Display;index as i" (click)="onClick(finalResponse.service_name,i)">
                         <h2 class="accordion-header" id="heading{{i}}">
-                            <button class="accordion-button fw-medium" id="serviceName{{i}}" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="true" [attr.aria-controls]="'collapse' + i">
+                            <button class="accordion-button fw-medium bg-white" id="serviceName{{i}}" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="true" [attr.aria-controls]="'collapse' + i">
                                 {{finalResponse.service_name}}
                                 <span class="badge badge-soft-primary py-2 ms-2" *ngIf="finalResponse.status">Pass</span>
                                 <span class="badge badge-soft-primary redbadge py-2 ms-2" *ngIf="!finalResponse.status">Fail</span>
@@ -54,5 +54,5 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- end card body -->
-</div><!-- end row -->
+            </div>
+</div>

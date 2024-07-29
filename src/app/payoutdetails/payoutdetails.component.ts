@@ -116,7 +116,7 @@ export class PayoutdetailsComponent {
       } else {
         this.onClear.emit(true)
       }
-      this.applyAndUnlock.patchValue({request: {body: {complianceReasonId: this.payoutDetailsActionResponse?.REASON_ID}}})
+      this.applyAndUnlock.patchValue({request: {body: {complianceReasonId: this.payoutDetailsActionResponse?.REASON_ID || null}}})
 
     }, error => {
       console.log(error)
