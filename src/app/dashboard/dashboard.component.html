@@ -47,13 +47,13 @@
                 <h6 class="mb-0 lineHeight">
                   <img src="assets/images/iconHistory.png" class="icon20x20 me-2">Outgoing Funds
                 </h6>
-                <span class="float-end valueBox text-center">{{PayoutDashDetails?.total_payment_in || 0}}</span>
+                <span class="float-end valueBox text-center">{{PayoutDashDetails?.total_payment_out || 0}}</span>
               </div>
               <div class="d-flex justify-content-between mb-3">
                 <h6 class="mb-0 lineHeight">
                   <i class="fas fa-user-check icon20x20 me-2"></i>Compliance Inprogress
                 </h6>
-                <span class="float-end valueBoxGreen text-center">{{PayoutDashDetails?.on_hold_payment_in || 0}}</span>
+                <span class="float-end valueBoxGreen text-center">{{PayoutDashDetails?.on_hold_payment_out || 0}}</span>
               </div>
             </div>
           </div>

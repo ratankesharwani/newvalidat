@@ -52,7 +52,7 @@ export class PaymentInGraphComponent{
   }
   ngOnInit() {
     this.reloadGraph()
-    this.createGraph()
+    // this.createGraph()
     type EChartsOption = echarts.EChartsOption;
   }
   reloadGraph(){
@@ -222,69 +222,77 @@ export class PaymentInGraphComponent{
     this.chartInstance = echarts.init(chartDom);
     this.option = {
       title: {
-        text: 'Stacked Area Chart'
+        text: 'Payment in',
       },
       tooltip: {
         trigger: 'axis',
-        axisPointer: {
-          type: 'cross',
-          label: {
-            backgroundColor: '#6a7985'
-          }
-        }
       },
-      legend: {
-        data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
-      },
+      legend: {},
       toolbox: {
+        show: true,
         feature: {
-          saveAsImage: {}
-        }
+          // dataZoom: {
+          //   yAxisIndex: 'none',
+          // },
+          dataView: { readOnly: false },
+          magicType: { type: ['line', 'bar'] },
+          restore: {},
+          saveAsImage: {},
+        },
       },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: this.value
       },
-      xAxis: [
-        {
-          type: 'category',
-          boundaryGap: false,
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        }
-      ],
-      yAxis: [
-        {
-          type: 'value'
-        }
-      ],
+      yAxis: {
+        type: 'value',
+        axisLabel: {
+          formatter: '{value} payment',
+        },
+      },
       series: [
         {
-          name: 'Email',
+          name: 'Payment In',
           type: 'line',
-          stack: 'Total',
-          areaStyle: {},
-          emphasis: {
-            focus: 'series'
-          },
-          data: [120, 132, 101, 134, 90, 230, 210]
+          data: this.totalCount
+          // markPoint: {
+          //   data: [
+          //     { type: 'max', name: 'Max' },
+          //     { type: 'min', name: 'Min' },
+          //   ],
+          // },
+          // markLine: {
+          //   data: [{ type: 'average', name: 'Avg' }],
+          // },
         },
         {
-          name: 'Search Engine',
+          name: 'Payin Queue',
           type: 'line',
-          stack: 'Total',
-          label: {
-            show: true,
-            position: 'top'
-          },
-          areaStyle: {},
-          emphasis: {
-            focus: 'series'
-          },
-          data: [820, 932, 901, 934, 1290, 1330, 1320]
-        }
-      ]
+          data: this.holdCount
+          // markLine: {
+          //   data: [
+          //     { type: 'average', name: 'Avg' },
+          //     [
+          //       {
+          //         symbol: 'none',
+          //         x: '90%',
+          //         yAxis: 'max',
+          //       },
+          //       {
+          //         symbol: 'circle',
+          //         label: {
+          //           position: 'start',
+          //           formatter: 'Max',
+          //         },
+          //         type: 'max',
+          //         name: '最高点',
+          //       },
+          //     ],
+          //   ],
+          // },
+        },
+      ],
     };
     
     
