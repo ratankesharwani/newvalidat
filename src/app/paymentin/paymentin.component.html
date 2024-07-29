@@ -60,21 +60,51 @@
                                     <div *ngIf="payin.blackListCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
                                 </td>
                                 <td class="gridjs-td text-center" (dblclick)="onRoute(i)">
-                                    <div *ngIf="payin.thirdPartyCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
-                                    <div *ngIf="payin.thirdPartyCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>
+                                    <div *ngIf="payin.thirdPartyCheck=='PASS'">
+                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="1" y="0.5" width="19" height="19" rx="5.5" fill="#098B8B" fill-opacity="0.04"/>
+                                        <rect x="1" y="0.5" width="19" height="19" rx="5.5" stroke="#7F56D9"/>
+                                        <path d="M15.1673 6.5L8.75065 12.9167L5.83398 10" stroke="#7F56D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg></div>
+                                    <div *ngIf="payin.thirdPartyCheck=='FAIL'">
+                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="1" y="0.5" width="19" height="19" rx="5.5" fill="#FEF3F2"/>
+                                            <rect x="1" y="0.5" width="19" height="19" rx="5.5" stroke="#F04438"/>
+                                            <path d="M7.89623 6.65377C7.69121 6.44874 7.35879 6.44874 7.15377 6.65377C6.94874 6.85879 6.94874 7.19121 7.15377 7.39623L9.75754 10L7.15377 12.6038C6.94874 12.8088 6.94874 13.1412 7.15377 13.3462C7.35879 13.5513 7.69121 13.5513 7.89623 13.3462L10.5 10.7425L13.1038 13.3462C13.3088 13.5513 13.6412 13.5513 13.8462 13.3462C14.0513 13.1412 14.0513 12.8088 13.8462 12.6038L11.2425 10L13.8462 7.39623C14.0513 7.19121 14.0513 6.85879 13.8462 6.65377C13.6412 6.44874 13.3088 6.44874 13.1038 6.65377L10.5 9.25754L7.89623 6.65377Z" fill="#F04438"/>
+                                        </svg></div>
                                     <div *ngIf="payin.thirdPartyCheck=='NOT_AVAILABLE'" class="crossMarkBox">NA</div>
                                     <div *ngIf="payin.thirdPartyCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
                                 </td>
                                 <td class="gridjs-td text-center" (dblclick)="onRoute(i)">
-                                    <div *ngIf="payin.sanctionCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
-                                    <div *ngIf="payin.sanctionCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>
+                                    <div *ngIf="payin.sanctionCheck=='PASS'">
+                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="1" y="0.5" width="19" height="19" rx="5.5" fill="#098B8B" fill-opacity="0.04"/>
+                                        <rect x="1" y="0.5" width="19" height="19" rx="5.5" stroke="#7F56D9"/>
+                                        <path d="M15.1673 6.5L8.75065 12.9167L5.83398 10" stroke="#7F56D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg></div>
+                                    <div *ngIf="payin.sanctionCheck=='FAIL'">
+                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="1" y="0.5" width="19" height="19" rx="5.5" fill="#FEF3F2"/>
+                                            <rect x="1" y="0.5" width="19" height="19" rx="5.5" stroke="#F04438"/>
+                                            <path d="M7.89623 6.65377C7.69121 6.44874 7.35879 6.44874 7.15377 6.65377C6.94874 6.85879 6.94874 7.19121 7.15377 7.39623L9.75754 10L7.15377 12.6038C6.94874 12.8088 6.94874 13.1412 7.15377 13.3462C7.35879 13.5513 7.69121 13.5513 7.89623 13.3462L10.5 10.7425L13.1038 13.3462C13.3088 13.5513 13.6412 13.5513 13.8462 13.3462C14.0513 13.1412 14.0513 12.8088 13.8462 12.6038L11.2425 10L13.8462 7.39623C14.0513 7.19121 14.0513 6.85879 13.8462 6.65377C13.6412 6.44874 13.3088 6.44874 13.1038 6.65377L10.5 9.25754L7.89623 6.65377Z" fill="#F04438"/>
+                                        </svg></div>
                                     <div *ngIf="payin.sanctionCheck=='NOT_AVAILABLE'" class="crossMarkBox">NA</div>
                                     <div *ngIf="payin.sanctionCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
                                     <div *ngIf="payin.sanctionCheck=='PENDING'" >PENDING</div>
                                 </td>
                                 <td class="gridjs-td text-center" (dblclick)="onRoute(i)">
-                                    <div *ngIf="payin.cifasCheck=='PASS'" class="checkMarkBox"><i class="fas fa-check icon15x15"></i></div>
-                                    <div *ngIf="payin.cifasCheck=='FAIL'" class="crossMarkBox"><span class="icon15x15">X</span></div>
+                                    <div *ngIf="payin.cifasCheck=='PASS'">
+                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="1" y="0.5" width="19" height="19" rx="5.5" fill="#098B8B" fill-opacity="0.04"/>
+                                        <rect x="1" y="0.5" width="19" height="19" rx="5.5" stroke="#7F56D9"/>
+                                        <path d="M15.1673 6.5L8.75065 12.9167L5.83398 10" stroke="#7F56D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg></div>
+                                    <div *ngIf="payin.cifasCheck=='FAIL'">
+                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="1" y="0.5" width="19" height="19" rx="5.5" fill="#FEF3F2"/>
+                                            <rect x="1" y="0.5" width="19" height="19" rx="5.5" stroke="#F04438"/>
+                                            <path d="M7.89623 6.65377C7.69121 6.44874 7.35879 6.44874 7.15377 6.65377C6.94874 6.85879 6.94874 7.19121 7.15377 7.39623L9.75754 10L7.15377 12.6038C6.94874 12.8088 6.94874 13.1412 7.15377 13.3462C7.35879 13.5513 7.69121 13.5513 7.89623 13.3462L10.5 10.7425L13.1038 13.3462C13.3088 13.5513 13.6412 13.5513 13.8462 13.3462C14.0513 13.1412 14.0513 12.8088 13.8462 12.6038L11.2425 10L13.8462 7.39623C14.0513 7.19121 14.0513 6.85879 13.8462 6.65377C13.6412 6.44874 13.3088 6.44874 13.1038 6.65377L10.5 9.25754L7.89623 6.65377Z" fill="#F04438"/>
+                                        </svg></div>
                                     <div *ngIf="payin.cifasCheck=='NOT_AVAILABLE'" class="crossMarkBox">NA</div>
                                     <div *ngIf="payin.cifasCheck=='NOT_REQUIRED'" class="crossMarkBox">NR</div>
                                 </td>
