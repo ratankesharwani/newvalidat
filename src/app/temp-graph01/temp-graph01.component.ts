@@ -220,8 +220,8 @@ export class TempGraph01Component {
             this.holdCount.push(HOLD_COUNT)
             this.totalCount.push(TOTAL_COUNT)
             this.value.push(VALUE.toString())
-            this.craeteBarGraph()
           })
+          this.createLineGraph()
           this.shared.addPayin(this.Dashboard['controls']['request']['controls']['body'])
         })
       }
@@ -411,6 +411,43 @@ export class TempGraph01Component {
         link.href = url;
         link.download = 'chart.png';
         link.click();
+      }
+    }
+
+    directSearch(range:any){
+      const today = new Date();
+      const lastRange = new Date(today);
+      switch(range){
+        case '12Years':
+          lastRange.setFullYear(today.getFullYear() - 1);
+          break;
+        case '30Days':
+          lastRange.setDate(today.getDate() - 30);
+          break;
+        case '7Days':
+          lastRange.setDate(today.getDate() - 30);
+          break;
+        case '24Hours':
+          lastRange.setDate(today.getDate() - 1);
+          break;
+      }
+      this.Dashboard.patchValue({
+        request:
+        {
+          body:
+          {
+            code:'CUSTOM',
+            toDate:moment(today).format('YYYY-MM-DD'+'T00:00:00'+'.000Z'),
+            month1:null,
+            year1:null,
+            fromDate: moment(lastRange).format('YYYY-MM-DD'+'T23:59:59'+'.000Z'),
+            month2:null,
+            year2:null,
+          }
+        }
+      })
+      if(range){
+        this.reloadGraph()
       }
     }
 }

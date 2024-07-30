@@ -27,14 +27,14 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-4">
-                    <div class="btn-group radiobtnGroup" role="times" aria-label="Basic radio toggle button times">
-                        <input type="radio" class="btn-check" name="btnradio" id="12months" autocomplete="off" checked>
+                    <div class="btn-group radiobtnGroup" role="times" aria-label="Basic radio toggle button times" >
+                        <input type="radio" class="btn-check" name="btnradio" id="12months" autocomplete="off" checked (click)="directSearch('12Years')">
                         <label class="btn btn-outline-secondary mb-0" for="12months">12 months</label>
-                        <input type="radio" class="btn-check" name="btnradio" id="30days" autocomplete="off">
+                        <input type="radio" class="btn-check" name="btnradio" id="30days" autocomplete="off" (click)="directSearch('30Days')">
                         <label class="btn btn-outline-secondary mb-0" for="30days">30 days</label>
-                        <input type="radio" class="btn-check" name="btnradio" id="7days" autocomplete="off">
+                        <input type="radio" class="btn-check" name="btnradio" id="7days" autocomplete="off" (click)="directSearch('7Days')">
                         <label class="btn btn-outline-secondary mb-0" for="7days">7 days</label>
-                        <input type="radio" class="btn-check" name="btnradio" id="24hours" autocomplete="off">
+                        <input type="radio" class="btn-check" name="btnradio" id="24hours" autocomplete="off" (click)="directSearch('24Hours')">
                         <label class="btn btn-outline-secondary mb-0" for="24hours">24 hours</label>
                     </div>
                     <div class="d-flex">
