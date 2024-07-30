@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-12">
-        <div class="page-title-box d-flex align-items-center justify-content-between">
-            <h4 class="mb-0">Payment out report<br><span class="fn12 text-dark">Clients we work with and their
-                    transactions</span></h4>
-        </div>
+    <div class="col-12 mb-1">
+      <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h5 class="mb-0 fn30 text-black">Payment out report<span class="fn16 fw-500 d-block">Clients we work with and their
+            transactions</span></h5>
+      </div>
     </div>
-</div>
+  </div>
 <div class="row">
     <div class="col-lg-3 mt-2" *ngFor="let card of allCheckServices" (dblclick)="onRoute(card.name,card.path)">
         <div class="card">

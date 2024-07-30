@@ -84,10 +84,12 @@ export class GraphReportComponent {
           this.holdCount.push(pass)
           this.totalCount.push(total)
           this.failCount.push(fail)
+          if(created_date)
           this.value.push(created_date)
+          if(createdDate)
           this.value.push(createdDate)
-          this.createGraph()
         })
+        this.createGraph()
         this.shared.addPayin(this.Dashboard['controls']['request']['controls']['body'])
       })
     }
@@ -236,79 +238,191 @@ export class GraphReportComponent {
   option: any;
   createGraph(){
     const chartDom = this.el.nativeElement.querySelector('#chart');
-    this.chartInstance = echarts.init(chartDom);
-    this.option = {
-      legend: {},
-      toolbox: {
-        show: true,
-        feature: {
-          dataView: { readOnly: false },
-          magicType: { type: ['line', 'bar'] },
-          restore: {},
-          saveAsImage: {},
+      this.chartInstance = echarts.init(chartDom);
+      this.option = {
+        title: {
+          text: this.route.replace(/_/g, ' ')
         },
-      },
-      tooltip: {
-        trigger: 'axis',
-        showContent: false
-      },
-      dataset: {
-        source: [
-          this.value,
-          this.totalCount,
-          this.holdCount,
-          this.failCount
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: '#6a7985'
+            }
+          }
+        },
+        legend: {
+          data: ['Payment In', 'Payment Out']
+        },
+        toolbox: {
+          // feature: {
+          //   saveAsImage: {}
+          // }
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: 'category',
+            boundaryGap: false,
+            data: this.value
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: 'Payment In',
+            type: 'line',
+            stack: 'Total',
+            areaStyle: {},
+            emphasis: {
+              focus: 'series'
+            },
+            data: this.totalCount
+          },
+          {
+            name: 'Payment Out',
+            type: 'line',
+            stack: 'Total',
+            label: {
+              show: true,
+              position: 'top'
+            },
+            areaStyle: {},
+            emphasis: {
+              focus: 'series'
+            },
+            data: this.holdCount
+          }
         ]
-      },
-      xAxis: { type: 'category' },
-      yAxis: { gridIndex: 0 },
-      grid: { top: '55%' },
-      series: [
-        {
-          type: 'line',
-          smooth: true,
-          seriesLayoutBy: 'row',
-          emphasis: { focus: 'series' }
-        },
-        {
-          type: 'line',
-          smooth: true,
-          seriesLayoutBy: 'row',
-          emphasis: { focus: 'series' }
-        },
-        // {
-        //   type: 'line',
-        //   smooth: true,
-        //   seriesLayoutBy: 'row',
-        //   emphasis: { focus: 'series' }
-        // },
-        {
-          type: 'line',
-          smooth: true,
-          seriesLayoutBy: 'row',
-          emphasis: { focus: 'series' }
-        },
-        // {
-        //   type: 'pie',
-        //   id: 'pie',
-        //   radius: '30%',
-        //   center: ['50%', '25%'],
-        //   emphasis: {
-        //     focus: 'self'
-        //   },
-        //   label: {
-        //     formatter: '{b}: {@2012} ({d}%)'
-        //   },
-        //   encode: {
-        //     itemName: 'product',
-        //     value: this.value[1],
-        //     tooltip: '2012'
-        //   }
-        // }
-      ]
-    };
-    if (this.option) {
-      this.chartInstance.setOption(this.option,true);
+      };
+      if (this.option) {
+        this.chartInstance.setOption(this.option,true);
+      }
+  }
+  directSearch(range:any){
+    const today = new Date();
+    const lastRange = new Date(today);
+    switch(range){
+      case '12Years':
+        lastRange.setFullYear(today.getFullYear() - 1);
+        break;
+      case '30Days':
+        lastRange.setDate(today.getDate() - 30);
+        break;
+      case '7Days':
+        lastRange.setDate(today.getDate() - 30);
+        break;
+      case '24Hours':
+        lastRange.setDate(today.getDate() - 1);
+        break;
     }
+    this.Dashboard.patchValue({
+      request:
+      {
+        body:
+        {
+          code:'CUSTOM',
+          toDate:moment(today).format('YYYY-MM-DD'+'T00:00:00'+'.000Z'),
+          month1:null,
+          year1:null,
+          fromDate: moment(lastRange).format('YYYY-MM-DD'+'T23:59:59'+'.000Z'),
+          month2:null,
+          year2:null,
+        }
+      }
+    })
+    if(range){
+      this.reloadGraph()
+    }
+  }
+
+  dateChange(event: any) {
+    switch (this.selectedValue) {
+      case 'DEFAULT':
+        this.Dashboard.patchValue({
+          request:
+          {
+            body:
+            {
+              fromDate: null,
+              month1: null,
+              year1: null,
+              toDate: null,
+              month2: null,
+              year2: null
+            }
+          }
+        })
+        this.formValidation = true
+        break;
+      case 'CUSTOM':
+        this.formValidation = false
+        this.Dashboard.patchValue({
+          request:
+          {
+            body:
+            {
+              fromDate: event ? moment(event[0]).format('YYYY-MM-DD'+'T00:00:00'+'.000Z') : null,
+              month1: null,
+              year1: null,
+              toDate: event ? moment(event[1]).format('YYYY-MM-DD'+'T23:59:59'+'.000Z') : null,
+              month2:null,
+              year2:null
+            }
+          }
+        })
+        this.formValidation = (this.valueValidators['fromDate'].value != null && this.valueValidators['toDate'].value != null)
+        break;
+      case 'YEAR':
+        this.formValidation = false
+        this.Dashboard.patchValue({
+          request:
+          {
+            body:
+            {
+              fromDate: null,
+              month1: null,
+              year1: event ? moment(event[0]).format('YYYY') : null,
+              toDate: null,
+              month2: null,
+              year2: event ? moment(event[1]).format('YYYY') : null
+            }
+          }
+        })
+        this.formValidation = (this.valueValidators['year1'].value != null && this.valueValidators['year2'].value != null)
+        break;
+      case 'MONTH':
+        this.formValidation = false
+        this.Dashboard.patchValue({
+          request:
+          {
+            body:
+            {
+              fromDate: null,
+              month1: event ? moment(event[0]).format('MMMM') : null,
+              year1: event ? moment(event[0]).format('YYYY') : null,
+              toDate: null,
+              month2: event ? moment(event[1]).format('MMMM') : null,
+              year2: event ? moment(event[1]).format('YYYY') : null,
+            }
+          }
+        })
+        this.formValidation = (this.valueValidators['year1'].value != null && this.valueValidators['year2'].value != null
+          && this.valueValidators['month1'].value != null && this.valueValidators['month2'].value != null)
+        break;
+    }
+   if(event){
+     this.reloadGraph()
+   }
   }
 }

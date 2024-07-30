@@ -1,71 +1,76 @@
 <div id="layout-wrapper">
-  <header id="page-topbar" class="left0">
-    <app-innerheader></app-innerheader>
-  </header>
   <div class="main-content mleft0">
-        <div class="page-content">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="row">
-                          <div class="card">
-                            <div class="card-body pt-3">
-                              <h4 class="card-title mb-4">{{this.route}}</h4>
-                              <div class="row p-2">
-                                <div class="col-md-12 grid-margin stretch-card">
-                                  <div class="card position-relative p-3">
-                                    <div style="padding: 30px">
-
-                                      <form [formGroup]="Dashboard">
-                                        <div class="col-md-11 mb-3 m-auto d-flex flex-wrap align-content-start"
-                                          formGroupName="request">
-                                          <div class="col-md-3 px-4" formGroupName="body">
-                                            <div class="form-group position-relative mb-2">
-                                              <i class="ti-angle-down formArrow top12"></i>
-                                              <select class="form-control" formControlName="code"
-                                                (ngModelChange)="lookForm($event)">
-                                                <option label="">DEFAULT</option>
-                                                <option label="">CUSTOM</option>
-                                                <option label="">YEAR</option>
-                                                <option label="">MONTH</option>
-                                              </select>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-3 px-4"
-                                            [ngClass]="{'pe-auto':disabledRange,'opacity-50 pe-none':!disabledRange}">
-                                            <div class="form-group position-relative mb-2">
-                                              <input class="form-control" placeholder="FROM" autocomplete="off"
-                                                name="date" bsDatepicker
-                                                [bsConfig]="{dateInputFormat: dateInputFormat,minMode:viewMode,showWeekNumbers:false}"
-                                                (bsValueChange)="fromD($event)" [(bsValue)]="from_Date"
-                                                [minDate]="minFromDate" [maxDate]="maxFromDate">
-                                            </div>
-                                          </div>
-                                          <div class="col-md-3 px-4"
-                                            [ngClass]="{'opacity-100 pe-auto':disabledRange,'opacity-50 pe-none':!disabledRange}">
-                                            <div class="form-group position-relative mb-2">
-                                              <input class="form-control" placeholder="TO" autocomplete="off"
-                                                name="date" bsDatepicker
-                                                [bsConfig]="{dateInputFormat: dateInputFormat,minMode:viewMode,showWeekNumbers:false}"
-                                                (bsValueChange)="toD($event)" [(bsValue)]="to_Date"
-                                                [minDate]="minToDate" [maxDate]="maxToDate">
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div id="chart" style="width: 100%; height: 50vh;"></div>
-
-                                      </form>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+    <header id="page-topbar" class="left0">
+      <app-innerheader></app-innerheader>
+    </header>
+    <div class="page-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 mb-1">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+              <h5 class="mb-0 fn30 text-black">Reports<span class="fn16 fw-500 d-block">Clients we work with and their
+                  transactions</span></h5>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between mb-4">
+                  <div class="btn-group radiobtnGroup" role="times" aria-label="Basic radio toggle button times">
+                    <input type="radio" class="btn-check" name="btnradio" id="12months" autocomplete="off" checked
+                      (click)="directSearch('12Years')">
+                    <label class="btn btn-outline-secondary mb-0" for="12months">12 months</label>
+                    <input type="radio" class="btn-check" name="btnradio" id="30days" autocomplete="off"
+                      (click)="directSearch('30Days')">
+                    <label class="btn btn-outline-secondary mb-0" for="30days">30 days</label>
+                    <input type="radio" class="btn-check" name="btnradio" id="7days" autocomplete="off"
+                      (click)="directSearch('7Days')">
+                    <label class="btn btn-outline-secondary mb-0" for="7days">7 days</label>
+                    <input type="radio" class="btn-check" name="btnradio" id="24hours" autocomplete="off"
+                      (click)="directSearch('24Hours')">
+                    <label class="btn btn-outline-secondary mb-0" for="24hours">24 hours</label>
+                  </div>
+                  <div class="d-flex">
+                    <form [formGroup]="Dashboard">
+                      <div class="search-box me-3" formGroupName="request">
+                        <div class="position-relative" formGroupName="body">
+                          <select class="form-select rounded ps-2" formControlName="code" style="width: 120px;"
+                            (ngModelChange)="lookForm($event)">
+                            <option label="">DEFAULT</option>
+                            <option label="">CUSTOM</option>
+                            <option label="">MONTH</option>
+                            <option label="">YEAR</option>
+                          </select>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="search-box me-3">
+                      <div class="position-relative"
+                        [ngClass]="{'pe-auto':disabledRange,'opacity-50 pe-none':!disabledRange}">
+                        <input placeholder="01-01-2023 - 01-01-2024" class="form-control rounded ps-2" bsDatepicker
+                          [bsConfig]="{dateInputFormat: dateInputFormat,minMode:viewMode,showWeekNumbers:false}"
+                          [maxDate]="maxFromDate" (bsValueChange)="dateChange($event)" bsDaterangepicker>
+                        <img src="assets/images/svg/calenderIcon.svg" class="search-icon">
                       </div>
                     </div>
+                    <!-- <a href="javascript:void()" class="btn btn-outline-gray right-bar-toggle pt-2" id="right-bar-toggle">
+                                        <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4 6H14M1.5 1H16.5M6.5 11H11.5"  stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg> Filter
+                                    </a> -->
+
                   </div>
                 </div>
+                <div class="dataoutputHolder position-relative">
+                  <div id="chart" style="width: 100%; height: 50vh;"></div>
+                </div>
+              </div>
             </div>
-    <!-- <app-footer></app-footer> -->
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
