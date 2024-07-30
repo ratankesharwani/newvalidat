@@ -154,7 +154,7 @@ export const routes: Routes = [
     path: 'payin-details', component: PayindetailsComponent
   },
   {
-    path: 'temp-graph', component: TempGraphComponent,
+    path: 'dashboard/graph', component: TempGraphComponent,
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'payin' },
       { path: 'payin', component: TempGraph01Component },

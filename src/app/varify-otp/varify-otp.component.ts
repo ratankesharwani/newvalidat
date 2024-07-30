@@ -100,7 +100,7 @@ export class VarifyOtpComponent {
       if(this.queueParseData!=null){
         if(!this.queueParseData.FIRST_TIME_LOGIN){
           this.localStorage.setItem("isLoggedIn",'true')
-          this.router.navigate(['/out-dash'],{queryParams:{data:true}})
+          this.router.navigate(['/dashboard/graph'],{queryParams:{data:true}})
         }
         else {
           this.router.navigate(['/reset-password'],{queryParams:{data:this.id}})

@@ -24,7 +24,7 @@ export class OtpGuard implements CanActivate {
       return dialogRef.afterClosed().pipe(map(choice => {
         if(this.service.isLoggedin()==="true"){
           console.log(window.location.hash.split("/"))
-          this.router.navigate(['/out-dash'])
+          this.router.navigate(['/dashboard/graph'])
         }else {
           this.router.navigate(['/'])
         }

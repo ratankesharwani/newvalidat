@@ -19,9 +19,9 @@ constructor(private router:Router) {this.Graph='';}
     }
   }
   route(){
-    this.router.navigate(['/out-dash/graph',this.Graph])
+    this.router.navigate(['/dashboard/graph',this.Graph])
   }
   ngOnInit(){
-    this.router.navigate(['/out-dash/graph/pay-in-graph'])
+    this.router.navigate(['/dashboard/graph/payin'])
   }
 }
