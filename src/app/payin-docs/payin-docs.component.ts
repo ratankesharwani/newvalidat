@@ -5,17 +5,17 @@ import { CommonModule } from '@angular/common';
 import { LocalStorageService } from '../Service/local-storage.service';
 import { DropzoneDirective } from '../dropzone.directive';
 import { DropzoneComponent } from "../dropzone/dropzone.component";
+import { PopupboxConfirmationComponent } from "../popupbox-confirmation/popupbox-confirmation.component";
 @Component({
   selector: 'app-payin-docs',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, DropzoneComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, DropzoneComponent, PopupboxConfirmationComponent],
   templateUrl: './payin-docs.component.html',
   styleUrl: './payin-docs.component.css',
   providers:[DropzoneDirective]
 })
 export class PayinDocsComponent {
   @ViewChild('myFile')
-  myInputVariable: ElementRef;
   allDocuments: FormGroup
   UploadForm: FormGroup
   AllDocuments: any
@@ -72,7 +72,7 @@ export class PayinDocsComponent {
       documentTypeId: new FormControl(null, Validators.required)
     })
 
-    this.service.allDocuments(this.allDocuments.value).subscribe(data => {
+    this.service.allDocuments(this.allDocuments?.value).subscribe(data => {
       this.AllDocuments = data
     })
     this.service.payInList(this.DocumentType.value).subscribe(data => {
@@ -92,7 +92,7 @@ export class PayinDocsComponent {
   fontColor:any
   upLoadFile(event: any) {
     if (event) {
-      this.file = event.target.files[0]
+      this.file = event
       const fileExt: any = this.file?.name.split('.').pop();
       this.fileCheck = !this.ValidDocument.includes(fileExt?.toLowerCase());
       this.fileLimit = false
@@ -110,7 +110,7 @@ export class PayinDocsComponent {
     this.formData.append("documentTypeId", this.UploadForm.controls['documentTypeId'].value)
     this.formData.append("file", this.file,)
     this.formData.append("integrationId", this.queueParseData?.id)
-    this.formData.append("clientId", this.queueParseData?.clientId)
+    this.formData.append("clientId", '2')
     const userId: any = this.localStorage.getItem("userId")
     this.formData.append("uploadedBy", userId)
     this.formData.append("description", this.UploadForm.controls['description'].value)
@@ -160,7 +160,6 @@ export class PayinDocsComponent {
       this.fontColor= 'green'
       this.AlertMessage = 'Successful !!'
       this.alertMessage = "Document Uploaded"
-      this.myInputVariable.nativeElement.value = null;
       this.formData.delete("description")
       this.formData.delete("documentTypeId")
       this.formData.delete("file")
@@ -173,7 +172,6 @@ export class PayinDocsComponent {
       this.AlertMessage = 'Warning !!'
       this.alertMessage = error.error.ERROR
       console.log(error)
-      this.myInputVariable.nativeElement.value = null;
       this.formData = new FormData()
       this.formData.delete("file")
       this.UploadForm.patchValue({

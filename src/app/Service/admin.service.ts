@@ -10,6 +10,7 @@ import { AuthrizationAlertComponent } from '../authrization-alert/authrization-a
 })
 export class AdminService {
   private complianceUrl = environment.complianceUrl
+  private upload = environment.upload
   private bankInfoHubUrl =environment.bankInfoHubUrl
   private externalBankInfoUrl = "https://paragonuat.xend.com/paragongateway/externalbankinfo";
 
@@ -86,7 +87,7 @@ export class AdminService {
   uploadFile1(file:any):Observable<any>{
     let Header = new HttpHeaders();
     Header.append('Content-Type', 'multipart/form-data');
-    return this.http.post(this.complianceUrl+"/upload",file,{headers:Header})
+    return this.http.post(this.upload,file,{headers:Header})
   }
   allDocuments(data:any):Observable<any>{
     return this.http.post(this.complianceUrl,data)

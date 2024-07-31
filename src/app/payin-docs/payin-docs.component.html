@@ -5,7 +5,7 @@
       </div>
   </div>
 </div>
-<!-- <app-dropzone></app-dropzone> -->
+<app-dropzone (addfiles)="upLoadFile($event)" [ValidDocument]="ValidDocument"></app-dropzone>
 <!-- <div class="row">
     <div class="col-12">
         <div class="card">
@@ -51,7 +51,7 @@
     </div> 
 </div> -->
  <!-- end row --->
-<div class="row">
+<!-- <div class="row">
   <div class="col-12">
       <div class="card">
           <div class="card-body align-middle">
@@ -66,14 +66,12 @@
                           </div>
 
                           <h4 class="text-center fs-5">
-                              <div class="uploadIcon m-auto mb-2 position-relative lineHeight">
+                              <div class="uploadIcon m-auto mb-2 position-relative lineHeight d-block">
                                   <svg width="20" height="18" class="greenColor fn22" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <path d="M13.3326 12.3333L9.99923 9M9.99923 9L6.6659 12.3333M9.99923 9V16.5M16.9909 14.325C17.8037 13.8819 18.4458 13.1807 18.8158 12.3322C19.1858 11.4836 19.2627 10.536 19.0344 9.63891C18.8061 8.74179 18.2855 7.94626 17.5548 7.37787C16.8241 6.80948 15.925 6.50061 14.9992 6.5H13.9492C13.697 5.52436 13.2269 4.61861 12.5742 3.85082C11.9215 3.08304 11.1033 2.47321 10.181 2.06717C9.2587 1.66113 8.25636 1.46946 7.24933 1.50657C6.2423 1.54367 5.25679 1.80858 4.36688 2.28138C3.47697 2.75419 2.70583 3.42258 2.11142 4.23631C1.51701 5.05005 1.11481 5.98794 0.935051 6.97949C0.755293 7.97104 0.802655 8.99044 1.07358 9.96105C1.3445 10.9317 1.83194 11.8282 2.49923 12.5833" stroke="#475467" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                                       </svg>
                                       
-                                  <!-- <i class="mdi mdi-cloud-upload-outline greenColor fn22"></i> -->
                               </div>
-                              <!--i class="d-block m-auto" data-feather="upload-cloud"></i-->
                               <span class="text-green">Click to upload</span> or drag and drop
                               <span class="fs-6 d-block">jpg, xlsx, png, xls, pdf, jpeg, csv, doc, docx, zip, rar, mht, msg or GIF (max. 800x400px)</span>
                           </h4>                                                
@@ -84,7 +82,7 @@
           </div>
       </div>
     </div>
-</div>
+</div> -->
 <form [formGroup]="UploadForm">
 <div class="row">
   <div class="col-12">
@@ -178,3 +176,4 @@
       </div>
   </div>
 </div>
+<app-popupbox-confirmation [display]=openPop [Description]="alertMessage" (action)="closePopup()" [AlertMessage]="AlertMessage"></app-popupbox-confirmation>

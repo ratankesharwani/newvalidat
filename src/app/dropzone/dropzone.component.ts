@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Output, ViewChild,EventEmitter, Input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import Dropzone from 'dropzone';
 
@@ -18,12 +18,18 @@ export class DropzoneComponent implements AfterViewInit {
     ngAfterViewInit() {
       this.initializeDropzone();
     }
+    @Output() addfiles :EventEmitter<any>=new EventEmitter();
+    @Output() removefiles :EventEmitter<any>=new EventEmitter();
+
+    @Input() ValidDocument:any
+     
   
+
     initializeDropzone() {
       this.dropzone = new Dropzone(this.dropzoneElement.nativeElement, {
-        url: 'http://localhost:5212/api/Files/Upload',  // Replace with your upload URL
+        // url: 'http://localhost:5212/api/Files/Upload',  // Replace with your upload URL
         maxFilesize: 10,  // Max filesize in MB
-        acceptedFiles: '.jpg,.jpeg,.png,.gif,.xlsx,.xls,.pdf,.csv,.doc,.docx,.zip,.rar,.mht,.msg',
+        acceptedFiles: this.ValidDocument,
         maxFiles: 1,    
         dictDefaultMessage: 'Drop files here or click to upload',
         dictFallbackMessage: 'Your browser does not support drag and drop file uploads.',
@@ -40,11 +46,16 @@ export class DropzoneComponent implements AfterViewInit {
   
       // Optional event listeners
       this.dropzone.on('success', (file: any, response: any) => {
-        console.log('File uploaded successfully:');
+        this.addfiles.emit(file);
       });
   
       this.dropzone.on('error', (file: any, errorMessage: string) => {
         console.error('Error uploading file:', file, errorMessage);
+      });
+
+      this.dropzone.on('removedfile', (file: any) => {
+        if(file.accepted)
+        this.removefiles.emit()
       });
     }
   }
