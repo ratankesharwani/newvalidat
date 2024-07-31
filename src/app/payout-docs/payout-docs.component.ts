@@ -6,6 +6,7 @@ import { LocalStorageService } from '../Service/local-storage.service';
 import { DropzoneDirective } from '../dropzone.directive';
 import { DropzoneComponent } from "../dropzone/dropzone.component";
 import { PopupboxConfirmationComponent } from "../popupbox-confirmation/popupbox-confirmation.component";
+import { error } from 'console';
 
 @Component({
   selector: 'app-payout-docs',
@@ -49,17 +50,6 @@ export class PayoutDocsComponent {
         body: new FormGroup({})
       })
     });
-
-    this.allDocuments = new FormGroup({
-      request: new FormGroup({
-        module: new FormControl('COMPLIANCE', [Validators.required]),
-        subModule: new FormControl('ALL_DOCUMENT', [Validators.required]),
-        body: new FormGroup({
-          integrationId: new FormControl(this.queueParseData.id, [Validators.required]),
-          moduleId: new FormControl(this.queueParseData.moduleId, Validators.required)
-        })
-      })
-    });
   }
 
   Documents: any
@@ -72,8 +62,21 @@ export class PayoutDocsComponent {
       documentTypeId: new FormControl(null, Validators.required)
     })
 
+    this.allDocuments = new FormGroup({
+      request: new FormGroup({
+        module: new FormControl('COMPLIANCE', [Validators.required]),
+        subModule: new FormControl('ALL_DOCUMENT', [Validators.required]),
+        body: new FormGroup({
+          integrationId: new FormControl(this.queueParseData.id, [Validators.required]),
+          moduleId: new FormControl(this.queueParseData.moduleId, Validators.required)
+        })
+      })
+    });
+    
     this.service.allDocuments(this.allDocuments?.value).subscribe(data => {
       this.AllDocuments = data
+    },error=>{
+      console.log(error)
     })
     this.service.payInList(this.DocumentType.value).subscribe(data => {
       this.Documents = data

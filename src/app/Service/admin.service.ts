@@ -90,6 +90,8 @@ export class AdminService {
     return this.http.post(this.upload,file,{headers:Header})
   }
   allDocuments(data:any):Observable<any>{
+    let Header = new HttpHeaders();
+    Header.append('Content-Type', 'application/json');
     return this.http.post(this.complianceUrl,data)
   }
   downloadDocuments(data:any){

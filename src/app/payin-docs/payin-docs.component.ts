@@ -50,6 +50,16 @@ export class PayinDocsComponent {
         body: new FormGroup({})
       })
     });
+  }
+
+  Documents: any
+
+  ngOnInit() {
+    this.UploadForm = new FormGroup({
+      file: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, Validators.required),
+      documentTypeId: new FormControl(null, Validators.required)
+    })
 
     this.allDocuments = new FormGroup({
       request: new FormGroup({
@@ -61,16 +71,6 @@ export class PayinDocsComponent {
         })
       })
     });
-  }
-
-  Documents: any
-
-  ngOnInit() {
-    this.UploadForm = new FormGroup({
-      file: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, Validators.required),
-      documentTypeId: new FormControl(null, Validators.required)
-    })
 
     this.service.allDocuments(this.allDocuments?.value).subscribe(data => {
       this.AllDocuments = data
