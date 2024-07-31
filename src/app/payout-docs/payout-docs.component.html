@@ -1,196 +1,102 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-flex align-items-center justify-content-between">
-            <h4 class="mb-0">Attach documents<br><span class="fn12 text-dark">Clients we work with and their transactions</span></h4>
+            <h5 class="mb-0 fn18 text-black">Attach documents<span class="fn14 fw-500 d-block">Clients we work with and their transactions</span></h5>
         </div>
     </div>
-</div>
-
-
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body align-middle">
-                <div>
-                    <form action="#" class="align-middle">
-                        <div class="dz-message needsclick">
-                            <div class="mb-3">
-                                <i class="display-4 text-muted uil uil-cloud-upload"></i>
-                            </div>
-
-                            <h4 class="text-center fs-5">
-                                <div class="uploadIcon m-auto mb-2 position-relative">
-                                    <i data-feather="upload-cloud"></i>
-                                </div>
-                                <!--i class="d-block m-auto" data-feather="upload-cloud"></i-->
-                                <a href="javascript:void()" class="text-green">Click to upload</a> or drag and drop
-                                <span class="fs-6 d-block">jpg, xlsx, png, xls, pdf, jpeg, csv, doc, docx, zip, rar, mht, msg or GIF (max. 800x400px)</span>
-                            </h4>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="text-center mt-4 d-none"><button type="button" class="btn btn-primary">Send Files</button></div>
-            </div>
-        </div><!-- end card -->
-    </div> <!-- end col -->
-</div>
- <!-- end row --->
- <div class="row">
+  </div>
+  <app-dropzone (addfiles)="upLoadFile($event)" [ValidDocument]="ValidDocument"></app-dropzone>
+  <form [formGroup]="UploadForm">
+  <div class="row">
     <div class="col-12">
         <div class="d-flex justify-content-start">
             <div class="col-xl-6 pe-3 mb-3">
-                <label class="form-label">Timezone</label>
-                <select class="form-select">
-                    <option selected>Select document type</option>
-                    <option>Option 1</option>
-                    <option>Option 1</option>
-                </select>
+              <label class="font-weight600">Document type</label><span>*</span>
+                <select class="form-select" formControlName="documentTypeId"
+                          [ngStyle]="{'border':docControl.invalid && (docControl.dirty || docControl.touched || submitted)?'1px solid red':''}">
+                    <option selected [ngValue]=null>--Select--</option>
+                    <option *ngFor="let doc of Documents" [ngValue]="doc.id">{{doc.display_field}}</option>
+                  </select>
+                  <div style="color: red" *ngIf="docControl.invalid && (docControl.dirty || docControl.touched || submitted)">
+                    <small *ngIf="docControl.errors?.['required']">
+                      Document type is required.
+                    </small>
+                  </div>
             </div>
             <div class="col-xl-6 mb-3">
-                <label class="form-label">Description</label>
-                <textarea class="form-control" rows="1" ></textarea>
+                <label class="form-label">Description</label><span>*</span>
+                <textarea class="form-control" placeholder="Type here..." rows="1" [ngStyle]="{'border-color':descControl.invalid && (descControl.dirty || descControl.touched || submitted)?'red':''}" id="description" formControlName="description"></textarea>
+                <div style="color: red" *ngIf="descControl.invalid && (descControl.dirty || descControl.touched || submitted)">
+                  <small *ngIf="UploadForm.controls['description'].errors?.['required']">
+                    Description is required.
+                  </small>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row mb-4">
+  </div>
+  <div class="row mb-5">
     <div class="col-12">
-        <div class="d-flex align-items-center justify-content-end">
-            <button type="button" class="btn btn-purple uploadBtn">
-                <i data-feather="upload-cloud"></i> Upload</button>
+        <div class="d-flex align-items-center justify-content-start uploadBtn">
+            <a (click)="uploadForm()" type="button" class="btn btn-primary">
+                <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.3326 12.3333L9.99923 9M9.99923 9L6.6659 12.3333M9.99923 9V16.5M16.9909 14.325C17.8037 13.8819 18.4458 13.1807 18.8158 12.3322C19.1858 11.4836 19.2627 10.536 19.0344 9.63891C18.8061 8.74179 18.2855 7.94626 17.5548 7.37787C16.8241 6.80948 15.925 6.50061 14.9992 6.5H13.9492C13.697 5.52436 13.2269 4.61861 12.5742 3.85082C11.9215 3.08304 11.1033 2.47321 10.181 2.06717C9.2587 1.66113 8.25636 1.46946 7.24933 1.50657C6.2423 1.54367 5.25679 1.80858 4.36688 2.28138C3.47697 2.75419 2.70583 3.42258 2.11142 4.23631C1.51701 5.05005 1.11481 5.98794 0.935051 6.97949C0.755293 7.97104 0.802655 8.99044 1.07358 9.96105C1.3445 10.9317 1.83194 11.8282 2.49923 12.5833" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg> Upload
+                </a>
         </div>
     </div>
-</div>
-
-<div class="row">
+  </div>
+  </form>
+  <div class="row">
     <div class="col-lg-12">
-        <div class="card">
-            <div class="row">
-                <div class="card-body pt-0">
-                    <div class="table mb-0 mt-2">
-                        <div class="gridjs gridjs-container" style="width: 100%;">
-                            <div class="gridjs-wrapper" style="height: 400px;">
-                                <table class="gridjs-table " style="height: 400px;">
-                                    <thead class="gridjs-thead">
-                                        <tr class="gridjs-tr">
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">File name</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Attachment type</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Description</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Date & time</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0">Uploaded by</th>
-                                            <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="top:0"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="gridjs-tbody">
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td"><i data-feather="upload-cloud"></i></td>
-                                        </tr>
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td"><i data-feather="upload-cloud" class="m-auto"></i></td>
-                                        </tr>                                                            
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td"><i data-feather="upload-cloud" class="m-auto"></i></td>
-                                        </tr>                                                            
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td"><i data-feather="upload-cloud" class="m-auto"></i></td>
-                                        </tr>                                                            
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td"><i data-feather="upload-cloud" class="m-auto"></i></td>
-                                        </tr>                                                            
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td"><i data-feather="upload-cloud" class="m-auto"></i></td>
-                                        </tr>                                                            
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td"><i data-feather="upload-cloud" class="m-auto"></i></td>
-                                        </tr>                                                            
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td"><i data-feather="upload-cloud" class="m-auto"></i></td>
-                                        </tr>                                                            
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td"><i data-feather="upload-cloud" class="m-auto"></i></td>
-                                        </tr>                                                            
-                                        <tr class="gridjs-tr">
-                                            <td class="gridjs-td">2024:03:27 17:52:12</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">Record picked for compliance processes.</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td">System</td>
-                                            <td class="gridjs-td"><i data-feather="upload-cloud" class="m-auto"></i></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+        <div class="table mb-0 mt-2">
+            <div class="gridjs gridjs-container" style="width: 100%;">
+                <div class="gridjs-wrapper" style="height: 400px;">
+                    <table class="gridjs-table " style="height: 400px;">
+                        <thead class="gridjs-thead">
+                            <tr class="gridjs-tr">
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="min-width: 70px; width: 80px; top:0">File name</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="min-width: 55px; width: 65px; top:0">Attachment type</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="min-width: 140px; width: 150px; top:0">Description</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="min-width: 80px; width: 80px; top:0">Date & time</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="min-width: 80px; width: 80px; top:0">Uploaded by</th>
+                                <th class="gridjs-th gridjs-th-sort gridjs-th-fixed" tabindex="0" style="min-width: 80px; width: 80px; top:0">Download</th>
+                            </tr>
+                        </thead>
+                        <tbody class="gridjs-tbody">
+                          <tr class="gridjs-tr" *ngFor="let documents of AllDocuments;index as i">
+                              <td class="gridjs-td">{{documents.actualDocumentName}}</td>
+                              <td class="gridjs-td">{{documents.documentTypeName}}</td>
+                              <td class="gridjs-td">{{documents.description}}</td>
+                              <td class="gridjs-td">{{documents.uploadedDate}}</td>
+                              <td class="gridjs-td">{{documents.firstName+"  "+documents.lastName}}</td>
+                              <td class="gridjs-td"  (click)="downloadDoc(documents.documentName)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" class="hover-cursor"/>
+                                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"  class="hover-cursor"/>
+                                </svg></td>
+                          </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <div class="gridjs-footer p-0 mt-3">
+                    <div class="gridjs-pagination">
+                        <div class="gridjs-pages float-none d-flex justify-content-between">
+                            <a title="Previous" href="javascript:void();" class="btn btn-outline-purple"><i class="fas fa-long-arrow-alt-left"></i> Previous</a>
+                            <div class="d-flex">
+                                <a href="javascript:void();" class="btn btn-light" title="Page 1">1</a>
+                                <a href="javascript:void();" class="btn" title="Page 2">2</a>
+                                <a href="javascript:void();" class="btn" title="Page 3">3</a>
+                                <a href="javascript:void();" class="btn" title="Page 4">4</a>
+                                <a href="javascript:void();" class="btn" title="Page 5">5</a>
+                                <a href="javascript:void();" class="btn" title="Page 6">6</a>
+                                <a href="javascript:void();" class="btn" title="Page 7">7</a>
                             </div>
-                            <div class="gridjs-footer p-0 mt-3">
-                                <div class="gridjs-pagination">
-                                    <div class="gridjs-pages float-none d-flex justify-content-between">
-                                        <a title="Previous" href="javascript:void();" class="btn btn-outline-purple"><i class="fas fa-long-arrow-alt-left"></i> Previous</a>
-                                        <div class="d-flex">
-                                            <a href="javascript:void();" class="btn btn-light" title="Page 1">1</a>
-                                            <a href="javascript:void();" class="btn" title="Page 2">2</a>
-                                            <a href="javascript:void();" class="btn" title="Page 3">3</a>
-                                            <a href="javascript:void();" class="btn" title="Page 4">4</a>
-                                            <a href="javascript:void();" class="btn" title="Page 5">5</a>
-                                            <a href="javascript:void();" class="btn" title="Page 6">6</a>
-                                            <a href="javascript:void();" class="btn" title="Page 7">7</a>
-                                        </div>
-                                        <a title="Next" href="javascript:void();" class="btn btn-outline-purple">Next <i class="fas fa-long-arrow-alt-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                            <a title="Next" href="javascript:void();" class="btn btn-outline-purple">Next <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- end card body -->
         </div>
-        <!-- end card -->
     </div>
-    <!-- end col -->
-</div>
-<!-- end row -->
+  </div>
+  <app-popupbox-confirmation [display]=openPop [Description]="alertMessage" (action)="closePopup()" [AlertMessage]="AlertMessage"></app-popupbox-confirmation>
