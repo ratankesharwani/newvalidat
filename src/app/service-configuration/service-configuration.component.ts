@@ -1,6 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { AdminService } from '../Service/admin.service';
 import { CommonModule } from '@angular/common';
@@ -26,10 +26,6 @@ export class ServiceConfigurationComponent {
   ModuleDropdown: any
   companyDropdown: any
   serviceTypeDropdown: any
-  ModuleId: any
-  CompanyId: any
-  RuleName: any
-  removedService: any[] = []
   Status: any
   controls:any
   detailsControls:any
@@ -41,8 +37,8 @@ export class ServiceConfigurationComponent {
   constructor(private service: AdminService,
               private router: Router,
               private fb: FormBuilder,
-              private active: ActivatedRoute,
-              private localStorage:LocalStorageService) {
+              private localStorage:LocalStorageService,
+              private cdr: ChangeDetectorRef) {
     this.ModuleForm = new FormGroup({
       request: new FormGroup({
         module: new FormControl('COMPLIANCE'),
@@ -101,36 +97,22 @@ export class ServiceConfigurationComponent {
   ngOnInit() {
     this.submitted=false
     this.controls = this.serviceConfigs['controls']['request']['controls']['body']['controls']
-    this.blockForm()
-    this.addMoreService()
-    this.blockAdd()
     this.service.payInList(this.ModuleForm.value).subscribe((response) => {
       this.ModuleDropdown = response;
-    }, error => {
     })
     this.service.payInList(this.company.value).subscribe(response => {
       this.companyDropdown = response;
-    }, error => {
     })
   }
 
   getCompanyId(event: any) {
-    this.CompanyId = event
-    this.serviceTypeForm.controls['request'].value.body.companyId = event
+    this.serviceTypeForm.patchValue({request:{body:{companyId:event}}})
     this.serviceType();
-    this.unBlockForm();
   }
 
   getModuleId(event: any) {
-    this.ModuleId = event
-    this.serviceTypeForm.controls['request'].value.body.moduleId = event
+    this.serviceTypeForm.patchValue({request:{body:{moduleId:event}}})
     this.serviceType();
-    this.unBlockForm();
-  }
-
-  ruleName(event: any) {
-    this.RuleName = event
-    this.unBlockForm();
   }
 
   serviceType() {
@@ -139,7 +121,14 @@ export class ServiceConfigurationComponent {
       this.service.payInList(this.serviceTypeForm.value).subscribe((response: any) => {
         if (response != null) {
           this.serviceTypeDropdown = response.services
-          this.removedService = response.services
+          console.log(this.serviceTypeDropdown)
+          const detail = this.detailsControl as FormArray;
+          detail.clear();
+          if (this.serviceTypeDropdown && Array.isArray(this.serviceTypeDropdown) && this.serviceTypeDropdown.length > 0) {
+            this.serviceTypeDropdown.forEach((service:any) => {
+              this.addMoreService(service.id);
+            });
+          }
         } else {
           this.serviceTypeDropdown = null
         }
@@ -152,44 +141,39 @@ export class ServiceConfigurationComponent {
   }
 
 
-  addMoreService() {
+  addMoreService(id) {
     const detail = this.detailsControl as FormArray;
     detail.push(
       this.fb.group({
-        serviceTypeId: new FormControl(null, [RxwebValidators.unique(), Validators.required]),
-        operatorId: new FormControl(null, Validators.required),
-        status: new FormControl(null, Validators.required)
+        serviceTypeId: new FormControl(id, [RxwebValidators.unique(), Validators.required]),
+        operatorId: new FormControl(1, Validators.required),
+        status: new FormControl(false, Validators.required)
       })
     );
-    this.blockAdd()
   }
 
-  removeService(index: any) {
-    this.detailsControl.removeAt(index)
-    const element = document.getElementById('add-more')
-    element?.style.setProperty("pointer-events", "auto")
-  }
-
-
-  ServiceStatus: any = [
-    {key: true, value: "PASS"},
-    {key: false, value: "FAIL"}
-  ];
-
-  blockForm() {
-    const element = document.getElementById('service-rule')
-    element?.style.setProperty("pointer-events", "none")
-  }
-
-  unBlockForm() {
-    this.blockForm()
-    if (this.RuleName && this.ModuleId && this.CompanyId) {
-      const element = document.getElementById('service-rule')
-      element?.style.setProperty("pointer-events", "auto")
+  removeFalseService() {
+    const detail = this.detailsControl as FormArray;
+    for (let i = detail.length - 1; i >= 0; i--) {  // Looping backward
+      const formGroup = detail.at(i) as FormGroup;
+      if (formGroup.get('status')?.value === false) {
+        detail.removeAt(i);  // Safe to remove without affecting remaining elements
+      }
     }
   }
+
+  onStatusChange(event: Event, formIndex: number, serviceId: string) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    const formGroup = this.detailsControl.controls[formIndex] as FormGroup;
+    formGroup.patchValue({status:isChecked,serviceTypeId:serviceId})
+  }
+
   saveServiceConfigs() {
     this.submitted=true
+    this.cdr.detectChanges();
+    this.removeFalseService()
+    this.serviceTypeForm.markAsDirty()
+    this.serviceTypeForm.markAsTouched()
     if (this.serviceConfigs.valid){
       this.service.payInList(this.serviceConfigs.value).subscribe((data:any) => {
         this.submitted=false
@@ -215,18 +199,7 @@ export class ServiceConfigurationComponent {
     this.detailsControl.controls.splice(0)
     this.ngOnInit()
   }
-  unBlockAdd() {
-    if (this.detailsControl.length < this.serviceTypeDropdown.length && this.serviceConfigs.valid) {
-      const element = document.getElementById('add-more')
-      element?.style.setProperty("pointer-events", "auto")
-    } else {
-      this.blockAdd()
-    }
-  }
-  blockAdd() {
-    const element = document.getElementById('add-more')
-    element?.style.setProperty("pointer-events", "none")
-  }
+ 
   closePopup(){
     this.openPop=!this.openPop
     if(!this.submitted){

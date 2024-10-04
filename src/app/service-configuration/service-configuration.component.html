@@ -27,7 +27,7 @@
                                 <label class="form-label">Module<span class="text-danger">*</span></label>
                                 <select class="form-select" formControlName="moduleId"
                                     (ngModelChange)="getModuleId($event)"
-                                    [ngStyle]="controls['moduleId'].invalid && (controls['moduleId'].dirty || controls['moduleId'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
+                                    [ngStyle]="(controls['moduleId'].invalid && (controls['moduleId'].dirty || controls['moduleId'].touched || submitted))?{color:'red',border:'1px solid red'}:{}">
                                     <option selected [ngValue]=null>--Select--</option>
                                     <option *ngFor="let data of ModuleDropdown" [ngValue]="data.id">
                                         {{data.display_field}}</option>
@@ -42,8 +42,9 @@
                             <div class="col-xl-3 pe-3 mb-3">
                                 <label class="form-label">Rule Name<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" placeholder="Type Rule Name"
-                                    formControlName="ruleName" (ngModelChange)="ruleName($event)"
-                                    [ngStyle]="controls['ruleName'].invalid && (controls['ruleName'].dirty || controls['ruleName'].touched || submitted)?{color:'red',border:'1px solid red'}:{}" />
+                                    formControlName="ruleName"
+                                    [ngClass]="{'input-error': controls['ruleName'].invalid && (controls['ruleName'].dirty || controls['ruleName'].touched || submitted)}"
+                                    [ngStyle]="(controls['ruleName'].invalid && (controls['ruleName'].dirty || controls['ruleName'].touched || submitted))?{color:'red',border:'1px solid red'}:{}" />
                                 <div style="color: red"
                                     *ngIf="controls['ruleName'].invalid && (controls['ruleName'].dirty || controls['ruleName'].touched || submitted)">
                                     <small *ngIf="controls['ruleName'].errors?.['required']">
@@ -67,58 +68,23 @@
                 <div class="card card-h-100">
                     <div class="card-body">
                         <h4 class="card-title mb-4">Check rules</h4>
-                        <div id="service-rule" *ngFor="let totalService of detailsControl.controls;index as i" formArrayName="details">
-                            <div class="row d-flex justify-content-start" [formGroupName]="i">
-                                <div class="col-xl-4 pe-3 mb-3">
-                                    <label class="form-label">Service Type<span class="text-danger">*</span></label>
-                                    <select class="form-select" formControlName="serviceTypeId"
-                                        (ngModelChange)="unBlockAdd()" id="selServiceTypeId">
-                                        <option selected [ngValue]=null>--Select--</option>
-                                        <option *ngFor="let data of serviceTypeDropdown" [ngValue]="data.id">
-                                            {{data.service_name}}</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-4 pe-3 mb-3">
-                                    <label class="form-label">Operator<span class="text-danger">*</span></label>
-                                    <select class="form-select" formControlName="operatorId"
-                                        (ngModelChange)="unBlockAdd()">
-                                        <option selected [ngValue]=null>--Select--</option>
-                                        <option [ngValue]=1>=</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 mb-3 pe-3">
-                                    <label class="form-label">Value<span class="text-danger">*</span></label>
-                                    <select class="form-select" formControlName="status"
-                                        (ngModelChange)="unBlockAdd()"
-                                        [ngStyle]="totalService['status'].invalid && (totalService['status'].dirty || totalService['status'].touched || submitted)?{color:'red',border:'1px solid red'}:{}">
-                                        <option selected [ngValue]=null>--Select-</option>
-                                        <option *ngFor="let serviceStatus of ServiceStatus"
-                                            [ngValue]="serviceStatus.key">{{serviceStatus.value}}</option>
-                                    </select>
-                                    <div style="color: red"
-                                        *ngIf="detailsControl.controls[i]['status'].invalid && (detailsControl.controls[i]['status'].dirty || detailsControl.controls['status'].touched || submitted)">
-                                        <small *ngIf="detailsControl.controls[i]['status'].errors?.['required']">
-                                            Module is required.
-                                        </small>
+                        <div id="service-rule">
+                            <div class="row d-flex justify-content-start">
+                                <div>
+                                    <div class="form-check form-switch form-switch-md mb-5 p-0 col-xl-5"
+                                        *ngFor="let data of serviceTypeDropdown; let idx = index">
+                                        <label class="form-check-label" for="blacklist-{{idx}}">{{data.service_name}}</label>
+                                        <div class="inactive float-end ms-3">{{detailsControl.controls[idx]?.get('status').value?'Active':'Inactive'}}</div>
+                                        <input class="form-check-input float-end valign-middle" type="checkbox" id="blacklist-{{idx}}"
+                                            (change)="onStatusChange($event, idx, data.id)">
                                     </div>
-                                </div>
-                                <div class="col-xl-1 svgBtn">
-                                    <a type="button" (click)="removeService(i)" class="float-start mt-4 p-1" matTooltip="Remove" matTooltipPosition="above">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                          </svg>
-                                        </a>
-                                </div>
+                                  </div>
                             </div>
                         </div>
                         <hr>
-                        <button style="margin-right: 43rem" [ngClass]="{'opacity-100 pe-auto':( this.serviceConfigs.valid),'opacity-50 pe-none':!(this.serviceConfigs.valid)}" (click)="addMoreService()" type="button" class="btn btn-primary float-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon20x20">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                              </svg>Add More</button>
                         <div class="d-flex justify-content-end">
                             <button (click)="goBack()" type="button" class="btn btn-outline-secondary me-3">Cancel</button>
-                            <button type="button" class="btn btn-primary" (click)="saveServiceConfigs()" [ngClass]="{'opacity-100 pe-auto':(this.serviceConfigs.valid&& this.detailsControl.length>0),'opacity-50 pe-none':!(this.serviceConfigs.valid && this.detailsControl.length>0)}">Save Rules</button>
+                            <button type="button" class="btn btn-primary" (click)="saveServiceConfigs()" [ngClass]="{'opacity-100 pe-auto':this.serviceConfigs.valid,'opacity-50 pe-none':!this.serviceConfigs.valid}">Save Rules</button>
                         </div>
                     </div>
                 </div>
