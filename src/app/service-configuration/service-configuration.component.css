@@ -1,0 +1,7 @@
+.input-error::placeholder {
+    color: red;
+}
+
+input::placeholder {
+    color: grey;
+}
